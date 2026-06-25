@@ -52,7 +52,7 @@ class SkinsProStrategy {
 
   public static async getConfigElement(): Promise<HTMLElement> {
     const element = document.createElement('div');
-      element.innerHTML = '<div style="padding:16px;line-height:1.5;">Skins Pro uses the built-in default layout. Add the dashboard first, then customize entities and resource pack in the card editor only if needed.</div>';
+      element.innerHTML = '<div class="sp-strategy-info">Skins Pro uses the built-in default layout. Add the dashboard first, then customize entities and resource pack in the card editor only if needed.</div>';
     return element;
   }
 }

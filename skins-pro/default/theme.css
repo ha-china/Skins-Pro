@@ -211,3 +211,14 @@ button { font:inherit; }
 @media (max-width: 520px) {
   .devices,.rooms,.scene-grid,.devices-page-grid,.rooms-page,.rooms-page-medium,.rooms-page-dense,.scenes-page,.security-grid,.settings-grid { grid-template-columns:1fr; }
 }
+/* editor & strategy info styles */
+.sp-strategy-info { padding:16px; line-height:1.5; }
+.sp-wrap { display:grid; gap:16px; padding:16px; }
+.sp-card { border:1px solid var(--mc-border,rgba(0,0,0,.12)); border-radius:var(--mc-radius-editor,12px); padding:16px; display:grid; gap:12px; }
+.sp-card h3 { margin:0; font-size:16px; }
+.sp-card p { margin:0; color:var(--mc-text-muted,#666); }
+.sp-card label { display:grid; gap:6px; }
+.sp-card label span { font-size:13px; font-weight:600; }
+.sp-card input,.sp-card select { min-height:40px; padding:8px 10px; border:1px solid var(--mc-border-input,rgba(0,0,0,.16)); border-radius:var(--mc-radius-input,8px); font:inherit; box-sizing:border-box; width:100%; }
+.sp-card button { min-height:40px; border:0; border-radius:var(--mc-radius-btn,10px); background:var(--mc-accent-green,#3a7); color:var(--mc-text-main,#fff); padding:0 14px; cursor:pointer; font:inherit; }
+.sp-grid { display:grid; gap:12px; grid-template-columns:1fr 1fr; }

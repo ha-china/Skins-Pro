@@ -39,6 +39,14 @@ export class MinecraftDashboardCardEditor extends HTMLElement {
     this.render();
   }
 
+  private themeCssUrl(): string {
+    try {
+      return new URL('./skins-pro/default/theme.css', import.meta.url).toString();
+    } catch {
+      return '/local/community/skins-pro/skins-pro/default/theme.css';
+    }
+  }
+
   private updateValue(path: string, value: any): void {
     const next = JSON.parse(JSON.stringify(this._config));
     const parts = path.split('.');
@@ -100,36 +108,25 @@ export class MinecraftDashboardCardEditor extends HTMLElement {
 
     const config = this._config || {};
     this.shadowRoot.innerHTML = `
-      <style>
-        :host { display:block; }
-        .wrap { display:grid; gap:16px; padding:16px; }
-        .card { border:1px solid rgba(0,0,0,.12); border-radius:12px; padding:16px; display:grid; gap:12px; }
-        h3 { margin:0; font-size:16px; }
-        p { margin:0; color:#666; }
-        label { display:grid; gap:6px; }
-        span { font-size:13px; font-weight:600; }
-        input, select { min-height:40px; padding:8px 10px; border:1px solid rgba(0,0,0,.16); border-radius:8px; font:inherit; }
-        button { min-height:40px; border:0; border-radius:10px; background:#3a7; color:#fff; padding:0 14px; cursor:pointer; font:inherit; }
-        .grid { display:grid; gap:12px; grid-template-columns:1fr 1fr; }
-      </style>
-      <div class="wrap">
-        <div class="card">
+      <link rel="stylesheet" href="${this.themeCssUrl()}">
+      <div class="sp-wrap">
+        <div class="sp-card">
           <h3>Quick setup</h3>
           <p>Auto-detect common Home Assistant entities and fill the dashboard config.</p>
           <div><button id="auto-detect">Auto detect entities</button></div>
         </div>
-        <div class="card">
+        <div class="sp-card">
           <h3>Basic</h3>
-          <div class="grid">
+          <div class="sp-grid">
             ${this.input('Language', 'language', config.language || 'auto')}
             ${this.input('Resource pack base path', 'resource_pack.base_path', config.resource_pack?.base_path || '__AUTO__')}
             ${this.input('Chinese title', 'title_zh', config.title_zh || '')}
             ${this.input('English title', 'title_en', config.title_en || '')}
           </div>
         </div>
-        <div class="card">
+        <div class="sp-card">
           <h3>Entities</h3>
-          <div class="grid">
+          <div class="sp-grid">
             ${this.input('Weather entity', 'weather.entity', config.weather?.entity || '')}
             ${this.input('Outdoor temperature entity', 'weather.temperature_entity', config.weather?.temperature_entity || '')}
             ${this.input('Quote entity', 'quote.entity', config.quote?.entity || '')}
@@ -138,10 +135,10 @@ export class MinecraftDashboardCardEditor extends HTMLElement {
             ${this.input('Energy compare entity', 'energy.compare_value_entity', config.energy?.compare_value_entity || '')}
           </div>
         </div>
-        <div class="card">
+        <div class="sp-card">
           <h3>Home selection</h3>
           <p>Comma-separated values. Leave empty to auto-pick.</p>
-          <div class="grid">
+          <div class="sp-grid">
             ${this.csvInput('Home devices', 'home_selection.devices', config.home_selection?.devices || [])}
             ${this.csvInput('Home rooms', 'home_selection.rooms', config.home_selection?.rooms || [])}
             ${this.csvInput('Home scenes', 'home_selection.scenes', config.home_selection?.scenes || [])}

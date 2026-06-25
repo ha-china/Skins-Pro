@@ -33,6 +33,15 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Commit dist assets
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add dist/skins-pro.js dist/default
+          git diff --staged --quiet || git commit -m "chore: update dist assets [skip ci]"
+          git push
+
       - name: Upload dist artifact
         uses: actions/upload-artifact@v4
         with:

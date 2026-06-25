@@ -996,12 +996,12 @@ export class MinecraftDashboardCard extends HTMLElement {
     return `
       <div class="maintenance-block">
         <div class="section-title maintenance-title"><h2>${escapeHtml(translate('maintenance'))}</h2></div>
-        <div class="env-list maintenance-list">
+        <div class="maintenance-list">
           ${items.map((item) => `
-            <div class="env-row maintenance-item">
-              <div class="dot ${escapeHtml(item.level === 'error' ? 'pm' : 'hum')}"><ha-icon icon="${escapeHtml(this.batteryIcon(item.battery))}"></ha-icon></div>
-              <div class="muted">${escapeHtml(item.name)}</div>
-              <div class="env-value">${escapeHtml(String(item.battery))}%</div>
+            <div class="maintenance-item">
+              <span class="maintenance-dot ${escapeHtml(item.level)}"></span>
+              <span class="maintenance-name">${escapeHtml(item.name)}</span>
+              <span class="maintenance-value">${escapeHtml(String(item.battery))}%</span>
             </div>
           `).join('')}
         </div>
@@ -1242,7 +1242,11 @@ export class MinecraftDashboardCard extends HTMLElement {
     }
 
     const pool = ['light', 'climate', 'speaker', 'lock', 'garden'];
-    return pool[Math.floor(Math.random() * pool.length)] as string;
+    let hash = 0;
+    for (let i = 0; i < domain.length; i += 1) {
+      hash = ((hash << 5) - hash + domain.charCodeAt(i)) | 0;
+    }
+    return pool[Math.abs(hash) % pool.length] as string;
   }
 
   private weatherIcon(state: string): string {
@@ -1397,20 +1401,6 @@ export class MinecraftDashboardCard extends HTMLElement {
 
     const temp = this._hass.states[entityId]?.attributes?.temperature;
     return temp !== undefined && temp !== null ? `${this.formatNumber(String(temp), 1)}°C` : '';
-  }
-
-  private batteryIcon(battery: number): string {
-    if (battery <= 5) return 'mdi:battery-alert-variant-outline';
-    if (battery <= 10) return 'mdi:battery-10';
-    if (battery <= 20) return 'mdi:battery-20';
-    if (battery <= 30) return 'mdi:battery-30';
-    if (battery <= 40) return 'mdi:battery-40';
-    if (battery <= 50) return 'mdi:battery-50';
-    if (battery <= 60) return 'mdi:battery-60';
-    if (battery <= 70) return 'mdi:battery-70';
-    if (battery <= 80) return 'mdi:battery-80';
-    if (battery <= 90) return 'mdi:battery-90';
-    return 'mdi:battery';
   }
 
   private areaSummaryById(areaId: string, language: 'zh-CN' | 'en'): string {

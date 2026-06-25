@@ -41,9 +41,9 @@ export class MinecraftDashboardCardEditor extends HTMLElement {
 
   private themeCssUrl(): string {
     try {
-      return new URL('./skins-pro/default/theme.css', import.meta.url).toString();
+      return new URL('default/theme.css', import.meta.url).toString();
     } catch {
-      return '/local/community/skins-pro/skins-pro/default/theme.css';
+      return '/local/community/skins-pro/default/theme.css';
     }
   }
 

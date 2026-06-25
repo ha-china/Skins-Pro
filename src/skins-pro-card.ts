@@ -208,21 +208,6 @@ const DEFAULT_ASSETS: Record<string, string> = {
   room_garden: 'room-garden.jpg',
 };
 
-const DEFAULT_THEME: Record<string, string> = {
-  '--sp-sidebar-width': '190px',
-  '--sp-app-padding': '18px',
-  '--sp-stage-radius': '32px',
-  '--sp-glass-bg': 'rgba(32,14,3,.92)',
-  '--sp-panel-bg': 'rgba(245,240,230,.95)',
-  '--sp-text-main': '#ffffff',
-  '--sp-text-muted': 'rgba(255,255,255,.72)',
-  '--sp-accent-green': '#5ca147',
-  '--sp-accent-blue': '#4d9de6',
-  '--sp-accent-purple': '#7c59c8',
-  '--sp-accent-red': '#d88774',
-  '--sp-accent-brown': '#b18b60',
-};
-
 const STRINGS: Record<'zh-CN' | 'en', Record<TranslationKey, string>> = {
   'zh-CN': {
     home: '首页',
@@ -340,7 +325,6 @@ const DEFAULT_CONFIG: DashboardConfig = {
     skin: 'default',
     base_path: '__AUTO__',
     assets: DEFAULT_ASSETS,
-    theme: DEFAULT_THEME,
   },
   weather: {
     entity: 'weather.home',
@@ -808,10 +792,12 @@ export class MinecraftDashboardCard extends HTMLElement {
       return;
     }
 
-    const theme = this._config?.resource_pack?.theme || {};
-    Object.entries(DEFAULT_THEME).forEach(([key, value]) => {
-      host.style.setProperty(key, theme[key] || value);
-    });
+    const theme = this._config?.resource_pack?.theme;
+    if (theme) {
+      Object.entries(theme).forEach(([key, value]) => {
+        host.style.setProperty(key, value);
+      });
+    }
     host.style.setProperty('--sp-base-texture', `url("${this.assetUrl('base')}")`);
     host.style.setProperty('--sp-stage-texture', `url("${this.assetUrl('stage')}")`);
   }

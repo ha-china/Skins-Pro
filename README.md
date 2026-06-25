@@ -2,70 +2,52 @@
 
 [![Open your Home Assistant instance and add this repository in HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Desmond-Dong&repository=Skins-Pro&category=plugin)
 
-A Minecraft-style Home Assistant dashboard card with bilingual (zh/en) support and replaceable resource packs.
+给你的 Home Assistant 换上 Minecraft 风格的主页吧！
 
-一款 Minecraft 风格的 Home Assistant 仪表盘卡片，支持中英文双语和可替换资源包。
+Skins Pro 是一款社区仪表盘卡片，把整个界面变成了 MC 风格的启动器。自带中英文双语，还支持换皮肤——装上就能用，不用折腾。
 
-- direct add from Home Assistant Community dashboards / 可从 Community dashboards 直接添加
-- no runtime dependencies / 无运行时依赖
-- Chinese and English labels / 中英文标签
-- replaceable resource packs for visuals and style / 可替换的皮肤资源包
-- auto-detects entities on first add / 首次添加时自动探测实体
-- all assets bundled — install and go / 所有资源打包在内，安装即用
+- 从 Community dashboards 直接添加，开箱即用
+- 内置两套皮肤（默认 &  Minecraft），也可以自己换
+- 首次添加会自动帮你匹配家里的设备
+- 所有资源打包在 dist 里，HACS 安装一次搞定
 
 ## Credits
 
-- **Original Project**: [dwains-dashboard-next](https://github.com/dwainscheeren/dwains-dashboard-next) — architectural inspiration.
-- **Initial Assets & Design**: [html-card-pro Discussions](https://github.com/ha-china/html-card-pro/discussions/11) — initial skin assets and visual concept.
+- [dwains-dashboard-next](https://github.com/dwainscheeren/dwains-dashboard-next) — 架构灵感来源
+- [html-card-pro Discussions](https://github.com/ha-china/html-card-pro/discussions/11) — 最初的皮肤素材和视觉设计
 
 ## Installation
 
 [![Open your Home Assistant instance and add this repository in HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Desmond-Dong&repository=Skins-Pro&category=plugin)
 
-1. Click the badge above, or go to HACS → Custom repositories and add `https://github.com/Desmond-Dong/Skins-Pro` as a Dashboard.
-2. Install `Skins Pro`.
-3. Reload the Home Assistant frontend if prompted.
-4. Go to `Settings → Dashboards → Add dashboard` and select `Skins Pro`.
+点上面的按钮一键添加，或者手动操作：
 
-## Default Behavior
+1. HACS → 自定义仓库 → 添加 `https://github.com/Desmond-Dong/Skins-Pro`，类型选 Dashboard
+2. 安装 Skins Pro
+3. 刷新 Home Assistant 前端
+4. 设置 → 仪表盘 → 添加仪表盘 → 选 Skins Pro
 
-After adding the dashboard, it creates one dashboard view with one custom card:
+## 开箱即用
 
-```yaml
-type: custom:skins-pro-card
-```
+添加后会自动创建一个带 Skins Pro 卡片的仪表盘，内置以下板块：
 
-The card contains built-in defaults for:
+- ☀️ 天气
+- 💬 每日一言
+- 📱 快捷设备控制
+- 🚪 房间快照
+- 🎬 场景按钮
+- ⚡ 今日用电
+- 🌐 中英文自动切换
 
-- weather
-- quote
-- device shortcuts
-- room snapshots
-- scene buttons
-- energy block
-- bilingual labels
+首次添加时会自动扫描你的 Home Assistant，尽量匹配已有的实体。如果匹配得不够准，直接在卡片编辑界面改就行，不用写 YAML。
 
-When the dashboard is added from Community dashboards, the strategy now tries to auto-detect common Home Assistant entities and writes a usable default card config for you.
+## 换皮肤 / Resource Packs
 
-If the mapping is not ideal, you can open the card editor in the UI and adjust it there without editing YAML.
+内置了两套皮肤，装完就能切。你也可以自己定义资源路径和 CSS 变量来换风格。
 
-If your entity IDs match the defaults closely, it works with minimal editing. If not, you can edit the card config in the dashboard UI and remap the entities.
+默认路径会自动检测（基于 `import.meta.url`），装了 HACS 不用配就能用。如果你想用自己的素材，配一下 `resource_pack.base_path` 就行。
 
-## Resource Packs
-
-Resource packs let you change the visual style without changing code.
-
-By default, the repository ships with bundled skins under:
-
-```text
-/hacsfiles/<repository>/skins-pro/{skin}/
-```
-
-The auto-detection logic resolves assets from `import.meta.url`, so in most cases you do not need to set `resource_pack.base_path` manually. After installation via HACS, the path resolves automatically.
-
-You can still use `resource_pack.base_path` to point to your own asset directory, and optionally override file names in `resource_pack.assets` or CSS tokens in `resource_pack.theme`.
-
-Bundled skins:
+内置皮肤：
 
 ```text
 skins-pro/
@@ -149,39 +131,26 @@ scenes:
     confirm: true
 ```
 
-## Language
+## 语言 / Language
 
-Set `language` to one of these values:
+`language` 支持三个值：
 
-- `auto`: follow Home Assistant language
-- `zh-CN`: force Chinese
-- `en`: force English
+- `auto` — 跟随 Home Assistant 系统语言
+- `zh-CN` — 强制中文
+- `en` — 英文
 
-For most labels, you can define both `*_zh` and `*_en` fields.
+每个标签都可以分别配 `*_zh` 和 `*_en`，不配的话会用内置默认值。
 
-## No-YAML Workflow
+## 不想写 YAML？
 
-The intended flow is now:
+本来就不用写。添加完仪表盘后，卡片会自动匹配你的实体。哪里不满意，在 UI 编辑界面改就行。
 
-1. Add `Skins Pro` from Community dashboards.
-2. Let the built-in strategy auto-detect common entities.
-3. If needed, open the card editor and fix weather, quote, energy, and resource pack path visually.
+内部注册的资源：
 
-You do not need to manually paste a full Lovelace YAML template anymore.
+- 仪表盘策略：`skins-pro`
+- 卡片类型：`custom:skins-pro-card`
 
-## Community Dashboard Strategy
-
-This project still registers itself as a dashboard strategy so it can be added directly from Community dashboards.
-
-Registered strategy types:
-
-- `skins-pro`
-
-Registered card types:
-
-- `skins-pro-card`
-
-## Development
+## 本地开发
 
 ```bash
 npm install
@@ -189,15 +158,27 @@ npm run type-check
 npm run build
 ```
 
-Build output:
+构建产物在 `dist/`：
 
-```text
-dist/skins-pro.js
+```
+dist/
+├── skins-pro.js          ← 主 JS
+└── skins-pro/            ← 皮肤资源（图片 + CSS）
+    ├── default/
+    └── minecraft/
 ```
 
-## Notes
+## 发布
 
-- This project is a complete rewrite and fork of [dwains-dashboard-next](https://github.com/dwainscheeren/dwains-dashboard-next). It has its own independent Git history and release cycle.
-- The project no longer depends on `lit`, `memoize-one`, or other runtime packages.
-- The current implementation is intentionally minimal and opinionated.
-- If needed, more visual packs can be added later without bringing back the old complex settings architecture.
+打 tag 即可触发 GitHub Actions 自动构建并发布 Release：
+
+```bash
+git tag v1.2.0
+git push origin v1.2.0
+```
+
+## 说明
+
+- 这个项目是从 [dwains-dashboard-next](https://github.com/dwainscheeren/dwains-dashboard-next) 重写的独立分支，有自己独立的 Git 历史和发布周期。
+- 没有运行时依赖（不依赖 `lit`、`memoize-one` 等）。
+- 有意保持精简，后续如需增加皮肤，不会带回原来那套复杂的配置体系。

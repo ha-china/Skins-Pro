@@ -4,12 +4,14 @@
 
 A Minecraft-style Home Assistant dashboard card with bilingual (zh/en) support and replaceable resource packs.
 
-- direct add from Home Assistant Community dashboards
-- no runtime dependencies
-- Chinese and English labels
-- replaceable resource packs for visuals and style
-- auto-detects entities on first add
-- all assets bundled — install and go
+一款 Minecraft 风格的 Home Assistant 仪表盘卡片，支持中英文双语和可替换资源包。
+
+- direct add from Home Assistant Community dashboards / 可从 Community dashboards 直接添加
+- no runtime dependencies / 无运行时依赖
+- Chinese and English labels / 中英文标签
+- replaceable resource packs for visuals and style / 可替换的皮肤资源包
+- auto-detects entities on first add / 首次添加时自动探测实体
+- all assets bundled — install and go / 所有资源打包在内，安装即用
 
 ## Credits
 

@@ -3,4 +3,5 @@ node_modules/
 npm-debug.log*
 *.log
 dist/default/
+dist/skins.json
 skins-pro/minecraft/

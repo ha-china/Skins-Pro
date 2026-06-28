@@ -1,13 +1,10 @@
-# Skins Pro — 下一代 Home Assistant 仪表盘
-
-[![Open your Home Assistant instance and add this repository in HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Desmond-Dong&repository=Skins-Pro&category=plugin)
+# Skins Pro — **Next-Gen Home Assistant Dashboard**
 
 **下一代 Home Assistant 仪表盘**——多皮肤、沉浸式、开箱即用。  
 **Next-Gen Home Assistant Dashboard** — Multi-skin, immersive, plug-and-play.
 
-Skins Pro 是一款社区 Lovelace 卡片，采用多皮肤架构，内置 **modern**、**AEON** 和 **minecraft** 三套精美皮肤。自带中英文双语，从 HACS 安装后无需任何配置即可使用。
-
-Skins Pro is a community Lovelace card with a multi-skin architecture, featuring **modern**, **AEON**, and **minecraft** skins. Bilingual (CN/EN) — install from HACS and it just works.
+Skins Pro 是一款社区 Lovelace 卡片，采用多皮肤架构，内置 **modern**、**AEON** 和 **minecraft** 三套精美皮肤，自带中英文双语，从 HACS 安装后无需配置即可使用。  
+Skins Pro is a community Lovelace card with a multi-skin architecture featuring **modern**, **AEON**, and **minecraft** skins. Bilingual (CN/EN) — install from HACS and it just works.
 
 - 从 HACS Community Dashboards 直接添加 / Add directly from HACS Community Dashboards
 - 多皮肤自由切换 / Switch between skins freely
@@ -57,8 +54,7 @@ On first add, it automatically scans your Home Assistant and organizes content b
 
 ## 皮肤开发 / Skin Development
 
-皮肤是一个文件夹放在 `skins-pro/<皮肤名>/` 下，包含图片、CSS 和文本配置。`npm run build` 会自动发现、处理图片并生成代码。
-
+皮肤是一个文件夹放在 `skins-pro/<皮肤名>/` 下，包含图片、CSS 和文本配置。`npm run build` 会自动发现、处理图片并生成代码。  
 A skin is a folder under `skins-pro/<skin-name>/` containing images, CSS, and strings. `npm run build` auto-discovers, processes images, and generates code.
 
 ### 目录结构 / Directory Structure
@@ -66,35 +62,34 @@ A skin is a folder under `skins-pro/<skin-name>/` containing images, CSS, and st
 ```
 skins-pro/
   your-skin-name/
-    theme.css               # 样式（必须） / Styles (required)
-    strings.json            # 皮肤文本 + icon_map（可选）
-    avatar.jpg              # 头像（建议 300×300）
-    background.jpg          # 主区域背景（宽 ≤ 2560px）
-    decoration.jpg          # 侧边装饰图（宽 ≤ 800px）
-    base-texture.jpg        # 背景纹理（宽 ≤ 2560px）
-    stage-*.jpg             # 阶段/过渡图（宽 ≤ 2560px）
-    room-*.jpg              # 房间图（宽 ≤ 1200px）
-    icon-*.jpg              # 设备图标（最长边 ≤ 300px）
+    theme.css               # 样式（必须）/ Styles (required)
+    strings.json            # 皮肤文本 + icon_map（可选）/ Strings + icon_map (optional)
+    avatar.jpg              # 头像，建议 300×300 / Avatar, recommended 300×300
+    background.jpg          # 主区域背景，宽 ≤ 2560px / Background, width ≤ 2560px
+    decoration.jpg          # 侧边装饰图，宽 ≤ 800px / Side decoration, width ≤ 800px
+    base-texture.jpg        # 背景纹理，宽 ≤ 2560px / Base texture, width ≤ 2560px
+    stage-*.jpg             # 阶段/过渡图，宽 ≤ 2560px / Stage image, width ≤ 2560px
+    room-*.jpg              # 房间图，宽 ≤ 1200px / Room image, width ≤ 1200px
+    icon-*.jpg              # 设备图标，最长边 ≤ 300px / Device icon, longest edge ≤ 300px
 ```
 
 ### 构建时图片处理 / Image Processing
 
 | 文件名 / Pattern | 目标尺寸 / Target | 说明 / Notes |
 |---|---|---|
-| `room-*` | 宽 ≤ 1200px | 保持比例 / Maintain aspect ratio |
-| `icon-*` | 最长边 ≤ 300px | 保持比例 |
-| `avatar.*` | 最长边 ≤ 300px | 保持比例 |
-| `decoration.*` | 宽 ≤ 800px | 保持比例 |
-| `background.*`, `base-*`, `stage-*` | 宽 ≤ 2560px | 保持比例 |
-| 其他 / others | 宽 ≤ 1200px | 保持比例 |
+| `room-*` | 宽 ≤ 1200px / width | 保持比例 / Maintain aspect ratio |
+| `icon-*` | 最长边 ≤ 300px / longest edge | 保持比例 / Maintain aspect ratio |
+| `avatar.*` | 最长边 ≤ 300px / longest edge | 保持比例 / Maintain aspect ratio |
+| `decoration.*` | 宽 ≤ 800px / width | 保持比例 / Maintain aspect ratio |
+| `background.*`, `base-*`, `stage-*` | 宽 ≤ 2560px / width | 保持比例 / Maintain aspect ratio |
+| 其他 / others | 宽 ≤ 1200px / width | 保持比例 / Maintain aspect ratio |
 
 源文件支持 PNG / JPG / BMP / WebP，一律输出 JPG，不大于原图。  
 Supports PNG / JPG / BMP / WebP input, outputs JPG. Never upscales.
 
 ### theme.css
 
-所有样式通过 `:host` 上的 CSS 变量自定义。每个皮肤独立的 `theme.css` 文件。参考 `skins-pro/modern/theme.css` 查看所有变量。
-
+所有样式通过 `:host` 上的 CSS 变量自定义。每个皮肤独立的 `theme.css` 文件。参考 `skins-pro/modern/theme.css` 查看所有变量。  
 All styles are customized via CSS variables on `:host`. Each skin has its own `theme.css`. See `skins-pro/modern/theme.css` for the full variable list.
 
 ### strings.json + icon_map
@@ -113,7 +108,7 @@ All styles are customized via CSS variables on `:host`. Each skin has its own `t
 }
 ```
 
-`icon_map` 定义实体域 → 图标图片的映射。未覆盖的域自动 fallback。  
+`icon_map` 定义实体域→图标图片的映射，未覆盖的域自动 fallback。  
 Maps entity domains to icon image filenames. Unmapped domains fall back automatically.
 
 ## 开发 / Development
@@ -122,28 +117,22 @@ Maps entity domains to icon image filenames. Unmapped domains fall back automati
 git clone https://github.com/Desmond-Dong/Skins-Pro.git
 cd Skins-Pro
 npm install
-npm run build       # 构建
-npm run watch       # 开发模式自动构建
-npm run type-check  # TypeScript 类型检查
+npm run build       # 构建 / Build
+npm run watch       # 开发模式自动构建 / Watch mode
+npm run type-check  # TypeScript 类型检查 / Type check
 ```
 
 构建产物在 `dist/`：  
 Build output: `dist/`
 
-- `dist/skins-pro.js` — 核心 JS
-- `dist/<皮肤名>/` — 各皮肤素材和 CSS
+- `dist/skins-pro.js` — 核心 JS / Core JS bundle
+- `dist/<皮肤名>/` — 各皮肤素材和 CSS / Per-skin assets and CSS
 
 ### 在 HA 中测试 / Testing in HA
 
 1. `npm run build`
 2. 将 `dist/` 复制到 HA 的 `www/community/skins-pro/` / Copy `dist/` to HA's `www/community/skins-pro/`
 3. 硬刷新浏览器（Ctrl+Shift+R）/ Hard refresh
-
-### 调试技巧 / Debugging Tips
-
-- DevTools 查看 Shadow DOM / Inspect Shadow DOM
-- CSS 变量在 `:host` 上实时修改 / Tweak CSS variables live on `:host`
-- 构建日志输出每个皮肤处理状态 / Build logs show per-skin processing status
 
 ## 致谢 / Credits
 

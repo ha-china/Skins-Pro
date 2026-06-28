@@ -44,7 +44,8 @@ Switch via the "Skin" field in the card editor.
 
 ### 皮肤切换演示 / Skin Switching Demo
 
-<video src="screenshots/skin.mp4" controls width="100%"></video>
+<video src="https://github.com/ha-china/Skins-Pro/raw/master/screenshots/skin.mp4" controls width="100%" preload="metadata"></video>
+[⬇ Download MP4](screenshots/skin.mp4)
 
 ## 功能 / Features
 

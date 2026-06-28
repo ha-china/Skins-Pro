@@ -64,25 +64,25 @@ skins-pro/
   your-skin-name/
     theme.css               # 样式（必须）/ Styles (required)
     strings.json            # 皮肤文本 + icon_map（可选）/ Strings + icon_map (optional)
-    avatar.jpg              # 头像，建议 300×300 / Avatar, recommended 300×300
-    background.jpg          # 主区域背景，宽 ≤ 2560px / Background, width ≤ 2560px
-    decoration.jpg          # 侧边装饰图，宽 ≤ 800px / Side decoration, width ≤ 800px
-    base-texture.jpg        # 背景纹理，宽 ≤ 2560px / Base texture, width ≤ 2560px
-    stage-*.jpg             # 阶段/过渡图，宽 ≤ 2560px / Stage image, width ≤ 2560px
-    room-*.jpg              # 房间图，宽 ≤ 1200px / Room image, width ≤ 1200px
-    icon-*.jpg              # 设备图标，最长边 ≤ 300px / Device icon, longest edge ≤ 300px
+    avatar.jpg              # 头像，建议 ≥ 300×300 / Avatar, recommended ≥ 300×300
+    background.jpg          # 主区域背景，建议宽 ≥ 2560px / Background, recommended width ≥ 2560px
+    decoration.jpg          # 侧边装饰图，建议宽 ≥ 800px / Side decoration, recommended width ≥ 800px
+    base-texture.jpg        # 背景纹理，建议宽 ≥ 2560px / Base texture, recommended width ≥ 2560px
+    stage-*.jpg             # 阶段/过渡图，建议宽 ≥ 2560px / Stage image, recommended width ≥ 2560px
+    room-*.jpg              # 房间图，建议宽 ≥ 1200px / Room image, recommended width ≥ 1200px
+    icon-*.jpg              # 设备图标，建议最长边 ≥ 300px / Device icon, recommended longest edge ≥ 300px
 ```
 
 ### 构建时图片处理 / Image Processing
 
-| 文件名 / Pattern | 目标尺寸 / Target | 说明 / Notes |
+| 文件名 / Pattern | 建议源尺寸 / Recommended source | 说明 / Notes |
 |---|---|---|
-| `room-*` | 宽 ≤ 1200px / width | 保持比例 / Maintain aspect ratio |
-| `icon-*` | 最长边 ≤ 300px / longest edge | 保持比例 / Maintain aspect ratio |
-| `avatar.*` | 最长边 ≤ 300px / longest edge | 保持比例 / Maintain aspect ratio |
-| `decoration.*` | 宽 ≤ 800px / width | 保持比例 / Maintain aspect ratio |
-| `background.*`, `base-*`, `stage-*` | 宽 ≤ 2560px / width | 保持比例 / Maintain aspect ratio |
-| 其他 / others | 宽 ≤ 1200px / width | 保持比例 / Maintain aspect ratio |
+| `room-*` | 宽 ≥ 1200px / width | 保持比例，缩放至 1200px / Maintain ratio, downscale to 1200px |
+| `icon-*` | 最长边 ≥ 300px / longest edge | 保持比例，缩放至 300px / Maintain ratio, downscale to 300px |
+| `avatar.*` | 最长边 ≥ 300px / longest edge | 保持比例，缩放至 300px / Maintain ratio, downscale to 300px |
+| `decoration.*` | 宽 ≥ 800px / width | 保持比例，缩放至 800px / Maintain ratio, downscale to 800px |
+| `background.*`, `base-*`, `stage-*` | 宽 ≥ 2560px / width | 保持比例，缩放至 2560px / Maintain ratio, downscale to 2560px |
+| 其他 / others | 宽 ≥ 1200px / width | 保持比例，缩放至 1200px / Maintain ratio, downscale to 1200px |
 
 源文件支持 PNG / JPG / BMP / WebP，一律输出 JPG，不大于原图。  
 Supports PNG / JPG / BMP / WebP input, outputs JPG. Never upscales.

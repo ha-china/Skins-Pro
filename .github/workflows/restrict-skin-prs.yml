@@ -11,7 +11,7 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'contribute-skin')
+    if: contains(github.event.pull_request.labels.*.name, 'contribute-skin') && !contains(github.event.pull_request.labels.*.name, 'architecture')
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -30,7 +30,7 @@ jobs:
           BLOCKED=false
           for f in ${{ steps.files.outputs.files }}; do
             case "$f" in
-              src/*|scripts/*|tsconfig.json|rollup.config.js|.github/workflows/*|.github/ISSUE_TEMPLATE/*)
+              src/*|scripts/*|tsconfig.json|rollup.config.js|.github/workflows/*|.github/PULL_REQUEST_TEMPLATE.md)
                 echo "BLOCKED file: $f"
                 BLOCKED=true
                 ;;
@@ -43,4 +43,4 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            core.setFailed('Skin-contribution PRs must not modify architecture files (src/, scripts/, tsconfig.json, rollup.config.js, .github/workflows/, .github/ISSUE_TEMPLATE/). Please revert these changes.');
+            core.setFailed('Skin-contribution PRs must not modify architecture files (src/, scripts/, tsconfig.json, rollup.config.js, .github/workflows/, .github/PULL_REQUEST_TEMPLATE.md). Please revert these changes.');

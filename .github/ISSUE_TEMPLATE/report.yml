@@ -1,0 +1,40 @@
+name: 反馈 / Feedback
+description: 贡献皮肤或提出架构优化 / Contribute a skin or suggest architecture improvements
+labels: []
+body:
+  - type: checkboxes
+    id: type
+    attributes:
+      label: 类型 / Type
+      description: 选择你的反馈类别（可多选）/ Select one or more categories
+      options:
+        - label: 贡献主题 / Contribute a Skin
+        - label: 优化架构 / Architecture Optimization
+  - type: input
+    id: skin_name
+    attributes:
+      label: 皮肤名称 / Skin Name
+      description: 贡献皮肤时填写 / Required when contributing a skin
+    validations:
+      required: false
+  - type: textarea
+    id: description_zh
+    attributes:
+      label: 描述（中文）
+      description: 请详细描述你的需求或建议
+    validations:
+      required: false
+  - type: textarea
+    id: description_en
+    attributes:
+      label: Description (English)
+      description: Please describe your request or suggestion in detail
+    validations:
+      required: false
+  - type: textarea
+    id: additional
+    attributes:
+      label: 附加信息 / Additional Info
+      description: 截图、参考链接等 / Screenshots, reference links, etc.
+    validations:
+      required: false

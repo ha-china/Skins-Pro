@@ -186,7 +186,7 @@ button { font:inherit; }
 .switch.on { background:var(--sp-accent-green); }
 .switch.on::after { left:24px; }
 .rooms { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--sp-space-md); align-content:end; }
-.room { aspect-ratio:4/3; min-height:150px; border:0; border-radius:var(--sp-radius-room); overflow:hidden; position:relative; box-shadow:var(--sp-shadow-xl); cursor:pointer; padding:0; background:transparent; }
+.room { aspect-ratio:4/3; min-height:80px; border:0; border-radius:var(--sp-radius-room); overflow:hidden; position:relative; box-shadow:var(--sp-shadow-xl); cursor:pointer; padding:0; background:transparent; }
 .room img { position:absolute; inset:0; width:100%; height:100%; }
 .room::after { content:""; position:absolute; inset:0; background:var(--sp-room-overlay); }
 .room-label { position:absolute; z-index:1; left:14px; right:14px; bottom:14px; text-align:left; }
@@ -267,7 +267,7 @@ button { font:inherit; }
 .mc-app[data-view="rooms"] .bottom-stack { grid-template-rows:auto; align-self:stretch; }
 .mc-app[data-view="rooms"] .page-body { overflow:auto; }
 .mc-app[data-view="rooms"] .rooms { grid-template-columns:repeat(4,minmax(0,1fr)); }
-.mc-app[data-view="rooms"] .room { min-height:clamp(108px, 13vh, 150px); }
+.mc-app[data-view="rooms"] .room { min-height:80px; }
 .mc-app[data-view="scenes"] .welcome-group,
 .mc-app[data-view="scenes"] .bottom-stack,
 .mc-app[data-view="scenes"] .time-card,
@@ -333,7 +333,7 @@ button { font:inherit; }
   .profile-img { width:40px; height:40px; }
   .item-img,.item-icon { width:40px; height:40px; }
   .device { min-height:120px; }
-  .room { min-height:110px; }
+  .room { min-height:80px; }
   .room-scene-chip { padding:2px 10px; max-width:110px; }
 }
 @media (max-width: 520px) {
@@ -349,7 +349,7 @@ button { font:inherit; }
   .profile-img { width:36px; height:36px; }
   .item-img,.item-icon { width:36px; height:36px; }
   .device { min-height:90px; }
-  .room { min-height:85px; }
+  .room { min-height:80px; }
   .room-scene-chip { padding:1px 8px; max-width:90px; font-size:var(--sp-font-xs); }
 }
 /* editor & strategy info styles */

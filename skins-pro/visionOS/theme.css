@@ -988,7 +988,7 @@ button {
 
 .room {
   aspect-ratio: 4 / 3;
-  min-height: 150px;
+  min-height: 80px;
   border: 0;
   border-radius: var(--sp-radius-xl);
   overflow: hidden;
@@ -1497,7 +1497,7 @@ button {
 }
 
 .mc-app[data-view="rooms"] .room {
-  min-height: clamp(108px, 13vh, 150px);
+  min-height: 80px;
 }
 
 /* ---- Scenes View ---- */
@@ -1807,7 +1807,7 @@ button {
   }
 
   .room {
-    min-height: 110px;
+    min-height: 80px;
   }
 
   .room-scene-chip {
@@ -1871,7 +1871,7 @@ button {
   }
 
   .room {
-    min-height: 85px;
+    min-height: 80px;
   }
 
   .room-scene-chip {

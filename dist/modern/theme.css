@@ -253,8 +253,8 @@ button { font:inherit; }
   .mc-app[data-view="devices"] .devices,
   .mc-app[data-view="rooms"] .rooms,
   .mc-app[data-view="scenes"] .scenes-page { grid-template-columns:repeat(3,minmax(0,1fr)); }
-  .mc-app[data-view="rooms"] .room { min-height:90px; }
-  .rooms { gap:var(--sp-space-sm); }
+  .mc-app[data-view="rooms"] .room { min-height:80px; aspect-ratio:unset; }
+  .rooms { gap:var(--sp-space-sm); align-content:start; }
 }
 @media (max-width: 760px) {
   :host {

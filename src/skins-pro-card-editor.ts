@@ -336,13 +336,18 @@ export class SkinsProCardEditor extends HTMLElement {
             headers: { Authorization: `Bearer ${this._hass?.auth?.data?.access_token || ''}` },
             body: formData,
           });
+          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
           const text = await resp.text();
           let path = text.trim();
           try {
             const j = JSON.parse(text);
-            if (j.path) path = j.path;
+            path = j.path || j.content_id || path;
           } catch { /* plain text response */ }
-          if (path) this.setField('background_image', path);
+          if (path && !path.startsWith('{') && !path.startsWith('<')) {
+            this.setField('background_image', path);
+            return;
+          }
+          throw new Error('Invalid path');
         } catch {
           // fallback: read as data URL if upload API fails
           const reader = new FileReader();

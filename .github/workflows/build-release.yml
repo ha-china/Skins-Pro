@@ -111,6 +111,41 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Detect changed store assets
+        if: steps.check.outputs.skip != 'true'
+        id: changed
+        run: |
+          git fetch origin store --depth=1 2>/dev/null || true
+
+          PURGE_URLS="https://purge.jsdelivr.net/gh/ha-china/Skins-Pro@store/screenshots/registry.json"
+
+          # Compare skin zips
+          for zip in store/*.zip; do
+            [ -f "$zip" ] || continue
+            skin=$(basename "$zip" .zip)
+            new_hash=$(md5sum "$zip" | cut -d' ' -f1)
+            old_hash=$(git show "origin/store:$zip" 2>/dev/null | md5sum | cut -d' ' -f1 || echo "")
+            if [ -n "$old_hash" ] && [ "$new_hash" != "$old_hash" ]; then
+              echo "Changed zip: $skin"
+              PURGE_URLS="$PURGE_URLS https://purge.jsdelivr.net/gh/ha-china/Skins-Pro@store/store/${skin}.zip"
+            fi
+          done
+
+          # Compare thumbnails
+          for thumb in screenshots/thumbnails/*.jpg; do
+            [ -f "$thumb" ] || continue
+            skin=$(basename "$thumb" .jpg)
+            new_hash=$(md5sum "$thumb" | cut -d' ' -f1)
+            old_hash=$(git show "origin/store:$thumb" 2>/dev/null | md5sum | cut -d' ' -f1 || echo "")
+            if [ -n "$old_hash" ] && [ "$new_hash" != "$old_hash" ]; then
+              echo "Changed thumbnail: $skin"
+              PURGE_URLS="$PURGE_URLS https://purge.jsdelivr.net/gh/ha-china/Skins-Pro@store/screenshots/thumbnails/${skin}.jpg"
+            fi
+          done
+
+          echo "purge_urls=$PURGE_URLS" >> "$GITHUB_OUTPUT"
+          echo "Purge URLs: $PURGE_URLS"
+
       - name: Push store assets to store branch
         if: steps.check.outputs.skip != 'true'
         run: |
@@ -137,4 +172,9 @@ jobs:
 
       - name: Purge jsdelivr cache
         if: steps.check.outputs.skip != 'true'
-        run: curl -s https://purge.jsdelivr.net/gh/ha-china/Skins-Pro@store/screenshots/registry.json
+        run: |
+          for url in ${{ steps.changed.outputs.purge_urls }}; do
+            echo "Purging: $url"
+            curl -s "$url" > /dev/null
+            sleep 0.5
+          done

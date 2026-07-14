@@ -5,6 +5,7 @@ on:
     branches: [main, master]
     paths:
       - 'skins-pro/**'
+      - 'screenshots/**'
   workflow_dispatch:
 
 permissions:
@@ -33,8 +34,14 @@ jobs:
       - name: Detect changed skins
         id: skins
         run: |
-          CHANGED=$(git diff --name-only HEAD~1 HEAD -- skins-pro/ 2>/dev/null \
+          # Detect changed skins from skins-pro/ source files
+          SKIN_CHANGED=$(git diff --name-only HEAD~1 HEAD -- skins-pro/ 2>/dev/null \
             | grep '^skins-pro/' | cut -d/ -f2 | sort -u | grep -v '^modern$' || true)
+          # Detect changed skins from screenshots/ (e.g. screenshots/cs-go.png)
+          SCREENSHOT_CHANGED=$(git diff --name-only HEAD~1 HEAD -- screenshots/ 2>/dev/null \
+            | grep '^screenshots/' | cut -d/ -f2 | sed 's/\.[^.]*$//' | sort -u \
+            | grep -v '^thumbnails$' | grep -v '^registry$' || true)
+          CHANGED=$(printf '%s\n%s\n' "$SKIN_CHANGED" "$SCREENSHOT_CHANGED" | grep -v '^$' | sort -u || true)
           if [ -z "$CHANGED" ]; then
             echo "target=" >> "$GITHUB_OUTPUT"
             echo "No specific skins changed"

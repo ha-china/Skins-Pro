@@ -11,8 +11,8 @@
   --sp-panel-bg:#F2FFF1;
   --sp-card-bg:rgba(255,255,255,.78);
 
-  --sp-base-texture:url("./background.jpg");
-  --sp-stage-texture:url("./background.jpg");
+  --sp-base-texture:url("./background.png");
+  --sp-stage-texture:url("./background.png");
 
   --sp-app-overlay:
     radial-gradient(circle at 18% 8%, rgba(255,212,106,.20), transparent 30%),
@@ -706,8 +706,138 @@ button { font:inherit; }
 .devices > .device.device-off:nth-child(6n+6), .devices-page-grid > .device.device-off:nth-child(6n+6), .device.tone-brown.device-off .item-img { box-shadow:0 8px 16px rgba(11, 11, 11, 0.16); border:2px solid rgba(11, 11, 11, 0.18); }
 /* end skins-pro card theme port */
 
+/* skins-pro devices-filter + security layout patch */
+.filter-bar {
+  display:flex;
+  gap:var(--sp-space-sm);
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.filter-select {
+  min-height:36px;
+  padding:0 var(--sp-space-lg) 0 var(--sp-space-sm);
+  border:var(--sp-border-width) solid var(--sp-border-glass);
+  border-radius:var(--sp-radius-pill);
+  background:var(--sp-glass-light, var(--sp-glass-bg));
+  color:var(--sp-text-stage, var(--sp-text-main, #0B0B0B));
+  font:inherit;
+  font-size:var(--sp-font-xs);
+  font-weight:600;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  -webkit-appearance:none;
+  appearance:none;
+  outline:none;
+  cursor:pointer;
+  min-width:120px;
+  box-sizing:border-box;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23FFF0E0' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 8px center;
+  background-size:14px;
+}
+.filter-select option {
+  color:var(--sp-text-stage, #0B0B0B);
+  background:var(--sp-panel-bg, #0C1020);
+}
+.action-btn {
+  min-height:36px;
+  box-sizing:border-box;
+  border:var(--sp-border-width) solid var(--sp-border-glass);
+  border-radius:var(--sp-radius-pill);
+  padding:0 14px;
+  background:var(--sp-glass-light, var(--sp-glass-bg));
+  color:var(--sp-text-stage, var(--sp-text-main, #0B0B0B));
+  cursor:pointer;
+  font:inherit;
+  font-size:var(--sp-font-xs);
+  font-weight:600;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:background .2s ease,color .2s ease;
+}
+.action-btn:hover {
+  background:var(--sp-accent-alpha, var(--sp-accent-green-alpha, rgba(0,0,0,.08)));
+  color:var(--sp-accent, var(--sp-text-stage, #0B0B0B));
+}
+
+.devices.security-grid {
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-space-md);
+  grid-template-columns:unset;
+}
+.security-cameras {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:var(--sp-space-sm);
+}
+.security-devices {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:var(--sp-space-sm);
+}
+.security-grid {
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-space-md);
+}
+
+.mc-app[data-view="security"] .page-shell,
+.mc-app[data-view="scenes"] .page-shell {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.mc-app[data-view="security"] .camera-card,
+.mc-app[data-view="security"] .security-grid .device,
+.mc-app[data-view="scenes"] .devices-page-grid .device {
+  box-shadow: none !important;
+  backdrop-filter: blur(14px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%) !important;
+  background: var(--sp-glass-bg, rgba(245, 240, 232, 0.62)) !important;
+  border: 1px solid var(--sp-border-glass, rgba(139, 115, 85, 0.28)) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #0B0B0B)) !important;
+}
+.mc-app[data-view="security"] .security-grid .device .item-img,
+.mc-app[data-view="scenes"] .devices-page-grid .device .item-img {
+  box-shadow: none !important;
+  border: 2px solid var(--sp-border-device, rgba(139, 115, 85, 0.28)) !important;
+}
+.mc-app[data-view="security"] .camera-card .device-name,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .camera-card .status,
+.mc-app[data-view="security"] .security-grid .device .device-name,
+.mc-app[data-view="security"] .security-grid .device .state-word,
+.mc-app[data-view="security"] .security-grid .device .muted,
+.mc-app[data-view="scenes"] .devices-page-grid .device .device-name,
+.mc-app[data-view="scenes"] .devices-page-grid .device .state-word,
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted {
+  color: var(--sp-text-stage, var(--sp-text-dark, #0B0B0B)) !important;
+  text-shadow: none !important;
+}
+.mc-app[data-view="security"] .security-grid .device .status,
+.mc-app[data-view="scenes"] .devices-page-grid .device .status {
+  background: rgba(0, 0, 0, 0.10) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #0B0B0B)) !important;
+}
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .security-grid .device .muted {
+  color: var(--sp-text-stage-muted, var(--sp-text-muted, rgba(44, 44, 44, 0.72))) !important;
+}
+/* end skins-pro devices-filter + security layout patch */
+
+
+
+
 /* skins-pro weather layout patch */
-.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px); }
+.welcome-group .welcome .quote { display:none; }
+
+.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px);  grid-area:unset; }
 .weather-state-icon { width:30px; height:30px; border-radius:var(--sp-radius-weather,10px); display:grid; place-items:center; background:var(--sp-weather-bg,rgba(128,128,128,.18)); color:var(--sp-text-alt,var(--sp-text-main)); flex-shrink:0; }
 .weather-current { display:flex; align-items:center; gap:var(--sp-space-sm,10px); }
 .weather-current-info { display:flex; flex-direction:column; gap:1px; min-width:0; }
@@ -1124,4 +1254,118 @@ button { font:inherit; }
     max-width: 90px;
   }
 }
+
+/* skins-pro maplestory polish v1 */
+/* 亮色浮空森林磨砂侧栏；深色字保证可读；贴合首页玻璃卡 */
+:host {
+  --sp-sidebar-bg: linear-gradient(165deg, rgba(255, 255, 255, 0.55), rgba(220, 246, 230, 0.62)) !important;
+  --sp-sidebar-text: #0F2F2B !important;
+  --sp-sidebar-text-muted: #163A36 !important;
+  --sp-sidebar-active-bg: rgba(65, 174, 118, 0.28) !important;
+  --sp-sidebar-active-text: #0F6B45 !important;
+  --sp-card-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.58), rgba(226, 248, 232, 0.42)) !important;
+  --sp-text-primary: #0F2F2B !important;
+  --sp-text-main: #0F2F2B !important;
+  --sp-text-muted: rgba(15, 47, 43, 0.78) !important;
+  --sp-text-stage: #0F2F2B !important;
+  --sp-text-stage-muted: rgba(15, 47, 43, 0.72) !important;
+  --sp-shadow-glass: none !important;
+  --sp-shadow-card: none !important;
+}
+.sidebar {
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.52), rgba(214, 244, 224, 0.58)) !important;
+  border: 1px solid rgba(65, 174, 118, 0.32) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(32px) saturate(170%) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(170%) !important;
+}
+.profile .meta h3,
+.sidebar .profile h3 {
+  color: #0F2F2B !important;
+  text-shadow: none !important;
+  font-weight: 800 !important;
+}
+.profile .meta .muted,
+.sidebar .muted {
+  color: #1F4A45 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+  font-weight: 650 !important;
+}
+.profile-img {
+  border-color: rgba(65, 174, 118, 0.50) !important;
+  box-shadow: none !important;
+}
+.nav-button,
+.sidebar .nav-button {
+  color: #0F2F2B !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+.nav-button ha-icon,
+.nav-button .icon,
+.sidebar .nav-button .icon {
+  color: #0F2F2B !important;
+  opacity: 1 !important;
+}
+.nav-button:hover,
+.nav-button.active,
+.sidebar .nav-button:hover,
+.sidebar .nav-button.active {
+  color: #0A5C3B !important;
+  background: rgba(65, 174, 118, 0.26) !important;
+  box-shadow: inset 0 0 0 1px rgba(65, 174, 118, 0.40) !important;
+}
+.sidebar-art {
+  border-radius: 18px !important;
+  overflow: hidden;
+  border: 1px solid rgba(65, 174, 118, 0.28);
+  box-shadow: none !important;
+}
+.glass-card,
+.time-card,
+.panel-energy,
+.panel-environment,
+.panel-scenes,
+.maintenance-card {
+  background: rgba(255, 255, 255, 0.52) !important;
+  border: 1px solid rgba(65, 174, 118, 0.22) !important;
+  backdrop-filter: blur(22px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(150%) !important;
+  box-shadow: none !important;
+  color: #0F2F2B !important;
+}
+.panel-scenes .scene,
+.scene {
+  box-shadow: none !important;
+}
+/* 设备卡统一亮色玻璃，避免开/关深浅割裂 */
+.devices .device,
+.devices-page-grid .device,
+.camera-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.58), rgba(226, 248, 232, 0.40)) !important;
+  color: #0F2F2B !important;
+  border: 1px solid rgba(65, 174, 118, 0.22) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(18px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
+}
+.devices .device.device-on,
+.devices-page-grid .device.device-on {
+  background: linear-gradient(145deg, rgba(65, 174, 118, 0.28), rgba(255, 255, 255, 0.55)) !important;
+  border-color: rgba(65, 174, 118, 0.40) !important;
+}
+.device .device-name,
+.device .state-word,
+.device .muted,
+.camera-card .device-name,
+.camera-card .muted {
+  color: #0F2F2B !important;
+  text-shadow: none !important;
+}
+.device .muted,
+.camera-card .muted {
+  color: rgba(15, 47, 43, 0.72) !important;
+}
+/* end skins-pro maplestory polish v1 */
 

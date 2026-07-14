@@ -152,11 +152,14 @@ cd Skins-Pro
 npm install
 npm run build       # 构建全部
 npm run build -- <皮肤名>   # 只构建指定皮肤 + modern（更快）
+npm run build -- <皮肤名> --skins-only   # 只处理皮肤图片，不重建 JS
 npm run watch       # 文件变动时自动重新构建
 npm run type-check  # 代码检查
 ```
 
 `npm run build -- visionOS` 只构建 `modern` + `visionOS`，跳过其它皮肤，适合本地迭代单个皮肤。
+
+`npm run build -- visionOS --skins-only` 只处理皮肤图片，输出到 `dist/visionOS/`，不重建 JS、不打包 zip。已有可用的 `dist/skins-pro.js` 时用这个，只更新皮肤图片。
 
 构建产物在 `dist/`：
 
@@ -195,9 +198,9 @@ npm run type-check  # 代码检查
 
 1. 在 `skins-pro/<新皮肤名>/` 下创建皮肤目录，放入所需文件（`theme.css`、`strings.json`、图片等）
 
-2. 执行 `npm run build`，皮肤会自动被发现
+2. 执行 `npm run build -- <新皮肤名> --skins-only`，只处理皮肤图片，输出到 `dist/<新皮肤名>/`
 
-3. 把皮肤文件复制到 HA 的 `www/` 目录：
+3. 把 `dist/<新皮肤名>/` 复制到 HA 的 `www/` 目录：
    ```
    <HA 配置>/www/skins-pro/<新皮肤名>/
      ├── theme.css

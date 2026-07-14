@@ -152,11 +152,14 @@ cd Skins-Pro
 npm install
 npm run build       # Build everything
 npm run build -- <skin-name>   # Build only one skin + modern (faster)
+npm run build -- <skin-name> --skins-only   # Process skin images only, no JS rebuild
 npm run watch       # Auto-rebuild on file changes
 npm run type-check  # Check for code errors
 ```
 
 `npm run build -- visionOS` builds only `modern` + `visionOS`, skipping other skins — faster when iterating on a single skin.
+
+`npm run build -- visionOS --skins-only` processes only the skin's images and outputs to `dist/visionOS/` — no JS rebuild, no zip packaging. Use this when you already have a working `dist/skins-pro.js` and just want to update skin images.
 
 Build output in `dist/`:
 
@@ -195,9 +198,9 @@ You don't need the store to test a new skin. Just:
 
 1. Create your skin folder under `skins-pro/<new-skin-name>/` with the usual files (`theme.css`, `strings.json`, images)
 
-2. Run `npm run build` — your skin will be auto-discovered
+2. Run `npm run build -- <new-skin-name> --skins-only` — processes only your skin's images, outputs to `dist/<new-skin-name>/`
 
-3. Copy your skin's files to your HA `www/` folder:
+3. Copy `dist/<new-skin-name>/` to your HA `www/` folder:
    ```
    <HA config>/www/skins-pro/<new-skin-name>/
      ├── theme.css

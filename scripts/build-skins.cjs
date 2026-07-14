@@ -23,6 +23,7 @@ function resolveTargetSkins() {
   return skins;
 }
 const targetSkins = resolveTargetSkins();
+const skinsOnly = process.argv.includes('--skins-only');
 const allDirs = fs.readdirSync(src, { withFileTypes: true })
   .filter(d => d.isDirectory())
   .map(d => d.name)
@@ -102,7 +103,7 @@ async function processImage(srcPath, destDir) {
   for (const dir of dirs) {
     const srcDir = path.join(src, dir);
     const isModern = dir === 'modern';
-    const outDir = isModern ? path.join(dest, dir) : path.join(stage, dir);
+    const outDir = isModern ? path.join(dest, dir) : (skinsOnly ? path.join(dest, dir) : path.join(stage, dir));
 
     fs.mkdirSync(outDir, { recursive: true });
 
@@ -123,7 +124,7 @@ async function processImage(srcPath, destDir) {
 
     await Promise.all(jobs);
 
-    if (!isModern) {
+    if (!isModern && !skinsOnly) {
       // Zip non-modern directly into store/<dir>.zip, then clean up staging
       const zipPath = path.join(store, `${dir}.zip`);
       await new Promise((resolve, reject) => {
@@ -143,6 +144,12 @@ async function processImage(srcPath, destDir) {
   // Clean up staging directory
   if (fs.existsSync(stage)) {
     fs.rmSync(stage, { recursive: true, force: true });
+  }
+
+  if (skinsOnly) {
+    const scope = targetSkins.length > 0 ? `: ${targetSkins.join(', ')}` : '';
+    console.log(`Skins build complete${scope} — ${dirs.length} skin(s) processed, output in dist/`);
+    return;
   }
 
   // Generate skin list + strings + icon maps for compile-time injection.

@@ -1333,8 +1333,8 @@ button { font:inherit; }
   padding:0 var(--sp-space-lg) 0 var(--sp-space-sm);
   border:var(--sp-border-width) solid var(--sp-border-glass);
   border-radius:var(--sp-radius-pill);
-  background:rgba(15, 20, 25, 0.42);
-  color:var(--sp-text-primary, #E2E8F0);
+  background:var(--sp-glass-light, var(--sp-glass-bg));
+  color:var(--sp-text-stage, var(--sp-text-main, #1a2238));
   font:inherit;
   font-size:var(--sp-font-xs);
   font-weight:600;
@@ -1346,14 +1346,14 @@ button { font:inherit; }
   cursor:pointer;
   min-width:120px;
   box-sizing:border-box;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23E2E8F0' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23FFF0E0' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-repeat:no-repeat;
   background-position:right 8px center;
   background-size:14px;
 }
 .filter-select option {
-  color:#E2E8F0;
-  background:#0F1419;
+  color:var(--sp-text-stage, #1a2238);
+  background:var(--sp-panel-bg, #0C1020);
 }
 .action-btn {
   min-height:36px;
@@ -1361,8 +1361,8 @@ button { font:inherit; }
   border:var(--sp-border-width) solid var(--sp-border-glass);
   border-radius:var(--sp-radius-pill);
   padding:0 14px;
-  background:rgba(15, 20, 25, 0.42);
-  color:var(--sp-text-primary, #E2E8F0);
+  background:var(--sp-glass-light, var(--sp-glass-bg));
+  color:var(--sp-text-stage, var(--sp-text-main, #1a2238));
   cursor:pointer;
   font:inherit;
   font-size:var(--sp-font-xs);
@@ -1372,8 +1372,8 @@ button { font:inherit; }
   transition:background .2s ease,color .2s ease;
 }
 .action-btn:hover {
-  background:rgba(245, 166, 35, 0.18);
-  color:var(--sp-accent, #F5A623);
+  background:var(--sp-accent-alpha, var(--sp-accent-green-alpha, rgba(0,0,0,.08)));
+  color:var(--sp-accent, var(--sp-text-stage, #1a2238));
 }
 
 .devices.security-grid {
@@ -1412,14 +1412,14 @@ button { font:inherit; }
   box-shadow: none !important;
   backdrop-filter: blur(14px) saturate(130%) !important;
   -webkit-backdrop-filter: blur(14px) saturate(130%) !important;
-  background: rgba(15, 20, 25, 0.34) !important;
-  border: 1px solid rgba(245, 166, 35, 0.22) !important;
-  color: var(--sp-text-primary, #E2E8F0) !important;
+  background: var(--sp-glass-bg, rgba(245, 240, 232, 0.62)) !important;
+  border: 1px solid var(--sp-border-glass, rgba(139, 115, 85, 0.28)) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #1a2238)) !important;
 }
 .mc-app[data-view="security"] .security-grid .device .item-img,
 .mc-app[data-view="scenes"] .devices-page-grid .device .item-img {
   box-shadow: none !important;
-  border: 2px solid rgba(245, 166, 35, 0.28) !important;
+  border: 2px solid var(--sp-border-device, rgba(139, 115, 85, 0.28)) !important;
 }
 .mc-app[data-view="security"] .camera-card .device-name,
 .mc-app[data-view="security"] .camera-card .muted,
@@ -1430,18 +1430,19 @@ button { font:inherit; }
 .mc-app[data-view="scenes"] .devices-page-grid .device .device-name,
 .mc-app[data-view="scenes"] .devices-page-grid .device .state-word,
 .mc-app[data-view="scenes"] .devices-page-grid .device .muted {
-  color: var(--sp-text-primary, #E2E8F0) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #1a2238)) !important;
   text-shadow: none !important;
 }
 .mc-app[data-view="security"] .security-grid .device .status,
 .mc-app[data-view="scenes"] .devices-page-grid .device .status {
-  background: rgba(245, 166, 35, 0.14) !important;
-  color: var(--sp-text-primary, #E2E8F0) !important;
+  background: rgba(0, 0, 0, 0.10) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #1a2238)) !important;
 }
 .mc-app[data-view="scenes"] .devices-page-grid .device .muted,
 .mc-app[data-view="security"] .camera-card .muted,
 .mc-app[data-view="security"] .security-grid .device .muted {
-  color: var(--sp-text-muted, rgba(226, 232, 240, 0.72)) !important;
+  color: var(--sp-text-stage-muted, var(--sp-text-muted, rgba(44, 44, 44, 0.72))) !important;
 }
 /* end skins-pro devices-filter + security layout patch */
+
 

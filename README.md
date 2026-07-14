@@ -13,7 +13,7 @@ Skins Pro is a community Lovelace card with a multi-skin architecture. It ships 
 - Area-based room display
 - Auto icon matching by entity domain
 
-> Note — All current theme image assets are AI-generated, so some images may contain AI watermarks or similar generation artifacts. If you don't like the AI-generated images, you can freely upload your own background and room images in the settings.
+> Note — We often create skins out of passion for the things we love, but this can inadvertently touch on copyright issues. We recommend using AI-generated images whenever possible. All current theme image assets are AI-generated, so some images may contain AI watermarks or similar generation artifacts. If you don't like the AI-generated images, you can freely upload your own background and room images in the settings. If you believe any skin infringes on your copyright, please open an issue and we will remove it promptly.
 
 ## Philosophy
 
@@ -226,6 +226,8 @@ We welcome skin contributions! Simply:
 3. **Submit a PR** using the PR template — fill in all required fields
 
 Once merged, CI automatically builds the card, packages your skin to the store branch, and makes it available in the card editor's skin store.
+
+> ⚠️ **Copyright Notice** — When contributing skins, please ensure your image assets do not infringe on others' copyright. We recommend using AI-generated or original images. Skins with valid copyright complaints will be removed from the store.
 
 ### PR Template Requirements (enforced by CI)
 

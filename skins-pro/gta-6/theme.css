@@ -46,8 +46,8 @@
   --sp-glass-bg:rgba(12, 16, 32, 0.72);
   --sp-panel-bg:rgba(12, 16, 32, 0.82);
   --sp-card-bg: linear-gradient(145deg, rgba(29, 27, 36, 0.72), rgba(9, 13, 29, 0.58));
-  --sp-base-texture: url("./base-texture.jpg");
-  --sp-stage-texture: url("./stage-background.jpg");
+  --sp-base-texture: url("./background.png");
+  --sp-stage-texture: url("./background.png");
   --sp-app-overlay: radial-gradient(circle at 18% 12%, rgba(255, 107, 157, 0.22), transparent 28%), radial-gradient(circle at 82% 18%, rgba(255, 240, 224, 0.12), transparent 30%), radial-gradient(circle at 50% 92%, rgba(30, 144, 255, 0.20), transparent 34%), linear-gradient(135deg, rgba(12, 16, 32, 0.84), rgba(0, 70, 218, 0.58) 48%, rgba(12, 16, 32, 0.86));
   --sp-stage-overlay: linear-gradient(90deg, rgba(8, 12, 28, 0.50), rgba(12, 16, 32, 0.20) 38%, rgba(12, 16, 32, 0.22) 62%, rgba(8, 12, 28, 0.52)), radial-gradient(circle at 50% 42%, rgba(255, 240, 224, 0.08), transparent 36%), linear-gradient(180deg, rgba(12, 16, 32, 0.10), rgba(12, 16, 32, 0.48));
   --sp-room-overlay: linear-gradient(90deg, rgba(8, 12, 28, 0.72), rgba(12, 16, 32, 0.36) 46%, rgba(12, 16, 32, 0.14)), linear-gradient(180deg, rgba(12, 16, 32, 0.16), rgba(12, 16, 32, 0.62));
@@ -913,8 +913,136 @@ button { font:inherit; }
 .devices > .device.device-off:nth-child(6n+6), .devices-page-grid > .device.device-off:nth-child(6n+6), .device.tone-brown.device-off .item-img { box-shadow:0 8px 16px rgba(11, 11, 11, 0.14); border:2px solid rgba(255, 240, 224, 0.16); }
 /* end skins-pro card theme port */
 
+/* skins-pro devices-filter + security layout patch */
+.filter-bar {
+  display:flex;
+  gap:var(--sp-space-sm);
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.filter-select {
+  min-height:36px;
+  padding:0 var(--sp-space-lg) 0 var(--sp-space-sm);
+  border:var(--sp-border-width) solid var(--sp-border-glass);
+  border-radius:var(--sp-radius-pill);
+  background:var(--sp-glass-light, var(--sp-glass-bg));
+  color:var(--sp-text-stage, var(--sp-text-main, #1a2238));
+  font:inherit;
+  font-size:var(--sp-font-xs);
+  font-weight:600;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  -webkit-appearance:none;
+  appearance:none;
+  outline:none;
+  cursor:pointer;
+  min-width:120px;
+  box-sizing:border-box;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23FFF0E0' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 8px center;
+  background-size:14px;
+}
+.filter-select option {
+  color:var(--sp-text-stage, #1a2238);
+  background:var(--sp-panel-bg, #0C1020);
+}
+.action-btn {
+  min-height:36px;
+  box-sizing:border-box;
+  border:var(--sp-border-width) solid var(--sp-border-glass);
+  border-radius:var(--sp-radius-pill);
+  padding:0 14px;
+  background:var(--sp-glass-light, var(--sp-glass-bg));
+  color:var(--sp-text-stage, var(--sp-text-main, #1a2238));
+  cursor:pointer;
+  font:inherit;
+  font-size:var(--sp-font-xs);
+  font-weight:600;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:background .2s ease,color .2s ease;
+}
+.action-btn:hover {
+  background:var(--sp-accent-alpha, var(--sp-accent-green-alpha, rgba(0,0,0,.08)));
+  color:var(--sp-accent, var(--sp-text-stage, #1a2238));
+}
+
+.devices.security-grid {
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-space-md);
+  grid-template-columns:unset;
+}
+.security-cameras {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:var(--sp-space-sm);
+}
+.security-devices {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:var(--sp-space-sm);
+}
+.security-grid {
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-space-md);
+}
+
+.mc-app[data-view="security"] .page-shell,
+.mc-app[data-view="scenes"] .page-shell {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.mc-app[data-view="security"] .camera-card,
+.mc-app[data-view="security"] .security-grid .device,
+.mc-app[data-view="scenes"] .devices-page-grid .device {
+  box-shadow: none !important;
+  backdrop-filter: blur(14px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%) !important;
+  background: var(--sp-glass-bg, rgba(245, 240, 232, 0.62)) !important;
+  border: 1px solid var(--sp-border-glass, rgba(139, 115, 85, 0.28)) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #1a2238)) !important;
+}
+.mc-app[data-view="security"] .security-grid .device .item-img,
+.mc-app[data-view="scenes"] .devices-page-grid .device .item-img {
+  box-shadow: none !important;
+  border: 2px solid var(--sp-border-device, rgba(139, 115, 85, 0.28)) !important;
+}
+.mc-app[data-view="security"] .camera-card .device-name,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .camera-card .status,
+.mc-app[data-view="security"] .security-grid .device .device-name,
+.mc-app[data-view="security"] .security-grid .device .state-word,
+.mc-app[data-view="security"] .security-grid .device .muted,
+.mc-app[data-view="scenes"] .devices-page-grid .device .device-name,
+.mc-app[data-view="scenes"] .devices-page-grid .device .state-word,
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted {
+  color: var(--sp-text-stage, var(--sp-text-dark, #1a2238)) !important;
+  text-shadow: none !important;
+}
+.mc-app[data-view="security"] .security-grid .device .status,
+.mc-app[data-view="scenes"] .devices-page-grid .device .status {
+  background: rgba(0, 0, 0, 0.10) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #1a2238)) !important;
+}
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .security-grid .device .muted {
+  color: var(--sp-text-stage-muted, var(--sp-text-muted, rgba(44, 44, 44, 0.72))) !important;
+}
+/* end skins-pro devices-filter + security layout patch */
+
+
 /* skins-pro weather layout patch */
-.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px); }
+.welcome-group .welcome .quote { display:none; }
+
+.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px);  grid-area:unset; }
 /* end skins-pro weather layout patch */
 
 /* skins-pro sidebar layout patch */
@@ -1228,4 +1356,73 @@ button { font:inherit; }
     max-width: 90px;
   }
 }
+
+/* skins-pro gta-6 polish v1 */
+/* Vice City 霓虹磨砂侧栏；首页右侧信息卡去阴影 */
+:host {
+  --sp-sidebar-bg: linear-gradient(165deg, rgba(255, 107, 157, 0.28), rgba(12, 16, 32, 0.72) 42%, rgba(30, 144, 255, 0.22)) !important;
+  --sp-sidebar-text: #FFF0E0 !important;
+  --sp-sidebar-text-muted: rgba(255, 240, 224, 0.78) !important;
+  --sp-sidebar-active-bg: rgba(255, 107, 157, 0.28) !important;
+  --sp-sidebar-active-text: #FF6B9D !important;
+  --sp-shadow-glass: none !important;
+  --sp-shadow-card: none !important;
+  --sp-shadow-scene: none !important;
+}
+.sidebar {
+  background: linear-gradient(165deg, rgba(255, 107, 157, 0.30), rgba(12, 16, 32, 0.70) 48%, rgba(30, 144, 255, 0.24)) !important;
+  border: 1px solid rgba(255, 107, 157, 0.42) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(28px) saturate(170%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(170%) !important;
+}
+.profile .meta h3 {
+  color: #FFF0E0 !important;
+  text-shadow: none !important;
+}
+.profile .meta .muted {
+  color: rgba(255, 240, 224, 0.72) !important;
+}
+.profile-img {
+  border-color: rgba(255, 107, 157, 0.55) !important;
+  box-shadow: none !important;
+}
+.nav-button {
+  color: rgba(255, 240, 224, 0.82) !important;
+}
+.nav-button ha-icon { color: inherit !important; opacity: 0.95; }
+.nav-button:hover,
+.nav-button.active {
+  color: #FF6B9D !important;
+  background: rgba(255, 107, 157, 0.26) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 107, 157, 0.45) !important;
+}
+.sidebar-art {
+  border-radius: 18px !important;
+  overflow: hidden;
+  border: 1px solid rgba(255, 107, 157, 0.38);
+  box-shadow: none !important;
+}
+
+/* 右侧信息卡：半透明霓虹磨砂、去掉阴影 */
+.glass-card,
+.time-card,
+.panel-energy,
+.panel-environment,
+.panel-scenes,
+.maintenance-card {
+  background: linear-gradient(145deg, rgba(255, 107, 157, 0.22), rgba(12, 16, 32, 0.58) 55%, rgba(30, 144, 255, 0.16)) !important;
+  border: 1px solid rgba(255, 107, 157, 0.28) !important;
+  backdrop-filter: blur(22px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(160%) !important;
+  box-shadow: none !important;
+}
+.panel-scenes .scene,
+.scene {
+  box-shadow: none !important;
+}
+.scene:hover {
+  box-shadow: none !important;
+}
+/* end skins-pro gta-6 polish v1 */
 

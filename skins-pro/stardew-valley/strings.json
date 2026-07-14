@@ -1,4 +1,7 @@
 {
+  "name_zh": "星露谷物语",
+  "name_en": "Stardew Valley",
+  "author": "xyiqq",
   "title_zh": "欢迎回到星露谷物语智能空间！",
   "title_en": "Welcome back to Stardew Valley!",
   "subtitle_zh": "星露谷物语 · 主题智能空间",
@@ -31,6 +34,5 @@
     "vacuum": "vacuum",
     "device_tracker": "device_tracker",
     "update": "update"
-  },
-  "author": "xyiqq"
+  }
 }

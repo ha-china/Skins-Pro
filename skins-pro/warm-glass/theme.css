@@ -76,9 +76,9 @@ button { font:inherit; }
 .nav-button ha-icon { width:20px; color:inherit; }
 .sidebar-art { margin-top:auto; min-height:100px; flex-shrink:0; border-radius:var(--sp-radius-lg); overflow:hidden; box-shadow:var(--sp-shadow-sm); }
 .sidebar-art img { width:100%; height:100%; }
-.stage { min-height:0; height:100%; border-radius:var(--sp-stage-radius); overflow:hidden; position:relative; background:var(--sp-panel-bg); background-image:var(--sp-stage-overlay),var(--sp-stage-texture); background-size:cover; background-position:center; background-repeat:no-repeat; box-shadow:var(--sp-shadow-lg); }
+.stage { min-height:0; height:100%; border-radius:var(--sp-stage-radius); overflow:hidden; position:relative; background-color:transparent; background-image:var(--sp-stage-overlay),var(--sp-stage-texture); background-size:cover; background-position:center; background-repeat:no-repeat; box-shadow:var(--sp-shadow-lg); }
 .stage-grid { position:relative; z-index:1; height:100%; padding:var(--sp-space-xl); box-sizing:border-box; display:grid; grid-template-columns:minmax(0,3fr) minmax(280px,1fr); grid-template-rows:auto minmax(0,1fr) auto; grid-template-areas:"welcome side" "spacer side" "bottom side"; gap:var(--sp-space-lg); overflow:hidden; }
-.welcome { grid-area:welcome; align-self:start; max-width:540px; }
+.welcome {  align-self:start; max-width:540px; }
 .quote { margin-top:var(--sp-space-xs); font-size:var(--sp-font-xs); color:var(--sp-text-muted-bright); font-weight:400; }
 .weather-row { margin-top:12px; display:flex; align-items:center; gap:var(--sp-space-sm); cursor:pointer; background:var(--sp-glass-light); border:var(--sp-border-width) solid var(--sp-border-glass); border-radius:var(--sp-radius-md); padding:var(--sp-space-xs) var(--sp-space-sm); width:fit-content; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
 .weather-state-icon { width:30px; height:30px; border-radius:var(--sp-radius-weather); display:grid; place-items:center; background:var(--sp-weather-bg); color:var(--sp-text-alt); }
@@ -460,9 +460,10 @@ button { font:inherit; }
 /* end skins-pro card theme port */
 
 /* skins-pro weather layout patch */
-.welcome-group { grid-area:welcome; display:block; min-width:0; }
-.welcome-group > .welcome { max-width:540px; }
-.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px); }
+.welcome-group { grid-area:welcome; display:grid; grid-template-rows:auto auto; gap:0; align-self:start; max-width:540px; min-width:0; }
+.welcome-group > .welcome { max-width:540px;  grid-area:unset; }
+.welcome-group .welcome .quote { display:none; }
+.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px);  grid-area:unset; }
 .weather-block { margin-top:12px; cursor:pointer; width:100%; max-width:240px; flex-shrink:0; }
 .weather-current { display:flex; align-items:center; gap:var(--sp-space-sm,10px); }
 .weather-current-info { display:flex; flex-direction:column; gap:1px; min-width:0; }

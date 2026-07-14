@@ -1,4 +1,5 @@
 {
+  "author": "xyiqq",
   "title_zh": "欢迎回到猫和老鼠智能空间！",
   "title_en": "Welcome back to Tom and Jerry!",
   "subtitle_zh": "猫和老鼠 · 主题智能空间",
@@ -15,24 +16,21 @@
     "climate": "climate",
     "water_heater": "water_heater",
     "humidifier": "humidifier",
-    "media_player": "speaker",
+    "media_player": "media_player",
     "remote": "remote",
     "lock": "lock",
-    "binary_sensor": "lock",
+    "binary_sensor": "binary_sensor",
     "alarm_control_panel": "lock",
     "switch": "switch",
     "fan": "fan",
-    "cover": "switch",
+    "cover": "cover",
     "camera": "camera",
     "valve": "valve",
-    "automation": "button",
-    "sensor": "button",
-    "person": "button",
-    "vacuum": "fan",
-    "device_tracker": "button",
-    "update": "button",
-    "sun": "light",
-    "weather": "climate"
-  },
-  "author": "xyiqq"
+    "automation": "automation",
+    "sensor": "sensor",
+    "person": "person",
+    "vacuum": "vacuum",
+    "device_tracker": "device_tracker",
+    "update": "update"
+  }
 }

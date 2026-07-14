@@ -80,7 +80,7 @@
   --sp-sidebar-width:200px; --sp-app-padding:16px; --sp-stage-radius:24px;
   --sp-runtime-height:560px; --sp-runtime-min-height:560px;
   --sp-glass-bg:rgba(12, 18, 30, 0.72); --sp-panel-bg:rgba(12, 18, 30, 0.82);
-  --sp-base-texture:url("./background.jpg"); --sp-stage-texture:url("./background.jpg");
+  --sp-base-texture:url("./background.png"); --sp-stage-texture:url("./background.png");
   --sp-app-overlay:linear-gradient(135deg, rgba(5,10,20,.84), rgba(28,42,72,.72));
   --sp-stage-overlay:linear-gradient(90deg, rgba(5,10,20,.36), rgba(5,10,20,.08) 46%, rgba(5,10,20,.42));
   --sp-room-overlay:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.45));
@@ -160,9 +160,9 @@ button { font:inherit; }
 .nav-button ha-icon { width:20px; color:inherit; }
 .sidebar-art { margin-top:auto; min-height:100px; flex-shrink:0; border-radius:var(--sp-radius-lg); overflow:hidden; box-shadow:var(--sp-shadow-sm); }
 .sidebar-art img { width:100%; height:100%; }
-.stage { min-height:0; height:100%; border-radius:var(--sp-stage-radius); overflow:hidden; position:relative; background:var(--sp-panel-bg); background-image:var(--sp-stage-overlay),var(--sp-stage-texture); background-size:cover; background-position:center; background-repeat:no-repeat; box-shadow:var(--sp-shadow-lg); }
+.stage { min-height:0; height:100%; border-radius:var(--sp-stage-radius); overflow:hidden; position:relative; background-color:transparent; background-image:var(--sp-stage-overlay),var(--sp-stage-texture); background-size:cover; background-position:center; background-repeat:no-repeat; box-shadow:var(--sp-shadow-lg); }
 .stage-grid { position:relative; z-index:1; height:100%; padding:var(--sp-space-xl); box-sizing:border-box; display:grid; grid-template-columns:minmax(0,3fr) minmax(280px,1fr); grid-template-rows:auto minmax(0,1fr) auto; grid-template-areas:"welcome side" "spacer side" "bottom side"; gap:var(--sp-space-lg); overflow:hidden; }
-.welcome { grid-area:welcome; align-self:start; max-width:540px; }
+.welcome {  align-self:start; max-width:540px; }
 .quote { margin-top:var(--sp-space-xs); font-size:var(--sp-font-xs); color:var(--sp-text-muted-bright); font-weight:400; }
 .weather-row { margin-top:12px; display:flex; align-items:center; gap:var(--sp-space-sm); cursor:pointer; background:var(--sp-glass-light); border:var(--sp-border-width) solid var(--sp-border-glass); border-radius:var(--sp-radius-md); padding:var(--sp-space-xs) var(--sp-space-sm); width:fit-content; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
 .weather-state-icon { width:30px; height:30px; border-radius:var(--sp-radius-weather); display:grid; place-items:center; background:var(--sp-weather-bg); color:var(--sp-text-alt); }
@@ -743,10 +743,139 @@ button { font:inherit; }
 .devices > .device.device-off:nth-child(6n+6), .devices-page-grid > .device.device-off:nth-child(6n+6), .device.tone-brown.device-off .item-img { box-shadow:0 8px 16px rgba(11, 11, 11, 0.14); border:2px solid rgba(13, 13, 26, 0.16); }
 /* end skins-pro card theme port */
 
+/* skins-pro devices-filter + security layout patch */
+.filter-bar {
+  display:flex;
+  gap:var(--sp-space-sm);
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.filter-select {
+  min-height:36px;
+  padding:0 var(--sp-space-lg) 0 var(--sp-space-sm);
+  border:var(--sp-border-width) solid var(--sp-border-glass);
+  border-radius:var(--sp-radius-pill);
+  background:var(--sp-glass-light, var(--sp-glass-bg));
+  color:var(--sp-text-stage, var(--sp-text-main, #1a2238));
+  font:inherit;
+  font-size:var(--sp-font-xs);
+  font-weight:600;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  -webkit-appearance:none;
+  appearance:none;
+  outline:none;
+  cursor:pointer;
+  min-width:120px;
+  box-sizing:border-box;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23FFF0E0' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 8px center;
+  background-size:14px;
+}
+.filter-select option {
+  color:var(--sp-text-stage, #1a2238);
+  background:var(--sp-panel-bg, #0C1020);
+}
+.action-btn {
+  min-height:36px;
+  box-sizing:border-box;
+  border:var(--sp-border-width) solid var(--sp-border-glass);
+  border-radius:var(--sp-radius-pill);
+  padding:0 14px;
+  background:var(--sp-glass-light, var(--sp-glass-bg));
+  color:var(--sp-text-stage, var(--sp-text-main, #1a2238));
+  cursor:pointer;
+  font:inherit;
+  font-size:var(--sp-font-xs);
+  font-weight:600;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:background .2s ease,color .2s ease;
+}
+.action-btn:hover {
+  background:var(--sp-accent-alpha, var(--sp-accent-green-alpha, rgba(0,0,0,.08)));
+  color:var(--sp-accent, var(--sp-text-stage, #1a2238));
+}
+
+.devices.security-grid {
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-space-md);
+  grid-template-columns:unset;
+}
+.security-cameras {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:var(--sp-space-sm);
+}
+.security-devices {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:var(--sp-space-sm);
+}
+.security-grid {
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-space-md);
+}
+
+.mc-app[data-view="security"] .page-shell,
+.mc-app[data-view="scenes"] .page-shell {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.mc-app[data-view="security"] .camera-card,
+.mc-app[data-view="security"] .security-grid .device,
+.mc-app[data-view="scenes"] .devices-page-grid .device {
+  box-shadow: none !important;
+  backdrop-filter: blur(14px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%) !important;
+  background: var(--sp-glass-bg, rgba(245, 240, 232, 0.62)) !important;
+  border: 1px solid var(--sp-border-glass, rgba(139, 115, 85, 0.28)) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #1a2238)) !important;
+}
+.mc-app[data-view="security"] .security-grid .device .item-img,
+.mc-app[data-view="scenes"] .devices-page-grid .device .item-img {
+  box-shadow: none !important;
+  border: 2px solid var(--sp-border-device, rgba(139, 115, 85, 0.28)) !important;
+}
+.mc-app[data-view="security"] .camera-card .device-name,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .camera-card .status,
+.mc-app[data-view="security"] .security-grid .device .device-name,
+.mc-app[data-view="security"] .security-grid .device .state-word,
+.mc-app[data-view="security"] .security-grid .device .muted,
+.mc-app[data-view="scenes"] .devices-page-grid .device .device-name,
+.mc-app[data-view="scenes"] .devices-page-grid .device .state-word,
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted {
+  color: var(--sp-text-stage, var(--sp-text-dark, #1a2238)) !important;
+  text-shadow: none !important;
+}
+.mc-app[data-view="security"] .security-grid .device .status,
+.mc-app[data-view="scenes"] .devices-page-grid .device .status {
+  background: rgba(0, 0, 0, 0.10) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #1a2238)) !important;
+}
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .security-grid .device .muted {
+  color: var(--sp-text-stage-muted, var(--sp-text-muted, rgba(44, 44, 44, 0.72))) !important;
+}
+/* end skins-pro devices-filter + security layout patch */
+
+
+
+
 /* skins-pro weather layout patch */
-.welcome-group { grid-area:welcome; display:block; min-width:0; }
-.welcome-group > .welcome { max-width:540px; }
-.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px); }
+.welcome-group { grid-area:welcome; display:grid; grid-template-rows:auto auto; gap:0; align-self:start; max-width:540px; min-width:0; }
+.welcome-group > .welcome { max-width:540px;  grid-area:unset; }
+.welcome-group .welcome .quote { display:none; }
+.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px);  grid-area:unset; }
 .weather-block { margin-top:12px; cursor:pointer; width:100%; max-width:240px; flex-shrink:0; }
 .weather-current { display:flex; align-items:center; gap:var(--sp-space-sm,10px); }
 .weather-current-info { display:flex; flex-direction:column; gap:1px; min-width:0; }
@@ -1068,4 +1197,160 @@ button { font:inherit; }
     max-width: 90px;
   }
 }
+
+/* skins-pro gundam polish v1 */
+/* 高达机甲亮色天空：蓝白半透明磨砂侧栏（提高不透明度盖住左侧深色机甲）+ 深蓝可读字；卡片去脏黑玻璃，右侧卡去重阴影 */
+:host {
+  --sp-sidebar-bg: linear-gradient(165deg, rgba(248, 252, 255, 0.88), rgba(210, 232, 255, 0.84) 52%, rgba(170, 210, 255, 0.80)) !important;
+  --sp-sidebar-text: #0A1A3A !important;
+  --sp-sidebar-text-muted: rgba(10, 26, 58, 0.82) !important;
+  --sp-sidebar-active-bg: rgba(58, 167, 255, 0.28) !important;
+  --sp-sidebar-active-text: #0B5FD4 !important;
+  --sp-glass-bg: rgba(255, 255, 255, 0.56) !important;
+  --sp-panel-bg: rgba(255, 255, 255, 0.58) !important;
+  --sp-card-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.62), rgba(198, 226, 255, 0.42)) !important;
+  --sp-text-primary: #0A1A3A !important;
+  --sp-text-main: #0A1A3A !important;
+  --sp-text-muted: rgba(10, 26, 58, 0.78) !important;
+  --sp-text-muted-bright: rgba(10, 26, 58, 0.86) !important;
+  --sp-text-muted-dim: rgba(10, 26, 58, 0.68) !important;
+  --sp-text-stage: #0A1A3A !important;
+  --sp-text-stage-muted: rgba(10, 26, 58, 0.74) !important;
+  --sp-border-glass: rgba(58, 167, 255, 0.28) !important;
+  --sp-shadow-glass: none !important;
+  --sp-shadow-card: none !important;
+  --sp-shadow-scene: none !important;
+  --sp-shadow-md: none !important;
+  --sp-shadow-lg: none !important;
+  --sp-shadow-xl: none !important;
+}
+.sidebar {
+  background: linear-gradient(165deg, rgba(248, 252, 255, 0.90), rgba(210, 232, 255, 0.86) 50%, rgba(170, 210, 255, 0.82)) !important;
+  border: 1px solid rgba(58, 167, 255, 0.40) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(36px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(36px) saturate(180%) !important;
+}
+.profile .meta h3,
+.sidebar .profile h3 {
+  color: #0A1A3A !important;
+  text-shadow: none !important;
+  font-weight: 800 !important;
+}
+.profile .meta .muted,
+.sidebar .muted {
+  color: rgba(10, 26, 58, 0.74) !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+  font-weight: 650 !important;
+}
+.profile-img {
+  border-color: rgba(58, 167, 255, 0.55) !important;
+  box-shadow: none !important;
+}
+.nav-button,
+.sidebar .nav-button {
+  color: #0A1A3A !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+.nav-button ha-icon,
+.nav-button .icon,
+.sidebar .nav-button .icon {
+  color: #0A1A3A !important;
+  opacity: 1 !important;
+}
+.nav-button:hover,
+.nav-button.active,
+.sidebar .nav-button:hover,
+.sidebar .nav-button.active {
+  color: #0B5FD4 !important;
+  background: rgba(58, 167, 255, 0.26) !important;
+  box-shadow: inset 0 0 0 1px rgba(58, 167, 255, 0.42) !important;
+}
+.sidebar-art {
+  border-radius: 18px !important;
+  overflow: hidden;
+  border: 1px solid rgba(58, 167, 255, 0.30);
+  box-shadow: none !important;
+}
+
+/* 首页右侧信息卡：亮色机甲玻璃，去掉重阴影 */
+.glass-card,
+.time-card,
+.panel-energy,
+.panel-environment,
+.panel-scenes,
+.maintenance-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.64), rgba(198, 226, 255, 0.40)) !important;
+  border: 1px solid rgba(58, 167, 255, 0.28) !important;
+  backdrop-filter: blur(22px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(150%) !important;
+  box-shadow: none !important;
+  color: #0A1A3A !important;
+}
+.panel-scenes .scene,
+.scene {
+  box-shadow: none !important;
+}
+.scene:hover {
+  box-shadow: none !important;
+}
+
+/* 设备卡统一亮色磨砂，避免深色割裂 */
+.devices .device,
+.devices-page-grid .device,
+.camera-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.58), rgba(186, 220, 255, 0.32)) !important;
+  color: #0A1A3A !important;
+  border: 1px solid rgba(58, 167, 255, 0.24) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(18px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
+}
+.devices .device.device-on,
+.devices-page-grid .device.device-on,
+.device-on-yellow,
+.device-on-green,
+.device-on-blue,
+.device-on-purple,
+.device-on-red,
+.device-on-brown {
+  background: linear-gradient(145deg, rgba(58, 167, 255, 0.28), rgba(255, 255, 255, 0.55)) !important;
+  border-color: rgba(58, 167, 255, 0.40) !important;
+  color: #0A1A3A !important;
+  text-shadow: none !important;
+}
+.device .device-name,
+.device .state-word,
+.device .muted,
+.camera-card .device-name,
+.camera-card .muted {
+  color: #0A1A3A !important;
+  text-shadow: none !important;
+}
+.device .muted,
+.camera-card .muted {
+  color: rgba(10, 26, 58, 0.72) !important;
+}
+.welcome h1,
+.welcome .quote,
+.weather-current-temp,
+.weather-current-hl,
+.weather-current-cond,
+.forecast-high,
+.forecast-low,
+.forecast-weekday,
+.page-header h1,
+.section-title h2,
+.side h2,
+.side h3 {
+  color: #0A1A3A !important;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.55) !important;
+}
+.stage {
+  box-shadow: none !important;
+}
+/* end skins-pro gundam polish v1 */
 

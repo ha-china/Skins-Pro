@@ -1,0 +1,98 @@
+name: Release
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'package.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build JS and release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Check release conditions
+        id: check
+        run: |
+          NEW_VER=$(jq -r '.version' package.json)
+          OLD_VER=$(git show HEAD~1:package.json 2>/dev/null | jq -r '.version' 2>/dev/null || echo "")
+          VER_CHANGED=false
+          if [ -n "$OLD_VER" ] && [ "$NEW_VER" != "$OLD_VER" ]; then
+            VER_CHANGED=true
+          elif ! git rev-parse "v$NEW_VER" >/dev/null 2>&1; then
+            VER_CHANGED=true
+          fi
+
+          echo "version=$NEW_VER" >> "$GITHUB_OUTPUT"
+          echo "version_changed=$VER_CHANGED" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Node.js
+        if: steps.check.outputs.version_changed == 'true'
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Install dependencies
+        if: steps.check.outputs.version_changed == 'true'
+        run: npm ci
+
+      - name: Build JS bundle
+        if: steps.check.outputs.version_changed == 'true'
+        run: npm run build -- modern
+
+      - name: Type check
+        if: steps.check.outputs.version_changed == 'true'
+        run: npm run type-check
+
+      - name: Commit dist to master
+        if: steps.check.outputs.version_changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -f dist/
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: build dist assets [skip ci]"
+          fi
+
+      - name: Generate changelog
+        if: steps.check.outputs.version_changed == 'true'
+        id: changelog
+        uses: Desmond-Dong/actions/bilingual-changelog@main
+        with:
+          llm-api-key: ${{ secrets.LLM_API_KEY }}
+          llm-api-url: ${{ secrets.LLM_API_URL }}
+          llm-model: ${{ secrets.LLM_MODEL }}
+
+      - name: Tag version
+        if: steps.check.outputs.version_changed == 'true'
+        run: |
+          git tag "v${{ steps.check.outputs.version }}"
+
+      - name: Push master (including tags)
+        if: steps.check.outputs.version_changed == 'true'
+        run: |
+          git push origin --tags
+          git push
+
+      - name: Create Release
+        if: steps.check.outputs.version_changed == 'true'
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: v${{ steps.check.outputs.version }}
+          body: |
+            ${{ steps.changelog.outputs.changelog }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

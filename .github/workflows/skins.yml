@@ -1,18 +1,18 @@
-name: Build and Release Skins Pro
+name: Build Skins
 
 on:
   push:
     branches: [main, master]
-    paths-ignore:
-      - '.github/workflows/**'
+    paths:
+      - 'skins-pro/**'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  release:
-    name: Build and Release
+  build-skins:
+    name: Build and publish skins
     runs-on: ubuntu-latest
 
     steps:
@@ -21,76 +21,40 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check release conditions
-        id: check
-        run: |
-          IS_MERGE=false
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            IS_MERGE=true
-          else
-            PARENT_COUNT=$(git rev-list --parents -1 HEAD | wc -w)
-            [ "$PARENT_COUNT" -gt 2 ] && IS_MERGE=true
-          fi
-
-          NEW_VER=$(jq -r '.version' package.json)
-          OLD_VER=$(git show HEAD~1:package.json 2>/dev/null | jq -r '.version' 2>/dev/null || echo "")
-          VER_CHANGED=false
-          if [ -n "$OLD_VER" ] && [ "$NEW_VER" != "$OLD_VER" ]; then
-            VER_CHANGED=true
-          elif ! git rev-parse "v$NEW_VER" >/dev/null 2>&1; then
-            VER_CHANGED=true
-          fi
-
-          echo "version=$NEW_VER" >> "$GITHUB_OUTPUT"
-          echo "version_changed=$VER_CHANGED" >> "$GITHUB_OUTPUT"
-
-          if [ "$IS_MERGE" = "true" ] || [ "$VER_CHANGED" = "true" ]; then
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Setup Node.js
-        if: steps.check.outputs.skip != 'true'
         uses: actions/setup-node@v6
         with:
           node-version: '24'
           cache: npm
 
       - name: Install dependencies
-        if: steps.check.outputs.skip != 'true'
         run: npm ci
 
       - name: Detect changed skins
-        if: steps.check.outputs.skip != 'true'
         id: skins
         run: |
           CHANGED=$(git diff --name-only HEAD~1 HEAD -- skins-pro/ 2>/dev/null \
             | grep '^skins-pro/' | cut -d/ -f2 | sort -u | grep -v '^modern$' || true)
           if [ -z "$CHANGED" ]; then
             echo "target=" >> "$GITHUB_OUTPUT"
-            echo "No specific skins changed, building all"
+            echo "No specific skins changed"
           else
             echo "target=$CHANGED" >> "$GITHUB_OUTPUT"
             echo "Changed skins: $CHANGED"
           fi
 
       - name: Fetch existing store assets
-        if: steps.check.outputs.skip != 'true' && steps.skins.outputs.target != ''
         run: |
           git fetch origin store --depth=1 2>/dev/null || true
           mkdir -p store screenshots/thumbnails
-          # Fetch existing zips from store branch (unchanged skins keep their zips)
           for p in $(git ls-tree -r --name-only origin/store -- store/ 2>/dev/null | grep '\.zip$' || true); do
             git show "origin/store:$p" > "$p" 2>/dev/null && echo "Restored: $p"
           done
-          # Fetch existing thumbnails
           for p in $(git ls-tree -r --name-only origin/store -- screenshots/thumbnails/ 2>/dev/null | grep '\.jpg$' || true); do
             git show "origin/store:$p" > "$p" 2>/dev/null && echo "Restored: $p"
           done
 
-      - name: Build
-        if: steps.check.outputs.skip != 'true'
+      - name: Build skins
         run: |
           if [ -n "${{ steps.skins.outputs.target }}" ]; then
             npm run build -- ${{ steps.skins.outputs.target }}
@@ -98,61 +62,13 @@ jobs:
             npm run build
           fi
 
-      - name: Type check
-        if: steps.check.outputs.skip != 'true'
-        run: npm run type-check
-
-      - name: Commit dist to master
-        if: steps.check.outputs.skip != 'true'
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add -f dist/
-          if ! git diff --staged --quiet; then
-            git commit -m "chore: build dist assets [skip ci]"
-          fi
-
-      - name: Generate changelog
-        if: steps.check.outputs.version_changed == 'true'
-        id: changelog
-        uses: Desmond-Dong/actions/bilingual-changelog@main
-        with:
-          llm-api-key: ${{ secrets.LLM_API_KEY }}
-          llm-api-url: ${{ secrets.LLM_API_URL }}
-          llm-model: ${{ secrets.LLM_MODEL }}
-
-      - name: Tag version
-        if: steps.check.outputs.version_changed == 'true'
-        run: |
-          git tag "v${{ steps.check.outputs.version }}"
-
-      - name: Push master (including tags)
-        if: steps.check.outputs.skip != 'true'
-        run: |
-          git push origin --tags
-          git push
-
-      - name: Create Release
-        if: steps.check.outputs.version_changed == 'true'
-        uses: softprops/action-gh-release@v3
-        with:
-          tag_name: v${{ steps.check.outputs.version }}
-          body: |
-            ${{ steps.changelog.outputs.changelog }}
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Detect changed store assets
-        if: steps.check.outputs.skip != 'true'
         id: changed
         run: |
           git fetch origin store --depth=1 2>/dev/null || true
 
           PURGE_URLS="https://purge.jsdelivr.net/gh/ha-china/Skins-Pro@store/screenshots/registry.json"
 
-          # Compare skin zips
           for zip in store/*.zip; do
             [ -f "$zip" ] || continue
             skin=$(basename "$zip" .zip)
@@ -164,7 +80,6 @@ jobs:
             fi
           done
 
-          # Compare thumbnails
           for thumb in screenshots/thumbnails/*.jpg; do
             [ -f "$thumb" ] || continue
             skin=$(basename "$thumb" .jpg)
@@ -180,20 +95,19 @@ jobs:
           echo "Purge URLs: $PURGE_URLS"
 
       - name: Push store assets to store branch
-        if: steps.check.outputs.skip != 'true'
         run: |
           STORE_DIR="$(mktemp -d)"
-          mv store/*.zip "$STORE_DIR/"
-          mv screenshots/thumbnails "$STORE_DIR/thumbnails"
-          mv screenshots/registry.json "$STORE_DIR/registry.json"
+          mv store/*.zip "$STORE_DIR/" 2>/dev/null || true
+          mv screenshots/thumbnails "$STORE_DIR/thumbnails" 2>/dev/null || true
+          mv screenshots/registry.json "$STORE_DIR/registry.json" 2>/dev/null || true
 
           git checkout --orphan _store_push
           find . -maxdepth 1 -not -name '.git' -not -name '.' -exec rm -rf {} +
 
           mkdir -p store screenshots/thumbnails
-          mv "$STORE_DIR"/*.zip store/
-          mv "$STORE_DIR/thumbnails"/* screenshots/thumbnails/
-          mv "$STORE_DIR/registry.json" screenshots/registry.json
+          mv "$STORE_DIR"/*.zip store/ 2>/dev/null || true
+          mv "$STORE_DIR"/thumbnails/* screenshots/thumbnails/ 2>/dev/null || true
+          mv "$STORE_DIR"/registry.json screenshots/registry.json 2>/dev/null || true
 
           printf '%s\n' '# Skins Pro — Store Assets' '' 'This branch contains build artifacts for the skin store.' 'Pushed automatically by CI. Do not edit manually.' > README.md
           git add .
@@ -204,7 +118,6 @@ jobs:
           git checkout "${{ github.ref_name }}"
 
       - name: Purge jsdelivr cache
-        if: steps.check.outputs.skip != 'true'
         run: |
           for url in ${{ steps.changed.outputs.purge_urls }}; do
             echo "Purging: $url"

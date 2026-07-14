@@ -46,8 +46,8 @@
   --sp-glass-bg:rgba(15, 20, 25, 0.72);
   --sp-panel-bg:rgba(15, 20, 25, 0.82);
   --sp-card-bg: linear-gradient(145deg, rgba(32, 31, 29, 0.72), rgba(12, 17, 22, 0.58));
-  --sp-base-texture: url("./base-texture.jpg");
-  --sp-stage-texture: url("./stage-background.jpg");
+  --sp-base-texture: url("./background.png");
+  --sp-stage-texture: url("./background.png");
   --sp-app-overlay: radial-gradient(circle at 18% 12%, rgba(245, 166, 35, 0.22), transparent 28%), radial-gradient(circle at 82% 18%, rgba(226, 232, 240, 0.12), transparent 30%), radial-gradient(circle at 50% 92%, rgba(74, 85, 104, 0.20), transparent 34%), linear-gradient(135deg, rgba(15, 20, 25, 0.84), rgba(0, 11, 67, 0.58) 48%, rgba(15, 20, 25, 0.86));
   --sp-stage-overlay: linear-gradient(90deg, rgba(11, 16, 21, 0.50), rgba(15, 20, 25, 0.20) 38%, rgba(15, 20, 25, 0.22) 62%, rgba(11, 16, 21, 0.52)), radial-gradient(circle at 50% 42%, rgba(226, 232, 240, 0.08), transparent 36%), linear-gradient(180deg, rgba(15, 20, 25, 0.10), rgba(15, 20, 25, 0.48));
   --sp-room-overlay: linear-gradient(90deg, rgba(11, 16, 21, 0.72), rgba(15, 20, 25, 0.36) 46%, rgba(15, 20, 25, 0.14)), linear-gradient(180deg, rgba(15, 20, 25, 0.16), rgba(15, 20, 25, 0.62));
@@ -914,7 +914,9 @@ button { font:inherit; }
 /* end skins-pro card theme port */
 
 /* skins-pro weather layout patch */
-.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px); }
+.welcome-group .welcome .quote { display:none; }
+
+.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px);  grid-area:unset; }
 /* end skins-pro weather layout patch */
 
 /* skins-pro sidebar layout patch */
@@ -1228,4 +1230,218 @@ button { font:inherit; }
     max-width: 90px;
   }
 }
+
+/* skins-pro cs-go glass polish v1 */
+/* 右侧信息卡 / 首页玻璃卡：半透明磨砂、去掉阴影 */
+.glass-card,
+.time-card,
+.panel-energy,
+.panel-environment,
+.panel-scenes,
+.maintenance-card {
+  background: rgba(15, 20, 25, 0.32) !important;
+  border: 1px solid rgba(245, 166, 35, 0.22) !important;
+  backdrop-filter: blur(18px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(130%) !important;
+  box-shadow: none !important;
+}
+
+/* 首页设备卡 + 设备/自动化页卡片：半透明、去阴影 */
+.devices .device,
+.devices-page-grid .device,
+.device:not(.device-on-yellow):not(.device-on-green):not(.device-on-blue):not(.device-on-purple):not(.device-on-red):not(.device-on-brown),
+.devices > .device.device-off,
+.devices-page-grid > .device.device-off,
+.device.tone-yellow.device-off,
+.device.tone-green.device-off,
+.device.tone-blue.device-off,
+.device.tone-purple.device-off,
+.device.tone-red.device-off,
+.device.tone-brown.device-off,
+.camera-card {
+  background: rgba(15, 20, 25, 0.34) !important;
+  border: 1px solid rgba(226, 232, 240, 0.16) !important;
+  backdrop-filter: blur(16px) saturate(125%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(125%) !important;
+  box-shadow: none !important;
+}
+
+.devices > .device.device-off:nth-child(6n+1),
+.devices-page-grid > .device.device-off:nth-child(6n+1),
+.devices > .device.device-off:nth-child(6n+2),
+.devices-page-grid > .device.device-off:nth-child(6n+2),
+.devices > .device.device-off:nth-child(6n+3),
+.devices-page-grid > .device.device-off:nth-child(6n+3),
+.devices > .device.device-off:nth-child(6n+4),
+.devices-page-grid > .device.device-off:nth-child(6n+4),
+.devices > .device.device-off:nth-child(6n+5),
+.devices-page-grid > .device.device-off:nth-child(6n+5),
+.devices > .device.device-off:nth-child(6n+6),
+.devices-page-grid > .device.device-off:nth-child(6n+6) {
+  box-shadow: none !important;
+  background: rgba(15, 20, 25, 0.34) !important;
+}
+
+.devices-page-grid .device .item-icon,
+.device .item-img,
+.devices-page-grid .device .item-img {
+  box-shadow: none !important;
+}
+
+/* 场景卡 */
+.panel-scenes .scene,
+.scene {
+  background: rgba(15, 20, 25, 0.30) !important;
+  backdrop-filter: blur(12px) saturate(125%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(125%) !important;
+  box-shadow: none !important;
+}
+.scene:hover {
+  box-shadow: none !important;
+}
+
+/* 房间卡：去掉厚阴影；底托半透明磨砂 */
+.room,
+.mc-app[data-view="rooms"] .room {
+  box-shadow: none !important;
+}
+.room-label {
+  left: 12px !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  padding: 8px 10px !important;
+  border-radius: 12px !important;
+  background: rgba(15, 20, 25, 0.36) !important;
+  backdrop-filter: blur(16px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(130%) !important;
+  border: 1px solid rgba(245, 166, 35, 0.20) !important;
+  box-sizing: border-box;
+  box-shadow: none !important;
+}
+/* end skins-pro cs-go glass polish v1 */
+
+/* skins-pro devices-filter + security layout patch */
+.filter-bar {
+  display:flex;
+  gap:var(--sp-space-sm);
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.filter-select {
+  min-height:36px;
+  padding:0 var(--sp-space-lg) 0 var(--sp-space-sm);
+  border:var(--sp-border-width) solid var(--sp-border-glass);
+  border-radius:var(--sp-radius-pill);
+  background:rgba(15, 20, 25, 0.42);
+  color:var(--sp-text-primary, #E2E8F0);
+  font:inherit;
+  font-size:var(--sp-font-xs);
+  font-weight:600;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  -webkit-appearance:none;
+  appearance:none;
+  outline:none;
+  cursor:pointer;
+  min-width:120px;
+  box-sizing:border-box;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23E2E8F0' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 8px center;
+  background-size:14px;
+}
+.filter-select option {
+  color:#E2E8F0;
+  background:#0F1419;
+}
+.action-btn {
+  min-height:36px;
+  box-sizing:border-box;
+  border:var(--sp-border-width) solid var(--sp-border-glass);
+  border-radius:var(--sp-radius-pill);
+  padding:0 14px;
+  background:rgba(15, 20, 25, 0.42);
+  color:var(--sp-text-primary, #E2E8F0);
+  cursor:pointer;
+  font:inherit;
+  font-size:var(--sp-font-xs);
+  font-weight:600;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:background .2s ease,color .2s ease;
+}
+.action-btn:hover {
+  background:rgba(245, 166, 35, 0.18);
+  color:var(--sp-accent, #F5A623);
+}
+
+.devices.security-grid {
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-space-md);
+  grid-template-columns:unset;
+}
+.security-cameras {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:var(--sp-space-sm);
+}
+.security-devices {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:var(--sp-space-sm);
+}
+.security-grid {
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-space-md);
+}
+
+.mc-app[data-view="security"] .page-shell,
+.mc-app[data-view="scenes"] .page-shell {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.mc-app[data-view="security"] .camera-card,
+.mc-app[data-view="security"] .security-grid .device,
+.mc-app[data-view="scenes"] .devices-page-grid .device {
+  box-shadow: none !important;
+  backdrop-filter: blur(14px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%) !important;
+  background: rgba(15, 20, 25, 0.34) !important;
+  border: 1px solid rgba(245, 166, 35, 0.22) !important;
+  color: var(--sp-text-primary, #E2E8F0) !important;
+}
+.mc-app[data-view="security"] .security-grid .device .item-img,
+.mc-app[data-view="scenes"] .devices-page-grid .device .item-img {
+  box-shadow: none !important;
+  border: 2px solid rgba(245, 166, 35, 0.28) !important;
+}
+.mc-app[data-view="security"] .camera-card .device-name,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .camera-card .status,
+.mc-app[data-view="security"] .security-grid .device .device-name,
+.mc-app[data-view="security"] .security-grid .device .state-word,
+.mc-app[data-view="security"] .security-grid .device .muted,
+.mc-app[data-view="scenes"] .devices-page-grid .device .device-name,
+.mc-app[data-view="scenes"] .devices-page-grid .device .state-word,
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted {
+  color: var(--sp-text-primary, #E2E8F0) !important;
+  text-shadow: none !important;
+}
+.mc-app[data-view="security"] .security-grid .device .status,
+.mc-app[data-view="scenes"] .devices-page-grid .device .status {
+  background: rgba(245, 166, 35, 0.14) !important;
+  color: var(--sp-text-primary, #E2E8F0) !important;
+}
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .security-grid .device .muted {
+  color: var(--sp-text-muted, rgba(226, 232, 240, 0.72)) !important;
+}
+/* end skins-pro devices-filter + security layout patch */
 

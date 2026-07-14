@@ -41,7 +41,7 @@
   --sp-sidebar-width:200px; --sp-app-padding:16px; --sp-stage-radius:26px;
   --sp-runtime-height:560px; --sp-runtime-min-height:560px;
   --sp-glass-bg:rgba(18, 22, 42, 0.72); --sp-panel-bg:rgba(18, 22, 42, 0.82); --sp-card-bg:rgba(20,28,54,.78);
-  --sp-base-texture:url("./base-texture.jpg"); --sp-stage-texture:url("./stage-background.jpg");
+  --sp-base-texture:url("./background.png"); --sp-stage-texture:url("./background.png");
   --sp-app-overlay:radial-gradient(circle at 18% 8%, rgba(255,255,255,.14), transparent 30%),radial-gradient(circle at 82% 16%, rgba(255,255,255,.12), transparent 34%),linear-gradient(135deg,#1B1230 0%,#37A8C8 52%,#1B1230 100%);
   --sp-stage-overlay:linear-gradient(90deg, rgba(7,10,24,.18) 0%, rgba(7,10,24,.04) 35%, rgba(7,10,24,.36) 100%);
   --sp-room-overlay:linear-gradient(180deg,transparent 28%,rgba(5,7,20,.78));
@@ -468,8 +468,136 @@ ha-card{overflow:hidden;border:0;background:transparent;box-shadow:none}.loading
 .devices > .device.device-off:nth-child(6n+6), .devices-page-grid > .device.device-off:nth-child(6n+6), .device.tone-brown.device-off .item-img { box-shadow:0 8px 16px rgba(11, 11, 11, 0.14); border:2px solid rgba(255, 242, 200, 0.16); }
 /* end skins-pro card theme port */
 
+/* skins-pro devices-filter + security layout patch */
+.filter-bar {
+  display:flex;
+  gap:var(--sp-space-sm);
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.filter-select {
+  min-height:36px;
+  padding:0 var(--sp-space-lg) 0 var(--sp-space-sm);
+  border:var(--sp-border-width) solid var(--sp-border-glass);
+  border-radius:var(--sp-radius-pill);
+  background:var(--sp-glass-light, var(--sp-glass-bg));
+  color:var(--sp-text-stage, var(--sp-text-main, #1a2238));
+  font:inherit;
+  font-size:var(--sp-font-xs);
+  font-weight:600;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  -webkit-appearance:none;
+  appearance:none;
+  outline:none;
+  cursor:pointer;
+  min-width:120px;
+  box-sizing:border-box;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23FFF0E0' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 8px center;
+  background-size:14px;
+}
+.filter-select option {
+  color:var(--sp-text-stage, #1a2238);
+  background:var(--sp-panel-bg, #0C1020);
+}
+.action-btn {
+  min-height:36px;
+  box-sizing:border-box;
+  border:var(--sp-border-width) solid var(--sp-border-glass);
+  border-radius:var(--sp-radius-pill);
+  padding:0 14px;
+  background:var(--sp-glass-light, var(--sp-glass-bg));
+  color:var(--sp-text-stage, var(--sp-text-main, #1a2238));
+  cursor:pointer;
+  font:inherit;
+  font-size:var(--sp-font-xs);
+  font-weight:600;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:background .2s ease,color .2s ease;
+}
+.action-btn:hover {
+  background:var(--sp-accent-alpha, var(--sp-accent-green-alpha, rgba(0,0,0,.08)));
+  color:var(--sp-accent, var(--sp-text-stage, #1a2238));
+}
+
+.devices.security-grid {
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-space-md);
+  grid-template-columns:unset;
+}
+.security-cameras {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:var(--sp-space-sm);
+}
+.security-devices {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:var(--sp-space-sm);
+}
+.security-grid {
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-space-md);
+}
+
+.mc-app[data-view="security"] .page-shell,
+.mc-app[data-view="scenes"] .page-shell {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.mc-app[data-view="security"] .camera-card,
+.mc-app[data-view="security"] .security-grid .device,
+.mc-app[data-view="scenes"] .devices-page-grid .device {
+  box-shadow: none !important;
+  backdrop-filter: blur(14px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%) !important;
+  background: var(--sp-glass-bg, rgba(245, 240, 232, 0.62)) !important;
+  border: 1px solid var(--sp-border-glass, rgba(139, 115, 85, 0.28)) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #1a2238)) !important;
+}
+.mc-app[data-view="security"] .security-grid .device .item-img,
+.mc-app[data-view="scenes"] .devices-page-grid .device .item-img {
+  box-shadow: none !important;
+  border: 2px solid var(--sp-border-device, rgba(139, 115, 85, 0.28)) !important;
+}
+.mc-app[data-view="security"] .camera-card .device-name,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .camera-card .status,
+.mc-app[data-view="security"] .security-grid .device .device-name,
+.mc-app[data-view="security"] .security-grid .device .state-word,
+.mc-app[data-view="security"] .security-grid .device .muted,
+.mc-app[data-view="scenes"] .devices-page-grid .device .device-name,
+.mc-app[data-view="scenes"] .devices-page-grid .device .state-word,
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted {
+  color: var(--sp-text-stage, var(--sp-text-dark, #1a2238)) !important;
+  text-shadow: none !important;
+}
+.mc-app[data-view="security"] .security-grid .device .status,
+.mc-app[data-view="scenes"] .devices-page-grid .device .status {
+  background: rgba(0, 0, 0, 0.10) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #1a2238)) !important;
+}
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .security-grid .device .muted {
+  color: var(--sp-text-stage-muted, var(--sp-text-muted, rgba(44, 44, 44, 0.72))) !important;
+}
+/* end skins-pro devices-filter + security layout patch */
+
+
 /* skins-pro weather layout patch */
-.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px); }
+.welcome-group .welcome .quote { display:none; }
+
+.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px);  grid-area:unset; }
 .weather-state-icon { width:30px; height:30px; border-radius:var(--sp-radius-weather,10px); display:grid; place-items:center; background:var(--sp-weather-bg,rgba(128,128,128,.18)); color:var(--sp-text-alt,var(--sp-text-main)); flex-shrink:0; }
 .weather-block { margin-top:12px; cursor:pointer; width:100%; max-width:240px; flex-shrink:0; }
 .weather-current { display:flex; align-items:center; gap:var(--sp-space-sm,10px); }
@@ -881,4 +1009,432 @@ ha-card{overflow:hidden;border:0;background:transparent;box-shadow:none}.loading
     max-width: 90px;
   }
 }
+
+/* skins-pro fantasy-westward-journey polish v2 */
+/* 梦幻西游：右侧去阴影 + 青绿仙侠磨砂统一；侧栏同系磨砂 + 标准尺寸 200/52/42/~140 */
+:host {
+  --sp-sidebar-width: 200px !important;
+  --sp-shadow-sm: none !important;
+  --sp-shadow-md: none !important;
+  --sp-shadow-lg: none !important;
+  --sp-shadow-xl: none !important;
+  --sp-shadow-card: none !important;
+  --sp-shadow-glass: none !important;
+  --sp-shadow-scene: none !important;
+  --sp-shadow-device: none !important;
+  --ha-card-box-shadow: none !important;
+  --sp-glass-bg: rgba(10, 42, 48, 0.34) !important;
+  --sp-panel-bg: rgba(10, 42, 48, 0.26) !important;
+  --sp-card-bg: linear-gradient(145deg, rgba(46, 168, 158, 0.26), rgba(10, 36, 48, 0.38) 52%, rgba(55, 168, 200, 0.16)) !important;
+  --sp-border-glass: rgba(64, 196, 176, 0.38) !important;
+  --sp-sidebar-bg: linear-gradient(165deg, rgba(46, 168, 158, 0.34), rgba(10, 36, 48, 0.40) 48%, rgba(55, 168, 200, 0.22)) !important;
+  --sp-sidebar-text: #E8F7F2 !important;
+  --sp-sidebar-text-muted: rgba(232, 247, 242, 0.88) !important;
+  --sp-sidebar-active-bg: rgba(46, 168, 158, 0.32) !important;
+  --sp-sidebar-active-text: #FFE7A8 !important;
+  --sp-text-primary: #E8F7F2 !important;
+  --sp-text-main: #E8F7F2 !important;
+  --sp-text-muted: rgba(232, 247, 242, 0.86) !important;
+  --sp-text-muted-bright: rgba(232, 247, 242, 0.92) !important;
+  --sp-text-muted-dim: rgba(232, 247, 242, 0.78) !important;
+  --sp-text-stage: #E8F7F2 !important;
+  --sp-text-stage-muted: rgba(232, 247, 242, 0.88) !important;
+  --sp-accent: #40C4B0 !important;
+}
+
+.mc-app {
+  grid-template-columns: var(--sp-sidebar-width) minmax(0, 1fr) !important;
+}
+
+.stage {
+  box-shadow: none !important;
+  filter: none !important;
+  background-color: transparent !important;
+}
+
+/* 侧栏：青绿仙侠磨砂 + 高对比字 + 标准尺寸 200/52/42/~140 */
+.sidebar {
+  width: auto !important;
+  min-width: 0 !important;
+  background: linear-gradient(
+    165deg,
+    rgba(46, 168, 158, 0.36),
+    rgba(10, 36, 48, 0.38) 48%,
+    rgba(55, 168, 200, 0.24)
+  ) !important;
+  border: 1px solid rgba(64, 196, 176, 0.44) !important;
+  box-shadow: inset 0 1px 0 rgba(232, 247, 242, 0.12) !important;
+  backdrop-filter: blur(30px) saturate(165%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(165%) !important;
+  padding: 12px 10px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+.profile {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 2px 0 12px !important;
+  padding: 0 2px !important;
+  min-height: 52px !important;
+  min-width: 0 !important;
+}
+.profile .meta {
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+  overflow: hidden !important;
+}
+.profile .meta h3,
+.sidebar .profile h3 {
+  color: #E8F7F2 !important;
+  font-weight: 800 !important;
+  font-size: 14px !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55) !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.profile .meta .muted,
+.sidebar .muted {
+  color: rgba(232, 247, 242, 0.88) !important;
+  font-weight: 650 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45) !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.profile-img {
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+  min-height: 52px !important;
+  max-width: 52px !important;
+  max-height: 52px !important;
+  flex-shrink: 0 !important;
+  border-color: rgba(64, 196, 176, 0.62) !important;
+  box-shadow: none !important;
+}
+.menu {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow: auto !important;
+  gap: 4px !important;
+}
+.nav-button,
+.sidebar .nav-button {
+  min-height: 42px !important;
+  max-height: none !important;
+  padding: 0 10px !important;
+  gap: 8px !important;
+  color: #E8F7F2 !important;
+  font-weight: 800 !important;
+  font-size: 13px !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.42) !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+.nav-button ha-icon,
+.nav-button .icon {
+  color: #E8F7F2 !important;
+  opacity: 1 !important;
+  flex-shrink: 0 !important;
+}
+.nav-button:hover,
+.nav-button.active,
+.sidebar .nav-button:hover,
+.sidebar .nav-button.active {
+  color: #FFE7A8 !important;
+  background: rgba(46, 168, 158, 0.34) !important;
+  box-shadow: inset 0 0 0 1px rgba(64, 196, 176, 0.50) !important;
+}
+.nav-button:hover ha-icon,
+.nav-button.active ha-icon {
+  color: #FFE7A8 !important;
+}
+.sidebar-art {
+  aspect-ratio: 1 !important;
+  max-height: 140px !important;
+  min-height: 88px !important;
+  flex-shrink: 0 !important;
+  margin-top: auto !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(64, 196, 176, 0.36) !important;
+  box-shadow: none !important;
+}
+.sidebar-art img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block !important;
+}
+
+/* 右侧信息卡：同系青绿磨砂、强制去阴影 */
+.side,
+.side > *,
+.side > section,
+.glass-card,
+.time-card,
+.panel-energy,
+.panel-environment,
+.panel-scenes,
+.panel-rooms,
+.panel-devices,
+.maintenance-card,
+.room,
+.rooms .room,
+.side .glass-card,
+.side .time-card,
+.side .panel-energy,
+.side .panel-environment,
+.side .panel-scenes,
+.side .maintenance-card {
+  box-shadow: none !important;
+  filter: none !important;
+}
+.glass-card,
+.time-card,
+.panel-energy,
+.panel-environment,
+.panel-scenes,
+.maintenance-card,
+.side .glass-card,
+.side .time-card {
+  background: linear-gradient(
+    145deg,
+    rgba(46, 168, 158, 0.28),
+    rgba(10, 36, 48, 0.36) 55%,
+    rgba(55, 168, 200, 0.16)
+  ) !important;
+  border: 1px solid rgba(64, 196, 176, 0.36) !important;
+  backdrop-filter: blur(24px) saturate(155%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(155%) !important;
+  color: #E8F7F2 !important;
+  box-shadow: inset 0 1px 0 rgba(232, 247, 242, 0.10) !important;
+}
+.glass-card:hover,
+.time-card:hover,
+.scene:hover,
+.device:hover,
+.camera-card:hover,
+.room:hover {
+  box-shadow: none !important;
+  transform: none !important;
+}
+.side h2,
+.side h3,
+.section-title h2,
+.time-main,
+.env-value,
+.energy-value,
+.maintenance-value,
+.maintenance-item {
+  color: #E8F7F2 !important;
+  font-weight: 800 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45) !important;
+}
+.glass-card .muted,
+.time-card .muted,
+.panel-energy .muted,
+.panel-scenes .muted,
+.panel-environment .muted,
+.maintenance-card .muted,
+.time-sub,
+.energy-value small,
+.energy-footer {
+  color: rgba(232, 247, 242, 0.88) !important;
+  font-weight: 650 !important;
+}
+.energy-value {
+  color: #40C4B0 !important;
+}
+.down {
+  color: #37A8C8 !important;
+  font-weight: 800 !important;
+}
+
+/* 设备 / 场景：半透明磨砂 + 去阴影 */
+.devices .device,
+.devices-page-grid .device,
+.device:not(.device-on-yellow):not(.device-on-green):not(.device-on-blue):not(.device-on-purple):not(.device-on-red):not(.device-on-brown),
+.devices > .device.device-off,
+.devices-page-grid > .device.device-off,
+.device.tone-yellow.device-off,
+.device.tone-green.device-off,
+.device.tone-blue.device-off,
+.device.tone-purple.device-off,
+.device.tone-red.device-off,
+.device.tone-brown.device-off,
+.camera-card {
+  background: linear-gradient(
+    145deg,
+    rgba(46, 168, 158, 0.24),
+    rgba(10, 36, 48, 0.34) 58%,
+    rgba(55, 168, 200, 0.14)
+  ) !important;
+  border: 1px solid rgba(64, 196, 176, 0.30) !important;
+  backdrop-filter: blur(18px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(145%) !important;
+  box-shadow: none !important;
+  color: #E8F7F2 !important;
+}
+.devices > .device.device-off:nth-child(6n+1),
+.devices-page-grid > .device.device-off:nth-child(6n+1),
+.devices > .device.device-off:nth-child(6n+2),
+.devices-page-grid > .device.device-off:nth-child(6n+2),
+.devices > .device.device-off:nth-child(6n+3),
+.devices-page-grid > .device.device-off:nth-child(6n+3),
+.devices > .device.device-off:nth-child(6n+4),
+.devices-page-grid > .device.device-off:nth-child(6n+4),
+.devices > .device.device-off:nth-child(6n+5),
+.devices-page-grid > .device.device-off:nth-child(6n+5),
+.devices > .device.device-off:nth-child(6n+6),
+.devices-page-grid > .device.device-off:nth-child(6n+6) {
+  box-shadow: none !important;
+  background: linear-gradient(
+    145deg,
+    rgba(46, 168, 158, 0.24),
+    rgba(10, 36, 48, 0.34) 58%,
+    rgba(55, 168, 200, 0.14)
+  ) !important;
+}
+.device .device-name,
+.device .state-word,
+.devices-page-grid .device .device-name,
+.devices-page-grid .device .state-word,
+.camera-card .device-name {
+  color: #E8F7F2 !important;
+  font-weight: 750 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45) !important;
+}
+.device .muted,
+.devices-page-grid .device .muted,
+.camera-card .muted {
+  color: rgba(232, 247, 242, 0.86) !important;
+  font-weight: 650 !important;
+}
+.device .item-img,
+.devices-page-grid .device .item-img,
+.devices-page-grid .device .item-icon {
+  box-shadow: none !important;
+}
+.panel-scenes .scene,
+.scene {
+  background: linear-gradient(
+    145deg,
+    rgba(46, 168, 158, 0.26),
+    rgba(10, 36, 48, 0.32)
+  ) !important;
+  backdrop-filter: blur(14px) saturate(135%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(135%) !important;
+  box-shadow: none !important;
+  color: #E8F7F2 !important;
+  border-color: rgba(64, 196, 176, 0.32) !important;
+}
+.scene:hover {
+  box-shadow: none !important;
+  border-color: rgba(64, 196, 176, 0.52) !important;
+}
+
+/* 房间卡：去厚阴影；底托青绿磨砂 */
+.room,
+.mc-app[data-view="rooms"] .room {
+  box-shadow: none !important;
+}
+.room-label {
+  left: 12px !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  padding: 8px 10px !important;
+  border-radius: 12px !important;
+  background: rgba(10, 36, 48, 0.40) !important;
+  backdrop-filter: blur(16px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(145%) !important;
+  border: 1px solid rgba(64, 196, 176, 0.30) !important;
+  box-sizing: border-box;
+  box-shadow: none !important;
+}
+.room-label,
+.room-label h3 {
+  color: #E8F7F2 !important;
+  font-weight: 750 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45) !important;
+}
+.room-label .muted {
+  color: rgba(232, 247, 242, 0.88) !important;
+  font-weight: 650 !important;
+}
+
+/* 安全/场景页：与青绿磨砂统一（覆盖 patch 浅色回落） */
+.mc-app[data-view="security"] .camera-card,
+.mc-app[data-view="security"] .security-grid .device,
+.mc-app[data-view="scenes"] .devices-page-grid .device {
+  background: linear-gradient(
+    145deg,
+    rgba(46, 168, 158, 0.24),
+    rgba(10, 36, 48, 0.34)
+  ) !important;
+  border: 1px solid rgba(64, 196, 176, 0.30) !important;
+  color: #E8F7F2 !important;
+  box-shadow: none !important;
+}
+.mc-app[data-view="security"] .camera-card .device-name,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .camera-card .status,
+.mc-app[data-view="security"] .security-grid .device .device-name,
+.mc-app[data-view="security"] .security-grid .device .state-word,
+.mc-app[data-view="security"] .security-grid .device .muted,
+.mc-app[data-view="scenes"] .devices-page-grid .device .device-name,
+.mc-app[data-view="scenes"] .devices-page-grid .device .state-word,
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted {
+  color: #E8F7F2 !important;
+}
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .security-grid .device .muted {
+  color: rgba(232, 247, 242, 0.86) !important;
+}
+
+/* 筛选/操作按钮：青绿磨砂高对比 */
+.filter-select,
+.action-btn,
+.chip,
+.chip-group .chip {
+  background: rgba(10, 36, 48, 0.44) !important;
+  color: #E8F7F2 !important;
+  border-color: rgba(64, 196, 176, 0.36) !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+}
+.chip.active,
+.action-btn:hover {
+  background: rgba(46, 168, 158, 0.34) !important;
+  color: #FFE7A8 !important;
+  border-color: rgba(64, 196, 176, 0.48) !important;
+}
+
+@media (orientation: portrait) {
+  .mobile-nav {
+    background: linear-gradient(
+      180deg,
+      rgba(46, 168, 158, 0.42),
+      rgba(10, 36, 48, 0.72)
+    ) !important;
+    border-top: 1px solid rgba(64, 196, 176, 0.36) !important;
+    box-shadow: none !important;
+  }
+  .mobile-nav .nav-button {
+    color: #E8F7F2 !important;
+  }
+  .mobile-nav .nav-button.active {
+    color: #FFE7A8 !important;
+  }
+}
+/* end skins-pro fantasy-westward-journey polish v2 */
 

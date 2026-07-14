@@ -61,9 +61,42 @@ jobs:
         if: steps.check.outputs.skip != 'true'
         run: npm ci
 
+      - name: Detect changed skins
+        if: steps.check.outputs.skip != 'true'
+        id: skins
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- skins-pro/ 2>/dev/null \
+            | grep '^skins-pro/' | cut -d/ -f2 | sort -u | grep -v '^modern$' || true)
+          if [ -z "$CHANGED" ]; then
+            echo "target=" >> "$GITHUB_OUTPUT"
+            echo "No specific skins changed, building all"
+          else
+            echo "target=$CHANGED" >> "$GITHUB_OUTPUT"
+            echo "Changed skins: $CHANGED"
+          fi
+
+      - name: Fetch existing store assets
+        if: steps.check.outputs.skip != 'true' && steps.skins.outputs.target != ''
+        run: |
+          git fetch origin store --depth=1 2>/dev/null || true
+          mkdir -p store screenshots/thumbnails
+          # Fetch existing zips from store branch (unchanged skins keep their zips)
+          for p in $(git ls-tree -r --name-only origin/store -- store/ 2>/dev/null | grep '\.zip$' || true); do
+            git show "origin/store:$p" > "$p" 2>/dev/null && echo "Restored: $p"
+          done
+          # Fetch existing thumbnails
+          for p in $(git ls-tree -r --name-only origin/store -- screenshots/thumbnails/ 2>/dev/null | grep '\.jpg$' || true); do
+            git show "origin/store:$p" > "$p" 2>/dev/null && echo "Restored: $p"
+          done
+
       - name: Build
         if: steps.check.outputs.skip != 'true'
-        run: npm run build
+        run: |
+          if [ -n "${{ steps.skins.outputs.target }}" ]; then
+            npm run build -- ${{ steps.skins.outputs.target }}
+          else
+            npm run build
+          fi
 
       - name: Type check
         if: steps.check.outputs.skip != 'true'

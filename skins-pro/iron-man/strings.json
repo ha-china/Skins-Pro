@@ -30,9 +30,7 @@
     "person": "button",
     "vacuum": "fan",
     "device_tracker": "button",
-    "update": "button",
-    "sun": "light",
-    "weather": "climate"
+    "update": "button"
   },
   "author": "xyiqq"
 }

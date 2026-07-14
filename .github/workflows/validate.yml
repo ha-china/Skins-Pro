@@ -4,9 +4,13 @@ on:
   push:
     paths-ignore:
       - '.github/workflows/**'
+      - 'skins-pro/**'
+      - 'screenshots/**'
   pull_request:
     paths-ignore:
       - '.github/workflows/**'
+      - 'skins-pro/**'
+      - 'screenshots/**'
   workflow_dispatch:
 
 permissions: {}

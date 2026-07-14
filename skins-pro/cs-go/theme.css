@@ -46,8 +46,8 @@
   --sp-glass-bg:rgba(15, 20, 25, 0.72);
   --sp-panel-bg:rgba(15, 20, 25, 0.82);
   --sp-card-bg: linear-gradient(145deg, rgba(32, 31, 29, 0.72), rgba(12, 17, 22, 0.58));
-  --sp-base-texture: url("./base-texture.jpg");
-  --sp-stage-texture: url("./stage-background.jpg");
+  --sp-base-texture: url("./background.png");
+  --sp-stage-texture: url("./background.png");
   --sp-app-overlay: radial-gradient(circle at 18% 12%, rgba(245, 166, 35, 0.22), transparent 28%), radial-gradient(circle at 82% 18%, rgba(226, 232, 240, 0.12), transparent 30%), radial-gradient(circle at 50% 92%, rgba(74, 85, 104, 0.20), transparent 34%), linear-gradient(135deg, rgba(15, 20, 25, 0.84), rgba(0, 11, 67, 0.58) 48%, rgba(15, 20, 25, 0.86));
   --sp-stage-overlay: linear-gradient(90deg, rgba(11, 16, 21, 0.50), rgba(15, 20, 25, 0.20) 38%, rgba(15, 20, 25, 0.22) 62%, rgba(11, 16, 21, 0.52)), radial-gradient(circle at 50% 42%, rgba(226, 232, 240, 0.08), transparent 36%), linear-gradient(180deg, rgba(15, 20, 25, 0.10), rgba(15, 20, 25, 0.48));
   --sp-room-overlay: linear-gradient(90deg, rgba(11, 16, 21, 0.72), rgba(15, 20, 25, 0.36) 46%, rgba(15, 20, 25, 0.14)), linear-gradient(180deg, rgba(15, 20, 25, 0.16), rgba(15, 20, 25, 0.62));
@@ -914,7 +914,9 @@ button { font:inherit; }
 /* end skins-pro card theme port */
 
 /* skins-pro weather layout patch */
-.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px); }
+.welcome-group .welcome .quote { display:none; }
+
+.weather-with-meta { display:flex; align-items:flex-start; margin-top:var(--sp-space-md,12px);  grid-area:unset; }
 /* end skins-pro weather layout patch */
 
 /* skins-pro sidebar layout patch */

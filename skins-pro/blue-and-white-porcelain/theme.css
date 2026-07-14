@@ -979,7 +979,7 @@ button { font:inherit; }
   border:var(--sp-border-width) solid var(--sp-border-glass);
   border-radius:var(--sp-radius-pill);
   background:var(--sp-glass-light, var(--sp-glass-bg));
-  color:var(--sp-text-stage, var(--sp-text-main, #1a1a1a));
+  color:var(--sp-text-stage, var(--sp-text-main, #0A1628));
   font:inherit;
   font-size:var(--sp-font-xs);
   font-weight:600;
@@ -991,14 +991,14 @@ button { font:inherit; }
   cursor:pointer;
   min-width:120px;
   box-sizing:border-box;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%232C2C2C' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23FFF0E0' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-repeat:no-repeat;
   background-position:right 8px center;
   background-size:14px;
 }
 .filter-select option {
-  color:var(--sp-text-stage, #2C2C2C);
-  background:var(--sp-panel-bg, #F5F0E8);
+  color:var(--sp-text-stage, #0A1628);
+  background:var(--sp-panel-bg, #0C1020);
 }
 .action-btn {
   min-height:36px;
@@ -1007,7 +1007,7 @@ button { font:inherit; }
   border-radius:var(--sp-radius-pill);
   padding:0 14px;
   background:var(--sp-glass-light, var(--sp-glass-bg));
-  color:var(--sp-text-stage, var(--sp-text-main, #1a1a1a));
+  color:var(--sp-text-stage, var(--sp-text-main, #0A1628));
   cursor:pointer;
   font:inherit;
   font-size:var(--sp-font-xs);
@@ -1017,8 +1017,8 @@ button { font:inherit; }
   transition:background .2s ease,color .2s ease;
 }
 .action-btn:hover {
-  background:var(--sp-accent-green-alpha, rgba(0,0,0,.08));
-  color:var(--sp-accent, var(--sp-text-stage, #1a1a1a));
+  background:var(--sp-accent-alpha, var(--sp-accent-green-alpha, rgba(0,0,0,.08)));
+  color:var(--sp-accent, var(--sp-text-stage, #0A1628));
 }
 
 .devices.security-grid {
@@ -1059,7 +1059,7 @@ button { font:inherit; }
   -webkit-backdrop-filter: blur(14px) saturate(130%) !important;
   background: var(--sp-glass-bg, rgba(245, 240, 232, 0.62)) !important;
   border: 1px solid var(--sp-border-glass, rgba(139, 115, 85, 0.28)) !important;
-  color: var(--sp-text-stage, var(--sp-text-dark, #2C2C2C)) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #0A1628)) !important;
 }
 .mc-app[data-view="security"] .security-grid .device .item-img,
 .mc-app[data-view="scenes"] .devices-page-grid .device .item-img {
@@ -1075,13 +1075,13 @@ button { font:inherit; }
 .mc-app[data-view="scenes"] .devices-page-grid .device .device-name,
 .mc-app[data-view="scenes"] .devices-page-grid .device .state-word,
 .mc-app[data-view="scenes"] .devices-page-grid .device .muted {
-  color: var(--sp-text-stage, var(--sp-text-dark, #2C2C2C)) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #0A1628)) !important;
   text-shadow: none !important;
 }
 .mc-app[data-view="security"] .security-grid .device .status,
 .mc-app[data-view="scenes"] .devices-page-grid .device .status {
   background: rgba(0, 0, 0, 0.10) !important;
-  color: var(--sp-text-stage, var(--sp-text-dark, #2C2C2C)) !important;
+  color: var(--sp-text-stage, var(--sp-text-dark, #0A1628)) !important;
 }
 .mc-app[data-view="scenes"] .devices-page-grid .device .muted,
 .mc-app[data-view="security"] .camera-card .muted,
@@ -1089,6 +1089,7 @@ button { font:inherit; }
   color: var(--sp-text-stage-muted, var(--sp-text-muted, rgba(44, 44, 44, 0.72))) !important;
 }
 /* end skins-pro devices-filter + security layout patch */
+
 
 
 /* skins-pro editor contrast patch */

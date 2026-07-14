@@ -67,13 +67,13 @@ Download additional skins directly from the card editor. Clicking **Download** f
 
 - ☀️ Weather & greeting
 - 💬 Info display
-- 📱 Device controls (by area or by type)
+- 📱 Device controls (by area or by type) — lights, switches, covers, climate, water heater, fan, humidifier, vacuum
 - 🚪 Room snapshots
 - 🎬 Scene buttons
 - 🤖 Automations page
 - ⚡ Energy dashboard (today vs yesterday)
 - 🛡️ Security page — cameras, locks, alarm control panel (auto-detected, click to arm/disarm)
-- 🎵 Media player card — album art, playback controls, volume bar
+- 🎵 Media player card — album art, playback controls, skip tracks, volume bar
 - 📷 Camera snapshot on homepage
 - 🌡️ Environment sensors display
 - 🌐 Auto CN/EN bilingual switching
@@ -98,7 +98,7 @@ skins-pro/
     strings.json            # Strings + icon_map + author (required)
     avatar.jpg              # Avatar, recommended ≥ 300×300
     background.jpg          # Background, recommended width ≥ 2560px
-    decoration.jpg          # Side decoration, recommended width ≥ 800px
+    decoration.jpg          # Side decoration, recommended height ≥ 400px
     base-texture.jpg        # Base texture, recommended width ≥ 2560px
     stage-*.jpg             # Stage image, recommended width ≥ 2560px
     room-*.jpg              # Room image, recommended width ≥ 1200px
@@ -112,11 +112,11 @@ skins-pro/
 | `room-*` | width ≥ 1200px | Maintain ratio, downscale to 1200px |
 | `icon-*` | longest edge ≥ 300px | Maintain ratio, downscale to 300px |
 | `avatar.*` | longest edge ≥ 300px | Maintain ratio, downscale to 300px |
-| `decoration.*` | width ≥ 800px | Maintain ratio, downscale to 800px |
+| `decoration.*` | height ≥ 400px | Maintain ratio, downscale to height 400px |
 | `background.*`, `base-*`, `stage-*` | width ≥ 2560px | Maintain ratio, downscale to 2560px |
 | others | width ≥ 1200px | Maintain ratio, downscale to 1200px |
 
-Supports PNG / JPG / BMP / WebP input, outputs JPG. Never upscales.
+Supports PNG / JPG / BMP / WebP input. Icons, avatars, and decorations output as PNG; everything else as JPG. Never upscales.
 
 ### theme.css
 
@@ -150,33 +150,32 @@ All styles are customized via CSS variables on `:host`. Each skin has its own `t
 git clone https://github.com/ha-china/Skins-Pro.git
 cd Skins-Pro
 npm install
-npm run build       # Build all skins (also runs rollup)
-npm run build -- <skin-name>   # Build only one skin + the bundled 'modern' (faster for local testing)
-npm run watch       # Watch mode (auto-rebuild on source changes)
-npm run type-check  # TypeScript type check
+npm run build       # Build everything
+npm run build -- <skin-name>   # Build only one skin + modern (faster)
+npm run watch       # Auto-rebuild on file changes
+npm run type-check  # Check for code errors
 ```
 
-`npm run build -- visionOS` processes only `modern` + `visionOS`, skipping the other skins and store packages — useful when iterating on a single skin.
+`npm run build -- visionOS` builds only `modern` + `visionOS`, skipping other skins — faster when iterating on a single skin.
 
 Build output in `dist/`:
 
-- `dist/skins-pro.js` — Core JS bundle (the only file you need for HA testing)
-- `dist/modern/` — The built-in modern skin's processed assets and CSS
+- `dist/skins-pro.js` — The main JS file (the only file you need for HA)
+- `dist/modern/` — The built-in modern skin's images and CSS
 
-### Testing a Local Build in Home Assistant
+### Testing in Home Assistant
 
 1. **Build the project:**
    ```bash
    npm run build
    ```
 
-2. **Deploy `skins-pro.js` to HA's `www/` directory:**  
-   Copy `dist/skins-pro.js` into your HA `config/www/` folder:
+2. **Copy `dist/skins-pro.js` to your HA `www/` folder:**
    ```
    <HA config>/www/skins-pro.js
    ```
 
-3. **Register the resource in Home Assistant:**  
+3. **Add it as a dashboard resource in Home Assistant:**  
    Settings → Dashboards → Resources → Add Resource
    - URL: `/local/skins-pro.js`
    - Type: JavaScript Module
@@ -185,20 +184,20 @@ Build output in `dist/`:
 
    After that, every time you `npm run build`, just replace `www/skins-pro.js` and hard refresh to see changes.
 
-> **Tip** — If the built-in **modern** skin assets (images, CSS) are not loading and you see broken images or unstyled output, also copy `dist/modern/` into `www/community/skins-pro/modern/`:
+> **Tip** — If the built-in **modern** skin images or styles are not loading, also copy `dist/modern/` to `www/community/skins-pro/modern/`:
 > ```
 > <HA config>/www/community/skins-pro/modern/  ← copy dist/modern/ here
 > ```
 
-### Testing a New Skin (Store-less Local Workflow)
+### Testing a New Skin Locally
 
-While developing a new skin, you don't need to go through the store. Instead:
+You don't need the store to test a new skin. Just:
 
-1. Add your skin directory under `skins-pro/<new-skin-name>/` with the usual files (`theme.css`, `strings.json`, images)
+1. Create your skin folder under `skins-pro/<new-skin-name>/` with the usual files (`theme.css`, `strings.json`, images)
 
-2. Build the project: the skin will be auto-discovered and baked into `generated.ts`
+2. Run `npm run build` — your skin will be auto-discovered
 
-3. Copy your skin's images to your HA `www/` for direct serving:
+3. Copy your skin's files to your HA `www/` folder:
    ```
    <HA config>/www/skins-pro/<new-skin-name>/
      ├── theme.css
@@ -206,16 +205,16 @@ While developing a new skin, you don't need to go through the store. Instead:
      ├── background.jpg
      ├── room-*.jpg
      ├── icon-*.jpg
-     └── ... (all the images from your skin directory)
+     └── ... (all files from your skin directory)
    ```
 
-4. In the Skins Pro card editor, add the skin name to the `downloaded_skins` array:
+4. In the Skins Pro card editor, add the skin name to `downloaded_skins`:
    ```json
    "downloaded_skins": ["<new-skin-name>"]
    ```
-   This tells the card that the skin is already installed, so it appears in the skin dropdown immediately without going through the store. Select it from the dropdown and hard refresh.
+   This tells the card the skin is already installed, so it shows up in the skin dropdown right away. Select it and hard refresh.
 
-That's it — no store, no PR, no CI needed for local development. When you're happy with the result, open a PR to share it.
+That's it — no store, no PR needed for local testing. When you're happy with the result, open a PR to share it.
 
 ## Contributing a Skin
 
@@ -229,13 +228,6 @@ Once merged, CI automatically builds the card, packages your skin to the store b
 
 > ⚠️ **Copyright Notice** — When contributing skins, please ensure your image assets do not infringe on others' copyright. We recommend using AI-generated or original images. Skins with valid copyright complaints will be removed from the store.
 
-### PR Template Requirements (enforced by CI)
-
-- PR description must keep the full template structure
-- At least one type must be checked (`Contribute a Skin` / `Architecture Optimization`)
-- `### 描述 / Description` must be filled in
-- For skin contributions: `### 皮肤名称 / Skin Name` must be filled in
-
 After submitting, a bot will automatically post a **Screenshot Preview** comment showing your skin's preview image.
 
 ### Required Files
@@ -247,14 +239,6 @@ After submitting, a bot will automatically post a **Screenshot Preview** comment
 | `avatar.*` (png/jpg) | Avatar image, recommended ≥ 300×300 |
 | `background.*` (png/jpg) | Main background, recommended width ≥ 2560px |
 | `screenshots/<skin-name>.png` | Store preview image. **Filename must match the skin folder name exactly** |
-
-### Validation Rules (enforced by CI)
-
-- Skin folder name (`skins-pro/<name>/`) must match preview filename (`screenshots/<name>.png`)
-- `strings.json` must contain a non-empty `author` field (your GitHub username, without `@`)
-- `theme.css` must be present
-- Skin directory may only contain image files + `theme.css` + `strings.json`
-- Exactly one preview screenshot per skin
 
 ### Tips
 

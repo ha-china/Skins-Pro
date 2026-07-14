@@ -1320,3 +1320,128 @@ button { font:inherit; }
 }
 /* end skins-pro cs-go glass polish v1 */
 
+/* skins-pro devices-filter + security layout patch */
+.filter-bar {
+  display:flex;
+  gap:var(--sp-space-sm);
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.filter-select {
+  min-height:36px;
+  padding:0 var(--sp-space-lg) 0 var(--sp-space-sm);
+  border:var(--sp-border-width) solid var(--sp-border-glass);
+  border-radius:var(--sp-radius-pill);
+  background:rgba(15, 20, 25, 0.42);
+  color:var(--sp-text-primary, #E2E8F0);
+  font:inherit;
+  font-size:var(--sp-font-xs);
+  font-weight:600;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  -webkit-appearance:none;
+  appearance:none;
+  outline:none;
+  cursor:pointer;
+  min-width:120px;
+  box-sizing:border-box;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23E2E8F0' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 8px center;
+  background-size:14px;
+}
+.filter-select option {
+  color:#E2E8F0;
+  background:#0F1419;
+}
+.action-btn {
+  min-height:36px;
+  box-sizing:border-box;
+  border:var(--sp-border-width) solid var(--sp-border-glass);
+  border-radius:var(--sp-radius-pill);
+  padding:0 14px;
+  background:rgba(15, 20, 25, 0.42);
+  color:var(--sp-text-primary, #E2E8F0);
+  cursor:pointer;
+  font:inherit;
+  font-size:var(--sp-font-xs);
+  font-weight:600;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:background .2s ease,color .2s ease;
+}
+.action-btn:hover {
+  background:rgba(245, 166, 35, 0.18);
+  color:var(--sp-accent, #F5A623);
+}
+
+.devices.security-grid {
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-space-md);
+  grid-template-columns:unset;
+}
+.security-cameras {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:var(--sp-space-sm);
+}
+.security-devices {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:var(--sp-space-sm);
+}
+.security-grid {
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-space-md);
+}
+
+.mc-app[data-view="security"] .page-shell,
+.mc-app[data-view="scenes"] .page-shell {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.mc-app[data-view="security"] .camera-card,
+.mc-app[data-view="security"] .security-grid .device,
+.mc-app[data-view="scenes"] .devices-page-grid .device {
+  box-shadow: none !important;
+  backdrop-filter: blur(14px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%) !important;
+  background: rgba(15, 20, 25, 0.34) !important;
+  border: 1px solid rgba(245, 166, 35, 0.22) !important;
+  color: var(--sp-text-primary, #E2E8F0) !important;
+}
+.mc-app[data-view="security"] .security-grid .device .item-img,
+.mc-app[data-view="scenes"] .devices-page-grid .device .item-img {
+  box-shadow: none !important;
+  border: 2px solid rgba(245, 166, 35, 0.28) !important;
+}
+.mc-app[data-view="security"] .camera-card .device-name,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .camera-card .status,
+.mc-app[data-view="security"] .security-grid .device .device-name,
+.mc-app[data-view="security"] .security-grid .device .state-word,
+.mc-app[data-view="security"] .security-grid .device .muted,
+.mc-app[data-view="scenes"] .devices-page-grid .device .device-name,
+.mc-app[data-view="scenes"] .devices-page-grid .device .state-word,
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted {
+  color: var(--sp-text-primary, #E2E8F0) !important;
+  text-shadow: none !important;
+}
+.mc-app[data-view="security"] .security-grid .device .status,
+.mc-app[data-view="scenes"] .devices-page-grid .device .status {
+  background: rgba(245, 166, 35, 0.14) !important;
+  color: var(--sp-text-primary, #E2E8F0) !important;
+}
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted,
+.mc-app[data-view="security"] .camera-card .muted,
+.mc-app[data-view="security"] .security-grid .device .muted {
+  color: var(--sp-text-muted, rgba(226, 232, 240, 0.72)) !important;
+}
+/* end skins-pro devices-filter + security layout patch */
+

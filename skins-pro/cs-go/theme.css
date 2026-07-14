@@ -1231,3 +1231,92 @@ button { font:inherit; }
   }
 }
 
+/* skins-pro cs-go glass polish v1 */
+/* 右侧信息卡 / 首页玻璃卡：半透明磨砂、去掉阴影 */
+.glass-card,
+.time-card,
+.panel-energy,
+.panel-environment,
+.panel-scenes,
+.maintenance-card {
+  background: rgba(15, 20, 25, 0.32) !important;
+  border: 1px solid rgba(245, 166, 35, 0.22) !important;
+  backdrop-filter: blur(18px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(130%) !important;
+  box-shadow: none !important;
+}
+
+/* 首页设备卡 + 设备/自动化页卡片：半透明、去阴影 */
+.devices .device,
+.devices-page-grid .device,
+.device:not(.device-on-yellow):not(.device-on-green):not(.device-on-blue):not(.device-on-purple):not(.device-on-red):not(.device-on-brown),
+.devices > .device.device-off,
+.devices-page-grid > .device.device-off,
+.device.tone-yellow.device-off,
+.device.tone-green.device-off,
+.device.tone-blue.device-off,
+.device.tone-purple.device-off,
+.device.tone-red.device-off,
+.device.tone-brown.device-off,
+.camera-card {
+  background: rgba(15, 20, 25, 0.34) !important;
+  border: 1px solid rgba(226, 232, 240, 0.16) !important;
+  backdrop-filter: blur(16px) saturate(125%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(125%) !important;
+  box-shadow: none !important;
+}
+
+.devices > .device.device-off:nth-child(6n+1),
+.devices-page-grid > .device.device-off:nth-child(6n+1),
+.devices > .device.device-off:nth-child(6n+2),
+.devices-page-grid > .device.device-off:nth-child(6n+2),
+.devices > .device.device-off:nth-child(6n+3),
+.devices-page-grid > .device.device-off:nth-child(6n+3),
+.devices > .device.device-off:nth-child(6n+4),
+.devices-page-grid > .device.device-off:nth-child(6n+4),
+.devices > .device.device-off:nth-child(6n+5),
+.devices-page-grid > .device.device-off:nth-child(6n+5),
+.devices > .device.device-off:nth-child(6n+6),
+.devices-page-grid > .device.device-off:nth-child(6n+6) {
+  box-shadow: none !important;
+  background: rgba(15, 20, 25, 0.34) !important;
+}
+
+.devices-page-grid .device .item-icon,
+.device .item-img,
+.devices-page-grid .device .item-img {
+  box-shadow: none !important;
+}
+
+/* 场景卡 */
+.panel-scenes .scene,
+.scene {
+  background: rgba(15, 20, 25, 0.30) !important;
+  backdrop-filter: blur(12px) saturate(125%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(125%) !important;
+  box-shadow: none !important;
+}
+.scene:hover {
+  box-shadow: none !important;
+}
+
+/* 房间卡：去掉厚阴影；底托半透明磨砂 */
+.room,
+.mc-app[data-view="rooms"] .room {
+  box-shadow: none !important;
+}
+.room-label {
+  left: 12px !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  padding: 8px 10px !important;
+  border-radius: 12px !important;
+  background: rgba(15, 20, 25, 0.36) !important;
+  backdrop-filter: blur(16px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(130%) !important;
+  border: 1px solid rgba(245, 166, 35, 0.20) !important;
+  box-sizing: border-box;
+  box-shadow: none !important;
+}
+/* end skins-pro cs-go glass polish v1 */
+

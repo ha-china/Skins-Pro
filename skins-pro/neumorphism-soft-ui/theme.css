@@ -1069,7 +1069,7 @@ button { font:inherit; }
   border: 0 !important;
   box-shadow: var(--neo-inset) !important;
 }
-/* Right column: flat transparent stack — Soft UI raised only on inner cards */
+/* Right column: flat transparent stack — no Soft UI shadow on right cards */
 .side {
   background: transparent !important;
   backdrop-filter: none !important;
@@ -1090,7 +1090,7 @@ button { font:inherit; }
   -webkit-backdrop-filter: none !important;
   border: 0 !important;
   color: var(--neo-text-strong) !important;
-  box-shadow: var(--neo-raised) !important;
+  box-shadow: none !important;
   border-radius: 22px !important;
 }
 .weather-row,
@@ -1103,6 +1103,9 @@ button { font:inherit; }
   color: var(--neo-text-strong) !important;
   box-shadow: var(--neo-raised) !important;
   border-radius: 22px !important;
+}
+.side .scene {
+  box-shadow: none !important;
 }
 .chip.active {
   box-shadow: var(--neo-inset) !important;

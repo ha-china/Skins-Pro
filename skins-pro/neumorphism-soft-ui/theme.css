@@ -936,3 +936,248 @@ button { font:inherit; }
   box-shadow: var(--sp-shadow) !important;
   border: 1px solid rgba(184, 154, 116, 0.14) !important;
 }
+
+/* =========================================================
+   neumorphism Soft UI material port (NameThatUI-aligned)
+   - one continuous #E0E5EC matte surface
+   - dual soft shadows (light TL / dark BR), no frosted glass
+   - light sidebar matching the body surface
+   ========================================================= */
+:host {
+  --neo-surface: #E0E5EC;
+  --neo-light: rgba(255, 255, 255, 0.90);
+  --neo-dark: rgba(163, 177, 198, 0.55);
+  --neo-raised: -6px -6px 14px var(--neo-light), 6px 6px 14px var(--neo-dark);
+  --neo-raised-sm: -4px -4px 10px var(--neo-light), 4px 4px 10px var(--neo-dark);
+  --neo-inset: inset 4px 4px 10px var(--neo-dark), inset -4px -4px 10px var(--neo-light);
+  --neo-text: #4A5568;
+  --neo-text-strong: #2D3748;
+  --neo-accent: #6B9BD1;
+
+  --sp-app-overlay: linear-gradient(135deg, rgba(224, 229, 236, 0.42), rgba(224, 229, 236, 0.28)) !important;
+  --sp-stage-overlay: none !important;
+  --sp-room-overlay: linear-gradient(180deg, transparent 55%, rgba(44, 44, 44, 0.28)) !important;
+  --sp-glass-bg: #E0E5EC !important;
+  --sp-panel-bg: #E0E5EC !important;
+  --sp-card-bg: #E0E5EC !important;
+  --sp-glass-light: #E0E5EC !important;
+  --sp-glass-dim: #E0E5EC !important;
+  --sp-glass-chip: #E0E5EC !important;
+  --sp-border-width: 0px !important;
+  --sp-border-glass: transparent !important;
+  --sp-border-device: transparent !important;
+  --sp-border-chip: transparent !important;
+  --sp-border-weather: transparent !important;
+  --sp-border-muted: transparent !important;
+  --sp-shadow-sm: var(--neo-raised-sm) !important;
+  --sp-shadow-md: var(--neo-raised) !important;
+  --sp-shadow-lg: var(--neo-raised) !important;
+  --sp-shadow-xl: var(--neo-raised) !important;
+  --sp-shadow-card: var(--neo-raised) !important;
+  --sp-shadow-glass: var(--neo-raised) !important;
+  --sp-shadow-scene: var(--neo-raised-sm) !important;
+  --sp-shadow-device: var(--neo-raised-sm) !important;
+  --sp-text-primary: var(--neo-text-strong) !important;
+  --sp-text-main: var(--neo-text-strong) !important;
+  --sp-text-muted: rgba(74, 85, 104, 0.72) !important;
+  --sp-text-muted-bright: rgba(74, 85, 104, 0.82) !important;
+  --sp-text-muted-dim: rgba(74, 85, 104, 0.58) !important;
+  --sp-text-alt: var(--neo-accent) !important;
+  --sp-text-stage: var(--neo-text-strong) !important;
+  --sp-text-stage-muted: rgba(74, 85, 104, 0.72) !important;
+  --sp-sidebar-bg: #E0E5EC !important;
+  --sp-sidebar-text: var(--neo-text-strong) !important;
+  --sp-sidebar-text-muted: rgba(74, 85, 104, 0.72) !important;
+  --sp-sidebar-active-bg: #E0E5EC !important;
+  --sp-sidebar-active-text: var(--neo-accent) !important;
+  --sp-scrollbar-track: rgba(163, 177, 198, 0.25) !important;
+  --sp-scrollbar-thumb: rgba(107, 155, 209, 0.45) !important;
+  --sp-weather-bg: #E0E5EC !important;
+  --sp-time-icon-bg: #E0E5EC !important;
+  --sp-item-icon-bg: #E0E5EC !important;
+  --sp-camera-bg: rgba(163, 177, 198, 0.28) !important;
+  --sp-dark-overlay: rgba(224, 229, 236, 0.55) !important;
+  --sp-accent-green: var(--neo-accent) !important;
+  --sp-accent-green-alpha: rgba(107, 155, 209, 0.14) !important;
+  --sp-accent-green-active: #E0E5EC !important;
+  --sp-accent-green-border: transparent !important;
+}
+
+.mc-app {
+  background-color: var(--neo-surface) !important;
+  color: var(--neo-text-strong) !important;
+}
+
+/* Sidebar: same matte surface as body, raised Soft UI plate */
+.sidebar {
+  background: var(--neo-surface) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  box-shadow: var(--neo-raised) !important;
+  color: var(--neo-text) !important;
+}
+.profile .meta,
+.profile .meta .muted,
+.nav-button {
+  color: var(--sp-sidebar-text-muted) !important;
+}
+.nav-button.active,
+.nav-button:hover {
+  color: var(--neo-accent) !important;
+  background: var(--neo-surface) !important;
+  box-shadow: var(--neo-inset) !important;
+}
+.profile-img {
+  width: 72px !important;
+  height: 72px !important;
+  min-width: 72px !important;
+  min-height: 72px !important;
+  max-width: 72px !important;
+  max-height: 72px !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow: var(--neo-raised-sm) !important;
+}
+.profile {
+  min-height: 72px !important;
+  gap: 12px !important;
+}
+.sidebar-art {
+  aspect-ratio: 1 !important;
+  width: 72px !important;
+  max-width: 72px !important;
+  min-height: 72px !important;
+  max-height: 72px !important;
+  height: 72px !important;
+  margin: 8px auto 4px !important;
+  border-radius: 22px !important;
+  overflow: hidden !important;
+  box-shadow: var(--neo-raised-sm) !important;
+  background: var(--neo-surface) !important;
+}
+.sidebar-art img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* Stage / panels: continuous surface, no floating dark drop shadow */
+.stage {
+  background-color: var(--neo-surface) !important;
+  border: 0 !important;
+  box-shadow: var(--neo-inset) !important;
+}
+.side,
+.glass-card,
+.time-card,
+.panel-energy,
+.panel-scenes,
+.maintenance-card,
+.weather-row,
+.chip,
+.scene {
+  background: var(--neo-surface) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  color: var(--neo-text-strong) !important;
+  box-shadow: var(--neo-raised) !important;
+  border-radius: 22px !important;
+}
+.side {
+  /* kill the heavy right-edge cast shadow from old glass stack */
+  filter: none !important;
+  outline: none !important;
+}
+.chip.active {
+  box-shadow: var(--neo-inset) !important;
+  color: var(--neo-accent) !important;
+}
+.scene:active,
+.nav-button:active {
+  box-shadow: var(--neo-inset) !important;
+}
+
+/* Device cards: Soft UI extruded pads (off) / soft accent (on) */
+.devices > .device,
+.devices-page-grid > .device,
+.device {
+  background: var(--neo-surface) !important;
+  border: 0 !important;
+  color: var(--neo-text-strong) !important;
+  box-shadow: var(--neo-raised) !important;
+  text-shadow: none !important;
+}
+.devices > .device.device-on,
+.devices-page-grid > .device.device-on,
+.device.device-on {
+  background: linear-gradient(145deg, #d7e4f4 0%, #c5d6ea 55%, #b7c9df 100%) !important;
+  color: var(--neo-text-strong) !important;
+  box-shadow: var(--neo-inset) !important;
+}
+.device .device-name,
+.device .state-word,
+.device .muted,
+.camera-card .muted {
+  color: var(--neo-text-strong) !important;
+  text-shadow: none !important;
+}
+.device .muted {
+  color: rgba(74, 85, 104, 0.72) !important;
+}
+.item-img,
+.item-icon {
+  border: 0 !important;
+  box-shadow: var(--neo-raised-sm) !important;
+  background: var(--neo-surface) !important;
+}
+.switch {
+  background: var(--neo-surface) !important;
+  box-shadow: var(--neo-inset) !important;
+  border: 0 !important;
+}
+.switch.on {
+  background: rgba(107, 155, 209, 0.28) !important;
+}
+
+/* Rooms keep photo but Soft UI frame */
+.room {
+  box-shadow: var(--neo-raised) !important;
+  border: 0 !important;
+}
+
+/* Welcome / right panel text on Soft UI */
+.welcome h1,
+.page-header h1,
+.section-title h2,
+.side h2,
+.side h3,
+.time-main,
+.env-value,
+.energy-value {
+  color: var(--neo-text-strong) !important;
+  text-shadow: none !important;
+}
+.welcome .quote,
+.muted,
+.time-sub,
+.weather-current-cond,
+.forecast-weekday,
+.forecast-low {
+  color: rgba(74, 85, 104, 0.72) !important;
+  text-shadow: none !important;
+}
+
+/* Compact avatar/decoration on narrow sidebar breakpoint */
+@media (max-width: 1180px) {
+  .profile-img {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
+  }
+}

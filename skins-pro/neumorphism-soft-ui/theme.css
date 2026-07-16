@@ -1,4 +1,4 @@
-:host { --sp-glass-regular:rgba(255,255,255,0.28);
+﻿:host { --sp-glass-regular:rgba(255,255,255,0.28);
   --sp-text-primary: #2C2C2C;
   display:block; width:100%;
   --sp-sidebar-width:200px; --sp-app-padding:16px; --sp-stage-radius:24px;
@@ -76,7 +76,7 @@ button { font:inherit; }
 .nav-button ha-icon { width:20px; color:inherit; }
 .sidebar-art { margin-top:auto; min-height:100px; flex-shrink:0; border-radius:var(--sp-radius-lg); overflow:hidden; box-shadow:var(--sp-shadow-sm); }
 .sidebar-art img { width:100%; height:100%; }
-.stage { min-height:0; height:100%; border-radius:var(--sp-stage-radius); overflow:hidden; position:relative; background:var(--sp-panel-bg); background-image:var(--sp-stage-overlay),var(--sp-stage-texture); background-size:cover; background-position:center; background-repeat:no-repeat; box-shadow:var(--sp-shadow-lg); }
+.stage { min-height:0; height:100%; border-radius:var(--sp-stage-radius); overflow:hidden; position:relative; background-color:transparent; background-image:var(--sp-stage-overlay),var(--sp-stage-texture); background-size:cover; background-position:center; background-repeat:no-repeat; box-shadow:var(--sp-shadow-lg); }
 .stage-grid { position:relative; z-index:1; height:100%; padding:var(--sp-space-xl); box-sizing:border-box; display:grid; grid-template-columns:minmax(0,3fr) minmax(280px,1fr); grid-template-rows:auto minmax(0,1fr) auto; grid-template-areas:"welcome side" "spacer side" "bottom side"; gap:var(--sp-space-lg); overflow:hidden; }
 .welcome { grid-area:welcome; align-self:start; max-width:540px; }
 .quote { margin-top:var(--sp-space-xs); font-size:var(--sp-font-xs); color:var(--sp-text-muted-bright); font-weight:400; }
@@ -98,10 +98,34 @@ button { font:inherit; }
 .chip { min-height:36px; border:var(--sp-border-width) solid var(--sp-border-chip); border-radius:var(--sp-radius-pill); padding:0 14px; background:var(--sp-glass-dim); color:var(--sp-text-main); cursor:pointer; transition:all .2s ease; }
 .chip.active { background:var(--sp-accent-green-active); border-color:var(--sp-accent-green-border); color:var(--sp-accent-green); }
 .device-group { display:grid; gap:var(--sp-space-md); margin-bottom:var(--sp-space-lg); }
-.devices-page-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--sp-space-sm); }
+.devices-page-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:var(--sp-space-sm); }
+.automations-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:var(--sp-space-md); }
 .section-title { display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--sp-space-sm); }
 .devices { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:var(--sp-space-md); }
-.security-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--sp-space-sm); }
+/* Sub-page grids: override homepage .devices 5-column layout */
+.devices.devices-page-grid.automations-grid {
+  display:grid !important;
+  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)) !important;
+  gap:var(--sp-space-md) !important;
+  min-width:0 !important;
+  width:100% !important;
+}
+.devices.devices-page-grid:not(.automations-grid):not(.security-grid) {
+  display:grid !important;
+  grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)) !important;
+  gap:var(--sp-space-sm) !important;
+  min-width:0 !important;
+  width:100% !important;
+}
+.devices.security-grid {
+  display:flex !important;
+  flex-direction:column !important;
+  gap:var(--sp-space-md) !important;
+  grid-template-columns:unset !important;
+  min-width:0 !important;
+  width:100% !important;
+}
+.security-grid { display:flex; flex-direction:column; gap:var(--sp-space-md); }
 .device { min-height:148px; border:0; border-radius:var(--sp-radius-device); padding:var(--sp-space-lg); background:var(--sp-card-bg, var(--sp-panel-bg)); color:var(--sp-text-dark); box-shadow:var(--sp-shadow-card); display:grid; grid-template-rows:auto 1fr auto; cursor:pointer; text-align:left; border:var(--sp-border-width) solid var(--sp-border-device); }
 .camera-card { border:0; border-radius:var(--sp-radius-lg); overflow:hidden; background:var(--sp-panel-bg); color:var(--sp-text-dark); cursor:pointer; text-align:left; box-shadow:var(--sp-shadow-card); width:100%; }
 .camera-preview { aspect-ratio:16/10; background:var(--sp-camera-bg); }
@@ -187,7 +211,7 @@ button { font:inherit; }
 .mc-app[data-view="devices"] .side { display:none; }
 .mc-app[data-view="devices"] .bottom-stack { grid-template-rows:auto; align-self:stretch; }
 .mc-app[data-view="devices"] .panel-devices { display:block; }
-.mc-app[data-view="devices"] .devices { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.mc-app[data-view="devices"] .devices { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
 .mc-app[data-view="rooms"] .welcome,
 .mc-app[data-view="rooms"] .panel-devices,
 .mc-app[data-view="rooms"] .panel-environment,
@@ -236,18 +260,18 @@ button { font:inherit; }
 .sp-del { min-height:36px; min-width:36px; border:0; border-radius:var(--sp-radius-btn); background:var(--sp-accent-red); color:#fff; cursor:pointer; font:inherit; }
 .sp-add { min-height:36px; border:var(--sp-border-width) dashed var(--sp-border-muted); border-radius:var(--sp-radius-btn); background:transparent; color:var(--sp-text-main); cursor:pointer; font:inherit; margin-top:var(--sp-space-xs); }
 
-.devices > .device.device-off:nth-child(6n+1), .devices-page-grid > .device.device-off:nth-child(6n+1), .device.tone-yellow.device-off { border-top:3px solid var(--sp-device-yellow); }
-.devices > .device.device-off:nth-child(6n+2), .devices-page-grid > .device.device-off:nth-child(6n+2), .device.tone-green.device-off { border-top:3px solid var(--sp-device-green); }
-.devices > .device.device-off:nth-child(6n+3), .devices-page-grid > .device.device-off:nth-child(6n+3), .device.tone-blue.device-off { border-top:3px solid var(--sp-device-blue); }
-.devices > .device.device-off:nth-child(6n+4), .devices-page-grid > .device.device-off:nth-child(6n+4), .device.tone-purple.device-off { border-top:3px solid var(--sp-device-purple); }
-.devices > .device.device-off:nth-child(6n+5), .devices-page-grid > .device.device-off:nth-child(6n+5), .device.tone-red.device-off { border-top:3px solid var(--sp-device-red); }
-.devices > .device.device-off:nth-child(6n+6), .devices-page-grid > .device.device-off:nth-child(6n+6), .device.tone-brown.device-off { border-top:3px solid var(--sp-device-brown); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+1), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+1), .mc-app[data-view="devices"] .device.tone-yellow.device-off { border-top:3px solid var(--sp-device-yellow); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+2), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+2), .mc-app[data-view="devices"] .device.tone-green.device-off { border-top:3px solid var(--sp-device-green); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+3), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+3), .mc-app[data-view="devices"] .device.tone-blue.device-off { border-top:3px solid var(--sp-device-blue); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+4), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+4), .mc-app[data-view="devices"] .device.tone-purple.device-off { border-top:3px solid var(--sp-device-purple); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+5), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+5), .mc-app[data-view="devices"] .device.tone-red.device-off { border-top:3px solid var(--sp-device-red); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+6), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+6), .mc-app[data-view="devices"] .device.tone-brown.device-off { border-top:3px solid var(--sp-device-brown); }
 
 :host { --sp-glass-regular:rgba(255,255,255,0.28); }
 .stage { background-color:transparent !important; }
 .devices .device, .devices-page-grid .device {
-  backdrop-filter:blur(28px) saturate(200%);
-  -webkit-backdrop-filter:blur(28px) saturate(200%);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 .glass-card,.time-card { color:var(--sp-text-primary); }
 
@@ -300,8 +324,8 @@ button { font:inherit; }
 }
 .stage { background-color:transparent !important; }
 .devices .device, .devices-page-grid .device {
-  backdrop-filter:blur(18px) saturate(120%);
-  -webkit-backdrop-filter:blur(18px) saturate(120%);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 .device, .camera-card {
   background:var(--sp-card-bg, var(--sp-panel-bg));
@@ -395,71 +419,71 @@ button { font:inherit; }
   color:#FFFFFF;
 }
 
-.devices > .device.device-off:nth-child(6n+1), .devices-page-grid > .device.device-off:nth-child(6n+1), .device.tone-yellow.device-off {
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+1), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+1), .mc-app[data-view="devices"] .device.tone-yellow.device-off{
   background:linear-gradient(165deg, rgba(107, 155, 209, 0.24), rgba(44, 44, 44, 0.68));
   border-top:3px solid #6B9BD1;
   color:#FFFFFF;
   box-shadow:0 12px 28px rgba(107, 155, 209, 0.16);
 }
-.devices > .device.device-off:nth-child(6n+1), .devices-page-grid > .device.device-off:nth-child(6n+1), .device.tone-yellow.device-off .muted { color:rgba(255, 255, 255, 0.84); }
-.devices > .device.device-off:nth-child(6n+1), .devices-page-grid > .device.device-off:nth-child(6n+1), .device.tone-yellow.device-off .state-word { color:#FFFFFF; font-weight:700; text-shadow:0 1px 4px rgba(255,255,255,.82); }
-.devices > .device.device-off:nth-child(6n+1), .devices-page-grid > .device.device-off:nth-child(6n+1), .device.tone-yellow.device-off .status { background:rgba(44, 44, 44, 0.14); color:#FFFFFF; }
-.devices > .device.device-off:nth-child(6n+1), .devices-page-grid > .device.device-off:nth-child(6n+1), .device.tone-yellow.device-off .item-img { box-shadow:0 8px 16px rgba(107, 155, 209, 0.16); border:2px solid rgba(44, 44, 44, 0.18); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+1), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+1), .mc-app[data-view="devices"] .device.tone-yellow.device-off .muted{ color:rgba(255, 255, 255, 0.84); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+1), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+1), .mc-app[data-view="devices"] .device.tone-yellow.device-off .state-word{ color:#FFFFFF; font-weight:700; text-shadow:0 1px 4px rgba(255,255,255,.82); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+1), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+1), .mc-app[data-view="devices"] .device.tone-yellow.device-off .status{ background:rgba(44, 44, 44, 0.14); color:#FFFFFF; }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+1), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+1), .mc-app[data-view="devices"] .device.tone-yellow.device-off .item-img{ box-shadow:0 8px 16px rgba(107, 155, 209, 0.16); border:2px solid rgba(44, 44, 44, 0.18); }
 
-.devices > .device.device-off:nth-child(6n+2), .devices-page-grid > .device.device-off:nth-child(6n+2), .device.tone-green.device-off {
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+2), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+2), .mc-app[data-view="devices"] .device.tone-green.device-off{
   background:linear-gradient(165deg, rgba(163, 177, 198, 0.24), rgba(44, 44, 44, 0.68));
   border-top:3px solid #A3B1C6;
   color:#FFFFFF;
   box-shadow:0 12px 28px rgba(163, 177, 198, 0.16);
 }
-.devices > .device.device-off:nth-child(6n+2), .devices-page-grid > .device.device-off:nth-child(6n+2), .device.tone-green.device-off .muted { color:rgba(255, 255, 255, 0.84); }
-.devices > .device.device-off:nth-child(6n+2), .devices-page-grid > .device.device-off:nth-child(6n+2), .device.tone-green.device-off .state-word { color:#FFFFFF; font-weight:700; text-shadow:0 1px 4px rgba(255,255,255,.82); }
-.devices > .device.device-off:nth-child(6n+2), .devices-page-grid > .device.device-off:nth-child(6n+2), .device.tone-green.device-off .status { background:rgba(44, 44, 44, 0.14); color:#FFFFFF; }
-.devices > .device.device-off:nth-child(6n+2), .devices-page-grid > .device.device-off:nth-child(6n+2), .device.tone-green.device-off .item-img { box-shadow:0 8px 16px rgba(163, 177, 198, 0.16); border:2px solid rgba(44, 44, 44, 0.18); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+2), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+2), .mc-app[data-view="devices"] .device.tone-green.device-off .muted{ color:rgba(255, 255, 255, 0.84); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+2), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+2), .mc-app[data-view="devices"] .device.tone-green.device-off .state-word{ color:#FFFFFF; font-weight:700; text-shadow:0 1px 4px rgba(255,255,255,.82); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+2), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+2), .mc-app[data-view="devices"] .device.tone-green.device-off .status{ background:rgba(44, 44, 44, 0.14); color:#FFFFFF; }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+2), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+2), .mc-app[data-view="devices"] .device.tone-green.device-off .item-img{ box-shadow:0 8px 16px rgba(163, 177, 198, 0.16); border:2px solid rgba(44, 44, 44, 0.18); }
 
-.devices > .device.device-off:nth-child(6n+3), .devices-page-grid > .device.device-off:nth-child(6n+3), .device.tone-blue.device-off {
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+3), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+3), .mc-app[data-view="devices"] .device.tone-blue.device-off{
   background:linear-gradient(165deg, rgba(255, 255, 255, 0.24), rgba(44, 44, 44, 0.68));
   border-top:3px solid #FFFFFF;
   color:#FFFFFF;
   box-shadow:0 12px 28px rgba(255, 255, 255, 0.16);
 }
-.devices > .device.device-off:nth-child(6n+3), .devices-page-grid > .device.device-off:nth-child(6n+3), .device.tone-blue.device-off .muted { color:rgba(255, 255, 255, 0.84); }
-.devices > .device.device-off:nth-child(6n+3), .devices-page-grid > .device.device-off:nth-child(6n+3), .device.tone-blue.device-off .state-word { color:#FFFFFF; font-weight:700; text-shadow:0 1px 4px rgba(255,255,255,.82); }
-.devices > .device.device-off:nth-child(6n+3), .devices-page-grid > .device.device-off:nth-child(6n+3), .device.tone-blue.device-off .status { background:rgba(44, 44, 44, 0.14); color:#FFFFFF; }
-.devices > .device.device-off:nth-child(6n+3), .devices-page-grid > .device.device-off:nth-child(6n+3), .device.tone-blue.device-off .item-img { box-shadow:0 8px 16px rgba(255, 255, 255, 0.16); border:2px solid rgba(44, 44, 44, 0.18); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+3), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+3), .mc-app[data-view="devices"] .device.tone-blue.device-off .muted{ color:rgba(255, 255, 255, 0.84); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+3), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+3), .mc-app[data-view="devices"] .device.tone-blue.device-off .state-word{ color:#FFFFFF; font-weight:700; text-shadow:0 1px 4px rgba(255,255,255,.82); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+3), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+3), .mc-app[data-view="devices"] .device.tone-blue.device-off .status{ background:rgba(44, 44, 44, 0.14); color:#FFFFFF; }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+3), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+3), .mc-app[data-view="devices"] .device.tone-blue.device-off .item-img{ box-shadow:0 8px 16px rgba(255, 255, 255, 0.16); border:2px solid rgba(44, 44, 44, 0.18); }
 
-.devices > .device.device-off:nth-child(6n+4), .devices-page-grid > .device.device-off:nth-child(6n+4), .device.tone-purple.device-off {
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+4), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+4), .mc-app[data-view="devices"] .device.tone-purple.device-off{
   background:linear-gradient(165deg, rgba(163, 177, 198, 0.24), rgba(44, 44, 44, 0.68));
   border-top:3px solid #A3B1C6;
   color:#FFFFFF;
   box-shadow:0 12px 28px rgba(163, 177, 198, 0.16);
 }
-.devices > .device.device-off:nth-child(6n+4), .devices-page-grid > .device.device-off:nth-child(6n+4), .device.tone-purple.device-off .muted { color:rgba(255, 255, 255, 0.84); }
-.devices > .device.device-off:nth-child(6n+4), .devices-page-grid > .device.device-off:nth-child(6n+4), .device.tone-purple.device-off .state-word { color:#FFFFFF; font-weight:700; text-shadow:0 1px 4px rgba(255,255,255,.82); }
-.devices > .device.device-off:nth-child(6n+4), .devices-page-grid > .device.device-off:nth-child(6n+4), .device.tone-purple.device-off .status { background:rgba(44, 44, 44, 0.14); color:#FFFFFF; }
-.devices > .device.device-off:nth-child(6n+4), .devices-page-grid > .device.device-off:nth-child(6n+4), .device.tone-purple.device-off .item-img { box-shadow:0 8px 16px rgba(163, 177, 198, 0.16); border:2px solid rgba(44, 44, 44, 0.18); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+4), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+4), .mc-app[data-view="devices"] .device.tone-purple.device-off .muted{ color:rgba(255, 255, 255, 0.84); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+4), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+4), .mc-app[data-view="devices"] .device.tone-purple.device-off .state-word{ color:#FFFFFF; font-weight:700; text-shadow:0 1px 4px rgba(255,255,255,.82); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+4), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+4), .mc-app[data-view="devices"] .device.tone-purple.device-off .status{ background:rgba(44, 44, 44, 0.14); color:#FFFFFF; }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+4), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+4), .mc-app[data-view="devices"] .device.tone-purple.device-off .item-img{ box-shadow:0 8px 16px rgba(163, 177, 198, 0.16); border:2px solid rgba(44, 44, 44, 0.18); }
 
-.devices > .device.device-off:nth-child(6n+5), .devices-page-grid > .device.device-off:nth-child(6n+5), .device.tone-red.device-off {
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+5), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+5), .mc-app[data-view="devices"] .device.tone-red.device-off{
   background:linear-gradient(165deg, rgba(107, 155, 209, 0.24), rgba(44, 44, 44, 0.68));
   border-top:3px solid #6B9BD1;
   color:#FFFFFF;
   box-shadow:0 12px 28px rgba(107, 155, 209, 0.16);
 }
-.devices > .device.device-off:nth-child(6n+5), .devices-page-grid > .device.device-off:nth-child(6n+5), .device.tone-red.device-off .muted { color:rgba(255, 255, 255, 0.84); }
-.devices > .device.device-off:nth-child(6n+5), .devices-page-grid > .device.device-off:nth-child(6n+5), .device.tone-red.device-off .state-word { color:#FFFFFF; font-weight:700; text-shadow:0 1px 4px rgba(255,255,255,.82); }
-.devices > .device.device-off:nth-child(6n+5), .devices-page-grid > .device.device-off:nth-child(6n+5), .device.tone-red.device-off .status { background:rgba(44, 44, 44, 0.14); color:#FFFFFF; }
-.devices > .device.device-off:nth-child(6n+5), .devices-page-grid > .device.device-off:nth-child(6n+5), .device.tone-red.device-off .item-img { box-shadow:0 8px 16px rgba(107, 155, 209, 0.16); border:2px solid rgba(44, 44, 44, 0.18); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+5), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+5), .mc-app[data-view="devices"] .device.tone-red.device-off .muted{ color:rgba(255, 255, 255, 0.84); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+5), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+5), .mc-app[data-view="devices"] .device.tone-red.device-off .state-word{ color:#FFFFFF; font-weight:700; text-shadow:0 1px 4px rgba(255,255,255,.82); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+5), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+5), .mc-app[data-view="devices"] .device.tone-red.device-off .status{ background:rgba(44, 44, 44, 0.14); color:#FFFFFF; }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+5), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+5), .mc-app[data-view="devices"] .device.tone-red.device-off .item-img{ box-shadow:0 8px 16px rgba(107, 155, 209, 0.16); border:2px solid rgba(44, 44, 44, 0.18); }
 
-.devices > .device.device-off:nth-child(6n+6), .devices-page-grid > .device.device-off:nth-child(6n+6), .device.tone-brown.device-off {
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+6), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+6), .mc-app[data-view="devices"] .device.tone-brown.device-off{
   background:linear-gradient(165deg, rgba(44, 44, 44, 0.24), rgba(44, 44, 44, 0.68));
   border-top:3px solid #2C2C2C;
   color:#FFFFFF;
   box-shadow:0 12px 28px rgba(44, 44, 44, 0.16);
 }
-.devices > .device.device-off:nth-child(6n+6), .devices-page-grid > .device.device-off:nth-child(6n+6), .device.tone-brown.device-off .muted { color:rgba(255, 255, 255, 0.84); }
-.devices > .device.device-off:nth-child(6n+6), .devices-page-grid > .device.device-off:nth-child(6n+6), .device.tone-brown.device-off .state-word { color:#FFFFFF; font-weight:700; text-shadow:0 1px 4px rgba(255,255,255,.82); }
-.devices > .device.device-off:nth-child(6n+6), .devices-page-grid > .device.device-off:nth-child(6n+6), .device.tone-brown.device-off .status { background:rgba(44, 44, 44, 0.14); color:#FFFFFF; }
-.devices > .device.device-off:nth-child(6n+6), .devices-page-grid > .device.device-off:nth-child(6n+6), .device.tone-brown.device-off .item-img { box-shadow:0 8px 16px rgba(44, 44, 44, 0.16); border:2px solid rgba(44, 44, 44, 0.18); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+6), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+6), .mc-app[data-view="devices"] .device.tone-brown.device-off .muted{ color:rgba(255, 255, 255, 0.84); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+6), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+6), .mc-app[data-view="devices"] .device.tone-brown.device-off .state-word{ color:#FFFFFF; font-weight:700; text-shadow:0 1px 4px rgba(255,255,255,.82); }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+6), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+6), .mc-app[data-view="devices"] .device.tone-brown.device-off .status{ background:rgba(44, 44, 44, 0.14); color:#FFFFFF; }
+.mc-app[data-view="devices"] .devices > .device.device-off:nth-child(6n+6), .mc-app[data-view="devices"] .devices-page-grid > .device.device-off:nth-child(6n+6), .mc-app[data-view="devices"] .device.tone-brown.device-off .item-img{ box-shadow:0 8px 16px rgba(44, 44, 44, 0.16); border:2px solid rgba(44, 44, 44, 0.18); }
 /* end skins-pro card theme port */
 
 /* skins-pro weather layout patch */
@@ -485,17 +509,17 @@ button { font:inherit; }
 /* skins-pro sidebar layout patch */
 .mc-app { grid-template-columns:var(--sp-sidebar-width) minmax(0,1fr); grid-template-rows:minmax(0,1fr); }
 .mobile-nav { display:none; }
-.profile { align-items:center; min-height:52px; }
+.profile { align-items:center; min-height:60px; }
 .profile .meta { min-width:0; flex:1; }
 .profile-img {
   flex-shrink:0;
   box-sizing:border-box;
-  width:52px !important;
-  height:52px !important;
-  min-width:52px;
-  min-height:52px;
-  max-width:52px;
-  max-height:52px;
+  width:60px !important;
+  height:60px !important;
+  min-width:60px;
+  min-height:60px;
+  max-width:60px;
+  max-height:60px;
   object-fit:cover !important;
   object-position:center center !important;
   aspect-ratio:1;
@@ -512,8 +536,9 @@ button { font:inherit; }
 .menu { flex:1 1 auto; min-height:0; overflow:auto; align-content:start; }
 .sidebar-art {
   aspect-ratio:1;
-  max-height:140px;
-  min-height:88px;
+  width:100%;
+  max-width:100%;
+  min-height:0;
   flex-shrink:0;
   overflow:hidden;
 }
@@ -880,41 +905,74 @@ button { font:inherit; }
   border: 0 !important;
   box-shadow: none !important;
 }
-.mc-app[data-view="security"] .camera-card,
-.mc-app[data-view="security"] .security-grid .device,
-.mc-app[data-view="scenes"] .devices-page-grid .device {
-  box-shadow: none !important;
-  backdrop-filter: blur(14px) saturate(130%) !important;
-  -webkit-backdrop-filter: blur(14px) saturate(130%) !important;
-  background: var(--sp-glass-bg, rgba(245, 240, 232, 0.62)) !important;
-  border: 1px solid var(--sp-border-glass, rgba(139, 115, 85, 0.28)) !important;
-  color: var(--sp-text-stage, var(--sp-text-dark, #2C2C2C)) !important;
+.mc-app[data-view="devices"] .devices-page-grid .device {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  box-shadow: var(--neo-raised, -6px -6px 14px rgba(255,255,255,.9), 6px 6px 14px rgba(163,177,198,.55)) !important;
+  color: var(--neo-text-strong, var(--sp-text-stage, #2C2C2C)) !important;
 }
-.mc-app[data-view="security"] .security-grid .device .item-img,
-.mc-app[data-view="scenes"] .devices-page-grid .device .item-img {
-  box-shadow: none !important;
-  border: 2px solid var(--sp-border-device, rgba(139, 115, 85, 0.28)) !important;
+.mc-app[data-view="security"] .camera-card,
+.mc-app[data-view="security"] .security-devices .device,
+.mc-app[data-view="scenes"] .devices-page-grid .device,
+.mc-app[data-view="automations"] .devices-page-grid .device {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  border-top: 0 !important;
+  background: var(--neo-surface, #E0E5EC) !important;
+  box-shadow: var(--neo-raised, -6px -6px 14px rgba(255,255,255,.9), 6px 6px 14px rgba(163,177,198,.55)) !important;
+  color: var(--neo-text-strong, var(--sp-text-stage, #2C2C2C)) !important;
+}
+.mc-app[data-view="security"] .camera-card {
+  background: var(--neo-surface, #E0E5EC) !important;
+  overflow: hidden !important;
+}
+.mc-app[data-view="devices"] .devices-page-grid .device .item-img {
+  box-shadow: var(--neo-raised-sm, -4px -4px 10px rgba(255,255,255,.9), 4px 4px 10px rgba(163,177,198,.55)) !important;
+  border: 0 !important;
+  background: var(--neo-surface, #E0E5EC) !important;
+}
+.mc-app[data-view="security"] .security-devices .device .item-img,
+.mc-app[data-view="security"] .security-devices .device .item-icon,
+.mc-app[data-view="scenes"] .devices-page-grid .device .item-img,
+.mc-app[data-view="scenes"] .devices-page-grid .device .item-icon,
+.mc-app[data-view="automations"] .devices-page-grid .device .item-img,
+.mc-app[data-view="automations"] .devices-page-grid .device .item-icon {
+  box-shadow: var(--neo-raised-sm, -4px -4px 10px rgba(255,255,255,.9), 4px 4px 10px rgba(163,177,198,.55)) !important;
+  border: 0 !important;
+  background: var(--neo-surface, #E0E5EC) !important;
 }
 .mc-app[data-view="security"] .camera-card .device-name,
 .mc-app[data-view="security"] .camera-card .muted,
 .mc-app[data-view="security"] .camera-card .status,
-.mc-app[data-view="security"] .security-grid .device .device-name,
-.mc-app[data-view="security"] .security-grid .device .state-word,
-.mc-app[data-view="security"] .security-grid .device .muted,
+.mc-app[data-view="security"] .security-devices .device .device-name,
+.mc-app[data-view="security"] .security-devices .device .state-word,
+.mc-app[data-view="security"] .security-devices .device .muted,
 .mc-app[data-view="scenes"] .devices-page-grid .device .device-name,
 .mc-app[data-view="scenes"] .devices-page-grid .device .state-word,
-.mc-app[data-view="scenes"] .devices-page-grid .device .muted {
+.mc-app[data-view="scenes"] .devices-page-grid .device .muted,
+.mc-app[data-view="devices"] .devices-page-grid .device .device-name,
+.mc-app[data-view="devices"] .devices-page-grid .device .state-word,
+.mc-app[data-view="devices"] .devices-page-grid .device .muted,
+.mc-app[data-view="automations"] .devices-page-grid .device .device-name,
+.mc-app[data-view="automations"] .devices-page-grid .device .state-word,
+.mc-app[data-view="automations"] .devices-page-grid .device .muted {
   color: var(--sp-text-stage, var(--sp-text-dark, #2C2C2C)) !important;
   text-shadow: none !important;
 }
-.mc-app[data-view="security"] .security-grid .device .status,
-.mc-app[data-view="scenes"] .devices-page-grid .device .status {
-  background: rgba(0, 0, 0, 0.10) !important;
+.mc-app[data-view="security"] .security-devices .device .status,
+.mc-app[data-view="scenes"] .devices-page-grid .device .status,
+.mc-app[data-view="devices"] .devices-page-grid .device .status,
+.mc-app[data-view="automations"] .devices-page-grid .device .status {
+  background: rgba(44, 44, 44, 0.10) !important;
   color: var(--sp-text-stage, var(--sp-text-dark, #2C2C2C)) !important;
 }
 .mc-app[data-view="scenes"] .devices-page-grid .device .muted,
+.mc-app[data-view="devices"] .devices-page-grid .device .muted,
+.mc-app[data-view="automations"] .devices-page-grid .device .muted,
 .mc-app[data-view="security"] .camera-card .muted,
-.mc-app[data-view="security"] .security-grid .device .muted {
+.mc-app[data-view="security"] .security-devices .device .muted {
   color: var(--sp-text-stage-muted, var(--sp-text-muted, rgba(44, 44, 44, 0.72))) !important;
 }
 /* end skins-pro devices-filter + security layout patch */
@@ -936,6 +994,21 @@ button { font:inherit; }
   box-shadow: var(--sp-shadow) !important;
   border: 1px solid rgba(184, 154, 116, 0.14) !important;
 }
+/* Homepage right column: never use soft-home drop shadow */
+.mc-app[data-view="home"] .side .glass-card,
+.mc-app[data-view="home"] .side .time-card,
+.mc-app[data-view="home"] .side .panel-energy,
+.mc-app[data-view="home"] .side .scene {
+  box-shadow: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+}
+.mc-app[data-view="scenes"] .devices-page-grid > .device,
+.mc-app[data-view="automations"] .devices-page-grid > .device,
+.mc-app[data-view="security"] .security-devices > .device,
+.mc-app[data-view="security"] .security-cameras > .camera-card {
+  border: 0 !important;
+  box-shadow: var(--neo-raised) !important;
+}
 
 /* =========================================================
    neumorphism Soft UI material port (NameThatUI-aligned)
@@ -954,7 +1027,7 @@ button { font:inherit; }
   --neo-text-strong: #2D3748;
   --neo-accent: #6B9BD1;
 
-  --sp-app-overlay: linear-gradient(135deg, rgba(224, 229, 236, 0.42), rgba(224, 229, 236, 0.28)) !important;
+  --sp-app-overlay: none !important;
   --sp-stage-overlay: none !important;
   --sp-room-overlay: linear-gradient(180deg, transparent 55%, rgba(44, 44, 44, 0.28)) !important;
   --sp-glass-bg: #E0E5EC !important;
@@ -1005,6 +1078,10 @@ button { font:inherit; }
 
 .mc-app {
   background-color: var(--neo-surface) !important;
+  background-image: var(--sp-app-overlay), var(--sp-base-texture) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
   color: var(--neo-text-strong) !important;
 }
 
@@ -1029,32 +1106,36 @@ button { font:inherit; }
   box-shadow: var(--neo-inset) !important;
 }
 .profile-img {
-  width: 72px !important;
-  height: 72px !important;
-  min-width: 72px !important;
-  min-height: 72px !important;
-  max-width: 72px !important;
-  max-height: 72px !important;
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  min-height: 64px !important;
+  max-width: 64px !important;
+  max-height: 64px !important;
   border: 0 !important;
-  border-radius: 22px !important;
+  border-radius: 20px !important;
   box-shadow: var(--neo-raised-sm) !important;
+  object-fit: cover !important;
 }
 .profile {
-  min-height: 72px !important;
+  min-height: 64px !important;
   gap: 12px !important;
 }
 .sidebar-art {
   aspect-ratio: 1 !important;
-  width: 120px !important;
-  max-width: 120px !important;
-  min-height: 120px !important;
-  max-height: 120px !important;
-  height: 120px !important;
-  margin: 10px auto 6px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  height: auto !important;
+  margin: 12px 0 8px !important;
   border-radius: 24px !important;
   overflow: hidden !important;
   box-shadow: var(--neo-raised-sm) !important;
   background: var(--neo-surface) !important;
+  flex-shrink: 0 !important;
+  align-self: stretch !important;
 }
 .sidebar-art img {
   width: 100% !important;
@@ -1063,13 +1144,19 @@ button { font:inherit; }
   object-position: center !important;
 }
 
-/* Stage / panels: continuous surface, no floating dark drop shadow */
+/* Stage: show background.jpg, NO white inset frame */
 .stage {
-  background-color: var(--neo-surface) !important;
+  background-color: transparent !important;
+  background-image: var(--sp-stage-overlay), var(--sp-stage-texture) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
   border: 0 !important;
-  box-shadow: var(--neo-inset) !important;
+  box-shadow: none !important;
+  outline: none !important;
+  filter: none !important;
 }
-/* Right column: flat transparent stack — no Soft UI shadow on panel cards */
+/* Right column: frosted glass panels, no Soft UI shadow */
 .side {
   background: transparent !important;
   backdrop-filter: none !important;
@@ -1083,31 +1170,42 @@ button { font:inherit; }
 .side .time-card,
 .side .panel-energy,
 .side .panel-scenes,
-.side .maintenance-card {
-  background: var(--neo-surface) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border: 0 !important;
+.side .maintenance-card,
+.side section.glass-card {
+  background: rgba(255, 255, 255, 0.28) !important;
+  background-color: rgba(255, 255, 255, 0.28) !important;
+  background-image: none !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
   color: var(--neo-text-strong) !important;
   box-shadow: none !important;
   border-radius: 22px !important;
 }
-/* Scene buttons keep Soft UI raised pads */
-.weather-row,
-.chip,
-.scene,
+/* Homepage right-side scene chips: same frosted look, no raised shadow */
 .side .scene,
 .panel-scenes .scene {
-  background: var(--neo-surface) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border: 0 !important;
+  background: rgba(255, 255, 255, 0.38) !important;
+  backdrop-filter: blur(14px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(140%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.32) !important;
   color: var(--neo-text-strong) !important;
-  box-shadow: var(--neo-raised) !important;
+  box-shadow: none !important;
+  border-radius: 18px !important;
+}
+.weather-row,
+.chip {
+  background: rgba(255, 255, 255, 0.38) !important;
+  backdrop-filter: blur(12px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.32) !important;
+  color: var(--neo-text-strong) !important;
+  box-shadow: none !important;
   border-radius: 18px !important;
 }
 .chip.active {
-  box-shadow: var(--neo-inset) !important;
+  box-shadow: none !important;
+  background: rgba(107, 155, 209, 0.22) !important;
   color: var(--neo-accent) !important;
 }
 .scene:active,
@@ -1115,32 +1213,56 @@ button { font:inherit; }
   box-shadow: var(--neo-inset) !important;
 }
 
-/* Device cards: Soft UI extruded pads (off) / soft accent (on) */
-.devices > .device,
-.devices-page-grid > .device,
-.device {
-  background: var(--neo-surface) !important;
-  border: 0 !important;
+/* Homepage device row — frosted glass, no Soft UI shadow */
+.devices:not(.devices-page-grid):not(.security-grid) > .device {
+  background: rgba(255, 255, 255, 0.42) !important;
+  border: 1px solid rgba(255, 255, 255, 0.38) !important;
   color: var(--neo-text-strong) !important;
-  box-shadow: var(--neo-raised) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(16px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(145%) !important;
+  text-shadow: none !important;
+  border-radius: 22px !important;
+}
+.devices:not(.devices-page-grid):not(.security-grid) > .device.device-on {
+  background: rgba(107, 155, 209, 0.28) !important;
+  color: var(--neo-text-strong) !important;
+  box-shadow: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.42) !important;
+}
+.devices:not(.devices-page-grid):not(.security-grid) > .device .device-name,
+.devices:not(.devices-page-grid):not(.security-grid) > .device .state-word,
+.devices:not(.devices-page-grid):not(.security-grid) > .device .muted {
+  color: var(--neo-text-strong) !important;
   text-shadow: none !important;
 }
-.devices > .device.device-on,
-.devices-page-grid > .device.device-on,
-.device.device-on {
-  background: linear-gradient(145deg, #d7e4f4 0%, #c5d6ea 55%, #b7c9df 100%) !important;
-  color: var(--neo-text-strong) !important;
-  box-shadow: var(--neo-inset) !important;
-}
-.device .device-name,
-.device .state-word,
-.device .muted,
-.camera-card .muted {
-  color: var(--neo-text-strong) !important;
-  text-shadow: none !important;
-}
-.device .muted {
+.devices:not(.devices-page-grid):not(.security-grid) > .device .muted {
   color: rgba(74, 85, 104, 0.72) !important;
+}
+
+/* Sub-page grids: devices / scenes / automations / security */
+.mc-app[data-view="devices"] .devices-page-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+  gap: var(--sp-space-sm) !important;
+  align-content: start !important;
+}
+.mc-app[data-view="devices"] .device-group {
+  display: grid !important;
+  gap: var(--sp-space-md) !important;
+}
+.mc-app[data-view="security"] .security-cameras {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: var(--sp-space-sm) !important;
+}
+.mc-app[data-view="security"] .security-devices {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+  gap: var(--sp-space-sm) !important;
+}
+.mc-app[data-view="security"] .camera-preview {
+  background: rgba(163, 177, 198, 0.28) !important;
 }
 .item-img,
 .item-icon {
@@ -1185,14 +1307,268 @@ button { font:inherit; }
   text-shadow: none !important;
 }
 
-/* Compact avatar/decoration on narrow sidebar breakpoint */
-@media (max-width: 1180px) {
-  .profile-img {
-    width: 48px !important;
-    height: 48px !important;
-    min-width: 48px !important;
-    min-height: 48px !important;
-    max-width: 48px !important;
-    max-height: 48px !important;
-  }
+/* =========================================================
+   HARD FIX v2: scenes / automations / security / stage frame
+   High-specificity tail overrides — do NOT touch .profile-img / .sidebar-art sizing
+   ========================================================= */
+:host {
+  --neo-light-soft: rgba(255, 255, 255, 0.35);
+  --neo-dark-soft: rgba(163, 177, 198, 0.45);
+  --neo-raised-soft: 6px 6px 14px var(--neo-dark-soft), -4px -4px 10px var(--neo-light-soft);
+  --neo-raised-soft-sm: 4px 4px 10px var(--neo-dark-soft), -3px -3px 8px var(--neo-light-soft);
+}
+
+/* Stage: NEVER inset shadow — kills white outer frame */
+:host .stage,
+:host .mc-app[data-view="home"] .stage,
+:host .mc-app[data-view="scenes"] .stage,
+:host .mc-app[data-view="automations"] .stage,
+:host .mc-app[data-view="security"] .stage,
+:host .mc-app[data-view="devices"] .stage,
+:host .mc-app[data-view="rooms"] .stage,
+:host .mc-app[data-view="energy"] .stage {
+  box-shadow: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+  filter: none !important;
+}
+
+/* Homepage: background.jpg must show through .stage */
+:host .mc-app[data-view="home"] .stage {
+  background-color: transparent !important;
+  background-image: url("./background.png") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Sub-pages: transparent shells, clip horizontal overflow from card shadows */
+:host .mc-app[data-view="scenes"] .page-shell,
+:host .mc-app[data-view="automations"] .page-shell,
+:host .mc-app[data-view="security"] .page-shell,
+:host .mc-app[data-view="devices"] .page-shell {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  min-width: 0 !important;
+}
+:host .mc-app[data-view="scenes"] .page-body,
+:host .mc-app[data-view="automations"] .page-body,
+:host .mc-app[data-view="security"] .page-body,
+:host .mc-app[data-view="devices"] .page-body {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+:host .mc-app[data-view="scenes"] .page-scroll,
+:host .mc-app[data-view="automations"] .page-scroll,
+:host .mc-app[data-view="security"] .page-scroll,
+:host .mc-app[data-view="devices"] .page-scroll {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding: 10px 8px 16px 6px !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  scrollbar-width: thin !important;
+}
+:host .mc-app[data-view="scenes"] .page-scroll::-webkit-scrollbar,
+:host .mc-app[data-view="automations"] .page-scroll::-webkit-scrollbar,
+:host .mc-app[data-view="security"] .page-scroll::-webkit-scrollbar,
+:host .mc-app[data-view="devices"] .page-scroll::-webkit-scrollbar {
+  height: 0 !important;
+  width: 6px !important;
+}
+
+/* Scenes page DOM (skins-pro.js): .devices.devices-page-grid.automations-grid > .device */
+:host .mc-app[data-view="scenes"] .devices.devices-page-grid,
+:host .mc-app[data-view="scenes"] .devices.devices-page-grid.automations-grid,
+:host .mc-app[data-view="automations"] .devices.devices-page-grid,
+:host .mc-app[data-view="automations"] .devices.devices-page-grid.automations-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+  gap: 20px !important;
+  align-content: start !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  padding: 4px !important;
+  overflow: visible !important;
+}
+
+/* Security: wrappers stay transparent; inner grids hold cards */
+:host .mc-app[data-view="security"] .devices.security-grid,
+:host .mc-app[data-view="security"] .security-cameras,
+:host .mc-app[data-view="security"] .security-devices {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  filter: none !important;
+}
+:host .mc-app[data-view="security"] .devices.security-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 4px !important;
+  box-sizing: border-box !important;
+  grid-template-columns: unset !important;
+}
+:host .mc-app[data-view="security"] .security-cameras {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: 20px !important;
+  min-width: 0 !important;
+  width: 100% !important;
+}
+:host .mc-app[data-view="security"] .security-devices {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+  gap: 20px !important;
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+/* Cards: softer Soft UI — reduced white highlight, no connected halo */
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device,
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device.device-off,
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device[class*="device-on-"],
+:host .mc-app[data-view="automations"] .devices-page-grid > .device,
+:host .mc-app[data-view="automations"] .devices-page-grid > .device.device-off,
+:host .mc-app[data-view="automations"] .devices-page-grid > .device[class*="device-on-"],
+:host .mc-app[data-view="security"] .security-devices > .device,
+:host .mc-app[data-view="security"] .security-devices > .device[class*="device-on-"],
+:host .mc-app[data-view="security"] .security-devices > .device.device-unavailable,
+:host .mc-app[data-view="security"] .security-cameras > .camera-card,
+:host .devices:not(.devices-page-grid):not(.security-grid) > .device {
+  background: var(--neo-surface, #E0E5EC) !important;
+  border: 0 !important;
+  border-top: 0 !important;
+  outline: none !important;
+  box-shadow: var(--neo-raised-soft) !important;
+  color: var(--neo-text-strong, #2D3748) !important;
+  text-shadow: none !important;
+  filter: none !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device .item-img,
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device .item-icon,
+:host .mc-app[data-view="automations"] .devices-page-grid > .device .item-img,
+:host .mc-app[data-view="automations"] .devices-page-grid > .device .item-icon,
+:host .mc-app[data-view="security"] .security-devices > .device .item-img,
+:host .mc-app[data-view="security"] .security-devices > .device .item-icon {
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: inset 3px 3px 6px var(--neo-dark-soft), inset -3px -3px 6px rgba(255, 255, 255, 0.45) !important;
+  background: var(--neo-surface, #E0E5EC) !important;
+}
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device .device-name,
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device .state-word,
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device .muted,
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device .status,
+:host .mc-app[data-view="automations"] .devices-page-grid > .device .device-name,
+:host .mc-app[data-view="automations"] .devices-page-grid > .device .state-word,
+:host .mc-app[data-view="automations"] .devices-page-grid > .device .muted,
+:host .mc-app[data-view="automations"] .devices-page-grid > .device .status,
+:host .mc-app[data-view="security"] .security-devices > .device .device-name,
+:host .mc-app[data-view="security"] .security-devices > .device .state-word,
+:host .mc-app[data-view="security"] .security-devices > .device .muted,
+:host .mc-app[data-view="security"] .security-devices > .device .status,
+:host .mc-app[data-view="security"] .security-cameras > .camera-card .device-name,
+:host .mc-app[data-view="security"] .security-cameras > .camera-card .muted,
+:host .mc-app[data-view="security"] .security-cameras > .camera-card .status {
+  color: var(--neo-text-strong, #2D3748) !important;
+  text-shadow: none !important;
+}
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device .muted,
+:host .mc-app[data-view="automations"] .devices-page-grid > .device .muted,
+:host .mc-app[data-view="security"] .security-devices > .device .muted,
+:host .mc-app[data-view="security"] .security-cameras > .camera-card .muted {
+  color: rgba(74, 85, 104, 0.72) !important;
+}
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device .status,
+:host .mc-app[data-view="automations"] .devices-page-grid > .device .status,
+:host .mc-app[data-view="security"] .security-devices > .device .status,
+:host .mc-app[data-view="security"] .security-cameras > .camera-card .status {
+  background: rgba(44, 44, 44, 0.10) !important;
+}
+
+/* Homepage right cards + device/scene cards: frosted glass, no shadow */
+:host .mc-app[data-view="home"] .side .glass-card,
+:host .mc-app[data-view="home"] .side .time-card,
+:host .mc-app[data-view="home"] .side .panel-energy,
+:host .mc-app[data-view="home"] .side .panel-scenes,
+:host .mc-app[data-view="home"] .side .maintenance-card,
+:host .mc-app[data-view="home"] .side section.glass-card,
+:host .mc-app[data-view="home"] .side section.panel-scenes,
+:host .mc-app[data-view="home"] .side section[data-section="scenes"],
+:host .mc-app[data-view="home"] .side .scene,
+:host .mc-app[data-view="home"] .weather-row,
+:host .mc-app[data-view="home"] .devices:not(.devices-page-grid):not(.security-grid) > .device,
+:host .mc-app[data-view="home"] .panel-scenes .scene,
+:host .mc-app[data-view="home"] .scene {
+  background: rgba(255, 255, 255, 0.28) !important;
+  background-color: rgba(255, 255, 255, 0.28) !important;
+  background-image: none !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  filter: none !important;
+}
+:host .mc-app[data-view="home"] .side .panel-scenes,
+:host .mc-app[data-view="home"] .side section.panel-scenes,
+:host .mc-app[data-view="home"] .side section[data-section="scenes"] {
+  /* overflow:hidden breaks frosted look in some browsers */
+  overflow: visible !important;
+}
+:host .mc-app[data-view="home"] .side .scene,
+:host .mc-app[data-view="home"] .panel-scenes .scene,
+:host .mc-app[data-view="home"] .weather-row {
+  background: rgba(255, 255, 255, 0.32) !important;
+  background-color: rgba(255, 255, 255, 0.32) !important;
+  backdrop-filter: blur(14px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(150%) !important;
+  box-shadow: none !important;
+}
+:host .mc-app[data-view="home"] .devices:not(.devices-page-grid):not(.security-grid) > .device.device-on {
+  background: rgba(107, 155, 209, 0.28) !important;
+  box-shadow: none !important;
+}
+
+/* Scenes page cards: same frosted glass */
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device,
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device.device-off,
+:host .mc-app[data-view="scenes"] .devices-page-grid > .device[class*="device-on-"] {
+  background: rgba(255, 255, 255, 0.42) !important;
+  backdrop-filter: blur(16px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(145%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.38) !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* FINAL: force 场景 panel frosted (highest priority) */
+:host .mc-app[data-view="home"] .side > section.glass-card.panel-scenes,
+:host .mc-app[data-view="home"] .side > section.glass-card.panel-energy,
+:host .mc-app[data-view="home"] .side > section.glass-card.panel-environment,
+:host .mc-app[data-view="home"] .side > .time-card {
+  background: rgba(255, 255, 255, 0.25) !important;
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  background-image: none !important;
+  backdrop-filter: blur(22px) saturate(165%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(165%) !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  overflow: visible !important;
 }

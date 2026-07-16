@@ -1069,7 +1069,16 @@ button { font:inherit; }
   border: 0 !important;
   box-shadow: var(--neo-inset) !important;
 }
-.side,
+/* Right column: flat transparent stack — Soft UI shadows only on inner cards */
+.side {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+  outline: none !important;
+}
 .glass-card,
 .time-card,
 .panel-energy,
@@ -1085,11 +1094,6 @@ button { font:inherit; }
   color: var(--neo-text-strong) !important;
   box-shadow: var(--neo-raised) !important;
   border-radius: 22px !important;
-}
-.side {
-  /* kill the heavy right-edge cast shadow from old glass stack */
-  filter: none !important;
-  outline: none !important;
 }
 .chip.active {
   box-shadow: var(--neo-inset) !important;

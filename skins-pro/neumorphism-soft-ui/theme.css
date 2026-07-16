@@ -1045,13 +1045,13 @@ button { font:inherit; }
 }
 .sidebar-art {
   aspect-ratio: 1 !important;
-  width: 72px !important;
-  max-width: 72px !important;
-  min-height: 72px !important;
-  max-height: 72px !important;
-  height: 72px !important;
-  margin: 8px auto 4px !important;
-  border-radius: 22px !important;
+  width: 120px !important;
+  max-width: 120px !important;
+  min-height: 120px !important;
+  max-height: 120px !important;
+  height: 120px !important;
+  margin: 10px auto 6px !important;
+  border-radius: 24px !important;
   overflow: hidden !important;
   box-shadow: var(--neo-raised-sm) !important;
   background: var(--neo-surface) !important;
@@ -1069,7 +1069,7 @@ button { font:inherit; }
   border: 0 !important;
   box-shadow: var(--neo-inset) !important;
 }
-/* Right column: flat transparent stack — Soft UI inset only on inner cards */
+/* Right column: flat transparent stack — Soft UI raised only on inner cards */
 .side {
   background: transparent !important;
   backdrop-filter: none !important;
@@ -1083,13 +1083,14 @@ button { font:inherit; }
 .side .time-card,
 .side .panel-energy,
 .side .panel-scenes,
-.side .maintenance-card {
+.side .maintenance-card,
+.side .scene {
   background: var(--neo-surface) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border: 0 !important;
   color: var(--neo-text-strong) !important;
-  box-shadow: var(--neo-inset) !important;
+  box-shadow: var(--neo-raised) !important;
   border-radius: 22px !important;
 }
 .weather-row,
@@ -1102,9 +1103,6 @@ button { font:inherit; }
   color: var(--neo-text-strong) !important;
   box-shadow: var(--neo-raised) !important;
   border-radius: 22px !important;
-}
-.side .scene {
-  box-shadow: var(--neo-inset) !important;
 }
 .chip.active {
   box-shadow: var(--neo-inset) !important;

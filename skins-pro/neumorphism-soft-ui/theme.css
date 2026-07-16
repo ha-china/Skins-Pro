@@ -1069,7 +1069,7 @@ button { font:inherit; }
   border: 0 !important;
   box-shadow: var(--neo-inset) !important;
 }
-/* Right column: flat transparent stack — Soft UI shadows only on inner cards */
+/* Right column: flat transparent stack — Soft UI inset only on inner cards */
 .side {
   background: transparent !important;
   backdrop-filter: none !important;
@@ -1079,11 +1079,19 @@ button { font:inherit; }
   filter: none !important;
   outline: none !important;
 }
-.glass-card,
-.time-card,
-.panel-energy,
-.panel-scenes,
-.maintenance-card,
+.side .glass-card,
+.side .time-card,
+.side .panel-energy,
+.side .panel-scenes,
+.side .maintenance-card {
+  background: var(--neo-surface) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  color: var(--neo-text-strong) !important;
+  box-shadow: var(--neo-inset) !important;
+  border-radius: 22px !important;
+}
 .weather-row,
 .chip,
 .scene {
@@ -1094,6 +1102,9 @@ button { font:inherit; }
   color: var(--neo-text-strong) !important;
   box-shadow: var(--neo-raised) !important;
   border-radius: 22px !important;
+}
+.side .scene {
+  box-shadow: var(--neo-inset) !important;
 }
 .chip.active {
   box-shadow: var(--neo-inset) !important;

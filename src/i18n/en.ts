@@ -141,6 +141,7 @@ const en: Record<TranslationKey, string> = {
   editorSkinStoreDownload: 'Download',
   editorSkinStoreRemove: 'Remove',
   editorSkinStoreRedownload: 'Update',
+  editorSkinStoreNewVersion: 'New version',
   editorSkinStoreSearch: 'Search skins...',
   editorStoreClearCache: 'If the layout breaks after updating, try clearing your browser cache first.',
   editorEnergy: 'Energy',

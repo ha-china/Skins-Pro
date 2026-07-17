@@ -9,7 +9,7 @@ import {
   type DashboardConfigRecord,
 } from './config';
 import { parseNavSave } from './nav-dialog';
-import { CDN_STORE, downloadSkin, fetchSkinThemes, fetchSkinStats, toggleLike, isSkinLiked, skinStats, removeSkin, type SkinStoreState } from './skin-store';
+import { CDN_STORE, downloadSkin, fetchSkinThemes, fetchSkinStats, fetchLocalSkinVersions, toggleLike, isSkinLiked, skinStats, removeSkin, type SkinStoreState } from './skin-store';
 import { uploadBackgroundImage } from './bg-upload';
 import { ENTITY_PICKER_TAG } from './pickers';
 
@@ -195,12 +195,16 @@ function bindSkinStore(host: EditorHost): void {
       try {
         const themes = await fetchSkinThemes();
         await fetchSkinStats();
-        const merged = themes.map(t => ({
-          ...t,
-          downloads: skinStats[t.id]?.downloads,
-          likes: skinStats[t.id]?.liked ?? 0,
-          userLiked: isSkinLiked(t.id),
+        const downloaded: string[] = host.state.config.downloaded_skins || [];
+        const localVersions = await fetchLocalSkinVersions(downloaded);
+        const merged = themes.map(th => ({
+          ...th,
+          hasUpdate: !!(th.version && localVersions[th.id] && localVersions[th.id] !== th.version),
+          downloads: skinStats[th.id]?.downloads,
+          likes: skinStats[th.id]?.liked ?? 0,
+          userLiked: isSkinLiked(th.id),
         }));
+        merged.sort((a, b) => Number(!!b.hasUpdate) - Number(!!a.hasUpdate));
         host.onChange({ skinStore: { open: true, loading: false, error: '', themes: merged, searchQuery: host.state.skinStore.searchQuery || '' } });
       } catch (err) {
         host.onChange({ skinStore: { ...host.state.skinStore, loading: false, error: String(err) } });

@@ -43,6 +43,8 @@ export interface SkinStoreTheme {
   name: string;
   thumbnail: string;
   author?: string;
+  version?: string;
+  hasUpdate?: boolean;
   downloads?: number;
   likes?: number;
   userLiked?: boolean;
@@ -83,7 +85,7 @@ export function renderSkinStore(
       <div class="store-card ${installed ? 'store-installed' : ''}" data-store-theme="${theme.id}">
         <img src="${CDN_STORE}/${theme.thumbnail}" alt="${theme.name}" class="store-thumb" loading="lazy">
         <div class="store-info">
-          <span class="store-name">${theme.name}${theme.author ? `<a href="https://github.com/${theme.author}" target="_blank" rel="noopener noreferrer" class="store-author">${theme.author}</a>` : ''}</span>
+          <span class="store-name">${theme.name}${theme.author ? `<a href="https://github.com/${theme.author}" target="_blank" rel="noopener noreferrer" class="store-author">${theme.author}</a>` : ''}${theme.hasUpdate ? `<span class="store-update-badge">${t(language, 'editorSkinStoreNewVersion')}</span>` : ''}</span>
           <div class="store-actions">
             <span class="store-dl-count">⬇ ${dlCount}</span>
             <button class="store-like${likedClass}" data-store-like="${theme.id}">
@@ -91,7 +93,9 @@ export function renderSkinStore(
             </button>
           </div>
           ${installed
-            ? `<div style="display:flex;gap:6px"><button class="store-download" data-store-download="${theme.id}">${t(language, 'editorSkinStoreRedownload')}</button><button class="store-remove" data-store-remove="${theme.id}">${t(language, 'editorSkinStoreRemove')}</button></div>`
+            ? theme.hasUpdate
+              ? `<div style="display:flex;gap:6px"><button class="store-download" data-store-download="${theme.id}">${t(language, 'editorSkinStoreRedownload')}</button><button class="store-remove" data-store-remove="${theme.id}">${t(language, 'editorSkinStoreRemove')}</button></div>`
+              : `<button class="store-remove" data-store-remove="${theme.id}">${t(language, 'editorSkinStoreRemove')}</button>`
             : `<button class="store-download" data-store-download="${theme.id}">${t(language, 'editorSkinStoreDownload')}</button>`
           }
         </div>
@@ -122,6 +126,20 @@ export async function fetchSkinThemes(): Promise<SkinStoreTheme[]> {
     [themes[i], themes[j]] = [themes[j]!, themes[i]!];
   }
   return themes;
+}
+
+export async function fetchLocalSkinVersions(skins: string[]): Promise<Record<string, string>> {
+  const results: Record<string, string> = {};
+  await Promise.all(skins.map(async (skin) => {
+    try {
+      const res = await fetch(`/local/skins-pro/${skin}/strings.json?v=${Date.now()}`);
+      if (res.ok) {
+        const data = await res.json() as Record<string, unknown>;
+        if (typeof data.version === 'string' && data.version) results[skin] = data.version;
+      }
+    } catch { /* ignore */ }
+  }));
+  return results;
 }
 
 export async function fetchSkinStats(): Promise<void> {

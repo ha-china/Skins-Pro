@@ -141,6 +141,7 @@ const zh: Record<TranslationKey, string> = {
   editorSkinStoreDownload: '下载',
   editorSkinStoreRemove: '移除',
   editorSkinStoreRedownload: '更新',
+  editorSkinStoreNewVersion: '新版本',
   editorSkinStoreSearch: '搜索皮肤...',
   editorStoreClearCache: '如果更新后页面布局不正常，可以先尝试清除浏览器缓存。',
   editorEnergy: '能源',

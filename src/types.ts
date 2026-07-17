@@ -356,6 +356,7 @@ export type TranslationKey =
   | 'editorSkinStoreDownload'
   | 'editorSkinStoreRemove'
   | 'editorSkinStoreRedownload'
+  | 'editorSkinStoreNewVersion'
   | 'editorSkinStoreSearch'
   | 'editorStoreClearCache'
   | 'editorEnergy'

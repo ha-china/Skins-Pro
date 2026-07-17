@@ -437,7 +437,16 @@ export class SkinsProCard extends LitElement {
 
   private _resolveTheme(): 'light' | 'dark' {
     if (!skinSupportsDark(selectedSkin(this._config))) return 'light';
-    return this._hass?.themes?.darkMode ? 'dark' : 'light';
+    const mode = this._config?.skin_mode || 'auto';
+    if (mode === 'light') return 'light';
+    if (mode === 'dark') return 'dark';
+    // auto: use sun entity, fallback to hour-based
+    const sun = this._hass?.states?.['sun.sun'];
+    if (sun?.state === 'above_horizon') return 'light';
+    if (sun?.state === 'below_horizon') return 'dark';
+    // no sun data: 6:00-17:59 = light, 18:00-5:59 = dark
+    const hour = new Date().getHours();
+    return hour >= 6 && hour < 18 ? 'light' : 'dark';
   }
 
   private _applyThemeAttribute(): void {

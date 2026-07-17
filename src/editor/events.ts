@@ -199,7 +199,7 @@ function bindSkinStore(host: EditorHost): void {
         const localVersions = await fetchLocalSkinVersions(downloaded);
         const merged = themes.map(th => ({
           ...th,
-          hasUpdate: !!(th.version && localVersions[th.id] && localVersions[th.id] !== th.version),
+          hasUpdate: !!(th.version && (!localVersions[th.id] || localVersions[th.id] !== th.version)),
           downloads: skinStats[th.id]?.downloads,
           likes: skinStats[th.id]?.liked ?? 0,
           userLiked: isSkinLiked(th.id),

@@ -26,7 +26,6 @@ export interface HomeAssistant {
     ) => Promise<() => Promise<void>>;
   };
   auth?: { data?: { access_token?: string } };
-  themes?: { darkMode?: boolean };
 }
 
 export interface AreaRegistryEntry {
@@ -185,6 +184,7 @@ export interface DashboardConfig {
   resource_pack?: ResourcePackConfig;
   downloaded_skins?: string[];
   background_image?: string;
+  skin_mode?: 'auto' | 'light' | 'dark';
   weather?: WeatherConfig;
   info?: InfoConfig;
   fullscreen?: boolean;
@@ -371,6 +371,10 @@ export type TranslationKey =
   | 'editorUseAreaPictures'
   | 'editorNavigation'
   | 'editorNavigationConfigure'
+  | 'editorSkinMode'
+  | 'editorSkinModeAuto'
+  | 'editorSkinModeLight'
+  | 'editorSkinModeDark'
   | 'editorCancel'
   | 'editorSave'
   | 'editorBackground'

@@ -375,7 +375,7 @@ button { font:inherit; }
 .panel-camera { width:100%; max-width:100%; min-width:0; justify-self:stretch; align-self:stretch; min-height:0; cursor:pointer; background:var(--sp-glass-bg); border-radius:var(--sp-radius-glass); padding:var(--sp-space-lg); box-shadow:3px 3px 6px rgba(0,0,0,.20),-3px -3px 6px rgba(255,255,255,.90); }
 .panel-camera .camera-preview { margin-top:var(--sp-space-xs); }
 .panel-scenes { min-height:0; height:100%; overflow:hidden; display:flex; flex-direction:column; background:var(--sp-glass-bg); border-radius:var(--sp-radius-glass); padding:var(--sp-space-lg); box-shadow:3px 3px 6px rgba(0,0,0,.20),-3px -3px 6px rgba(255,255,255,.90); }
-.panel-scenes .scene-grid { min-height:0; flex:1; align-content:start; overflow:hidden; padding:var(--sp-space-3xs) 0; }
+.panel-scenes .scene-grid { min-height:0; flex:1; align-content:start; overflow:hidden; padding:var(--sp-space-3xs) var(--sp-space-sm); }
 .time-card { display:flex; align-items:center; justify-content:space-between; gap:var(--sp-space-md); }
 .time-main { font-size:var(--sp-font-xl); line-height:1; font-weight:700; color:var(--sp-text-main); width:fit-content; border-radius:var(--sp-radius-sm); padding:var(--sp-space-2xs) var(--sp-space-xs); }
 .time-sub { margin-top:var(--sp-space-3xs); color:var(--sp-text-main); font-weight:700; font-size:var(--sp-font-3xs); width:fit-content; border-radius:var(--sp-radius-sm); padding:var(--sp-space-3xs) var(--sp-space-2xs); }
@@ -488,6 +488,7 @@ button { font:inherit; }
   .stage-grid,.page-shell { height:auto; padding:var(--sp-space-lg); overflow:visible; }
   .stage-grid { grid-template-columns:minmax(0,1fr); grid-template-areas:"welcome" "side" "bottom"; grid-template-rows:auto auto auto; }
   .welcome-group .weather-row { width:100%; margin-top:16px; }
+  .weather-block { max-width:none; }
   .side { height:auto; grid-template-rows:auto; overflow:visible; }
   .bottom-stack { gap:var(--sp-space-xs); }
   .mobile-nav { display:flex; flex-direction:row; flex-wrap:nowrap; position:fixed; bottom:0; left:0; right:0; width:100%; z-index:100; background:var(--sp-glass-bg); border-top:0; padding:var(--sp-space-xs) var(--sp-space-sm); justify-content:space-around; box-shadow:0 -4px 12px rgba(0,0,0,.08); }

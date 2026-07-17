@@ -375,7 +375,7 @@ button { font:inherit; }
 .panel-camera { width:100%; max-width:100%; min-width:0; justify-self:stretch; align-self:stretch; min-height:0; cursor:pointer; background:var(--sp-glass-bg); border-radius:var(--sp-radius-glass); padding:var(--sp-space-lg); box-shadow:3px 3px 6px rgba(0,0,0,.20),-3px -3px 6px rgba(255,255,255,.90); }
 .panel-camera .camera-preview { margin-top:var(--sp-space-xs); }
 .panel-scenes { min-height:0; height:100%; overflow:hidden; display:flex; flex-direction:column; background:var(--sp-glass-bg); border-radius:var(--sp-radius-glass); padding:var(--sp-space-lg); box-shadow:3px 3px 6px rgba(0,0,0,.20),-3px -3px 6px rgba(255,255,255,.90); }
-.panel-scenes .scene-grid { min-height:0; flex:1; align-content:start; overflow:hidden; padding:var(--sp-space-3xs) 0; }
+.panel-scenes .scene-grid { min-height:0; flex:1; align-content:start; overflow:hidden; padding:var(--sp-space-3xs) var(--sp-space-sm); }
 .time-card { display:flex; align-items:center; justify-content:space-between; gap:var(--sp-space-md); }
 .time-main { font-size:var(--sp-font-xl); line-height:1; font-weight:700; color:var(--sp-text-main); width:fit-content; border-radius:var(--sp-radius-sm); padding:var(--sp-space-2xs) var(--sp-space-xs); }
 .time-sub { margin-top:var(--sp-space-3xs); color:var(--sp-text-main); font-weight:700; font-size:var(--sp-font-3xs); width:fit-content; border-radius:var(--sp-radius-sm); padding:var(--sp-space-3xs) var(--sp-space-2xs); }

@@ -231,6 +231,7 @@ async function processImage(srcPath, destDir) {
       id: dir,
       name: dir,
       author: stringsData.author || '',
+      version: stringsData.version || '',
       thumbnail: `screenshots/thumbnails/${dir}.jpg`,
       package: `store/${dir}.zip`,
     });

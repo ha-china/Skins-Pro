@@ -1,0 +1,10 @@
+[
+  {
+    "id": "starry-night",
+    "name": "starry-night",
+    "author": "xyiqq",
+    "version": "1.0.0",
+    "thumbnail": "screenshots/thumbnails/starry-night.jpg",
+    "package": "store/starry-night.zip"
+  }
+]

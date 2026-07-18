@@ -1,10 +1,682 @@
 [
   {
+    "id": "AEON",
+    "name": "AEON",
+    "author": "Desmond-Dong",
+    "version": "20260717",
+    "thumbnail": "screenshots/thumbnails/AEON.jpg",
+    "package": "store/AEON.zip"
+  },
+  {
+    "id": "AEON_glass",
+    "name": "AEON_glass",
+    "author": "Desmond-Dong",
+    "version": "20260717",
+    "thumbnail": "screenshots/thumbnails/AEON_glass.jpg",
+    "package": "store/AEON_glass.zip"
+  },
+  {
+    "id": "alpine-glass",
+    "name": "alpine-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/alpine-glass.jpg",
+    "package": "store/alpine-glass.zip"
+  },
+  {
+    "id": "amblyopia-dark",
+    "name": "amblyopia-dark",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/amblyopia-dark.jpg",
+    "package": "store/amblyopia-dark.zip"
+  },
+  {
+    "id": "animal-crossing",
+    "name": "animal-crossing",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/animal-crossing.jpg",
+    "package": "store/animal-crossing.zip"
+  },
+  {
+    "id": "black-myth-wukong",
+    "name": "black-myth-wukong",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/black-myth-wukong.jpg",
+    "package": "store/black-myth-wukong.zip"
+  },
+  {
+    "id": "blue-and-white-porcelain",
+    "name": "blue-and-white-porcelain",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/blue-and-white-porcelain.jpg",
+    "package": "store/blue-and-white-porcelain.zip"
+  },
+  {
+    "id": "bronze-oracle-archive",
+    "name": "bronze-oracle-archive",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/bronze-oracle-archive.jpg",
+    "package": "store/bronze-oracle-archive.zip"
+  },
+  {
+    "id": "canopy-glass",
+    "name": "canopy-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/canopy-glass.jpg",
+    "package": "store/canopy-glass.zip"
+  },
+  {
+    "id": "celadon-breath",
+    "name": "celadon-breath",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/celadon-breath.jpg",
+    "package": "store/celadon-breath.zip"
+  },
+  {
+    "id": "chinese-ink-wash-painting",
+    "name": "chinese-ink-wash-painting",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/chinese-ink-wash-painting.jpg",
+    "package": "store/chinese-ink-wash-painting.zip"
+  },
+  {
+    "id": "chinese-odyssey-cinderella",
+    "name": "chinese-odyssey-cinderella",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/chinese-odyssey-cinderella.jpg",
+    "package": "store/chinese-odyssey-cinderella.zip"
+  },
+  {
+    "id": "chinese-odyssey-pandora",
+    "name": "chinese-odyssey-pandora",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/chinese-odyssey-pandora.jpg",
+    "package": "store/chinese-odyssey-pandora.zip"
+  },
+  {
+    "id": "claude-quiet",
+    "name": "claude-quiet",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/claude-quiet.jpg",
+    "package": "store/claude-quiet.zip"
+  },
+  {
+    "id": "cs-go",
+    "name": "cs-go",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/cs-go.jpg",
+    "package": "store/cs-go.zip"
+  },
+  {
+    "id": "deltaforce",
+    "name": "deltaforce",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/deltaforce.jpg",
+    "package": "store/deltaforce.zip"
+  },
+  {
+    "id": "dota-2",
+    "name": "dota-2",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/dota-2.jpg",
+    "package": "store/dota-2.zip"
+  },
+  {
+    "id": "doudizhu",
+    "name": "doudizhu",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/doudizhu.jpg",
+    "package": "store/doudizhu.zip"
+  },
+  {
+    "id": "ember-glass",
+    "name": "ember-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/ember-glass.jpg",
+    "package": "store/ember-glass.zip"
+  },
+  {
+    "id": "emerald-horizon-glass",
+    "name": "emerald-horizon-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/emerald-horizon-glass.jpg",
+    "package": "store/emerald-horizon-glass.zip"
+  },
+  {
+    "id": "exotic-caravan",
+    "name": "exotic-caravan",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/exotic-caravan.jpg",
+    "package": "store/exotic-caravan.zip"
+  },
+  {
+    "id": "family-five-euro-glass",
+    "name": "family-five-euro-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/family-five-euro-glass.jpg",
+    "package": "store/family-five-euro-glass.zip"
+  },
+  {
+    "id": "fantasy-westward-journey",
+    "name": "fantasy-westward-journey",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/fantasy-westward-journey.jpg",
+    "package": "store/fantasy-westward-journey.zip"
+  },
+  {
+    "id": "farewell-my-concubine",
+    "name": "farewell-my-concubine",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/farewell-my-concubine.jpg",
+    "package": "store/farewell-my-concubine.zip"
+  },
+  {
+    "id": "forrest-gump",
+    "name": "forrest-gump",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/forrest-gump.jpg",
+    "package": "store/forrest-gump.zip"
+  },
+  {
+    "id": "genshin",
+    "name": "genshin",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/genshin.jpg",
+    "package": "store/genshin.zip"
+  },
+  {
+    "id": "glass-smart-home",
+    "name": "glass-smart-home",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/glass-smart-home.jpg",
+    "package": "store/glass-smart-home.zip"
+  },
+  {
+    "id": "golden-spatula",
+    "name": "golden-spatula",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/golden-spatula.jpg",
+    "package": "store/golden-spatula.zip"
+  },
+  {
+    "id": "grok",
+    "name": "grok",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/grok.jpg",
+    "package": "store/grok.zip"
+  },
+  {
+    "id": "gta-6",
+    "name": "gta-6",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/gta-6.jpg",
+    "package": "store/gta-6.zip"
+  },
+  {
+    "id": "gundam",
+    "name": "gundam",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/gundam.jpg",
+    "package": "store/gundam.zip"
+  },
+  {
+    "id": "halo-glass",
+    "name": "halo-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/halo-glass.jpg",
+    "package": "store/halo-glass.zip"
+  },
+  {
+    "id": "happy-match",
+    "name": "happy-match",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/happy-match.jpg",
+    "package": "store/happy-match.zip"
+  },
+  {
+    "id": "haunted-manor-halloween",
+    "name": "haunted-manor-halloween",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/haunted-manor-halloween.jpg",
+    "package": "store/haunted-manor-halloween.zip"
+  },
+  {
+    "id": "hearthstone",
+    "name": "hearthstone",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/hearthstone.jpg",
+    "package": "store/hearthstone.zip"
+  },
+  {
+    "id": "hongse-youhuo",
+    "name": "hongse-youhuo",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/hongse-youhuo.jpg",
+    "package": "store/hongse-youhuo.zip"
+  },
+  {
+    "id": "honor-of-kings",
+    "name": "honor-of-kings",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/honor-of-kings.jpg",
+    "package": "store/honor-of-kings.zip"
+  },
+  {
+    "id": "ios-27",
+    "name": "ios-27",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/ios-27.jpg",
+    "package": "store/ios-27.zip"
+  },
+  {
+    "id": "ios-27-light",
+    "name": "ios-27-light",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/ios-27-light.jpg",
+    "package": "store/ios-27-light.zip"
+  },
+  {
+    "id": "iron-man",
+    "name": "iron-man",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/iron-man.jpg",
+    "package": "store/iron-man.zip"
+  },
+  {
+    "id": "league-of-legends",
+    "name": "league-of-legends",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/league-of-legends.jpg",
+    "package": "store/league-of-legends.zip"
+  },
+  {
+    "id": "legend-of-zelda",
+    "name": "legend-of-zelda",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/legend-of-zelda.jpg",
+    "package": "store/legend-of-zelda.zip"
+  },
+  {
+    "id": "leopard-print-glass",
+    "name": "leopard-print-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/leopard-print-glass.jpg",
+    "package": "store/leopard-print-glass.zip"
+  },
+  {
+    "id": "maplestory",
+    "name": "maplestory",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/maplestory.jpg",
+    "package": "store/maplestory.zip"
+  },
+  {
+    "id": "minecraft",
+    "name": "minecraft",
+    "author": "JochenZhou",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/minecraft.jpg",
+    "package": "store/minecraft.zip"
+  },
+  {
+    "id": "need-for-speed",
+    "name": "need-for-speed",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/need-for-speed.jpg",
+    "package": "store/need-for-speed.zip"
+  },
+  {
+    "id": "neon-glass",
+    "name": "neon-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/neon-glass.jpg",
+    "package": "store/neon-glass.zip"
+  },
+  {
+    "id": "nezha-demon-child",
+    "name": "nezha-demon-child",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/nezha-demon-child.jpg",
+    "package": "store/nezha-demon-child.zip"
+  },
+  {
+    "id": "northwest-desert-glass",
+    "name": "northwest-desert-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/northwest-desert-glass.jpg",
+    "package": "store/northwest-desert-glass.zip"
+  },
+  {
+    "id": "oil-painting-classic",
+    "name": "oil-painting-classic",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/oil-painting-classic.jpg",
+    "package": "store/oil-painting-classic.zip"
+  },
+  {
+    "id": "organic",
+    "name": "organic",
+    "author": "Desmond-Dong",
+    "version": "20260717",
+    "thumbnail": "screenshots/thumbnails/organic.jpg",
+    "package": "store/organic.zip"
+  },
+  {
+    "id": "paperwhite-quiet",
+    "name": "paperwhite-quiet",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/paperwhite-quiet.jpg",
+    "package": "store/paperwhite-quiet.zip"
+  },
+  {
+    "id": "peacekeeper-elite",
+    "name": "peacekeeper-elite",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/peacekeeper-elite.jpg",
+    "package": "store/peacekeeper-elite.zip"
+  },
+  {
+    "id": "plants-vs-zombies",
+    "name": "plants-vs-zombies",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/plants-vs-zombies.jpg",
+    "package": "store/plants-vs-zombies.zip"
+  },
+  {
+    "id": "plush-3d",
+    "name": "plush-3d",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/plush-3d.jpg",
+    "package": "store/plush-3d.zip"
+  },
+  {
+    "id": "pocket-monsters",
+    "name": "pocket-monsters",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/pocket-monsters.jpg",
+    "package": "store/pocket-monsters.zip"
+  },
+  {
+    "id": "quiet-luxury",
+    "name": "quiet-luxury",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/quiet-luxury.jpg",
+    "package": "store/quiet-luxury.zip"
+  },
+  {
+    "id": "red-dead-redemption-2",
+    "name": "red-dead-redemption-2",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/red-dead-redemption-2.jpg",
+    "package": "store/red-dead-redemption-2.zip"
+  },
+  {
+    "id": "red-smart-home",
+    "name": "red-smart-home",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/red-smart-home.jpg",
+    "package": "store/red-smart-home.zip"
+  },
+  {
+    "id": "resident-evil",
+    "name": "resident-evil",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/resident-evil.jpg",
+    "package": "store/resident-evil.zip"
+  },
+  {
+    "id": "retro-luxury",
+    "name": "retro-luxury",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/retro-luxury.jpg",
+    "package": "store/retro-luxury.zip"
+  },
+  {
+    "id": "romance-three-kingdoms",
+    "name": "romance-three-kingdoms",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/romance-three-kingdoms.jpg",
+    "package": "store/romance-three-kingdoms.zip"
+  },
+  {
+    "id": "shaolin-womens-soccer",
+    "name": "shaolin-womens-soccer",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/shaolin-womens-soccer.jpg",
+    "package": "store/shaolin-womens-soccer.zip"
+  },
+  {
+    "id": "slate-glass",
+    "name": "slate-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/slate-glass.jpg",
+    "package": "store/slate-glass.zip"
+  },
+  {
+    "id": "smarto-minimal",
+    "name": "smarto-minimal",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/smarto-minimal.jpg",
+    "package": "store/smarto-minimal.zip"
+  },
+  {
+    "id": "soft-home",
+    "name": "soft-home",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/soft-home.jpg",
+    "package": "store/soft-home.zip"
+  },
+  {
+    "id": "spirited-away",
+    "name": "spirited-away",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/spirited-away.jpg",
+    "package": "store/spirited-away.zip"
+  },
+  {
+    "id": "stardew-valley",
+    "name": "stardew-valley",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/stardew-valley.jpg",
+    "package": "store/stardew-valley.zip"
+  },
+  {
     "id": "starry-night",
     "name": "starry-night",
     "author": "xyiqq",
     "version": "1.0.0",
     "thumbnail": "screenshots/thumbnails/starry-night.jpg",
     "package": "store/starry-night.zip"
+  },
+  {
+    "id": "street-fighter-6",
+    "name": "street-fighter-6",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/street-fighter-6.jpg",
+    "package": "store/street-fighter-6.zip"
+  },
+  {
+    "id": "summer-beach-glass",
+    "name": "summer-beach-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/summer-beach-glass.jpg",
+    "package": "store/summer-beach-glass.zip"
+  },
+  {
+    "id": "terra-glass",
+    "name": "terra-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/terra-glass.jpg",
+    "package": "store/terra-glass.zip"
+  },
+  {
+    "id": "teyvat-assets",
+    "name": "teyvat-assets",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/teyvat-assets.jpg",
+    "package": "store/teyvat-assets.zip"
+  },
+  {
+    "id": "tide-glass",
+    "name": "tide-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/tide-glass.jpg",
+    "package": "store/tide-glass.zip"
+  },
+  {
+    "id": "tom-and-jerry",
+    "name": "tom-and-jerry",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/tom-and-jerry.jpg",
+    "package": "store/tom-and-jerry.zip"
+  },
+  {
+    "id": "ultraman",
+    "name": "ultraman",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/ultraman.jpg",
+    "package": "store/ultraman.zip"
+  },
+  {
+    "id": "valorant",
+    "name": "valorant",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/valorant.jpg",
+    "package": "store/valorant.zip"
+  },
+  {
+    "id": "visionOS",
+    "name": "visionOS",
+    "author": "Desmond-Dong",
+    "version": "20260717",
+    "thumbnail": "screenshots/thumbnails/visionOS.jpg",
+    "package": "store/visionOS.zip"
+  },
+  {
+    "id": "wall-e",
+    "name": "wall-e",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/wall-e.jpg",
+    "package": "store/wall-e.zip"
+  },
+  {
+    "id": "walnut-hi-fi-console",
+    "name": "walnut-hi-fi-console",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/walnut-hi-fi-console.jpg",
+    "package": "store/walnut-hi-fi-console.zip"
+  },
+  {
+    "id": "warm-glass",
+    "name": "warm-glass",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/warm-glass.jpg",
+    "package": "store/warm-glass.zip"
+  },
+  {
+    "id": "witcher-3",
+    "name": "witcher-3",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/witcher-3.jpg",
+    "package": "store/witcher-3.zip"
+  },
+  {
+    "id": "world-cup-2026-glass",
+    "name": "world-cup-2026-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/world-cup-2026-glass.jpg",
+    "package": "store/world-cup-2026-glass.zip"
+  },
+  {
+    "id": "world-cup-championship-night",
+    "name": "world-cup-championship-night",
+    "author": "xyiqq",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/world-cup-championship-night.jpg",
+    "package": "store/world-cup-championship-night.zip"
+  },
+  {
+    "id": "zen-glass",
+    "name": "zen-glass",
+    "author": "truemanshum",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/zen-glass.jpg",
+    "package": "store/zen-glass.zip"
   }
 ]

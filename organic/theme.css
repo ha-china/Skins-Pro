@@ -795,7 +795,7 @@ select option:checked { background:#DDE3DC; color:#2D3734; }
   .device-name { font-size: var(--sp-font-xs); }
   .devices-page-grid .device { min-height: 64px; }
   .scene { min-height: 48px; padding: var(--sp-space-xs) var(--sp-space-sm); }
-  .room { min-height: 64px; }
+  .room { min-height: 160px; }
   .mc-app[data-view="rooms"] .room { min-height: 130px; }
   .side { gap: var(--sp-space-sm); }
   .glass-card, .panel-energy, .panel-media, .panel-camera { padding: var(--sp-space-sm); }

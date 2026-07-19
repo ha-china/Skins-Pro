@@ -122,8 +122,8 @@ button { font:inherit; }
 .stage-grid { position:relative; z-index:1; height:100%; padding:var(--sp-space-xl); box-sizing:border-box; display:grid; grid-template-columns:minmax(0,3fr) minmax(280px,1fr); grid-template-rows:auto minmax(0,1fr) auto; grid-template-areas:"welcome side" "spacer side" "bottom side"; gap:var(--sp-space-lg); overflow:hidden; }
 .welcome { grid-area:welcome; align-self:start; max-width:540px; }
 .quote { margin-top:var(--sp-space-xs); font-size:var(--sp-font-xs); color:var(--sp-text-muted-bright); font-weight:400; }
-.weather-row { margin-top:12px; display:flex; align-items:center; gap:var(--sp-space-sm); cursor:pointer; background:var(--sp-glass-light); border:var(--sp-border-width) solid var(--sp-border-glass); border-radius:var(--sp-radius-md); padding:var(--sp-space-xs) var(--sp-space-sm); width:fit-content; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
-.weather-state-icon { width:30px; height:30px; border-radius:var(--sp-radius-weather); display:grid; place-items:center; background:var(--sp-weather-bg); color:var(--sp-text-alt); }
+.weather-row { margin-top:12px; display:flex; align-items:center; gap:var(--sp-space-sm); cursor:pointer; background:transparent; border:0; border-radius:0; padding:0; width:fit-content; backdrop-filter:none; -webkit-backdrop-filter:none; box-shadow:none; }
+.weather-state-icon { width:30px; height:30px; border-radius:var(--sp-radius-weather); display:grid; place-items:center; background:transparent; color:var(--sp-text-alt); }
 .bottom-stack { grid-area:bottom; align-self:end; min-height:0; display:grid; gap:var(--sp-space-sm); }
 .bottom-block { min-height:0; }
 .page-shell { height:100%; display:grid; grid-template-rows:auto minmax(0,1fr); gap:var(--sp-space-lg); padding:var(--sp-space-xl); box-sizing:border-box; }
@@ -369,11 +369,21 @@ button { font:inherit; }
 .scene.morning {
   color: #111111;
 }
+/* 天气区：无外框，透明直显 */
 .weather-block,
+.weather-row,
+.weather-with-meta,
+.weather-current,
+.weather-state-icon {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
 .weather-row {
-  background: var(--sp-glass-light);
-  border: 0;
-  box-shadow: var(--sp-shadow-sm), inset 0 4px 6px rgba(255, 255, 255, 0.65), inset 0 -3px 6px rgba(90, 75, 45, 0.18);
+  padding: 0 !important;
+  border-radius: 0 !important;
 }
 .switch.on {
   background: var(--sp-switch-on-bg);

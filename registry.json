@@ -35,7 +35,7 @@
     "id": "animal-crossing",
     "name": "animal-crossing",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/animal-crossing.jpg",
     "package": "store/animal-crossing.zip"
   },
@@ -43,7 +43,7 @@
     "id": "black-myth-wukong",
     "name": "black-myth-wukong",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/black-myth-wukong.jpg",
     "package": "store/black-myth-wukong.zip"
   },
@@ -51,7 +51,7 @@
     "id": "blue-and-white-porcelain",
     "name": "blue-and-white-porcelain",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/blue-and-white-porcelain.jpg",
     "package": "store/blue-and-white-porcelain.zip"
   },
@@ -83,7 +83,7 @@
     "id": "chinese-ink-wash-painting",
     "name": "chinese-ink-wash-painting",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/chinese-ink-wash-painting.jpg",
     "package": "store/chinese-ink-wash-painting.zip"
   },
@@ -91,7 +91,7 @@
     "id": "chinese-odyssey-cinderella",
     "name": "chinese-odyssey-cinderella",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/chinese-odyssey-cinderella.jpg",
     "package": "store/chinese-odyssey-cinderella.zip"
   },
@@ -651,7 +651,7 @@
     "id": "witcher-3",
     "name": "witcher-3",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/witcher-3.jpg",
     "package": "store/witcher-3.zip"
   },

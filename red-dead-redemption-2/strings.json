@@ -1,4 +1,6 @@
 {
+  "version": "1.0.1",
+  "author": "xyiqq",
   "title_zh": "欢迎回到荒野大镖客2智能空间！",
   "title_en": "Welcome back to Red Dead Redemption 2!",
   "subtitle_zh": "荒野大镖客2 · 主题智能空间",
@@ -31,6 +33,5 @@
     "vacuum": "vacuum",
     "device_tracker": "device_tracker",
     "update": "update"
-  },
-  "author": "xyiqq"
+  }
 }

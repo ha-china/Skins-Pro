@@ -1,4 +1,6 @@
 {
+  "version": "1.0.1",
+  "author": "xyiqq",
   "title_zh": "欢迎回到梦幻西游",
   "title_en": "Welcome back to 梦幻西游",
   "subtitle_zh": "梦幻西游 · 主题智能空间",
@@ -30,7 +32,7 @@
     "person": "person",
     "vacuum": "vacuum",
     "device_tracker": "device_tracker",
-    "update": "update"
-  },
-  "author": "xyiqq"
+    "update": "update",
+    "garden": "garden"
+  }
 }

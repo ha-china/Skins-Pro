@@ -1,4 +1,6 @@
 {
+  "version": "1.0.1",
+  "author": "xyiqq",
   "title_zh": "欢迎回到棋盘之城！",
   "title_en": "Welcome back to the board!",
   "subtitle_zh": "蓝金云端棋盘 · 金铲铲幻想空间",
@@ -7,7 +9,6 @@
   "profile_name_en": "Tactician",
   "profile_subtitle_zh": "金铲铲主题",
   "profile_subtitle_en": "Golden Spatula Theme",
-  "author": "xyiqq",
   "icon_map": {
     "light": "light",
     "input_boolean": "switch",

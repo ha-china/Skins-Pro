@@ -1,4 +1,6 @@
 {
+  "version": "1.0.1",
+  "author": "xyiqq",
   "title_zh": "欢迎回到口袋妖怪智能空间！",
   "title_en": "Welcome back to Pocket Monsters!",
   "subtitle_zh": "口袋妖怪 · 主题智能空间",
@@ -33,6 +35,5 @@
     "update": "button",
     "sun": "light",
     "weather": "climate"
-  },
-  "author": "xyiqq"
+  }
 }

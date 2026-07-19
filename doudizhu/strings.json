@@ -1,4 +1,6 @@
 {
+  "version": "1.0.1",
+  "author": "xyiqq",
   "title_zh": "欢迎回到斗地主智能空间！",
   "title_en": "Welcome back to Doudizhu!",
   "subtitle_zh": "斗地主 · 主题智能空间",
@@ -15,22 +17,23 @@
     "climate": "climate",
     "water_heater": "water_heater",
     "humidifier": "humidifier",
-    "media_player": "media_player",
+    "media_player": "speaker",
     "remote": "remote",
     "lock": "lock",
-    "binary_sensor": "binary_sensor",
+    "binary_sensor": "lock",
     "alarm_control_panel": "lock",
     "switch": "switch",
     "fan": "fan",
-    "cover": "cover",
+    "cover": "switch",
     "camera": "camera",
     "valve": "valve",
-    "automation": "automation",
-    "sensor": "sensor",
-    "person": "person",
-    "vacuum": "vacuum",
-    "device_tracker": "device_tracker",
-    "update": "update"
-  },
-  "author": "xyiqq"
+    "automation": "button",
+    "sensor": "button",
+    "person": "button",
+    "vacuum": "fan",
+    "device_tracker": "button",
+    "update": "button",
+    "sun": "light",
+    "weather": "climate"
+  }
 }

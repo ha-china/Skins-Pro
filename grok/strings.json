@@ -1,4 +1,6 @@
 {
+  "version": "1.0.1",
+  "author": "xyiqq",
   "title_zh": "欢迎回来，探索者",
   "title_en": "Welcome back, explorer",
   "subtitle_zh": "Grok · 宇宙智能中枢",
@@ -7,7 +9,6 @@
   "profile_name_en": "Grok",
   "profile_subtitle_zh": "xAI · 智能伙伴",
   "profile_subtitle_en": "xAI · AI Companion",
-  "author": "xyiqq",
   "icon_map": {
     "light": "light",
     "input_boolean": "switch",

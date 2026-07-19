@@ -1,4 +1,6 @@
 {
+  "version": "1.0.1",
+  "author": "xyiqq",
   "title_zh": "欢迎回到机库",
   "title_en": "Welcome back to the hangar",
   "subtitle_zh": "高达 / 机甲科幻风，未来基地，驾驶舱，蓝白红金",
@@ -31,6 +33,5 @@
     "vacuum": "vacuum",
     "device_tracker": "device_tracker",
     "update": "update"
-  },
-  "author": "xyiqq"
+  }
 }

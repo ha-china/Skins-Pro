@@ -1,4 +1,6 @@
 {
+  "version": "1.0.1",
+  "author": "xyiqq",
   "title_zh": "战术中控已就绪",
   "title_en": "Tactical console ready",
   "subtitle_zh": "Delta Force 战术智能空间",
@@ -31,6 +33,5 @@
     "vacuum": "vacuum",
     "device_tracker": "device_tracker",
     "update": "update"
-  },
-  "author": "xyiqq"
+  }
 }

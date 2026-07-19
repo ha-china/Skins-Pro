@@ -427,7 +427,7 @@
     "id": "plants-vs-zombies",
     "name": "plants-vs-zombies",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/plants-vs-zombies.jpg",
     "package": "store/plants-vs-zombies.zip"
   },

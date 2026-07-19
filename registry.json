@@ -491,7 +491,7 @@
     "id": "romance-three-kingdoms",
     "name": "romance-three-kingdoms",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/romance-three-kingdoms.jpg",
     "package": "store/romance-three-kingdoms.zip"
   },
@@ -515,7 +515,7 @@
     "id": "smarto-minimal",
     "name": "smarto-minimal",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/smarto-minimal.jpg",
     "package": "store/smarto-minimal.zip"
   },
@@ -523,7 +523,7 @@
     "id": "soft-home",
     "name": "soft-home",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/soft-home.jpg",
     "package": "store/soft-home.zip"
   },
@@ -531,7 +531,7 @@
     "id": "spirited-away",
     "name": "spirited-away",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/spirited-away.jpg",
     "package": "store/spirited-away.zip"
   },
@@ -539,7 +539,7 @@
     "id": "stardew-valley",
     "name": "stardew-valley",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/stardew-valley.jpg",
     "package": "store/stardew-valley.zip"
   },
@@ -555,7 +555,7 @@
     "id": "street-fighter-6",
     "name": "street-fighter-6",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/street-fighter-6.jpg",
     "package": "store/street-fighter-6.zip"
   },
@@ -579,7 +579,7 @@
     "id": "teyvat-assets",
     "name": "teyvat-assets",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/teyvat-assets.jpg",
     "package": "store/teyvat-assets.zip"
   },
@@ -595,7 +595,7 @@
     "id": "tom-and-jerry",
     "name": "tom-and-jerry",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/tom-and-jerry.jpg",
     "package": "store/tom-and-jerry.zip"
   },
@@ -603,7 +603,7 @@
     "id": "ultraman",
     "name": "ultraman",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/ultraman.jpg",
     "package": "store/ultraman.zip"
   },
@@ -611,7 +611,7 @@
     "id": "valorant",
     "name": "valorant",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/valorant.jpg",
     "package": "store/valorant.zip"
   },
@@ -627,7 +627,7 @@
     "id": "wall-e",
     "name": "wall-e",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/wall-e.jpg",
     "package": "store/wall-e.zip"
   },
@@ -643,7 +643,7 @@
     "id": "warm-glass",
     "name": "warm-glass",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/warm-glass.jpg",
     "package": "store/warm-glass.zip"
   },

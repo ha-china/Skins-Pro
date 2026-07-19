@@ -466,8 +466,10 @@ button {
   min-width: 0;
   text-align: right;
 }
-
-
+
+
+
+
 
 .env-list-inline {
   display: flex;
@@ -739,7 +741,8 @@ button {
 /* ==========================================================================
    12. Chips / Filter Tabs
    ========================================================================== */
-
+
+
 
 .chip {
   min-height: 36px;
@@ -2218,7 +2221,8 @@ button {
 /* ==========================================================================
    22. Editor / Strategy Dialog
    ========================================================================== */
-
+
+
 
 .sp-wrap {
   display: grid;
@@ -2297,9 +2301,12 @@ button {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--sp-space-md);
 }
-
-
-
+
+
+
+
+
+
 
 .sp-card button {
   min-height: 38px;
@@ -2322,7 +2329,8 @@ button {
   background: rgba(255,255,255,0.16);
   transform: translateY(-1px);
 }
-
+
+
 
 .sp-list {
   display: grid;
@@ -2427,7 +2435,7 @@ button {
   .device-name { font-size: var(--sp-font-xs); }
   .devices-page-grid .device { min-height: 64px; }
   .scene { min-height: 48px; padding: var(--sp-space-xs) var(--sp-space-sm); }
-  .room { min-height: 64px; }
+  .room { min-height: 160px; }
   .mc-app[data-view="rooms"] .room { min-height: 130px; }
   .side { gap: var(--sp-space-sm); }
   .glass-card, .panel-energy, .panel-media, .panel-camera { padding: var(--sp-space-sm); }

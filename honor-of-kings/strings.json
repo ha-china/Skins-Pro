@@ -1,4 +1,6 @@
 {
+  "version": "1.0.1",
+  "author": "xyiqq",
   "title_zh": "欢迎回到王者峡谷",
   "title_en": "Welcome Back to the King’s Arena",
   "subtitle_zh": "王者荣耀 · 蓝金史诗智能中控",
@@ -31,7 +33,6 @@
     "vacuum": "vacuum",
     "device_tracker": "device_tracker",
     "update": "update",
-    "garden": "light"
-  },
-  "author": "xyiqq"
+    "garden": "garden"
+  }
 }

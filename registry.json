@@ -99,7 +99,7 @@
     "id": "chinese-odyssey-pandora",
     "name": "chinese-odyssey-pandora",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/chinese-odyssey-pandora.jpg",
     "package": "store/chinese-odyssey-pandora.zip"
   },
@@ -107,7 +107,7 @@
     "id": "claude-quiet",
     "name": "claude-quiet",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/claude-quiet.jpg",
     "package": "store/claude-quiet.zip"
   },
@@ -115,7 +115,7 @@
     "id": "cs-go",
     "name": "cs-go",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/cs-go.jpg",
     "package": "store/cs-go.zip"
   },
@@ -123,7 +123,7 @@
     "id": "deltaforce",
     "name": "deltaforce",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/deltaforce.jpg",
     "package": "store/deltaforce.zip"
   },
@@ -131,7 +131,7 @@
     "id": "dota-2",
     "name": "dota-2",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/dota-2.jpg",
     "package": "store/dota-2.zip"
   },
@@ -139,7 +139,7 @@
     "id": "doudizhu",
     "name": "doudizhu",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/doudizhu.jpg",
     "package": "store/doudizhu.zip"
   },
@@ -179,7 +179,7 @@
     "id": "fantasy-westward-journey",
     "name": "fantasy-westward-journey",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/fantasy-westward-journey.jpg",
     "package": "store/fantasy-westward-journey.zip"
   },
@@ -187,7 +187,7 @@
     "id": "farewell-my-concubine",
     "name": "farewell-my-concubine",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/farewell-my-concubine.jpg",
     "package": "store/farewell-my-concubine.zip"
   },
@@ -195,7 +195,7 @@
     "id": "forrest-gump",
     "name": "forrest-gump",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/forrest-gump.jpg",
     "package": "store/forrest-gump.zip"
   },
@@ -203,7 +203,7 @@
     "id": "genshin",
     "name": "genshin",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/genshin.jpg",
     "package": "store/genshin.zip"
   },
@@ -211,7 +211,7 @@
     "id": "glass-smart-home",
     "name": "glass-smart-home",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/glass-smart-home.jpg",
     "package": "store/glass-smart-home.zip"
   },
@@ -219,7 +219,7 @@
     "id": "golden-spatula",
     "name": "golden-spatula",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/golden-spatula.jpg",
     "package": "store/golden-spatula.zip"
   },
@@ -227,7 +227,7 @@
     "id": "grok",
     "name": "grok",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/grok.jpg",
     "package": "store/grok.zip"
   },
@@ -235,7 +235,7 @@
     "id": "gta-6",
     "name": "gta-6",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/gta-6.jpg",
     "package": "store/gta-6.zip"
   },
@@ -243,7 +243,7 @@
     "id": "gundam",
     "name": "gundam",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/gundam.jpg",
     "package": "store/gundam.zip"
   },
@@ -259,7 +259,7 @@
     "id": "happy-match",
     "name": "happy-match",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/happy-match.jpg",
     "package": "store/happy-match.zip"
   },
@@ -443,7 +443,7 @@
     "id": "pocket-monsters",
     "name": "pocket-monsters",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/pocket-monsters.jpg",
     "package": "store/pocket-monsters.zip"
   },
@@ -451,7 +451,7 @@
     "id": "quiet-luxury",
     "name": "quiet-luxury",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/quiet-luxury.jpg",
     "package": "store/quiet-luxury.zip"
   },
@@ -459,7 +459,7 @@
     "id": "red-dead-redemption-2",
     "name": "red-dead-redemption-2",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/red-dead-redemption-2.jpg",
     "package": "store/red-dead-redemption-2.zip"
   },
@@ -467,7 +467,7 @@
     "id": "red-smart-home",
     "name": "red-smart-home",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/red-smart-home.jpg",
     "package": "store/red-smart-home.zip"
   },
@@ -475,7 +475,7 @@
     "id": "resident-evil",
     "name": "resident-evil",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/resident-evil.jpg",
     "package": "store/resident-evil.zip"
   },
@@ -483,7 +483,7 @@
     "id": "retro-luxury",
     "name": "retro-luxury",
     "author": "xyiqq",
-    "version": "",
+    "version": "1.0.1",
     "thumbnail": "screenshots/thumbnails/retro-luxury.jpg",
     "package": "store/retro-luxury.zip"
   },

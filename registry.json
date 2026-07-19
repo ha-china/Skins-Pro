@@ -403,7 +403,7 @@
     "id": "organic",
     "name": "organic",
     "author": "Desmond-Dong",
-    "version": "20260717",
+    "version": "20260719",
     "thumbnail": "screenshots/thumbnails/organic.jpg",
     "package": "store/organic.zip"
   },
@@ -619,7 +619,7 @@
     "id": "visionOS",
     "name": "visionOS",
     "author": "Desmond-Dong",
-    "version": "20260717",
+    "version": "20260719",
     "thumbnail": "screenshots/thumbnails/visionOS.jpg",
     "package": "store/visionOS.zip"
   },

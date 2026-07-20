@@ -416,6 +416,14 @@
     "package": "store/organic.zip"
   },
   {
+    "id": "paper-ink-morning",
+    "name": "paper-ink-morning",
+    "author": "truemanshum",
+    "version": "1.0.0",
+    "thumbnail": "screenshots/thumbnails/paper-ink-morning.jpg",
+    "package": "store/paper-ink-morning.zip"
+  },
+  {
     "id": "paperwhite-quiet",
     "name": "paperwhite-quiet",
     "author": "truemanshum",

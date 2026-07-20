@@ -200,6 +200,14 @@
     "package": "store/forrest-gump.zip"
   },
   {
+    "id": "free-layout",
+    "name": "free-layout",
+    "author": "Desmond-Dong",
+    "version": "",
+    "thumbnail": "screenshots/thumbnails/free-layout.jpg",
+    "package": "store/free-layout.zip"
+  },
+  {
     "id": "genshin",
     "name": "genshin",
     "author": "xyiqq",

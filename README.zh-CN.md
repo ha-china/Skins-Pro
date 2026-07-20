@@ -146,6 +146,7 @@ skins-pro/你的皮肤名/
 {
   "version": "1.0.0",
   "author": "你的-GitHub-用户名",
+  "dark_mode": true,
   "title_zh": "欢迎回来！",
   "title_en": "Welcome back!",
   "icon_map": {
@@ -160,6 +161,7 @@ skins-pro/你的皮肤名/
 
 - `version` — 皮肤版本号（如 `"1.0.0"`），在商店中显示。
 - `author` — 你的 GitHub 用户名（不含 `@`），在商店中显示并链接到你的主页。
+- `dark_mode` — 可选。设为 `true` 表示皮肤提供深色版资源（如 `background-dark.jpg`），默认为 `false`。
 - `icon_map` — 定义实体域→图标图片的映射，未覆盖的域自动 fallback。
 
 > **最佳参考** — 创建新皮肤时请以 [`visionOS/`](https://github.com/ha-china/Skins-Pro/tree/skin-assets/visionOS) 为起点，它拥有最完整的 `icon_map`、`theme.css` 和图标资源。

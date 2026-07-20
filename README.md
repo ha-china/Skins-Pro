@@ -146,6 +146,7 @@ All styles are customized via CSS variables on `:host`. Each skin has its own `t
 {
   "version": "1.0.0",
   "author": "your-github-username",
+  "dark_mode": true,
   "title_zh": "欢迎回来！",
   "title_en": "Welcome back!",
   "icon_map": {
@@ -160,6 +161,7 @@ All styles are customized via CSS variables on `:host`. Each skin has its own `t
 
 - `version` — Skin version string (e.g. `"1.0.0"`). Displayed in the store.
 - `author` — Your GitHub username (without `@`). Displayed in the store and linked to your profile.
+- `dark_mode` — Optional. Set to `true` if your skin provides dark variant assets (e.g. `background-dark.jpg`). Defaults to `false`.
 - `icon_map` — Maps entity domains to icon image filenames. Unmapped domains fall back automatically.
 
 > **Best reference** — Use [`visionOS/`](https://github.com/ha-china/Skins-Pro/tree/skin-assets/visionOS) as the starting point when creating a new skin. It has the most complete `icon_map`, `theme.css`, and icon assets.

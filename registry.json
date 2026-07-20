@@ -35,7 +35,7 @@
     "id": "animal-crossing",
     "name": "animal-crossing",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/animal-crossing.jpg",
     "package": "store/animal-crossing.zip"
   },
@@ -43,7 +43,7 @@
     "id": "black-myth-wukong",
     "name": "black-myth-wukong",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/black-myth-wukong.jpg",
     "package": "store/black-myth-wukong.zip"
   },
@@ -51,7 +51,7 @@
     "id": "blue-and-white-porcelain",
     "name": "blue-and-white-porcelain",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/blue-and-white-porcelain.jpg",
     "package": "store/blue-and-white-porcelain.zip"
   },
@@ -107,7 +107,7 @@
     "id": "claude-quiet",
     "name": "claude-quiet",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/claude-quiet.jpg",
     "package": "store/claude-quiet.zip"
   },
@@ -187,7 +187,7 @@
     "id": "farewell-my-concubine",
     "name": "farewell-my-concubine",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/farewell-my-concubine.jpg",
     "package": "store/farewell-my-concubine.zip"
   },
@@ -211,7 +211,7 @@
     "id": "genshin",
     "name": "genshin",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/genshin.jpg",
     "package": "store/genshin.zip"
   },
@@ -291,7 +291,7 @@
     "id": "hongse-youhuo",
     "name": "hongse-youhuo",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/hongse-youhuo.jpg",
     "package": "store/hongse-youhuo.zip"
   },
@@ -403,7 +403,7 @@
     "id": "oil-painting-classic",
     "name": "oil-painting-classic",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/oil-painting-classic.jpg",
     "package": "store/oil-painting-classic.zip"
   },
@@ -475,7 +475,7 @@
     "id": "quiet-luxury",
     "name": "quiet-luxury",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/quiet-luxury.jpg",
     "package": "store/quiet-luxury.zip"
   },
@@ -491,7 +491,7 @@
     "id": "red-smart-home",
     "name": "red-smart-home",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/red-smart-home.jpg",
     "package": "store/red-smart-home.zip"
   },
@@ -507,7 +507,7 @@
     "id": "retro-luxury",
     "name": "retro-luxury",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/retro-luxury.jpg",
     "package": "store/retro-luxury.zip"
   },
@@ -547,7 +547,7 @@
     "id": "soft-home",
     "name": "soft-home",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/soft-home.jpg",
     "package": "store/soft-home.zip"
   },
@@ -611,7 +611,7 @@
     "id": "teyvat-assets",
     "name": "teyvat-assets",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/teyvat-assets.jpg",
     "package": "store/teyvat-assets.zip"
   },
@@ -659,7 +659,7 @@
     "id": "wall-e",
     "name": "wall-e",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/wall-e.jpg",
     "package": "store/wall-e.zip"
   },
@@ -675,7 +675,7 @@
     "id": "warm-glass",
     "name": "warm-glass",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/warm-glass.jpg",
     "package": "store/warm-glass.zip"
   },
@@ -699,7 +699,7 @@
     "id": "world-cup-championship-night",
     "name": "world-cup-championship-night",
     "author": "xyiqq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "thumbnail": "screenshots/thumbnails/world-cup-championship-night.jpg",
     "package": "store/world-cup-championship-night.zip"
   },

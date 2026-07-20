@@ -9,12 +9,14 @@ export const BUNDLED_SKINS: readonly string[] = SKINS;
 interface SkinMetadata {
   strings: Record<string, string>;
   iconMap: Record<string, string>;
+  darkMode: boolean;
 }
 
 const SKIN_METADATA_CACHE: Record<string, SkinMetadata> = {
   [DEFAULT_SKIN]: {
     strings: (SKIN_STRINGS[DEFAULT_SKIN] || {}) as Record<string, string>,
     iconMap: (SKIN_ICON_MAPS[DEFAULT_SKIN] || {}) as Record<string, string>,
+    darkMode: Boolean((SKIN_STRINGS[DEFAULT_SKIN] as Record<string, unknown>)?.dark_mode),
   },
 };
 const SKIN_METADATA_LOADING = new Set<string>();
@@ -31,6 +33,7 @@ export async function loadSkinMetadata(skin: string): Promise<boolean> {
     SKIN_METADATA_CACHE[skin] = {
       strings: data as Record<string, string>,
       iconMap: (data.icon_map as Record<string, string>) || {},
+      darkMode: Boolean((data as Record<string, unknown>).dark_mode),
     };
     return true;
   } catch {
@@ -268,13 +271,12 @@ export function selectedSkin(config?: DashboardConfig): string {
   return matchedSkin || DEFAULT_SKIN;
 }
 
-const DARK_SUPPORTED_SKINS = new Set(['modern', 'neo-tactile', 'prism-tide']);
 export function skinSupportsDark(skin: string): boolean {
-  return DARK_SUPPORTED_SKINS.has(skin);
+  return SKIN_METADATA_CACHE[skin]?.darkMode ?? false;
 }
 let _darkAssetSkin: string | null = null;
 export function setDarkAssetSkin(skin: string | null): void {
-  _darkAssetSkin = skin && DARK_SUPPORTED_SKINS.has(skin) ? skin : null;
+  _darkAssetSkin = skin && skinSupportsDark(skin) ? skin : null;
 }
 
 export function assetUrl(config?: DashboardConfig, key?: string): string {

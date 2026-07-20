@@ -704,6 +704,14 @@
     "package": "store/world-cup-championship-night.zip"
   },
   {
+    "id": "xuan-bamboo-shadow",
+    "name": "xuan-bamboo-shadow",
+    "author": "truemanshum",
+    "version": "20260720",
+    "thumbnail": "screenshots/thumbnails/xuan-bamboo-shadow.jpg",
+    "package": "store/xuan-bamboo-shadow.zip"
+  },
+  {
     "id": "zen-glass",
     "name": "zen-glass",
     "author": "truemanshum",

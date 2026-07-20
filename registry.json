@@ -448,6 +448,14 @@
     "package": "store/pocket-monsters.zip"
   },
   {
+    "id": "prism-tide",
+    "name": "prism-tide",
+    "author": "truemanshum",
+    "version": "1.0.0",
+    "thumbnail": "screenshots/thumbnails/prism-tide.jpg",
+    "package": "store/prism-tide.zip"
+  },
+  {
     "id": "quiet-luxury",
     "name": "quiet-luxury",
     "author": "xyiqq",

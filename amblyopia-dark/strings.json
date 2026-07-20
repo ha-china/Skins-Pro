@@ -1,4 +1,6 @@
 {
+  "version": "1.0.2",
+  "author": "xyiqq",
   "title_zh": "欢迎回家",
   "title_en": "Welcome Home",
   "subtitle_zh": "弱视友好 · 深色高对比",
@@ -33,6 +35,5 @@
     "update": "update"
   },
   "name_zh": "弱视深色",
-  "name_en": "Amblyopia Dark",
-  "author": "xyiqq"
+  "name_en": "Amblyopia Dark"
 }

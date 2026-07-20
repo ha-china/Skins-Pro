@@ -576,6 +576,14 @@
     "package": "store/summer-beach-glass.zip"
   },
   {
+    "id": "suzhou-moon-garden",
+    "name": "suzhou-moon-garden",
+    "author": "truemanshum",
+    "version": "1.0.0",
+    "thumbnail": "screenshots/thumbnails/suzhou-moon-garden.jpg",
+    "package": "store/suzhou-moon-garden.zip"
+  },
+  {
     "id": "terra-glass",
     "name": "terra-glass",
     "author": "truemanshum",

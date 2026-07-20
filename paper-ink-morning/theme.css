@@ -1,0 +1,5169 @@
+/* ==========================================================================
+   NOIR - High-Definition Frosted Glass Theme for Skins Pro
+   cinematic black glass, graphite luxury, high contrast, soft silver accents, premium night mode
+   Layout base: Skins-Pro accessible visionOS-compatible CSS
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design Tokens
+   -------------------------------------------------------------------------- */
+
+:host {
+  display: block;
+  width: 100%;
+
+  /* ---- Layout ---- */
+  --sp-sidebar-width: 220px;
+  --sp-app-padding: 20px;
+  --sp-stage-radius: 32px;
+  --sp-runtime-height: 560px;
+  --sp-runtime-min-height: 560px;
+
+  /* ---- Glass Materials - pure flat frosted glass ---- */
+  --glass-thin:            rgba(242,244,255,0.26);
+  --glass-regular:         rgba(242,244,255,0.2);
+  --glass-thick:           rgba(242,244,255,0.14);
+  --glass-ultra-thick:     rgba(242,244,255,0.44);
+  --glass-knob:            #FFFFFF;
+  --glass-highlight:       0 0 0 0 transparent;
+
+  /* ---- Background & Overlay ---- */
+  --sp-stage-texture: none;
+  --sp-bg:            transparent;
+
+  /* Ambient light - semi-transparent warm, wallpaper visible for frosted effect */
+  --sp-app-overlay:
+    radial-gradient(ellipse 55% 60% at 60% 3%, rgba(242,244,255,0.2) 0%, rgba(245,242,238,0.06) 40%, rgba(232,229,224,0.35) 65%, rgba(221,218,213,0.20) 100%),
+    radial-gradient(ellipse 50% 40% at 85% 92%, rgba(255,255,255,0.06) 0%, transparent 50%);
+  --sp-stage-overlay:
+    radial-gradient(ellipse 60% 45% at 80% 90%, rgba(255,255,255,0.06) 0%, transparent 55%);
+  --sp-room-overlay:
+    linear-gradient(180deg, rgba(0,0,0,0.05) 10%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.55) 100%);
+
+  /* ---- Apple Blue Accent ---- */
+  --sp-accent:          #8EA3FF;
+  --sp-accent-hover:    #7486D1;
+  --sp-accent-alpha:    rgba(142,163,255,0.13);
+  --sp-accent-border:   rgba(142,163,255,0.26);
+  --sp-accent-glow:     0 0 32px rgba(142,163,255,0.18);
+
+  /* ---- Semantic Colors ---- */
+  --sp-warning:         #D6B26D;
+  --sp-error:           #FF3B30;
+  --sp-red-alpha:       rgba(214,178,109,0.12);
+
+  /* ---- Text ---- */
+  /* ---- Text - visionOS system label colors ---- */
+  --sp-text-primary:      #FFFFFF;
+  --sp-text-secondary:   rgba(255,255,255,0.72);
+  --sp-text-muted:       var(--sp-text-secondary);
+  --sp-text-muted-bright: rgba(255,255,255,0.84);
+  --sp-text-tertiary:    rgba(255,255,255,0.48);
+  --sp-text-quaternary:  rgba(242,244,255,0.26);
+  --sp-text-on-accent:   #FFFFFF;
+
+  /* ---- Borders ---- */
+  --sp-border-w:       0.5px;
+  --sp-border-glass:   rgba(242,244,255,0.46);
+  --sp-border-subtle:  rgba(7,9,13,0.1);
+  --sp-border-medium:  rgba(7,9,13,0.14);
+
+  /* ---- Shadows: flat, no depth ---- */
+  --sp-shadow-sm:
+    0 1px 4px  rgba(0,0,0,0.03);
+  --sp-shadow-md:
+    0 2px 8px  rgba(0,0,0,0.04);
+  --sp-shadow-lg:
+    0 4px 16px rgba(0,0,0,0.05);
+  --sp-shadow-xl:
+    0 6px 24px rgba(7,9,13,0.1);
+  --sp-shadow-glass:
+    0 2px 8px  rgba(0,0,0,0.03);
+  --sp-shadow-card:
+    0 2px 8px  rgba(0,0,0,0.04);
+  --sp-shadow-switch:
+    0 1px 3px  rgba(0,0,0,0.08);
+
+  /* ---- Radius System ---- */
+  --sp-radius-infinite: 9999px;
+  --sp-radius-xl:       28px;    /* sidebar, stage, rooms */
+  --sp-radius-lg:       24px;    /* cards, glass panels */
+  --sp-radius-md:       18px;    /* buttons, chips */
+  --sp-radius-sm:       14px;    /* compact cards */
+  --sp-radius-xs:       12px;    /* inputs, tags */
+  --sp-radius-icon:     18px;    /* icon containers */
+  --sp-radius-pill:     var(--sp-radius-infinite);
+  --sp-radius-sidebar:  var(--sp-radius-xl);    /* 28px */
+  --sp-radius-room:     var(--sp-radius-xl);    /* 28px */
+  --sp-radius-device:   var(--sp-radius-lg);    /* 24px */
+  --sp-radius-camera:   var(--sp-radius-lg);    /* 24px */
+  --sp-radius-glass:    var(--sp-radius-lg);    /* 24px */
+  --sp-radius-empty:    var(--sp-radius-xl);    /* 28px */
+  --sp-radius-scene:    var(--sp-radius-sm);    /* 14px */
+  --sp-radius-weather:  var(--sp-radius-xs);    /* 12px */
+  --sp-radius-time:     var(--sp-radius-xs);    /* 12px */
+  --sp-radius-editor:   var(--sp-radius-xs);    /* 12px */
+  --sp-radius-input:    var(--sp-radius-xs);    /* 12px */
+  --sp-radius-btn:      var(--sp-radius-md);    /* 18px */
+
+  /* ---- Blur System - visionOS: high blur + saturation for lens effect ---- */
+  --sp-blur-lg:   blur(48px) saturate(180%);
+  --sp-blur-sm:   blur(24px) saturate(160%);
+  --sp-blur-2xs:  blur(10px) saturate(140%);
+
+  /* ---- Animation Curves ---- */
+  --sp-ease-out:       cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --sp-ease-glass:     cubic-bezier(0.25, 0.1, 0.25, 1);
+  --sp-duration-fast:  0.15s;
+  --sp-duration-base:  0.25s;
+
+  /* ---- Spacing Scale ---- */
+  --sp-space-3xs:  4px;
+  --sp-space-2xs:  6px;
+  --sp-space-xs:   8px;
+  --sp-space-sm:   10px;
+  --sp-space-md:   12px;
+  --sp-space-lg:   16px;
+  --sp-space-xl:   24px;
+
+  /* ---- Typography ---- */
+  --sp-font-xxl:   32px;
+  --sp-font-xl:    26px;
+  --sp-font-lg:    20px;
+  --sp-font-md:    15px;
+  --sp-font-sm:    13px;
+  --sp-font-xs:    12px;
+  --sp-font-2xs:   11px;
+  --sp-font-3xs:   10px;
+  --sp-font-4xs:   9px;
+  --sp-font-weight-regular: 400;
+  --sp-font-weight-medium:  500;
+  --sp-font-weight-semibold: 600;
+  --sp-font-weight-bold:    700;
+  --sp-letter-spacing-tight:  -0.02em;
+  --sp-letter-spacing-wide:    0.01em;
+
+  /* ---- Component-specific ---- */
+  --sp-bar-gradient:
+    rgba(255,255,255,0.45);
+  --sp-bar-min:       12px;
+  --sp-switch-on-bg:  #D6B26D;
+  --sp-switch-off-bg: rgba(7,9,13,0.24);
+  --sp-scrollbar-track: transparent;
+  --sp-scrollbar-thumb: rgba(7,9,13,0.14);
+  --sp-camera-bg:       rgba(7,9,13,0.1);
+  --sp-card-min-width:  140px;
+  --sp-room-min-width:  200px;
+  --sp-scene-min-width: 130px;
+  --sp-row-height:      84px;
+  --sp-device-bg:       var(--glass-thick);
+  --sp-card-bg:         var(--glass-ultra-thick);
+  --sp-surface-bg:      var(--glass-regular);
+  --sp-panel-bg:        var(--glass-ultra-thick);
+
+  /* ========================================================================
+     HA Native Component Tokens
+     These CSS custom properties style HA's built-in web components
+     (ha-dialog, ha-bar, ha-spinner, ha-button, etc.)
+     ======================================================================== */
+
+  /* ---- ha-dialog (modal) ---- */
+  --ha-dialog-surface-background: var(--sp-card-bg);
+  --ha-dialog-surface-backdrop-filter: none;
+  --ha-dialog-border-radius: var(--sp-radius-xl);
+  --ha-dialog-scrim-backdrop-filter: blur(8px);
+  --dialog-content-padding: var(--sp-space-lg);
+  --dialog-box-shadow: var(--sp-shadow-lg);
+  --dialog-surface-margin-top: auto;
+
+  /* ---- ha-bar (progress) ---- */
+  --ha-bar-primary-color: var(--sp-accent);
+  --ha-bar-background-color: var(--sp-surface-bg);
+  --ha-bar-border-radius: var(--sp-radius-sm);
+
+  /* ---- ha-spinner (loading) ---- */
+  --ha-spinner-indicator-color: var(--sp-accent);
+  --ha-spinner-divider-color: var(--sp-border-subtle);
+
+  /* ---- ha-button ---- */
+  --ha-button-height: 40px;
+  --ha-button-border-radius: var(--sp-radius-infinite);
+}
+
+ha-control-switch{--control-switch-on-color:var(--sp-switch-on-bg)!important;--control-switch-off-color:var(--sp-switch-off-bg)!important;--control-switch-background-opacity:0.35!important;--control-switch-thickness:24px!important;--control-switch-border-radius:var(--sp-radius-pill)!important;--control-switch-padding:3px!important}
+ha-control-slider{--control-slider-color:var(--sp-text-tertiary)!important;--control-slider-background:var(--sp-device-bg)!important;--control-slider-background-opacity:0.5!important;--control-slider-thickness:32px!important;--control-slider-border-radius:var(--sp-radius-pill)!important}
+
+/* ==========================================================================
+   2. Base Resets
+   ========================================================================== */
+
+ha-card {
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+  font: inherit;
+}
+
+h1 {
+  font-size: var(--sp-font-lg);
+  font-weight: var(--sp-font-weight-semibold);
+  color: var(--sp-text-primary);
+  letter-spacing: var(--sp-letter-spacing-tight);
+}
+
+h2 {
+  font-size: var(--sp-font-md);
+  font-weight: var(--sp-font-weight-semibold);
+  color: var(--sp-text-primary);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: var(--sp-font-sm);
+  font-weight: var(--sp-font-weight-semibold);
+  color: var(--sp-text-primary);
+}
+
+button {
+  font: inherit;
+}
+
+/* ==========================================================================
+   3. Glass Mixin Classes (reusable material tokens)
+   ========================================================================== */
+
+/* ==========================================================================
+   4. Layout - App Shell
+   ========================================================================== */
+
+.mc-app {
+  width: 100%;
+  height: var(--sp-runtime-height);
+  min-height: var(--sp-runtime-min-height);
+  padding: var(--sp-app-padding);
+  padding-bottom: calc(var(--sp-app-padding) + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  color: var(--sp-text-primary);
+  display: grid;
+  grid-template-columns: var(--sp-sidebar-width) minmax(0, 1fr);
+  gap: var(--sp-space-lg);
+  background-image: var(--sp-app-overlay), linear-gradient(rgba(7,9,13,0.3), rgba(7,9,13,0.3));
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-color: var(--sp-bg);
+  overflow: clip;
+}
+
+/* --------------------------------------------------------------------------
+   Loading State
+   -------------------------------------------------------------------------- */
+
+.loading-state {
+  padding: var(--sp-space-xl);
+  color: var(--sp-text-secondary);
+  font-size: var(--sp-font-md);
+}
+
+/* ==========================================================================
+   5. Sidebar
+   ========================================================================== */
+
+.sidebar {
+  padding: var(--sp-space-md) var(--sp-space-sm);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--sp-radius-xl);
+  backdrop-filter: var(--sp-blur-lg);
+  -webkit-backdrop-filter: var(--sp-blur-lg);
+  background: rgba(242,244,255,0.26);
+  border: var(--sp-border-w) solid var(--sp-border-glass);
+  box-shadow: var(--sp-shadow-glass);
+  box-sizing: border-box;
+  transition:
+    background var(--sp-duration-base) var(--sp-ease-glass),
+    box-shadow var(--sp-duration-base) var(--sp-ease-glass),
+    border-color var(--sp-duration-base) var(--sp-ease-glass);
+}
+
+.sidebar:hover {
+  box-shadow: var(--sp-shadow-md);
+}
+
+/* ---- Profile ---- */
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-space-md);
+  margin: 2px 0 var(--sp-space-lg);
+  padding: 0 var(--sp-space-xs);
+}
+.profile .meta { min-width: 0; }
+.profile h2 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.profile-img {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--sp-radius-icon);
+  box-shadow: var(--sp-shadow-sm);
+}
+
+.profile-img,
+.sidebar-art img,
+.item-img,
+.room img {
+  display: block;
+  object-fit: cover;
+}
+
+/* ---- Navigation ---- */
+
+.menu {
+  display: grid;
+  gap: var(--sp-space-2xs);
+  min-height: 0;
+  overflow: auto;
+  padding-right: var(--sp-space-3xs);
+}
+
+.nav-button {
+  min-height: 44px;
+  border: 0;
+  border-radius: var(--sp-radius-md);
+  padding: 0 var(--sp-space-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-space-sm);
+  color: var(--sp-text-secondary);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-weight: var(--sp-font-weight-medium);
+  font-size: var(--sp-font-sm);
+  letter-spacing: -0.01em;
+  transition:
+    background var(--sp-duration-fast) var(--sp-ease-glass),
+    color var(--sp-duration-fast) var(--sp-ease-glass),
+    box-shadow var(--sp-duration-fast) var(--sp-ease-glass),
+    border-color var(--sp-duration-fast) var(--sp-ease-glass);
+  backdrop-filter: var(--sp-blur-2xs);
+  -webkit-backdrop-filter: var(--sp-blur-2xs);
+  border: var(--sp-border-w) solid transparent;
+}
+
+.nav-button:hover {
+  color: var(--sp-text-primary);
+  background: rgba(242,244,255,0.14);
+  border-color: var(--sp-border-glass);
+}
+
+.nav-button.active {
+  color: var(--sp-text-primary);
+  background: rgba(242,244,255,0.14);
+  border-color: var(--sp-border-glass);
+}
+
+.nav-button ha-icon {
+  width: 20px;
+  color: inherit;
+}
+.nav-button span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ---- Sidebar Art ---- */
+
+.sidebar-art {
+  margin-top: auto;
+  min-height: 100px;
+  flex-shrink: 0;
+  border-radius: var(--sp-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--sp-shadow-sm);
+}
+
+.sidebar-art img {
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================================================
+   6. Stage (Main Content Area)
+   ========================================================================== */
+
+.stage {
+  min-height: 0;
+  height: 100%;
+  border-radius: var(--sp-stage-radius);
+  overflow: clip;
+  position: relative;
+  background-color: transparent;
+  background-image: var(--sp-stage-overlay), linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), var(--sp-stage-texture);
+  background-size: cover, cover, cover;
+  background-position: center, center, center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  box-shadow: var(--sp-shadow-lg), var(--glass-highlight);
+}
+
+.mobile-nav {
+  display: none;
+}
+
+/* ==========================================================================
+   7. Home - Stage Grid
+   ========================================================================== */
+
+.stage-grid {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: var(--sp-space-xl);
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(280px, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "welcome  side"
+    "spacer   side"
+    "bottom   side";
+  gap: var(--sp-space-lg);
+  overflow: hidden;
+}
+
+/* ---- Welcome ---- */
+
+.welcome-group {
+  grid-area: welcome;
+}
+
+.welcome {
+  align-self: start;
+  max-width: 540px;
+}
+
+.weather-with-meta {
+  display: flex;
+  align-items: flex-start;
+  margin-top: var(--sp-space-md);
+}
+
+.welcome-meta {
+  margin-left: auto;
+}
+
+.welcome-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--sp-space-xs);
+  min-width: 0;
+  text-align: right;
+}
+
+
+
+
+
+.env-list-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-space-3xs) var(--sp-space-sm);
+}
+
+.env-list-inline .env-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--sp-font-2xs);
+}
+
+.env-list-inline .env-row .dot ha-icon {
+  --mdc-icon-size: 12px;
+}
+
+.env-list-inline .env-row .env-value {
+  font-weight: var(--sp-font-weight-semibold);
+}
+
+.quote {
+  margin-top: var(--sp-space-xs);
+  font-size: var(--sp-font-xs);
+  color: var(--sp-text-secondary);
+  font-weight: var(--sp-font-weight-regular);
+  letter-spacing: var(--sp-letter-spacing-wide);
+}
+
+/* ==========================================================================
+   8. Weather
+   ========================================================================== */
+
+.weather-row {
+  margin-top: var(--sp-space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-space-sm);
+  cursor: pointer;
+  background: var(--glass-thin);
+  border: var(--sp-border-w) solid var(--sp-border-glass);
+  border-radius: var(--sp-radius-lg);
+  padding: var(--sp-space-xs) var(--sp-space-sm);
+  width: fit-content;
+  backdrop-filter: var(--sp-blur-lg);
+  -webkit-backdrop-filter: var(--sp-blur-lg);
+  box-shadow: var(--sp-shadow-glass), var(--glass-highlight);
+  transition:
+    background var(--sp-duration-base) var(--sp-ease-glass),
+    transform var(--sp-duration-base) var(--sp-ease-glass),
+    box-shadow var(--sp-duration-base) var(--sp-ease-glass);
+}
+
+.weather-row:hover {
+  background: var(--glass-ultra-thick);
+  transform: translateY(-1px);
+  box-shadow: var(--sp-shadow-glass), var(--glass-highlight);
+}
+
+.weather-state-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--sp-radius-xs);
+  display: grid;
+  place-items: center;
+  background: var(--glass-thick);
+  box-shadow: var(--glass-highlight);
+  color: var(--sp-text-primary);
+  flex-shrink: 0;
+}
+
+.weather-block {
+  margin-top: var(--sp-space-md);
+  cursor: pointer;
+  width: 100%;
+  max-width: 240px;
+  flex-shrink: 0;
+}
+
+.weather-current {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-space-sm);
+}
+
+.weather-current-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.weather-current-temp {
+  font-size: var(--sp-font-lg);
+  font-weight: var(--sp-font-weight-semibold);
+  color: var(--sp-text-primary);
+  line-height: 1.2;
+  letter-spacing: var(--sp-letter-spacing-tight);
+}
+
+.weather-current-hl {
+  font-size: var(--sp-font-xs);
+  font-weight: var(--sp-font-weight-medium);
+  color: var(--sp-text-secondary);
+}
+
+.weather-current-cond {
+  font-size: var(--sp-font-2xs);
+  color: var(--sp-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- Forecast ---- */
+
+.weather-forecast {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 2px;
+  margin-top: var(--sp-space-xs);
+}
+
+.forecast-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.forecast-weekday {
+  font-size: var(--sp-font-3xs);
+  color: var(--sp-text-secondary);
+  font-weight: var(--sp-font-weight-medium);
+  white-space: nowrap;
+}
+
+.forecast-icon {
+  color: var(--sp-text-primary);
+}
+
+.forecast-icon ha-icon {
+  --mdc-icon-size: 20px;
+}
+
+.forecast-temps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.forecast-high {
+  font-size: var(--sp-font-3xs);
+  font-weight: var(--sp-font-weight-semibold);
+  color: var(--sp-text-primary);
+}
+
+.forecast-low {
+  font-size: var(--sp-font-3xs);
+  color: var(--sp-text-secondary);
+}
+
+/* ==========================================================================
+   9. Bottom Stack - Shortcuts
+   ========================================================================== */
+
+.bottom-stack {
+  grid-area: bottom;
+  align-self: end;
+  min-height: 0;
+  display: grid;
+  gap: var(--sp-space-sm);
+}
+
+.bottom-block {
+  min-height: 0;
+}
+
+/* ==========================================================================
+   10. Page Shell (Devices, Rooms, Scenes, Energy, etc.)
+   ========================================================================== */
+
+.page-shell {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--sp-space-lg);
+  padding: var(--sp-space-xl);
+  box-sizing: border-box;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--sp-space-lg);
+}
+
+.page-header h1 {
+  letter-spacing: -0.03em;
+}
+
+.page-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-space-md);
+}
+
+.page-body {
+  min-height: 0;
+}
+
+.page-body.single-column {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-space-lg);
+  align-items: flex-start;
+}
+
+.page-scroll {
+  min-height: 0;
+  max-height: 100%;
+  overflow: auto;
+  padding-right: var(--sp-space-xs);
+}
+
+.rooms-page-wrap {
+  min-height: 0;
+  overflow: visible;
+}
+
+/* ---- Section Titles ---- */
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sp-space-sm);
+}
+
+/* ==========================================================================
+   11. Scrollbar
+   ========================================================================== */
+
+.themed-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.themed-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--sp-scrollbar-thumb);
+  border-radius: var(--sp-radius-infinite);
+}
+
+.themed-scrollbar::-webkit-scrollbar-track {
+  background: var(--sp-scrollbar-track);
+  border-radius: var(--sp-radius-infinite);
+}
+.themed-scrollbar { scrollbar-width:thin; scrollbar-color:var(--sp-scrollbar-thumb) var(--sp-scrollbar-track); }
+.floor-tabs { flex-wrap:wrap; }
+.env-floor-header { font-size:var(--sp-font-2xs); font-weight:var(--sp-font-weight-bold); color:var(--sp-text-muted-bright); margin-top:var(--sp-space-xs); padding-bottom:var(--sp-space-3xs); border-bottom:0.5px solid var(--sp-border-subtle); }
+.env-floor-header:first-child { margin-top:0; }
+
+/* ==========================================================================
+   12. Chips / Filter Tabs
+   ========================================================================== */
+
+
+
+.chip {
+  min-height: 36px;
+  border: var(--sp-border-w) solid var(--sp-border-glass);
+  border-radius: var(--sp-radius-infinite);
+  padding: 0 14px;
+  background: var(--glass-thick);
+  color: var(--sp-text-secondary);
+  cursor: pointer;
+  backdrop-filter: var(--sp-blur-sm);
+  -webkit-backdrop-filter: var(--sp-blur-sm);
+  font-weight: var(--sp-font-weight-medium);
+  font-size: var(--sp-font-xs);
+  box-sizing: border-box;
+  transition:
+    background var(--sp-duration-fast) var(--sp-ease-glass),
+    color var(--sp-duration-fast) var(--sp-ease-glass),
+    box-shadow var(--sp-duration-fast) var(--sp-ease-glass),
+    transform var(--sp-duration-fast) var(--sp-ease-glass);
+  box-shadow: var(--glass-highlight);
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+  background: var(--glass-ultra-thick);
+  border-color: var(--sp-border-glass);
+  color: var(--sp-text-primary);
+}
+
+.chip.active {
+  background: var(--glass-ultra-thick);
+  border-color: var(--sp-border-glass);
+  color: var(--sp-text-primary);
+}
+
+/* ---- Filter Bar ---- */
+
+.filter-bar {
+  display: flex;
+  gap: var(--sp-space-sm);
+  align-items: center;
+  margin-bottom: var(--sp-space-md);
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  min-height: 36px;
+  padding: 0 var(--sp-space-lg) 0 var(--sp-space-sm);
+  border: var(--sp-border-w) solid var(--sp-border-glass);
+  border-radius: var(--sp-radius-infinite);
+  background: var(--glass-thick);
+  color: var(--sp-text-secondary);
+  font: inherit;
+  font-size: var(--sp-font-xs);
+  font-weight: var(--sp-font-weight-medium);
+  backdrop-filter: var(--sp-blur-sm);
+  -webkit-backdrop-filter: var(--sp-blur-sm);
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  min-width: 120px;
+  box-sizing: border-box;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23888' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 14px;
+}
+
+.filter-select option {
+  background: rgba(7,9,13,0.78);
+  color: #FFFFFF;
+}
+
+.action-btn {
+  min-height: 36px;
+  box-sizing: border-box;
+  border: var(--sp-border-w) solid var(--sp-border-glass);
+  border-radius: var(--sp-radius-infinite);
+  padding: 0 14px;
+  background: var(--glass-thick);
+  color: var(--sp-text-secondary);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--sp-font-xs);
+  font-weight: var(--sp-font-weight-medium);
+  backdrop-filter: var(--sp-blur-sm);
+  -webkit-backdrop-filter: var(--sp-blur-sm);
+  transition:
+    background var(--sp-duration-fast) var(--sp-ease-glass),
+    color var(--sp-duration-fast) var(--sp-ease-glass);
+}
+
+.action-btn:hover {
+  background: var(--glass-ultra-thick);
+  color: var(--sp-text-primary);
+}
+
+/* ==========================================================================
+   13. Device Cards
+   ========================================================================== */
+
+.device-group {
+  display: grid;
+  gap: var(--sp-space-md);
+  margin-bottom: var(--sp-space-lg);
+}
+
+.devices {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--sp-space-md);
+}
+
+.devices-page-grid {
+  grid-template-columns: repeat(auto-fill, minmax(var(--sp-card-min-width), 1fr));
+  gap: var(--sp-space-sm);
+}
+
+.automations-grid {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.security-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-sm);
+}
+
+.security-cameras {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--sp-space-sm);
+}
+
+.security-devices {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--sp-space-sm);
+}
+
+/* ---- Device Card ---- */
+
+.device {
+  min-height: 148px;
+  border: 0;
+  border-radius: var(--sp-radius-lg);
+  padding: var(--sp-space-lg);
+  background: var(--glass-regular);
+  color: var(--sp-text-primary);
+  box-shadow: var(--sp-shadow-card), var(--glass-highlight);
+  backdrop-filter: var(--sp-blur-lg);
+  -webkit-backdrop-filter: var(--sp-blur-lg);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  cursor: pointer;
+  text-align: left;
+  border: var(--sp-border-w) solid var(--sp-border-glass);
+  transition:
+    transform var(--sp-duration-base) var(--sp-ease-glass),
+    box-shadow var(--sp-duration-base) var(--sp-ease-glass),
+    border-color var(--sp-duration-base) var(--sp-ease-glass),
+    background var(--sp-duration-base) var(--sp-ease-glass);
+  overflow: hidden;
+}
+
+.device:hover {
+  transform: translateY(-2px);
+  border-color: var(--sp-border-glass);
+  box-shadow: var(--sp-shadow-md);
+  background: var(--glass-thin);
+}
+
+/* ---- Device State Colors (soft Apple tones) ---- */
+
+.device-on-yellow,
+.device-on-green,
+.device-on-blue,
+.device-on-purple,
+.device-on-red,
+.device-on-brown {
+}
+
+.device-unavailable {
+  background: rgba(242,244,255,0.14);
+  opacity: 0.65;
+}
+
+/* ---- Device Grid Compact ---- */
+
+.devices-page-grid .device {
+  min-height: 110px;
+  padding: var(--sp-space-sm);
+}
+
+.devices-page-grid .item-img,
+.devices-page-grid .item-icon {
+  width: 44px;
+  height: 44px;
+}
+
+/* ---- Device Internals ---- */
+
+.device-top,
+.control-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-space-xs);
+  min-width: 0;
+}
+
+.device-copy {
+  align-self: end;
+}
+
+.device-name {
+  font-size: var(--sp-font-sm);
+  font-weight: var(--sp-font-weight-semibold);
+  margin-bottom: 2px;
+  color: inherit;
+  letter-spacing: -0.01em;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.state-word {
+  font-size: var(--sp-font-xs);
+  font-weight: var(--sp-font-weight-medium);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Item Image / Icon ---- */
+
+.item-img,
+.item-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--sp-radius-icon);
+  box-shadow: var(--sp-shadow-sm);
+}
+
+.item-icon {
+  display: grid;
+  place-items: center;
+  background: var(--glass-thick);
+}
+
+/* ---- Tags / Status ---- */
+
+.tag-stack {
+  display: grid;
+  justify-items: end;
+  gap: var(--sp-space-2xs);
+  min-width: 0;
+}
+
+.status {
+  min-height: 22px;
+  border-radius: var(--sp-radius-infinite);
+  display: grid;
+  place-items: center;
+  font-size: var(--sp-font-3xs);
+  font-weight: var(--sp-font-weight-medium);
+  background: var(--sp-text-quaternary);
+  color: var(--sp-text-secondary);
+  padding: 0 var(--sp-space-xs);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.media-toggle-icon { --mdc-icon-size:18px; color:var(--sp-text-primary); display:flex; }
+
+/* ==========================================================================
+    14. Camera Card
+   ========================================================================== */
+
+.camera-card {
+  border: 0;
+  border-radius: var(--sp-radius-lg);
+  overflow: hidden;
+  background: var(--glass-regular);
+  color: var(--sp-text-primary);
+  cursor: pointer;
+  text-align: left;
+  box-shadow: var(--sp-shadow-card), var(--glass-highlight);
+  backdrop-filter: var(--sp-blur-lg);
+  -webkit-backdrop-filter: var(--sp-blur-lg);
+  width: 100%;
+  border: var(--sp-border-w) solid var(--sp-border-glass);
+  transition:
+    transform var(--sp-duration-base) var(--sp-ease-glass),
+    box-shadow var(--sp-duration-base) var(--sp-ease-glass),
+    border-color var(--sp-duration-base) var(--sp-ease-glass);
+}
+
+.camera-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--sp-border-glass);
+  box-shadow: var(--sp-shadow-md);
+}
+
+.camera-preview {
+  aspect-ratio: 3 / 2;
+  background: var(--sp-camera-bg);
+  min-height: 100px;
+  max-height: 200px;
+}
+
+.camera-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.camera-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-space-md);
+  padding: 10px;
+}
+
+/* ==========================================================================
+   15. Room Cards
+   ========================================================================== */
+
+.rooms {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sp-space-md);
+  align-content: end;
+}
+
+.room {
+  aspect-ratio: 4 / 3;
+  min-height: 80px;
+  border: 0;
+  border-radius: var(--sp-radius-xl);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--sp-shadow-lg);
+  cursor: pointer;
+  padding: 0;
+  background: transparent;
+  transition:
+    transform var(--sp-duration-base) var(--sp-ease-glass),
+    box-shadow var(--sp-duration-base) var(--sp-ease-glass);
+}
+
+.room:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sp-shadow-xl);
+}
+
+.room img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.room::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--sp-room-overlay);
+  pointer-events: none;
+}
+
+.room-label {
+  position: absolute;
+  z-index: 1;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  text-align: left;
+  min-width: 0;
+}
+
+.room-label h3 {
+  color: var(--sp-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.room-label .muted {
+  color: var(--sp-text-secondary);
+  font-size: var(--sp-font-xs);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.room-stats {
+  margin: 2px 0 0;
+  font-size: var(--sp-font-2xs);
+  color: var(--sp-text-tertiary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Room Scene Chips ---- */
+
+.room-scenes {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.room-scene-chip {
+  pointer-events: auto;
+  border: 0.5px solid var(--sp-border-subtle);
+  border-radius: var(--sp-radius-infinite);
+  padding: 4px 14px;
+  background: var(--glass-ultra-thick);
+  color: var(--sp-text-primary);
+  cursor: pointer;
+  font-size: var(--sp-font-sm);
+  font-weight: var(--sp-font-weight-medium);
+  white-space: nowrap;
+  text-align: right;
+  backdrop-filter: var(--sp-blur-2xs);
+  -webkit-backdrop-filter: var(--sp-blur-2xs);
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background var(--sp-duration-fast) var(--sp-ease-glass);
+  box-shadow: var(--glass-highlight);
+}
+
+.room-scene-chip:hover {
+  background: rgba(255,255,255,0.85);
+}
+.room-active { position:absolute; z-index:2; top:10px; left:10px; display:flex; flex-direction:column; gap:4px; align-items:flex-start; pointer-events:none; }
+.room-active-chip { pointer-events:auto; display:inline-flex; align-items:center; gap:4px; border:0.5px solid var(--sp-border-subtle); border-radius:var(--sp-radius-infinite); padding:4px 14px; background:var(--glass-ultra-thick); color:var(--sp-text-primary); cursor:pointer; font-size:var(--sp-font-sm); font-weight:var(--sp-font-weight-medium); white-space:nowrap; backdrop-filter:var(--sp-blur-2xs); -webkit-backdrop-filter:var(--sp-blur-2xs); transition:background var(--sp-duration-fast) var(--sp-ease-glass); box-shadow:var(--glass-highlight); max-width:140px; overflow:hidden; text-overflow:ellipsis; }
+.room-active-chip:hover { background:rgba(255,59,48,0.45); }
+
+/* ==========================================================================
+   16. Side Panel (Right Column)
+   ========================================================================== */
+
+.side {
+  grid-area: side;
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: max-content max-content auto auto;
+  gap: var(--sp-space-lg);
+  align-content: stretch;
+  overflow: hidden;
+}
+
+.side > section {
+  min-height: 0;
+}
+
+/* ---- Glass Card (generic side panel) ---- */
+
+.glass-card,
+.time-card {
+  border-radius: var(--sp-radius-lg);
+  padding: var(--sp-space-lg);
+  box-sizing: border-box;
+  background: var(--glass-regular);
+  backdrop-filter: var(--sp-blur-lg);
+  -webkit-backdrop-filter: var(--sp-blur-lg);
+  border: var(--sp-border-w) solid var(--sp-border-glass);
+  box-shadow: var(--sp-shadow-glass), var(--glass-highlight);
+  color: var(--sp-text-primary);
+  transition:
+    border-color var(--sp-duration-base) var(--sp-ease-glass),
+    box-shadow var(--sp-duration-base) var(--sp-ease-glass);
+}
+
+.glass-card:hover,
+.time-card:hover {
+  background: var(--glass-thin);
+  box-shadow: var(--sp-shadow-lg), var(--glass-highlight);
+}
+
+/* ---- Time Card ---- */
+
+.time-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-space-md);
+}
+
+.time-main {
+  font-size: var(--sp-font-xl);
+  line-height: 1;
+  font-weight: var(--sp-font-weight-semibold);
+  color: var(--sp-text-primary);
+  letter-spacing: -0.03em;
+}
+
+.time-sub {
+  margin-top: var(--sp-space-3xs);
+  color: var(--sp-text-tertiary);
+  font-size: var(--sp-font-3xs);
+}
+
+.time-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--sp-radius-xs);
+  display: grid;
+  place-items: center;
+  background: var(--glass-thick);
+  box-shadow: var(--glass-highlight);
+  color: var(--sp-text-primary);
+}
+
+/* ---- Environment ---- */
+
+.env-list,
+.scene-grid {
+  display: grid;
+  gap: var(--sp-space-md);
+  margin-top: var(--sp-space-md);
+}
+
+.env-row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--sp-space-sm);
+  min-height: 32px;
+}
+
+.dot {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--sp-radius-sm);
+  display: grid;
+  place-items: center;
+}
+
+.dot.temp {
+  background: var(--glass-thick);
+  box-shadow: var(--glass-highlight);
+  color: var(--sp-text-primary);
+}
+
+.dot.hum {
+  background: var(--glass-thick);
+  box-shadow: var(--glass-highlight);
+  color: var(--sp-text-primary);
+}
+
+.dot.pm {
+  background: var(--glass-thick);
+  box-shadow: var(--glass-highlight);
+  color: var(--sp-text-primary);
+}
+
+.env-value {
+  min-width: 0;
+  max-width: 100%;
+  font-weight: var(--sp-font-weight-semibold);
+  text-align: right;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* ---- Energy ---- */
+
+.panel-energy {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  justify-self: stretch;
+  align-self: stretch;
+  min-height: 0;
+  height: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Media Player (sidebar) ---- */
+
+.panel-media {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  justify-self: stretch;
+  align-self: stretch;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.media-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--sp-space-xs);
+}
+
+.media-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-space-xs);
+}
+
+.media-volrow {
+  margin-top: var(--sp-space-3xs);
+}
+
+.media-cover {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--sp-radius-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.media-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.media-cover-null {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sp-device-bg);
+  color: var(--sp-text-tertiary);
+}
+
+.media-cover-null ha-icon {
+  --mdc-icon-size: 22px;
+}
+
+.media-body {
+  min-width: 0;
+  flex: 1;
+}
+
+.media-title {
+  font-size: var(--sp-font-xs);
+  font-weight: var(--sp-font-weight-semibold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.media-artist {
+  font-size: var(--sp-font-3xs);
+  color: var(--sp-text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.media-source {
+  font-size: var(--sp-font-3xs);
+  color: var(--sp-text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.media-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-space-xs);
+  flex-shrink: 0;
+}
+
+.media-btn {
+  background: none;
+  border: none;
+  color: var(--sp-text-primary);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s;
+  min-height: auto;
+  width: auto;
+}
+
+.media-btn:hover {
+  background: var(--sp-device-bg);
+}
+
+.media-btn ha-icon {
+  --mdc-icon-size: 24px;
+}
+
+.media-playbtn ha-icon {
+  --mdc-icon-size: 36px;
+}
+
+.media-volume {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-space-xs);
+}
+
+.media-volbtn {
+  background: none;
+  border: none;
+  color: var(--sp-text-tertiary);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: auto;
+  width: auto;
+}
+
+.media-volbtn ha-icon {
+  --mdc-icon-size: 20px;
+}
+
+.media-voltrack {
+  flex: 1;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--sp-device-bg);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.media-volfill {
+  height: 100%;
+  border-radius: 5px;
+  background: var(--sp-text-tertiary);
+  pointer-events: none;
+}
+
+.media-off-state {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-space-xs);
+  margin-top: var(--sp-space-xs);
+  color: var(--sp-text-tertiary);
+  font-size: var(--sp-font-xs);
+}
+
+.media-off-state ha-icon {
+  --mdc-icon-size: 16px;
+}
+
+.panel-camera {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  justify-self: stretch;
+  align-self: stretch;
+  min-height: 0;
+  cursor: pointer;
+}
+
+.panel-camera .camera-preview {
+  margin-top: var(--sp-space-xs);
+}
+
+.energy-value {
+  font-size: var(--sp-font-xxl);
+  line-height: 1;
+  font-weight: var(--sp-font-weight-bold);
+  margin-top: var(--sp-space-3xs);
+  color: var(--sp-text-primary);
+  letter-spacing: -0.03em;
+}
+
+.energy-value small {
+  font-size: var(--sp-font-2xs);
+  color: var(--sp-text-tertiary);
+  font-weight: var(--sp-font-weight-regular);
+}
+
+/* ---- Energy Bars ---- */
+
+.bars {
+  height: 72px;
+  display: flex;
+  align-items: end;
+  gap: 3px;
+  margin-top: var(--sp-space-md);
+  padding: 0 var(--sp-space-3xs);
+}
+
+.bars span {
+  flex: 1;
+  border-radius: 4px;
+  background: var(--sp-bar-gradient);
+  min-height: var(--sp-bar-min);
+  opacity: 0.80;
+  transition: opacity var(--sp-duration-fast) var(--sp-ease-out);
+}
+
+.bars span:hover {
+  opacity: 1;
+}
+
+.compact-energy-bars {
+  height: 48px;
+  margin-top: var(--sp-space-sm);
+}
+
+.energy-bar-level-0 { height: 4%;  opacity: 0.20; }
+.energy-bar-level-1 { height: 12%; }
+.energy-bar-level-2 { height: 20%; }
+.energy-bar-level-3 { height: 28%; }
+.energy-bar-level-4 { height: 36%; }
+.energy-bar-level-5 { height: 44%; }
+.energy-bar-level-6 { height: 52%; }
+.energy-bar-level-7 { height: 60%; }
+.energy-bar-level-8 { height: 70%; }
+.energy-bar-level-9 { height: 80%; }
+.energy-bar-level-10 { height: 90%; }
+
+.energy-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--sp-space-sm);
+  color: var(--sp-text-tertiary);
+}
+
+.down {
+  color: var(--sp-text-primary);
+  font-weight: var(--sp-font-weight-semibold);
+}
+
+/* ---- Energy Detail Page ---- */
+
+.compact-energy-card {
+  flex: 1 1 200px;
+  max-width: 400px;
+  min-width: 200px;
+}
+
+.page-body.single-column.energy-detail-page {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sp-space-lg);
+  align-items: start;
+}
+
+.energy-detail-page .compact-energy-card {
+  flex: none;
+  max-width: none;
+  min-width: 0;
+}
+
+.compact-energy-list {
+  margin-top: var(--sp-space-xs);
+}
+
+/* ---- Scenes Panel ---- */
+
+.panel-scenes {
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-scenes .scene-grid {
+  min-height: 0;
+  flex: 1;
+  align-content: start;
+  overflow: hidden;
+}
+
+/* ---- Maintenance ---- */
+
+.maintenance-block {
+  margin-top: var(--sp-space-md);
+  padding-top: var(--sp-space-md);
+  border-top: var(--sp-border-w) solid var(--sp-border-subtle);
+}
+
+.maintenance-title {
+  margin-bottom: var(--sp-space-xs);
+}
+
+.maintenance-list {
+  display: grid;
+  gap: var(--sp-space-sm);
+  margin-top: var(--sp-space-md);
+}
+
+.maintenance-item {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr) auto;
+  gap: var(--sp-space-sm);
+  align-items: center;
+  color: var(--sp-text-secondary);
+  font-size: var(--sp-font-3xs);
+}
+
+.maintenance-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.maintenance-value {
+  font-weight: var(--sp-font-weight-semibold);
+  text-align: right;
+}
+
+.maintenance-dot {
+  width: var(--sp-space-sm);
+  height: var(--sp-space-sm);
+  border-radius: var(--sp-radius-infinite);
+  margin-top: 3px;
+}
+
+.maintenance-dot.warning {
+  background: var(--sp-warning);
+}
+
+.maintenance-dot.error {
+  background: var(--sp-error);
+}
+
+/* ==========================================================================
+   17. Scene Cards
+   ========================================================================== */
+
+.scene-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: end;
+  gap: var(--sp-space-sm);
+}
+
+.scenes-page {
+  grid-template-columns: repeat(auto-fill, minmax(var(--sp-scene-min-width), 1fr));
+  align-content: start;
+}
+
+.scene {
+  min-height: 78px;
+  border: 0;
+  border-radius: var(--sp-radius-sm);
+  color: var(--sp-text-primary);
+  padding: var(--sp-space-md);
+  background: var(--glass-regular);
+  text-align: center;
+  cursor: pointer;
+  box-shadow: var(--sp-shadow-glass), var(--glass-highlight);
+  backdrop-filter: var(--sp-blur-lg);
+  -webkit-backdrop-filter: var(--sp-blur-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-space-2xs);
+  border: var(--sp-border-w) solid var(--sp-border-glass);
+  transition:
+    transform var(--sp-duration-base) var(--sp-ease-glass),
+    box-shadow var(--sp-duration-base) var(--sp-ease-glass),
+    border-color var(--sp-duration-base) var(--sp-ease-glass);
+  min-width: 0;
+  overflow: hidden;
+}
+.scene strong {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scene:hover {
+  transform: scale(1.02);
+  border-color: var(--sp-border-glass);
+  box-shadow: var(--sp-shadow-sm);
+}
+
+
+.panel-scenes .scene {
+  min-height: 64px;
+  padding: var(--sp-space-sm);
+}
+
+.scene.morning { border-top:0.5px solid rgba(242,244,255,0.46); }
+.scene.night { border-top:0.5px solid rgba(242,244,255,0.44); }
+.scene.movie { border-top:0.5px solid rgba(255,255,255,0.30); }
+.scene.game { border-top:0.5px solid rgba(255,255,255,0.20); }
+
+.page-body.single-column > .maintenance-card { flex:1 1 200px; max-width:400px; min-width:200px; }
+
+/* ==========================================================================
+   18. View Visibility Rules
+   ========================================================================== */
+
+/* ---- Devices View ---- */
+
+.mc-app[data-view="devices"] .welcome-group,
+.mc-app[data-view="devices"] .panel-energy,
+.mc-app[data-view="devices"] .panel-scenes,
+.mc-app[data-view="devices"] .side {
+  display: none;
+}
+
+.mc-app[data-view="devices"] .bottom-stack {
+  grid-template-rows: auto;
+  align-self: stretch;
+}
+
+.mc-app[data-view="devices"] .panel-devices {
+  display: block;
+}
+
+.mc-app[data-view="devices"] .devices {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* ---- Rooms View ---- */
+
+.mc-app[data-view="rooms"] .welcome-group,
+.mc-app[data-view="rooms"] .panel-devices,
+.mc-app[data-view="rooms"] .panel-energy,
+.mc-app[data-view="rooms"] .panel-scenes,
+.mc-app[data-view="rooms"] .side {
+  display: none;
+}
+
+.mc-app[data-view="rooms"] .bottom-stack {
+  grid-template-rows: auto;
+  align-self: stretch;
+}
+
+.mc-app[data-view="rooms"] .page-body {
+  overflow: visible;
+}
+
+.mc-app[data-view="rooms"] .rooms {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.mc-app[data-view="rooms"] .room {
+  min-height: 220px;
+  aspect-ratio: unset;
+}
+
+/* ---- Scenes View ---- */
+
+.mc-app[data-view="scenes"] .welcome-group,
+.mc-app[data-view="scenes"] .bottom-stack,
+.mc-app[data-view="scenes"] .time-card,
+.mc-app[data-view="scenes"] .panel-energy,
+.mc-app[data-view="scenes"] .panel-media,
+.mc-app[data-view="scenes"] .panel-camera {
+  display: none;
+}
+
+.mc-app[data-view="scenes"] .side {
+  height: 100%;
+}
+
+.mc-app[data-view="scenes"] .panel-scenes {
+  display: block;
+  min-height: 100%;
+}
+
+.mc-app[data-view="scenes"] .scenes-page {
+  min-height: 100%;
+}
+
+/* ---- Energy View ---- */
+
+.mc-app[data-view="energy"] .welcome-group,
+.mc-app[data-view="energy"] .bottom-stack,
+.mc-app[data-view="energy"] .panel-scenes,
+.mc-app[data-view="energy"] .panel-media,
+.mc-app[data-view="energy"] .panel-camera {
+  display: none;
+}
+
+.mc-app[data-view="energy"] .side {
+  justify-self: end;
+  align-self: stretch;
+  width: 100%;
+  max-width: 360px;
+  height: 100%;
+  grid-template-rows: max-content minmax(0, 1fr);
+}
+
+.mc-app[data-view="energy"] .panel-energy {
+  display: block;
+  min-height: 0;
+  height: auto;
+}
+
+/* ==========================================================================
+   19. Responsive - Tablet (max-width: 1180px)
+   ========================================================================== */
+
+@media (max-width: 1180px) {
+  .mc-app {
+    grid-template-columns: 80px minmax(0, 1fr);
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .profile {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .profile .meta,
+  .nav-button span,
+  .sidebar-art {
+    display: none;
+  }
+
+  .profile-img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .nav-button {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .stage {
+    height: auto;
+    overflow: visible;
+  }
+
+  .stage-grid {
+    height: auto;
+    overflow: visible;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    grid-template-areas:
+      "welcome  side"
+      "bottom   side";
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .side {
+    height: auto;
+    grid-template-rows: auto;
+    overflow: visible;
+  }
+
+  .devices {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .devices-page-grid,
+  .scenes-page {
+    grid-template-columns: repeat(auto-fill, minmax(var(--sp-card-min-width), 1fr));
+  }
+
+  .mc-app[data-view="rooms"] .rooms {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .mc-app[data-view="scenes"] .scenes-page {
+    grid-template-columns: repeat(auto-fill, minmax(var(--sp-scene-min-width), 1fr));
+  }
+
+  .mc-app[data-view="rooms"] .room {
+    min-height: 90px;
+  }
+
+  .rooms {
+    gap: var(--sp-space-sm);
+    align-content: start;
+  }
+
+  .room {
+    aspect-ratio: unset;
+    min-height: 80px;
+  }
+}
+
+/* ==========================================================================
+   20. Responsive - Mobile (max-width: 760px)
+   ========================================================================== */
+
+@media (orientation: portrait) {
+  :host {
+    --sp-sidebar-width: 0;
+    --sp-font-xxl: 24px;
+    --sp-font-xl:  20px;
+    --sp-font-lg:  16px;
+    --sp-font-md:  13px;
+    --sp-font-sm:  12px;
+    --sp-font-xs:  11px;
+    --sp-font-2xs: 10px;
+    --sp-font-3xs: 9px;
+    --sp-font-4xs: 8px;
+    --sp-space-xl: 16px;
+    --sp-space-lg: 12px;
+    --sp-space-md: 8px;
+    --sp-space-sm: 6px;
+    --sp-space-xs: 4px;
+    --sp-space-2xs: 3px;
+    --sp-space-3xs: 2px;
+    --sp-app-padding: 10px;
+  }
+
+  .mc-app {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto !important;
+    min-height: 100vh !important;
+    padding: var(--sp-space-sm);
+    overflow: visible;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .stage {
+    height: auto;
+    overflow: visible;
+  }
+
+  .stage-grid,
+  .page-shell {
+    height: auto;
+    padding: var(--sp-space-lg);
+    overflow: visible;
+  }
+
+  .stage-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "welcome" "side" "bottom";
+    grid-template-rows: auto auto auto;
+  }
+
+  .welcome-group .weather-row {
+    width: 100%;
+    margin-top: var(--sp-space-lg);
+  }
+
+  .side {
+    height: auto;
+    grid-template-rows: auto;
+    overflow: visible;
+  }
+
+  .bottom-stack {
+    gap: var(--sp-space-xs);
+  }
+
+  /* ---- Mobile Nav Bar ---- */
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    background: var(--glass-thin);
+    backdrop-filter: var(--sp-blur-lg);
+    -webkit-backdrop-filter: var(--sp-blur-lg);
+    border-top: var(--sp-border-w) solid var(--sp-border-glass);
+    padding: var(--sp-space-xs) var(--sp-space-sm);
+    justify-content: space-around;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.04);
+  }
+
+  .mobile-nav .nav-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: 0;
+    color: var(--sp-text-tertiary);
+    cursor: pointer;
+    padding: 8px 12px;
+    font-size: var(--sp-font-xs);
+    font-weight: var(--sp-font-weight-medium);
+    min-width: 48px;
+    min-height: auto;
+    backdrop-filter: none;
+  }
+
+  .mobile-nav .nav-button:hover,
+  .mobile-nav .nav-button.active {
+    color: var(--sp-text-primary);
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .mobile-nav .nav-button ha-icon {
+    --mdc-icon-size: 24px;
+  }
+
+  .mobile-nav .nav-button span {
+    display: block;
+    font-size: var(--sp-font-2xs);
+    white-space: nowrap;
+  }
+
+  .stage {
+    padding-bottom: 64px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .devices,
+  .rooms,
+  .scene-grid,
+  .devices-page-grid,
+  .rooms-page,
+  .rooms-page-medium,
+  .rooms-page-dense,
+  .security-cameras {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .security-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .security-devices {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .mc-app[data-view="devices"] .devices,
+  .mc-app[data-view="rooms"] .rooms,
+  .mc-app[data-view="scenes"] .scenes-page {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .panel-energy,
+  .mc-app[data-view="energy"] .side {
+    max-width: none;
+    width: 100%;
+  }
+
+  .page-body.single-column.energy-detail-page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mc-app[data-view="devices"] .side,
+  .mc-app[data-view="rooms"] .side {
+    display: none;
+  }
+
+  .mc-app[data-view="scenes"] .bottom-stack,
+  .mc-app[data-view="energy"] .bottom-stack {
+    display: none;
+  }
+
+  .profile-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .item-img,
+  .item-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .device {
+    min-height: 120px;
+  }
+
+  .room {
+    min-height: 160px;
+  }
+
+  .mc-app[data-view="rooms"] .room {
+    min-height: 160px;
+  }
+
+  .room-scene-chip {
+    padding: 2px 10px;
+    max-width: 110px;
+  }
+}
+
+/* ==========================================================================
+   21. Responsive - Small Mobile (max-width: 520px)
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  :host {
+    --sp-font-xxl: 20px;
+    --sp-font-xl:  17px;
+    --sp-font-lg:  14px;
+    --sp-font-md:  12px;
+    --sp-font-sm:  11px;
+    --sp-font-xs:  10px;
+    --sp-font-2xs: 9px;
+    --sp-font-3xs: 8px;
+    --sp-font-4xs: 7px;
+    --sp-space-xl: 12px;
+    --sp-space-lg: 10px;
+    --sp-space-md: 6px;
+    --sp-space-sm: 4px;
+    --sp-space-xs: 3px;
+    --sp-space-2xs: 2px;
+    --sp-space-3xs: 2px;
+    --sp-app-padding: 6px;
+  }
+
+  .page-body.single-column.energy-detail-page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .profile-img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .item-img,
+  .item-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .device {
+    min-height: 90px;
+  }
+
+  .room-scene-chip {
+    padding: 1px 8px;
+    max-width: 90px;
+    font-size: var(--sp-font-xs);
+  }
+}
+
+/* ==========================================================================
+   22. Editor / Strategy Dialog
+   ========================================================================== */
+
+
+
+.sp-wrap {
+  display: grid;
+  gap: var(--sp-space-lg);
+  padding: var(--sp-space-xl);
+  background: rgba(7,9,13,0.3);
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.sp-card {
+  border: var(--sp-border-w) solid var(--sp-border-glass);
+  border-radius: var(--sp-radius-lg);
+  padding: var(--sp-space-lg);
+  display: grid;
+  gap: var(--sp-space-md);
+  background: var(--glass-regular);
+  backdrop-filter: var(--sp-blur-lg);
+  -webkit-backdrop-filter: var(--sp-blur-lg);
+  box-shadow: var(--sp-shadow-card), var(--glass-highlight);
+}
+
+.sp-card h3 {
+  margin: 0;
+  font-size: var(--sp-font-md);
+  color: var(--sp-text-primary);
+}
+
+.sp-card p {
+  margin: 0;
+  color: var(--sp-text-secondary);
+  font-size: var(--sp-font-xs);
+}
+
+.sp-card label {
+  display: grid;
+  gap: var(--sp-space-2xs);
+}
+
+.sp-card label span {
+  font-size: var(--sp-font-2xs);
+  font-weight: var(--sp-font-weight-medium);
+  color: var(--sp-text-secondary);
+}
+
+.sp-card input:not([type="checkbox"]),
+.sp-card select {
+  min-height: 40px;
+  padding: var(--sp-space-xs) var(--sp-space-sm);
+  border: var(--sp-border-w) solid var(--sp-border-glass);
+  border-radius: var(--sp-radius-xs);
+  font: inherit;
+  box-sizing: border-box;
+  width: 100%;
+  background: rgba(242,244,255,0.14);
+  color: var(--sp-text-primary);
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  transition: border-color var(--sp-duration-fast) var(--sp-ease-glass);
+}
+
+.sp-card select option {
+  background: rgba(7,9,13,0.78);
+  color: #FFFFFF;
+}
+
+.sp-card input:focus,
+.sp-card select:focus {
+  border-color: var(--sp-border-glass);
+  box-shadow: 0 0 0 3px rgba(242,244,255,0.14);
+}
+
+.sp-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--sp-space-md);
+}
+
+
+
+
+
+
+
+.sp-card button {
+  min-height: 38px;
+  border: var(--sp-border-w) solid var(--sp-border-glass);
+  border-radius: var(--sp-radius-md);
+  background: rgba(242,244,255,0.14);
+  color: var(--sp-text-primary);
+  padding: 0 var(--sp-space-lg);
+  cursor: pointer;
+  font: inherit;
+  font-weight: var(--sp-font-weight-medium);
+  font-size: var(--sp-font-xs);
+  white-space: nowrap;
+  transition:
+    background var(--sp-duration-fast) var(--sp-ease-glass),
+    transform var(--sp-duration-fast) var(--sp-ease-glass);
+}
+
+.sp-card button:hover {
+  background: rgba(242,244,255,0.2);
+  transform: translateY(-1px);
+}
+
+
+
+.sp-list {
+  display: grid;
+  gap: var(--sp-space-xs);
+}
+
+.sp-list .selector-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--sp-space-xs);
+  align-items: center;
+}
+
+.sp-del {
+  min-height: 36px;
+  min-width: 36px;
+  border: var(--sp-border-w) solid var(--sp-border-glass);
+  border-radius: var(--sp-radius-xs);
+  background: rgba(242,244,255,0.14);
+  color: var(--sp-text-primary);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--sp-font-md);
+  display: grid;
+  place-items: center;
+  transition: background var(--sp-duration-fast) var(--sp-ease-glass);
+}
+
+.sp-del:hover {
+  background: rgba(242,244,255,0.2);
+}
+
+.sp-add {
+  min-height: 36px;
+  border: var(--sp-border-w) dashed var(--sp-border-glass);
+  border-radius: var(--sp-radius-xs);
+  background: rgba(255,255,255,0.06);
+  color: var(--sp-text-secondary);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--sp-font-lg);
+  margin-top: var(--sp-space-xs);
+  transition:
+    background var(--sp-duration-fast) var(--sp-ease-glass),
+    border-color var(--sp-duration-fast) var(--sp-ease-glass);
+}
+
+.sp-add:hover {
+  background: rgba(242,244,255,0.14);
+  border-color: var(--sp-border-glass);
+}
+
+/* ==========================================================================
+   23. Utility / Micro-interactions
+   ========================================================================== */
+
+.muted {
+  color: var(--sp-text-secondary);
+  font-size: var(--sp-font-3xs);
+  letter-spacing: var(--sp-letter-spacing-wide);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration:0.01ms !important; animation-duration:0.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; }
+}
+@media (max-width: 450px) {
+  .sp-wrap { padding:var(--sp-space-md); }
+  .nav-overlay { align-items:stretch; padding:0; }
+  .nav-dialog { max-width:none; width:100%; min-height:100%; border-radius:0; padding:var(--sp-space-lg); }
+}
+@media (orientation: landscape) and (max-height: 768px) {
+  :host {
+    --sp-app-padding: 6px;
+    --sp-space-xl: 8px;
+    --sp-space-lg: 6px;
+    --sp-space-md: 5px;
+    --sp-space-sm: 4px;
+    --sp-space-xs: 3px;
+    --sp-space-2xs: 2px;
+    --sp-space-3xs: 2px;
+  }
+  .mc-app { height: 100dvh !important; min-height: 100dvh !important; overflow: hidden; gap: 6px; }
+  .sidebar { padding: var(--sp-space-xs); }
+  .sidebar-art { display: none; }
+  .nav-button { min-height: 36px; padding: 4px; gap: 4px; }
+  .nav-button span { display: none; }
+  .profile { padding: 4px 0; justify-content: center; }
+  .profile .meta { display: none; }
+  .profile-img { width: 36px; height: 36px; }
+  .stage { overflow: hidden; }
+  .stage-grid { height: 100%; padding: var(--sp-space-sm); gap: var(--sp-space-sm); overflow: hidden; grid-template-columns: minmax(0,2fr) 220px; grid-template-rows: auto minmax(0,1fr) auto; }
+  .welcome h1 { font-size: var(--sp-font-lg); margin: 0; }
+  .quote { display: none; }
+  .weather-with-meta { margin-top: var(--sp-space-xs); }
+  .section-title { margin-bottom: var(--sp-space-xs); }
+  .section-title h2 { font-size: var(--sp-font-sm); margin: 0; }
+  .section-title p { display: none; }
+  .bottom-stack { gap: var(--sp-space-xs); }
+  .device { min-height: 64px; padding: var(--sp-space-sm); }
+  .device-name { font-size: var(--sp-font-xs); }
+  .devices-page-grid .device { min-height: 64px; }
+  .scene { min-height: 48px; padding: var(--sp-space-xs) var(--sp-space-sm); }
+  .room { min-height: 64px; }
+  .mc-app[data-view="rooms"] .room { min-height: 130px; }
+  .side { gap: var(--sp-space-sm); }
+  .glass-card, .panel-energy, .panel-media, .panel-camera { padding: var(--sp-space-sm); }
+  .panel-scenes { padding: var(--sp-space-sm); }
+  .time-card { padding: var(--sp-space-xs) var(--sp-space-md); }
+  .time-main { font-size: var(--sp-font-md); }
+  .time-icon { width: 30px; height: 30px; }
+  .env-list { gap: var(--sp-space-2xs); margin-top: var(--sp-space-2xs); }
+  .env-row { min-height: 20px; font-size: var(--sp-font-2xs); }
+  .energy-value { font-size: var(--sp-font-lg); margin-top: 0; }
+  .energy-value small { font-size: var(--sp-font-2xs); }
+  .bars { height: 32px; margin-top: 4px; padding: 0; }
+  .compact-energy-bars { height: 32px; margin-top: 4px; }
+  .page-shell { padding: var(--sp-space-sm); gap: var(--sp-space-sm); height: 100%; }
+  .page-header { flex-direction: row; align-items: center; gap: var(--sp-space-sm); }
+  .page-header h1 { font-size: var(--sp-font-md); margin: 0; }
+  .page-header .quote { display: none; }
+  .page-controls { flex-shrink: 0; }
+  .filter-bar { flex-wrap: wrap; gap: var(--sp-space-xs); }
+  .chip, .filter-select, .action-btn { min-height: 26px; padding: 0 8px; font-size: var(--sp-font-2xs); }
+  .page-scroll { padding-right: 0; }
+  .rooms-page-wrap { overflow: hidden; }
+  .room-label { left: 6px; right: 6px; bottom: 4px; }
+  .room-label h3 { font-size: var(--sp-font-xs); }
+  .room-label .muted { font-size: var(--sp-font-3xs); }
+  .room-scene-chip { padding: 1px 8px; font-size: var(--sp-font-3xs); max-width: 80px; }
+  .room-active-chip { padding: 1px 8px; font-size: var(--sp-font-3xs); }
+  .camera-preview { aspect-ratio: 16/9; min-height: 60px; }
+
+}
+
+/* ==========================================================================
+   Noir local refinements: live CCTV, embedded HUD, theme tint
+   ========================================================================== */
+
+.camera-preview.camera-live {
+  position: relative;
+  overflow: hidden;
+  min-height: 150px;
+  background: var(--sp-camera-bg);
+}
+
+.panel-camera .camera-preview.camera-live {
+  min-height: clamp(150px, 18vh, 230px);
+}
+
+.camera-preview.camera-live .camera-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.camera-preview.camera-live:has(.live-camera-mount) .camera-fallback {
+  display: none !important;
+}
+
+.camera-preview.camera-live .live-camera-mount {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+.camera-preview.camera-live .live-camera-mount > *,
+.camera-preview.camera-live hui-picture-entity-card,
+.camera-preview.camera-live ha-card {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  border-radius: 0;
+  overflow: hidden;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  --ha-card-border-radius: 0;
+  --ha-card-box-shadow: none;
+  --ha-card-background: transparent;
+  --ha-card-border-width: 0;
+}
+
+.panel-camera {
+  cursor: default;
+}
+
+.camera-meta-button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+@media (min-width: 1500px) {
+  .mc-app[data-view="home"] .welcome-meta {
+    position: absolute !important;
+    top: clamp(28px, 4.6vh, 52px) !important;
+    right: calc(clamp(296px, 17vw, 348px) + var(--sp-space-xl)) !important;
+    left: auto !important;
+    width: clamp(292px, 17vw, 328px) !important;
+    max-width: 328px !important;
+    min-height: 58px;
+    max-height: 70px;
+    box-sizing: border-box;
+    display: grid;
+    align-content: center;
+    gap: 2px;
+    padding: 8px 12px !important;
+    overflow: hidden;
+    border-radius: 0 !important;
+    background:
+      linear-gradient(90deg, rgba(242,244,255,0.26), rgba(242,244,255,0.1) 62%, rgba(242,244,255,0.03)),
+      radial-gradient(circle at 8% 16%, rgba(214,178,109,0.16), transparent 44%) !important;
+    border: 0 !important;
+    box-shadow:
+      inset 0 1px 0 rgba(242,244,255,0.18),
+      inset 0 -16px 26px rgba(7,9,13,0.1),
+      0 10px 28px rgba(7,9,13,0.14) !important;
+    backdrop-filter: blur(12px) saturate(1.14) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(1.14) !important;
+    pointer-events: none;
+  }
+
+  .mc-app[data-view="home"] .welcome-meta::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, rgba(214,178,109,0.62), transparent);
+    opacity: 0.45;
+  }
+
+  .mc-app[data-view="home"] .welcome-meta .time-main {
+    font-size: clamp(30px, 1.95vw, 38px) !important;
+    line-height: 0.94;
+    font-weight: 760;
+    color: rgba(242,244,255,0.98) !important;
+    text-shadow: 0 8px 22px rgba(7,9,13,0.3);
+  }
+}
+
+:host {
+  --glass-thin: rgba(242,244,255,0.26);
+  --glass-regular: rgba(242,244,255,0.2);
+  --glass-thick: rgba(242,244,255,0.14);
+  --glass-ultra-thick: rgba(242,244,255,0.44);
+  --glass-knob: #F2F4FF;
+  --sp-app-overlay:
+    radial-gradient(ellipse 58% 54% at 52% 2%, rgba(142,163,255,0.22) 0%, rgba(214,178,109,0.13) 36%, rgba(7,9,13,0.16) 68%, rgba(7,9,13,0.1) 100%),
+    radial-gradient(ellipse 44% 36% at 88% 12%, rgba(214,178,109,0.14) 0%, transparent 58%),
+    radial-gradient(ellipse 38% 34% at 12% 88%, rgba(142,163,255,0.13) 0%, transparent 60%);
+  --sp-stage-overlay:
+    linear-gradient(180deg, rgba(242,244,255,0.02) 0%, rgba(7,9,13,0.08) 52%, rgba(7,9,13,0.18) 100%),
+    radial-gradient(ellipse 60% 42% at 82% 8%, rgba(214,178,109,0.14) 0%, transparent 58%);
+  --sp-room-overlay:
+    linear-gradient(180deg, rgba(7,9,13,0.02) 5%, rgba(7,9,13,0.18) 48%, rgba(7,9,13,0.44) 100%);
+  --sp-text-primary: #F2F4FF;
+  --sp-text-secondary: rgba(242,244,255,0.84);
+  --sp-text-tertiary: rgba(242,244,255,0.64);
+  --sp-text-quaternary: rgba(242,244,255,0.42);
+  --sp-border-glass: rgba(242,244,255,0.42);
+  --sp-shadow-card: 0 10px 30px rgba(7,9,13,0.22), 0 0 0 1px rgba(242,244,255,0.07) inset;
+  --sp-shadow-glass: 0 12px 34px rgba(7,9,13,0.24), 0 0 0 1px rgba(242,244,255,0.08) inset;
+}
+
+.stage {
+  background-image: var(--sp-stage-overlay), var(--sp-stage-texture);
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.sidebar,
+.weather-row,
+.device,
+.metric-card,
+.energy-panel,
+.scenes-panel,
+.rooms-panel,
+.panel-scenes,
+.page-shell,
+.room,
+.scene,
+.info-card,
+.forecast-day {
+  background-color: rgba(7,9,13,0.34);
+  border-color: rgba(242,244,255,0.3);
+}
+
+.nav-button.active,
+.nav-button:hover,
+.chip.active,
+.action-btn:hover {
+  background: rgba(142,163,255,0.22);
+  border-color: rgba(214,178,109,0.4);
+}
+
+.device h3,
+.room h3,
+.scene h3,
+.metric-card h3,
+.energy-panel h3,
+.info-card h3 {
+  text-shadow: 0 2px 8px rgba(7,9,13,0.52);
+}
+
+.item-img,
+.room img,
+.profile-img,
+.sidebar-art img {
+  filter: saturate(1.07) brightness(1.04);
+}
+
+/* ========================================================================
+   Low-vision accessibility layer - WCAG-informed high-contrast presentation
+   - opaque surfaces prevent wallpaper from reducing text contrast
+   - wide focus indicators and persistent state boundaries supplement colour
+   - 48px minimum control height and enlarged type reduce visual precision load
+   ======================================================================== */
+
+:host {
+  --sp-stage-texture: none;
+  --sp-bg: #101820;
+  --sp-accent: #163A5F;
+  --sp-accent-hover: #234E7B;
+  --sp-accent-alpha: color-mix(in srgb, #163A5F 26%, transparent);
+  --sp-accent-border: #9C5A00;
+  --sp-focus: #9C5A00;
+  --sp-warning: #F2B134;
+  --sp-error: #FF8A8A;
+  --sp-text-primary: #101820;
+  --sp-text-secondary: #243B54;
+  --sp-text-tertiary: #40556C;
+  --sp-text-quaternary: #40556C;
+  --sp-text-on-accent: #FFFFFF;
+  --sp-card-bg: #FFFCF4;
+  --sp-surface-bg: #F1E8D6;
+  --sp-panel-bg: #FFFFFF;
+  --sp-device-bg: #FFF7E6;
+  --glass-thin: #FFFCF4;
+  --glass-regular: #FFFCF4;
+  --glass-thick: #F1E8D6;
+  --glass-ultra-thick: #FFFFFF;
+  --glass-knob: #101820;
+  --sp-border-w: 2px;
+  --sp-border-glass: #163A5F;
+  --sp-border-subtle: #163A5F;
+  --sp-border-medium: #163A5F;
+  --sp-shadow-sm: 0 2px 0 #101820;
+  --sp-shadow-md: 0 3px 0 #101820;
+  --sp-shadow-lg: 0 4px 0 #101820;
+  --sp-shadow-card: 0 3px 0 #101820;
+  --sp-shadow-glass: 0 3px 0 #101820;
+  --sp-blur-lg: none;
+  --sp-blur-sm: none;
+  --sp-blur-2xs: none;
+  --sp-font-xxl: 36px;
+  --sp-font-xl: 30px;
+  --sp-font-lg: 23px;
+  --sp-font-md: 18px;
+  --sp-font-sm: 16px;
+  --sp-font-xs: 14px;
+  --sp-font-2xs: 13px;
+  --sp-font-3xs: 12px;
+  --sp-font-weight-regular: 500;
+  --sp-font-weight-medium: 650;
+  --sp-font-weight-semibold: 750;
+  --sp-font-weight-bold: 800;
+  --sp-letter-spacing-tight: 0;
+  --sp-letter-spacing-wide: 0.02em;
+  --sp-row-height: 92px;
+  --sp-bar-min: 14px;
+  --sp-switch-on-bg: #F2B134;
+  --sp-switch-off-bg: #344454;
+  --sp-runtime-height: 560px;
+  --sp-runtime-min-height: 560px;
+  color: var(--sp-text-primary);
+  background: var(--sp-bg);
+}
+
+.mc-app,
+.stage,
+.sidebar,
+.page-shell,
+.glass-card,
+.time-card,
+.device,
+.room,
+.scene,
+.panel-energy,
+.panel-scenes,
+.panel-media,
+.panel-camera,
+.env-row,
+.weather-block,
+.weather-forecast,
+.metric-card,
+.info-card,
+.forecast-day,
+.chip,
+.action-btn,
+.filter-select,
+.nav-button {
+  color: var(--sp-text-primary) !important;
+  border: var(--sp-border-w) solid var(--sp-border-glass) !important;
+  box-shadow: var(--sp-shadow-card) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.mc-app {
+  background: var(--sp-bg) !important;
+}
+
+.stage {
+  background-image:
+    linear-gradient(90deg, color-mix(in srgb, #101820 94%, transparent), color-mix(in srgb, #101820 78%, transparent)),
+    linear-gradient(180deg, color-mix(in srgb, #101820 78%, transparent), color-mix(in srgb, #101820 92%, transparent)),
+    var(--sp-stage-texture) !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.sidebar,
+.page-shell,
+.glass-card,
+.time-card,
+.device,
+.scene,
+.panel-energy,
+.panel-scenes,
+.panel-media,
+.panel-camera,
+.env-row,
+.weather-block,
+.weather-forecast,
+.metric-card,
+.info-card,
+.forecast-day {
+  background: var(--sp-card-bg) !important;
+}
+
+.room {
+  background-color: var(--sp-card-bg) !important;
+}
+
+.device h3,
+.device-name,
+.room h3,
+.room-label h3,
+.scene h3,
+.scene-title,
+.page-header h1,
+.welcome h1,
+.time-main,
+.energy-value,
+.nav-button,
+.chip,
+.action-btn,
+.filter-select {
+  color: var(--sp-text-primary) !important;
+  font-weight: var(--sp-font-weight-bold) !important;
+  text-shadow: none !important;
+}
+
+.muted,
+.device-subtitle,
+.room-label .muted,
+.scene p,
+.quote,
+.env-row,
+.forecast-day,
+.weather-forecast {
+  color: var(--sp-text-secondary) !important;
+  opacity: 1 !important;
+}
+
+.nav-button,
+.action-btn,
+.chip,
+.filter-select,
+.scene,
+.device,
+.env-row,
+.room {
+  min-height: 48px;
+}
+
+.nav-button.active,
+.nav-button[aria-current="page"],
+.chip.active,
+.scene.active,
+.scene[aria-pressed="true"],
+.device.active,
+.device[data-state="on"],
+[aria-selected="true"],
+[aria-pressed="true"] {
+  border-width: 4px !important;
+  border-color: var(--sp-focus) !important;
+  box-shadow: inset 8px 0 0 #101820, var(--sp-shadow-card) !important;
+  font-weight: 800 !important;
+}
+
+.nav-button.active::after,
+.chip.active::after,
+.scene.active::after,
+.device.active::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-inline-start: 8px;
+  border: 3px solid #101820;
+  border-radius: 50%;
+  background: var(--sp-focus);
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+.nav-button:focus-visible,
+.action-btn:focus-visible,
+.chip:focus-visible,
+.device:focus-visible,
+.room:focus-visible,
+.scene:focus-visible,
+[tabindex]:focus-visible {
+  outline: 4px solid var(--sp-focus) !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 0 8px #101820, 0 0 0 12px var(--sp-focus) !important;
+}
+
+.weather-block,
+.weather-forecast,
+.time-card,
+.panel-energy,
+.panel-scenes,
+.env-row,
+.scene-grid {
+  border-radius: var(--sp-radius-lg) !important;
+}
+
+.scene.morning,
+.scene.night,
+.scene.movie,
+.scene.game,
+.panel-scenes .scene {
+  border-top: 4px solid var(--sp-focus) !important;
+}
+
+@media (prefers-contrast: more) {
+  :host {
+    --sp-card-bg: #000000;
+    --sp-surface-bg: #000000;
+    --sp-panel-bg: #000000;
+    --sp-device-bg: #000000;
+    --sp-border-glass: #FFFFFF;
+    --sp-text-secondary: #FFFFFF;
+  }
+
+  .stage { background-image: none !important; background-color: #000000 !important; }
+  .sidebar, .page-shell, .glass-card, .time-card, .device, .room, .scene, .panel-energy, .panel-scenes { background: #000000 !important; }
+}
+
+@media (forced-colors: active) {
+  .nav-button, .action-btn, .chip, .device, .room, .scene, .glass-card, .time-card {
+    forced-color-adjust: auto;
+    border: 2px solid CanvasText !important;
+  }
+}
+
+@media (max-width: 640px) {
+  :host {
+    --sp-font-xxl: 30px;
+    --sp-font-xl: 26px;
+    --sp-font-lg: 21px;
+    --sp-font-md: 18px;
+    --sp-font-sm: 16px;
+    --sp-font-xs: 14px;
+  }
+
+  .nav-button, .action-btn, .chip, .filter-select { min-height: 52px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================================================
+   Low-vision final contrast pass - official preview readability
+   ======================================================================== */
+:host {
+  --sp-lowvision-text: #FFFFFF;
+  --sp-lowvision-ink: #061521;
+  --sp-lowvision-outline: rgba(0, 0, 0, 0.78);
+  --sp-lowvision-room-label-bg: rgba(0, 0, 0, 0.74);
+  --sp-lowvision-card-border: #061521;
+}
+.welcome h1,
+.section-title h2,
+.section-title p,
+.quote,
+.weather-current-temp,
+.weather-current-hl,
+.weather-current-cond,
+.forecast-weekday,
+.forecast-high,
+.forecast-low {
+  color: var(--sp-lowvision-text) !important;
+  text-shadow: 0 2px 4px var(--sp-lowvision-outline), 0 0 1px var(--sp-lowvision-outline) !important;
+}
+.section-title h2 {
+  font-size: max(var(--sp-font-lg), 20px) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em;
+}
+.section-title p,
+.quote,
+.muted,
+.time-sub,
+.env-label,
+.device-name,
+.state-word,
+.media-title,
+.media-artist,
+.media-source {
+  font-size: max(var(--sp-font-xs), 14px) !important;
+}
+.device-name,
+.room-label h3,
+.scene strong,
+.env-value,
+.energy-value,
+.time-main {
+  font-weight: 800 !important;
+}
+.room::after {
+  background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.44) 42%, rgba(0,0,0,0.86) 100%) !important;
+}
+.room-label {
+  left: 12px !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  padding: 10px 12px !important;
+  border-radius: 14px !important;
+  background: var(--sp-lowvision-room-label-bg) !important;
+  border: 2px solid rgba(255,255,255,0.82) !important;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.75) !important;
+}
+.room-label h3,
+.room-label .muted,
+.room-stats {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 3px #000000 !important;
+  font-size: max(var(--sp-font-sm), 15px) !important;
+}
+.room-scene-chip,
+.room-active-chip,
+.status,
+.chip,
+.action-btn,
+.media-btn,
+.media-volbtn,
+.nav-button {
+  min-height: 44px !important;
+  border-width: 2px !important;
+}
+.device,
+.glass-card,
+.time-card,
+.panel-energy,
+.panel-media,
+.panel-scenes,
+.scene {
+  border-width: 2px !important;
+}
+.bars span,
+.energy-bar,
+.bar,
+.media-volfill {
+  background: var(--sp-accent) !important;
+  opacity: 1 !important;
+  min-height: 18px !important;
+  box-shadow: 0 0 0 1px var(--sp-lowvision-outline) !important;
+}
+.weather-block,
+.weather-forecast {
+  min-width: 320px !important;
+}
+.forecast-day {
+  min-width: 48px !important;
+  padding: 2px 4px !important;
+}
+
+/* ========================================================================
+   Low-vision PR gate pass - enlarged readable runtime preview
+   ======================================================================== */
+:host {
+  --sp-font-xxl: 42px;
+  --sp-font-xl: 34px;
+  --sp-font-lg: 26px;
+  --sp-font-md: 20px;
+  --sp-font-sm: 18px;
+  --sp-font-xs: 16px;
+  --sp-font-2xs: 15px;
+  --sp-font-3xs: 14px;
+  --sp-space-lg: 18px;
+  --sp-space-md: 14px;
+  --sp-border-w: 2px;
+}
+.mc-app {
+  background-color: var(--sp-bg) !important;
+}
+.sidebar,
+.stage,
+.glass-card,
+.time-card,
+.panel-energy,
+.panel-media,
+.panel-scenes,
+.device,
+.scene,
+.weather-row,
+.chip,
+.action-btn {
+  border-width: 2px !important;
+}
+.nav-button {
+  min-height: 52px !important;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: var(--sp-text-primary) !important;
+  background: rgba(255,255,255,0.10) !important;
+}
+.nav-button.active,
+.nav-button:hover {
+  background: var(--sp-accent) !important;
+  color: var(--sp-text-on-accent) !important;
+  outline: 3px solid var(--sp-focus, var(--sp-accent-hover)) !important;
+  outline-offset: 2px !important;
+}
+.profile h2,
+.profile .muted,
+.nav-button span,
+.welcome h1,
+.quote,
+.section-title h2,
+.section-title p,
+.weather-current-temp,
+.weather-current-hl,
+.weather-current-cond,
+.forecast-weekday,
+.forecast-high,
+.forecast-low,
+.device-name,
+.state-word,
+.room-label h3,
+.room-label .muted,
+.room-stats,
+.scene strong,
+.scene span,
+.time-main,
+.time-sub,
+.env-label,
+.env-value,
+.energy-value,
+.energy-footer,
+.media-title,
+.media-artist,
+.media-source,
+.media-off-state,
+.status {
+  -webkit-text-stroke: 0 !important;
+  text-shadow: 0 2px 3px rgba(0,0,0,0.78), 0 0 1px rgba(0,0,0,0.90) !important;
+}
+.section-title h2,
+.welcome h1 {
+  font-size: 28px !important;
+  line-height: 1.12 !important;
+  color: #FFFFFF !important;
+}
+.section-title p,
+.quote,
+.device-name,
+.state-word,
+.media-title,
+.media-artist,
+.media-source,
+.env-label,
+.env-value,
+.status {
+  font-size: 18px !important;
+  line-height: 1.25 !important;
+}
+.muted,
+.time-sub,
+.energy-footer,
+.forecast-weekday,
+.forecast-high,
+.forecast-low,
+.weather-current-cond {
+  font-size: 16px !important;
+  line-height: 1.25 !important;
+}
+.weather-current-temp,
+.time-main,
+.energy-value {
+  color: var(--sp-text-primary) !important;
+  font-size: 36px !important;
+  font-weight: 900 !important;
+}
+.devices {
+  gap: 16px !important;
+}
+.device {
+  min-height: 172px !important;
+  padding: 18px !important;
+  background: var(--sp-card-bg) !important;
+  border-color: var(--sp-border-glass) !important;
+}
+.item-img,
+.item-icon {
+  width: 58px !important;
+  height: 58px !important;
+  flex: 0 0 auto !important;
+}
+.rooms {
+  gap: 16px !important;
+}
+.room {
+  min-height: 132px !important;
+}
+.room::after {
+  background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.42) 34%, rgba(0,0,0,0.90) 100%) !important;
+}
+.room-label {
+  background: rgba(0,0,0,0.86) !important;
+  border: 3px solid #FFFFFF !important;
+  padding: 12px 14px !important;
+  border-radius: 16px !important;
+}
+.room-label h3,
+.room-label .muted,
+.room-stats {
+  color: #FFFFFF !important;
+  font-size: 18px !important;
+  line-height: 1.2 !important;
+}
+.side {
+  gap: 14px !important;
+}
+.glass-card,
+.time-card,
+.panel-energy,
+.panel-media,
+.panel-scenes {
+  background: var(--sp-panel-bg) !important;
+  border-color: var(--sp-border-glass) !important;
+}
+.bars span,
+.media-volfill {
+  min-height: 20px !important;
+  background: var(--sp-accent) !important;
+  opacity: 1 !important;
+}
+.media-btn,
+.media-volbtn,
+.action-btn,
+.scene,
+.chip,
+.status {
+  min-height: 48px !important;
+  min-width: 48px !important;
+}
+.weather-forecast {
+  gap: 10px !important;
+}
+.forecast-day {
+  min-width: 58px !important;
+  padding: 4px 6px !important;
+  border-radius: 12px !important;
+  background: rgba(0,0,0,0.38) !important;
+}
+
+/* ========================================================================
+   Low-vision shared layout baseline - layout/readability fixes for all 10 themes
+   Goal: keep per-theme color language, fix shared clipping/crowding/size issues
+   ======================================================================== */
+:host {
+  --sp-runtime-height: min(92vh, 920px);
+  --sp-runtime-min-height: 720px;
+  --sp-app-padding: 24px;
+  --sp-sidebar-width: 240px;
+  --sp-space-3xs: 6px;
+  --sp-space-2xs: 8px;
+  --sp-space-xs: 10px;
+  --sp-space-sm: 12px;
+  --sp-space-md: 16px;
+  --sp-space-lg: 20px;
+  --sp-space-xl: 28px;
+  --sp-border-w: 2px;
+  --sp-font-xxl: 42px;
+  --sp-font-xl: 34px;
+  --sp-font-lg: 26px;
+  --sp-font-md: 20px;
+  --sp-font-sm: 18px;
+  --sp-font-xs: 16px;
+  --sp-font-2xs: 15px;
+  --sp-font-3xs: 14px;
+  --sp-font-4xs: 14px;
+  --sp-lv-control-min: 48px;
+  --sp-lv-control-comfort: 52px;
+  --sp-lv-card-pad: 18px;
+  --sp-lv-device-min: 176px;
+  --sp-lv-scene-min: 56px;
+  --sp-lv-side-gap: 16px;
+}
+
+.mc-app {
+  height: var(--sp-runtime-height) !important;
+  min-height: var(--sp-runtime-min-height) !important;
+  padding: var(--sp-app-padding) !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.sidebar {
+  width: var(--sp-sidebar-width) !important;
+  min-width: var(--sp-sidebar-width) !important;
+  gap: var(--sp-space-md) !important;
+  padding: var(--sp-space-lg) !important;
+  overflow: hidden !important;
+}
+
+.menu {
+  gap: var(--sp-space-sm) !important;
+  overflow: auto !important;
+  min-height: 0 !important;
+  padding-right: 4px !important;
+}
+
+.nav-button {
+  min-height: var(--sp-lv-control-comfort) !important;
+  padding: 12px 14px !important;
+  gap: 12px !important;
+  border-width: 2px !important;
+  border-style: solid !important;
+  border-color: color-mix(in srgb, var(--sp-border-glass) 72%, transparent) !important;
+  font-size: 18px !important;
+  line-height: 1.25 !important;
+}
+
+.nav-button:not(.active):not([aria-current="page"]) {
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+.nav-button.active,
+.nav-button[aria-current="page"] {
+  min-height: var(--sp-lv-control-comfort) !important;
+  border-width: 4px !important;
+  border-color: var(--sp-focus, var(--sp-accent)) !important;
+  outline: 0 !important;
+}
+
+.sidebar-art {
+  max-height: 120px !important;
+  min-height: 88px !important;
+  opacity: 0.88 !important;
+}
+
+.stage {
+  overflow: hidden !important;
+  min-height: 0 !important;
+}
+
+.stage-grid {
+  height: 100% !important;
+  min-height: 0 !important;
+  padding: var(--sp-space-xl) !important;
+  gap: var(--sp-space-lg) !important;
+  grid-template-columns: minmax(0, 3fr) minmax(300px, 0.95fr) !important;
+  grid-template-rows: max-content max-content minmax(0, 1fr) !important;
+  overflow: hidden !important;
+}
+
+.welcome-group {
+  min-width: 0 !important;
+}
+
+.weather-with-meta,
+.weather-row,
+.weather-block {
+  max-width: 100% !important;
+}
+
+.weather-row,
+.weather-block {
+  min-width: min(100%, 420px) !important;
+  min-height: 88px !important;
+  padding: 14px 16px !important;
+  gap: 12px !important;
+}
+
+.weather-current-temp {
+  font-size: clamp(32px, 3.2vw, 42px) !important;
+  line-height: 1.05 !important;
+}
+
+.weather-current-hl,
+.weather-current-cond,
+.forecast-weekday,
+.forecast-high,
+.forecast-low {
+  font-size: 16px !important;
+  line-height: 1.3 !important;
+}
+
+.weather-forecast {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  margin-top: 12px !important;
+}
+
+.forecast-day {
+  min-width: 68px !important;
+  min-height: 78px !important;
+  padding: 8px 10px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+}
+
+.bottom-stack,
+.bottom-block,
+.devices,
+.rooms {
+  min-width: 0 !important;
+}
+
+.devices,
+.rooms {
+  gap: 16px !important;
+}
+
+.device {
+  min-height: var(--sp-lv-device-min) !important;
+  padding: var(--sp-lv-card-pad) !important;
+  gap: 12px !important;
+  border-width: 2px !important;
+  overflow: hidden !important;
+}
+
+.device-top,
+.control-row {
+  gap: 12px !important;
+  min-height: 40px !important;
+  align-items: center !important;
+}
+
+.control-row {
+  flex-wrap: wrap !important;
+  row-gap: 10px !important;
+}
+
+.device-name {
+  font-size: 18px !important;
+  line-height: 1.25 !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+}
+
+.state-word,
+.status {
+  font-size: 16px !important;
+  min-height: 28px !important;
+  line-height: 1.2 !important;
+}
+
+.item-img,
+.item-icon {
+  width: 58px !important;
+  height: 58px !important;
+  flex: 0 0 auto !important;
+}
+
+.room {
+  min-height: 148px !important;
+  border-width: 2px !important;
+}
+
+.room::after {
+  background: linear-gradient(180deg, rgba(0,0,0,0.05) 8%, rgba(0,0,0,0.42) 45%, rgba(0,0,0,0.88) 100%) !important;
+}
+
+.room-label {
+  left: 12px !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  padding: 12px 14px !important;
+  border-radius: 16px !important;
+  background: rgba(0,0,0,0.86) !important;
+  border: 2px solid rgba(255,255,255,0.88) !important;
+}
+
+.room-label h3,
+.room-label .muted,
+.room-stats {
+  color: #FFFFFF !important;
+  font-size: 18px !important;
+  line-height: 1.25 !important;
+}
+
+/* Right rail: allow internal scroll instead of clipping half cards */
+.side {
+  min-height: 0 !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--sp-lv-side-gap) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  align-content: start !important;
+  padding-right: 4px !important;
+  scrollbar-width: thin !important;
+}
+
+.side > section,
+.side > .glass-card,
+.side > .time-card,
+.side > .panel-energy,
+.side > .panel-media,
+.side > .panel-scenes {
+  flex: 0 0 auto !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+}
+
+.glass-card,
+.time-card,
+.panel-energy,
+.panel-media,
+.panel-scenes {
+  padding: 16px !important;
+  border-width: 2px !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+.time-main {
+  font-size: clamp(28px, 2.4vw, 36px) !important;
+  line-height: 1.1 !important;
+}
+
+.time-sub,
+.env-label,
+.env-value,
+.energy-footer,
+.media-title,
+.media-artist,
+.media-source {
+  font-size: 16px !important;
+  line-height: 1.3 !important;
+}
+
+.env-list,
+.scene-grid {
+  gap: 12px !important;
+  margin-top: 12px !important;
+}
+
+.env-row {
+  min-height: 44px !important;
+  grid-template-columns: 32px minmax(0, 1fr) auto !important;
+  gap: 12px !important;
+  align-items: center !important;
+}
+
+.dot {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.panel-energy,
+.panel-media,
+.panel-scenes {
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: visible !important;
+}
+
+.panel-scenes .scene-grid {
+  overflow: visible !important;
+  flex: 0 0 auto !important;
+  align-content: start !important;
+}
+
+.scene,
+.panel-scenes .scene {
+  min-height: var(--sp-lv-scene-min) !important;
+  min-width: 0 !important;
+  padding: 12px 10px !important;
+  border-width: 2px !important;
+  gap: 6px !important;
+  overflow: visible !important;
+}
+
+.scene strong,
+.scene span {
+  font-size: 16px !important;
+  line-height: 1.2 !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+}
+
+.media-content,
+.media-row,
+.media-volrow {
+  min-width: 0 !important;
+}
+
+.media-row,
+.media-volrow {
+  gap: 10px !important;
+  align-items: center !important;
+  min-height: 40px !important;
+}
+
+.media-btn,
+.media-volbtn,
+.action-btn,
+.chip,
+.filter-select {
+  min-height: var(--sp-lv-control-min) !important;
+  min-width: var(--sp-lv-control-min) !important;
+  border-width: 2px !important;
+  font-size: 16px !important;
+}
+
+.bars span,
+.media-volfill,
+.energy-bar,
+.bar {
+  min-height: 18px !important;
+  opacity: 1 !important;
+}
+
+/* Border hierarchy: normal cards quieter, active stronger */
+.device:not(.active):not([data-state="on"]),
+.glass-card,
+.time-card,
+.panel-energy,
+.panel-media,
+.panel-scenes,
+.weather-row,
+.weather-block {
+  border-color: color-mix(in srgb, var(--sp-border-glass) 78%, transparent) !important;
+}
+
+.device[data-state="on"],
+.device.active,
+.scene.active,
+.scene[aria-pressed="true"],
+.chip.active,
+.nav-button.active {
+  border-color: var(--sp-focus, var(--sp-accent)) !important;
+  border-width: 4px !important;
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+.nav-button:focus-visible,
+.action-btn:focus-visible,
+.chip:focus-visible,
+.device:focus-visible,
+.room:focus-visible,
+.scene:focus-visible {
+  outline: 4px solid var(--sp-focus, var(--sp-accent)) !important;
+  outline-offset: 3px !important;
+}
+
+@media (max-width: 1280px) {
+  :host {
+    --sp-sidebar-width: 220px;
+    --sp-runtime-min-height: 680px;
+  }
+  .stage-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr) !important;
+  }
+}
+
+/* ========================================================================
+   Low-vision mobile nav cascade pass - final unscoped override
+   ======================================================================== */
+@media (max-width: 640px), (orientation: portrait) {
+  :host {
+    --sp-lv-mobile-nav-h: 184px;
+  }
+
+  .stage,
+  .mc-app .stage,
+  .mc-app[data-view="home"] .stage,
+  .mc-app:not([data-view]) .stage {
+    padding-bottom: calc(var(--sp-lv-mobile-nav-h) + 18px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .mobile-nav {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    z-index: 20 !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-auto-rows: minmax(72px, auto) !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    min-height: var(--sp-lv-mobile-nav-h) !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+  }
+
+  .mobile-nav .nav-button,
+  .mobile-nav .nav-button.active,
+  .mobile-nav .nav-button[aria-current="page"] {
+    flex: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 72px !important;
+    padding: 8px 4px !important;
+    border-radius: 22px !important;
+  }
+}
+
+/* ========================================================================
+   Low-vision mobile nav sibling pass - real DOM nav sits beside .mc-app
+   ======================================================================== */
+@media (max-width: 640px), (orientation: portrait) {
+  :host {
+    --sp-lv-mobile-nav-h: 184px;
+  }
+
+  .mobile-nav {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    z-index: 20 !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-auto-rows: minmax(72px, auto) !important;
+    gap: 8px !important;
+    min-height: var(--sp-lv-mobile-nav-h) !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+  }
+
+  .mobile-nav .nav-button,
+  .mobile-nav .nav-button.active,
+  .mobile-nav .nav-button[aria-current="page"] {
+    flex: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 72px !important;
+    padding: 8px 4px !important;
+    border-radius: 22px !important;
+  }
+}
+
+@media (max-width: 960px) {
+  .stage-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "welcome"
+      "bottom"
+      "side" !important;
+    overflow: auto !important;
+  }
+  .side {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .device:hover,
+  .scene:hover,
+  .camera-card:hover,
+  .nav-button:hover {
+    transform: none !important;
+  }
+}
+
+/* ========================================================================
+   Low-vision home balance pass - reduce welcome/device vertical void
+   Goal: keep right rail complete while moving actionable cards into view
+   ======================================================================== */
+.stage-grid {
+  grid-template-rows: auto auto minmax(0, 1fr) !important;
+  grid-template-areas:
+    "welcome side"
+    "bottom  side"
+    "spacer  side" !important;
+  align-content: start !important;
+}
+
+.bottom-stack {
+  align-self: start !important;
+  gap: 12px !important;
+}
+
+.bottom-block {
+  min-height: 0 !important;
+}
+
+.bottom-block + .bottom-block {
+  margin-top: 0 !important;
+}
+
+.section-title {
+  margin-bottom: 10px !important;
+}
+
+.weather-with-meta {
+  margin-top: 12px !important;
+  margin-bottom: 18px !important;
+}
+
+.devices {
+  align-items: stretch !important;
+}
+
+.rooms {
+  align-items: stretch !important;
+}
+
+@media (max-width: 960px) {
+  .stage-grid {
+    grid-template-rows: auto auto auto !important;
+    grid-template-areas:
+      "welcome"
+      "bottom"
+      "side" !important;
+  }
+}
+
+/* ========================================================================
+   Low-vision home force stack pass - force devices under weather
+   HA was still showing welcome/spacer/bottom vertical void; override with higher specificity
+   ======================================================================== */
+.mc-app .stage-grid,
+.mc-app[data-view="home"] .stage-grid,
+.mc-app:not([data-view]) .stage-grid {
+  display: grid !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  grid-template-columns: minmax(0, 3fr) minmax(300px, 0.95fr) !important;
+  grid-template-rows: max-content max-content minmax(0, 1fr) !important;
+  grid-template-areas:
+    "welcome side"
+    "bottom  side"
+    "filler  side" !important;
+  align-content: stretch !important;
+  align-items: stretch !important;
+  gap: 16px 20px !important;
+  overflow: hidden !important;
+}
+
+.mc-app .welcome-group,
+.mc-app[data-view="home"] .welcome-group {
+  grid-area: welcome !important;
+  align-self: start !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+.mc-app .bottom-stack,
+.mc-app[data-view="home"] .bottom-stack {
+  grid-area: bottom !important;
+  align-self: start !important;
+  justify-self: stretch !important;
+  margin: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  gap: 14px !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+.mc-app .side,
+.mc-app[data-view="home"] .side {
+  grid-area: side !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+/* suppress only explicit empty filler nodes; keep runtime-injected search visible */
+.mc-app .stage-grid > .filler:empty {
+  grid-area: filler !important;
+  min-height: 0 !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.mc-app .weather-with-meta {
+  margin-top: 10px !important;
+  margin-bottom: 8px !important;
+}
+
+.mc-app .weather-row,
+.mc-app .weather-block {
+  min-width: min(100%, 460px) !important;
+  min-height: 96px !important;
+}
+
+.mc-app .devices {
+  margin-top: 0 !important;
+  gap: 14px !important;
+}
+
+.mc-app .rooms {
+  margin-top: 0 !important;
+  gap: 14px !important;
+}
+
+.mc-app .section-title {
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+}
+
+.mc-app .device {
+  min-height: 168px !important;
+}
+
+.mc-app .control-row {
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+}
+
+.mc-app .panel-scenes .scene,
+.mc-app .scene {
+  min-height: 58px !important;
+}
+
+@media (max-width: 960px) {
+  .mc-app .stage-grid,
+  .mc-app[data-view="home"] .stage-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: max-content max-content max-content !important;
+    grid-template-areas:
+      "welcome"
+      "bottom"
+      "side" !important;
+    overflow: auto !important;
+  }
+  .mc-app .stage-grid > .filler:empty:not([style*="position:absolute"]):not([style*="translateX"]) {
+    display: none !important;
+  }
+  .mc-app .side {
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
+
+/* ========================================================================
+   Low-vision mobile containment pass - portrait viewport overflow fixes
+   Goal: no horizontal clipping, readable weather, usable bottom nav
+   ======================================================================== */
+@media (max-width: 640px), (orientation: portrait) {
+  :host {
+    --sp-app-padding: 0px;
+    --sp-stage-radius: 28px;
+    --sp-font-xxl: 40px;
+    --sp-font-xl: 32px;
+    --sp-font-lg: 26px;
+    --sp-font-md: 22px;
+    --sp-font-sm: 20px;
+    --sp-font-xs: 18px;
+    --sp-font-2xs: 16px;
+    --sp-font-3xs: 15px;
+    --sp-font-4xs: 15px;
+    --sp-lv-mobile-nav-h: 112px;
+  }
+
+  .mc-app {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 100dvh !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  .sidebar {
+    display: none !important;
+  }
+
+  .stage {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 100dvh !important;
+    border-radius: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    padding-bottom: calc(var(--sp-lv-mobile-nav-h) + env(safe-area-inset-bottom, 0px)) !important;
+    box-sizing: border-box !important;
+  }
+
+  .stage-grid,
+  .mc-app .stage-grid,
+  .mc-app[data-view="home"] .stage-grid,
+  .mc-app:not([data-view]) .stage-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: max-content max-content max-content !important;
+    grid-template-areas:
+      "welcome"
+      "bottom"
+      "side" !important;
+    gap: 18px !important;
+    padding: 24px 16px 18px !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  .welcome-group,
+  .bottom-stack,
+  .side,
+  .bottom-block,
+  .devices,
+  .rooms,
+  .weather-with-meta,
+  .weather-row,
+  .weather-block,
+  .weather-forecast {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .welcome {
+    max-width: none !important;
+  }
+
+  .welcome h1 {
+    font-size: clamp(34px, 8vw, 46px) !important;
+    line-height: 1.12 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .quote {
+    font-size: clamp(22px, 5.4vw, 30px) !important;
+    line-height: 1.28 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+  }
+
+  .weather-with-meta {
+    display: block !important;
+    margin: 24px 0 12px !important;
+  }
+
+  .weather-row,
+  .weather-block,
+  .mc-app .weather-row,
+  .mc-app .weather-block {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 22px 18px !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+  }
+
+  .weather-current {
+    display: grid !important;
+    grid-template-columns: 58px minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 16px !important;
+  }
+
+  .weather-current-temp {
+    font-size: clamp(42px, 11vw, 56px) !important;
+  }
+
+  .weather-current-hl,
+  .weather-current-cond {
+    font-size: clamp(20px, 5vw, 28px) !important;
+    white-space: normal !important;
+  }
+
+  .weather-forecast {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    margin-top: 18px !important;
+    overflow: visible !important;
+  }
+
+  .forecast-day,
+  .mc-app .forecast-day {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 138px !important;
+    padding: 14px 10px !important;
+    border-radius: 18px !important;
+  }
+
+  .forecast-weekday,
+  .forecast-high,
+  .forecast-low {
+    font-size: clamp(20px, 5vw, 26px) !important;
+    line-height: 1.2 !important;
+  }
+
+  .forecast-icon ha-icon {
+    --mdc-icon-size: 34px !important;
+  }
+
+  .bottom-stack,
+  .mc-app .bottom-stack,
+  .mc-app[data-view="home"] .bottom-stack {
+    gap: 18px !important;
+  }
+
+  .section-title {
+    align-items: end !important;
+    margin-bottom: 12px !important;
+  }
+
+  .section-title h2 {
+    font-size: clamp(34px, 8vw, 44px) !important;
+  }
+
+  .section-title p {
+    font-size: clamp(20px, 5vw, 28px) !important;
+  }
+
+  .devices {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    overflow: visible !important;
+  }
+
+  .device,
+  .mc-app .device {
+    min-width: 0 !important;
+    min-height: 300px !important;
+    padding: 18px !important;
+    border-radius: 22px !important;
+  }
+
+  .device-name {
+    font-size: clamp(24px, 6vw, 32px) !important;
+    line-height: 1.2 !important;
+  }
+
+  .state-word,
+  .muted,
+  .status {
+    font-size: clamp(18px, 4.6vw, 24px) !important;
+  }
+
+  .item-img,
+  .item-icon {
+    width: 88px !important;
+    height: 88px !important;
+  }
+
+  .control-row {
+    gap: 10px !important;
+  }
+
+  .rooms {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  .room {
+    width: 100% !important;
+    min-height: 220px !important;
+  }
+
+  .room-label h3,
+  .room-label .muted,
+  .room-stats {
+    font-size: clamp(20px, 5vw, 28px) !important;
+  }
+
+  .side,
+  .mc-app .side,
+  .mc-app[data-view="home"] .side {
+    height: auto !important;
+    overflow: visible !important;
+    padding-right: 0 !important;
+    gap: 16px !important;
+  }
+
+  .glass-card,
+  .time-card,
+  .panel-energy,
+  .panel-media,
+  .panel-scenes {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 18px !important;
+    border-radius: 22px !important;
+  }
+
+  .mobile-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-height: var(--sp-lv-mobile-nav-h) !important;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)) !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity !important;
+    box-sizing: border-box !important;
+    z-index: 1000 !important;
+  }
+
+  .mobile-nav .nav-button,
+  .mobile-nav .nav-button.active,
+  .mobile-nav .nav-button[aria-current="page"] {
+    flex: 0 0 86px !important;
+    width: 86px !important;
+    min-width: 86px !important;
+    max-width: 86px !important;
+    min-height: 92px !important;
+    padding: 8px 6px !important;
+    border-radius: 28px !important;
+    border-width: 2px !important;
+    scroll-snap-align: start !important;
+    transform: none !important;
+  }
+
+  .mobile-nav .nav-button.active,
+  .mobile-nav .nav-button[aria-current="page"] {
+    border-width: 4px !important;
+    background: var(--sp-accent) !important;
+    color: var(--sp-text-on-accent) !important;
+  }
+
+  .mobile-nav .nav-button ha-icon {
+    --mdc-icon-size: 30px !important;
+  }
+
+  .mobile-nav .nav-button span {
+    display: block !important;
+    max-width: 100% !important;
+    font-size: 16px !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+}
+
+/* ========================================================================
+   Low-vision QA refinement pass - real HA desktop/mobile evidence fixes
+   Goal: larger desktop text, safer narrow mobile column, no clipped bottom nav
+   ======================================================================== */
+.mc-app .section-title h2,
+.mc-app[data-view="home"] .section-title h2,
+.mc-app:not([data-view]) .section-title h2 {
+  font-size: clamp(32px, 2.3vw, 40px) !important;
+  line-height: 1.12 !important;
+}
+
+.mc-app .section-title p,
+.mc-app[data-view="home"] .section-title p,
+.mc-app:not([data-view]) .section-title p,
+.mc-app .device-name,
+.mc-app[data-view="home"] .device-name,
+.mc-app:not([data-view]) .device-name {
+  font-size: 20px !important;
+  line-height: 1.25 !important;
+}
+
+.mc-app .state-word,
+.mc-app .status,
+.mc-app .muted,
+.mc-app .room-label .muted,
+.mc-app .room-stats,
+.mc-app .weather-current-hl,
+.mc-app .weather-current-cond,
+.mc-app .forecast-weekday,
+.mc-app .forecast-high,
+.mc-app .forecast-low,
+.mc-app .time-sub,
+.mc-app .env-label,
+.mc-app .env-value,
+.mc-app .energy-footer,
+.mc-app .media-title,
+.mc-app .media-artist,
+.mc-app .media-source {
+  font-size: 18px !important;
+  line-height: 1.3 !important;
+}
+
+@media (max-width: 640px), (orientation: portrait) {
+  .mc-app,
+  .mc-app[data-view="home"],
+  .mc-app:not([data-view]) {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 0 !important;
+  }
+
+  .mc-app .sidebar,
+  .mc-app[data-view="home"] .sidebar,
+  .mc-app:not([data-view]) .sidebar {
+    display: none !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .mc-app .stage,
+  .mc-app[data-view="home"] .stage,
+  .mc-app:not([data-view]) .stage {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .mc-app .stage-grid,
+  .mc-app[data-view="home"] .stage-grid,
+  .mc-app:not([data-view]) .stage-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    gap: 14px !important;
+    overflow-x: hidden !important;
+  }
+
+  .mc-app .welcome-group,
+  .mc-app .bottom-stack,
+  .mc-app .side,
+  .mc-app .weather-with-meta,
+  .mc-app .weather-row,
+  .mc-app .weather-block,
+  .mc-app .weather-forecast,
+  .mc-app .devices,
+  .mc-app .rooms,
+  .mc-app .glass-card,
+  .mc-app .time-card,
+  .mc-app .panel-energy,
+  .mc-app .panel-media,
+  .mc-app .panel-scenes {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .mc-app .weather-forecast {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .mc-app .forecast-day,
+  .mc-app .device,
+  .mc-app .room,
+  .mc-app .scene {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .mc-app .devices {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .mc-app .device {
+    min-height: 220px !important;
+    padding: 16px !important;
+  }
+
+  .mc-app .mobile-nav {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    gap: 6px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .mc-app .mobile-nav .nav-button,
+  .mc-app .mobile-nav .nav-button.active,
+  .mc-app .mobile-nav .nav-button[aria-current="page"] {
+    flex: 0 0 78px !important;
+    width: 78px !important;
+    min-width: 78px !important;
+    max-width: 78px !important;
+  }
+}
+
+/* ========================================================================
+   Low-vision mobile nav final pass - show every tab without horizontal scroll
+   ======================================================================== */
+@media (max-width: 640px), (orientation: portrait) {
+  :host {
+    --sp-lv-mobile-nav-h: 172px;
+  }
+
+  .mc-app .stage,
+  .mc-app[data-view="home"] .stage,
+  .mc-app:not([data-view]) .stage {
+    padding-bottom: calc(var(--sp-lv-mobile-nav-h) + 18px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .mc-app .mobile-nav {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    z-index: 20 !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-auto-rows: minmax(70px, auto) !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    min-height: var(--sp-lv-mobile-nav-h) !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+  }
+
+  .mc-app .mobile-nav .nav-button,
+  .mc-app .mobile-nav .nav-button.active,
+  .mc-app .mobile-nav .nav-button[aria-current="page"] {
+    flex: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 70px !important;
+    padding: 8px 4px !important;
+    border-radius: 22px !important;
+  }
+}
+
+/* ========================================================================
+   Low-vision mobile nav cascade pass - final unscoped override
+   ======================================================================== */
+@media (max-width: 640px), (orientation: portrait) {
+  :host {
+    --sp-lv-mobile-nav-h: 184px;
+  }
+
+  .stage,
+  .mc-app .stage,
+  .mc-app[data-view="home"] .stage,
+  .mc-app:not([data-view]) .stage {
+    padding-bottom: calc(var(--sp-lv-mobile-nav-h) + 18px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .mobile-nav {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    z-index: 20 !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-auto-rows: minmax(72px, auto) !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    min-height: var(--sp-lv-mobile-nav-h) !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+  }
+
+  .mobile-nav .nav-button,
+  .mobile-nav .nav-button.active,
+  .mobile-nav .nav-button[aria-current="page"] {
+    flex: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 72px !important;
+    padding: 8px 4px !important;
+    border-radius: 22px !important;
+  }
+}
+
+/* ========================================================================
+   Low-vision order+weather compact pass - WCAG-aligned mobile/weather/nav fix
+   Standards applied:
+   - WCAG 1.4.10 Reflow: no obscured content / no two-dimensional scrolling
+   - WCAG 1.4.11 Non-text Contrast: clear boundaries, avoid overly thin/ambiguous framing
+   - WCAG 1.4.12 Text Spacing: readable line spacing without clipping/overlap
+   - WCAG 2.5.8 Target Size (Minimum): controls remain comfortably above 24x24 CSS px
+   ======================================================================== */
+@media (max-width: 960px), (max-width: 640px), (orientation: portrait) {
+  :host {
+    --sp-lv-mobile-nav-h: 240px;
+  }
+
+  .stage,
+  .mc-app .stage,
+  .mc-app[data-view="home"] .stage,
+  .mc-app:not([data-view]) .stage {
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .stage-grid,
+  .mc-app .stage-grid,
+  .mc-app[data-view="home"] .stage-grid,
+  .mc-app:not([data-view]) .stage-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: max-content max-content max-content !important;
+    grid-template-areas:
+      "welcome"
+      "side"
+      "bottom" !important;
+    align-content: start !important;
+    padding-bottom: 24px !important;
+  }
+
+  .welcome-group,
+  .mc-app .welcome-group,
+  .mc-app[data-view="home"] .welcome-group {
+    grid-area: welcome !important;
+    order: 0 !important;
+  }
+
+  .side,
+  .mc-app .side,
+  .mc-app[data-view="home"] .side {
+    grid-area: side !important;
+    order: 1 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .bottom-stack,
+  .mc-app .bottom-stack,
+  .mc-app[data-view="home"] .bottom-stack {
+    grid-area: bottom !important;
+    order: 2 !important;
+  }
+
+  .weather-with-meta,
+  .mc-app .weather-with-meta {
+    margin: 20px 0 16px !important;
+  }
+
+  .weather-row,
+  .weather-block,
+  .mc-app .weather-row,
+  .mc-app .weather-block {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 16px 14px !important;
+    border-radius: 24px !important;
+    border-width: 3px !important;
+    border-style: solid !important;
+    border-color: var(--sp-border-glass) !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .weather-current {
+    display: grid !important;
+    grid-template-columns: 52px minmax(0, 1fr) !important;
+    gap: 12px !important;
+    align-items: center !important;
+  }
+
+  .weather-current-temp,
+  .mc-app .weather-current-temp {
+    font-size: clamp(34px, 9vw, 42px) !important;
+    line-height: 1.1 !important;
+  }
+
+  .weather-current-hl,
+  .weather-current-cond,
+  .mc-app .weather-current-hl,
+  .mc-app .weather-current-cond {
+    font-size: clamp(20px, 4.8vw, 24px) !important;
+    line-height: 1.5 !important;
+    white-space: normal !important;
+  }
+
+  .weather-forecast,
+  .mc-app .weather-forecast {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    margin-top: 14px !important;
+    padding: 2px 0 !important;
+    overflow: visible !important;
+    align-items: stretch !important;
+  }
+
+  .forecast-day,
+  .mc-app .forecast-day {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 96px !important;
+    padding: 10px 12px !important;
+    gap: 12px !important;
+    border-width: 3px !important;
+    border-style: solid !important;
+    border-color: var(--sp-border-glass) !important;
+    border-radius: 16px !important;
+    box-sizing: border-box !important;
+    align-content: center !important;
+    justify-items: center !important;
+  }
+
+  .forecast-weekday,
+  .forecast-high,
+  .forecast-low,
+  .mc-app .forecast-weekday,
+  .mc-app .forecast-high,
+  .mc-app .forecast-low {
+    line-height: 1.35 !important;
+  }
+
+  .mobile-nav {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    z-index: 20 !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-auto-rows: minmax(56px, auto) !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    min-height: var(--sp-lv-mobile-nav-h) !important;
+    padding: 10px 8px calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  .mobile-nav .nav-button,
+  .mobile-nav .nav-button.active,
+  .mobile-nav .nav-button[aria-current="page"] {
+    flex: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 56px !important;
+    padding: 8px 4px !important;
+    border-width: 3px !important;
+    border-style: solid !important;
+    border-color: var(--sp-border-glass) !important;
+    border-radius: 22px !important;
+  }
+
+  .mobile-nav .nav-button span,
+  .mc-app .mobile-nav .nav-button span {
+    line-height: 1.25 !important;
+  }
+}
+
+/* Desktop/web weather compact (min-width 961px) - still LV readable, not oversized */
+@media (min-width: 961px) {
+  .weather-block,
+  .weather-forecast,
+  .mc-app .weather-block,
+  .mc-app .weather-forecast {
+    min-width: 0 !important;
+  }
+
+  .weather-row,
+  .weather-block,
+  .mc-app .weather-row,
+  .mc-app .weather-block {
+    width: auto !important;
+    max-width: min(100%, 280px) !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 12px 14px !important;
+    gap: 8px !important;
+  }
+
+  .weather-with-meta,
+  .mc-app .weather-with-meta {
+    max-width: min(100%, 720px) !important;
+  }
+
+  .weather-current-temp,
+  .mc-app .weather-current-temp {
+    font-size: clamp(28px, 2.2vw, 34px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .weather-current-hl,
+  .weather-current-cond,
+  .forecast-weekday,
+  .forecast-high,
+  .forecast-low,
+  .mc-app .weather-current-hl,
+  .mc-app .weather-current-cond,
+  .mc-app .forecast-weekday,
+  .mc-app .forecast-high,
+  .mc-app .forecast-low {
+    font-size: 15px !important;
+    line-height: 1.25 !important;
+  }
+
+  .weather-forecast,
+  .mc-app .weather-forecast {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 6px !important;
+    margin-top: 8px !important;
+    overflow: visible !important;
+  }
+
+  .forecast-day,
+  .mc-app .forecast-day {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    padding: 6px 4px !important;
+    gap: 2px !important;
+  }
+}
+
+/* ========================================================================
+   Paper Ink Morning accessibility release gate — arctic-clarity v16 layout port
+   - Keep the runtime home search trigger visible on every viewport.
+   - Fit all seven mobile navigation targets inside 430 CSS px.
+   - Preserve a full bottom safety gap above the fixed navigation.
+   ======================================================================== */
+.mc-app .stage-grid > div[style*="position:absolute"][style*="translateX"] {
+  min-height: 48px !important;
+  color: #111827 !important;
+  background: #FFFFFF !important;
+  border: 3px solid #FFFFFF !important;
+  box-shadow: 0 3px 12px rgba(0, 26, 61, 0.28) !important;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  box-sizing: border-box !important;
+}
+
+.mc-app .stage-grid > div[style*="position:absolute"][style*="translateX"] ha-icon {
+  color: #111827 !important;
+  --mdc-icon-size: 24px !important;
+}
+
+.mc-app .device button,
+.mc-app .media-btn,
+.mc-app .media-volbtn,
+.mc-app .time-icon {
+  min-width: 44px !important;
+  min-height: 44px !important;
+  border: 2px solid #FFFFFF !important;
+  background: #FFFFFF !important;
+  color: #111827 !important;
+  opacity: 1 !important;
+}
+
+.mc-app .media-btn ha-icon,
+.mc-app .media-volbtn ha-icon,
+.mc-app .time-icon ha-icon {
+  color: #111827 !important;
+  --mdc-icon-size: 24px !important;
+}
+
+@media (max-width: 640px), (orientation: portrait) {
+  .stage,
+  .mc-app .stage,
+  .mc-app[data-view="home"] .stage,
+  .mc-app:not([data-view]) .stage {
+    padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .stage-grid,
+  .mc-app .stage-grid,
+  .mc-app[data-view="home"] .stage-grid,
+  .mc-app:not([data-view]) .stage-grid {
+    display: grid !important;
+    grid-template: "search" max-content "welcome" max-content "side" max-content "bottom" max-content / minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: max-content max-content max-content max-content !important;
+    grid-template-areas: "search" "welcome" "side" "bottom" !important;
+  }
+
+  .mc-app .stage-grid > div[style*="position:absolute"][style*="translateX"],
+  .mc-app[data-view="home"] .stage-grid > div[style*="position:absolute"][style*="translateX"],
+  .mc-app:not([data-view]) .stage-grid > div[style*="position:absolute"][style*="translateX"] {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    grid-area: search !important;
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    justify-self: stretch !important;
+    align-self: start !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 10px 14px !important;
+    white-space: nowrap !important;
+  }
+
+  .mc-app .welcome-group,
+  .mc-app[data-view="home"] .welcome-group,
+  .mc-app:not([data-view]) .welcome-group {
+    grid-area: welcome !important;
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+  }
+
+  .mc-app .side,
+  .mc-app[data-view="home"] .side,
+  .mc-app:not([data-view]) .side {
+    grid-area: side !important;
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+  }
+
+  .mc-app .bottom-stack,
+  .mc-app[data-view="home"] .bottom-stack,
+  .mc-app:not([data-view]) .bottom-stack {
+    grid-area: bottom !important;
+    grid-column: 1 !important;
+    grid-row: 4 !important;
+  }
+
+  .mobile-nav,
+  .mc-app .mobile-nav {
+    gap: 2px !important;
+    padding: 5px 4px calc(5px + env(safe-area-inset-bottom, 0px)) !important;
+    overflow-x: hidden !important;
+  }
+
+  .mobile-nav .nav-button,
+  .mobile-nav .nav-button.active,
+  .mobile-nav .nav-button[aria-current="page"],
+  .mc-app .mobile-nav .nav-button,
+  .mc-app .mobile-nav .nav-button.active,
+  .mc-app .mobile-nav .nav-button[aria-current="page"] {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 64px !important;
+    height: 64px !important;
+    padding: 4px 1px !important;
+    border-width: 2px !important;
+    border-radius: 14px !important;
+  }
+
+  .mobile-nav .nav-button ha-icon,
+  .mc-app .mobile-nav .nav-button ha-icon {
+    --mdc-icon-size: 22px !important;
+  }
+
+  .mobile-nav .nav-button span,
+  .mc-app .mobile-nav .nav-button span {
+    font-size: 14px !important;
+    line-height: 16px !important;
+  }
+}
+
+/* ========================================================================
+   Paper Ink Morning low-vision contrast candidate pass — minimal, surface-aware
+   - Paper surfaces use ink text without heavy shadows.
+   - Photo/room overlays keep white text on an opaque dark plate.
+   - Search and status pills get explicit non-text contrast.
+   ======================================================================== */
+:host {
+  --pim-ink: #101820;
+  --pim-ink-soft: #243B54;
+  --pim-paper: #FFFCF4;
+  --pim-gold: #F2B134;
+  --pim-outline: #163A5F;
+}
+
+.mc-app .device,
+.mc-app .glass-card,
+.mc-app .time-card,
+.mc-app .panel-energy,
+.mc-app .panel-media,
+.mc-app .panel-scenes,
+.mc-app .scene,
+.mc-app .env-row {
+  color: var(--pim-ink) !important;
+  text-shadow: none !important;
+}
+
+.mc-app .device-name,
+.mc-app .state-word,
+.mc-app .media-title,
+.mc-app .media-artist,
+.mc-app .media-source,
+.mc-app .media-off-state,
+.mc-app .time-main,
+.mc-app .time-sub,
+.mc-app .env-label,
+.mc-app .env-value,
+.mc-app .energy-value,
+.mc-app .energy-footer,
+.mc-app .panel-scenes .section-title h2,
+.mc-app .panel-scenes .section-title p,
+.mc-app .scene strong,
+.mc-app .scene span {
+  color: var(--pim-ink) !important;
+  text-shadow: none !important;
+}
+
+.mc-app .status,
+.mc-app .room-scene-chip,
+.mc-app .room-active-chip {
+  background: var(--pim-gold) !important;
+  color: var(--pim-ink) !important;
+  border: 2px solid var(--pim-ink) !important;
+  text-shadow: none !important;
+  font-weight: 900 !important;
+}
+
+.mc-app .stage-grid > div[style*="position:absolute"][style*="translateX"] {
+  background: var(--pim-paper) !important;
+  color: var(--pim-ink) !important;
+  border-color: var(--pim-outline) !important;
+  text-shadow: none !important;
+}
+
+.mc-app .stage-grid > div[style*="position:absolute"][style*="translateX"] ha-icon {
+  color: var(--pim-ink) !important;
+}
+
+.mc-app .room-label,
+.mc-app .room-label h3,
+.mc-app .room-label .muted,
+.mc-app .room-stats {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 3px #000000 !important;
+}
+
+/* Desktop home composition: pair weather with live status and fit the right rail. */
+@media (min-width: 961px) {
+  .mc-app[data-view="home"] .welcome-group {
+    display: grid !important;
+    grid-template-columns: minmax(360px, 1fr) minmax(340px, 0.9fr) !important;
+    grid-template-areas:
+      "heading heading"
+      "weather status" !important;
+    column-gap: 24px !important;
+    align-items: start !important;
+  }
+
+  .mc-app[data-view="home"] .welcome {
+    grid-area: heading !important;
+  }
+
+  .mc-app[data-view="home"] .weather-with-meta {
+    display: contents !important;
+  }
+
+  .mc-app[data-view="home"] .weather-block {
+    grid-area: weather !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .mc-app[data-view="home"] .welcome-meta {
+    grid-area: status !important;
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 12px 0 0 24px !important;
+    overflow: visible !important;
+    align-self: start !important;
+    box-sizing: border-box !important;
+  }
+
+  .mc-app[data-view="home"] .side {
+    display: grid !important;
+    grid-template-rows: auto auto auto minmax(0, 1fr) !important;
+    height: 100% !important;
+    gap: 10px !important;
+    padding-right: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .mc-app[data-view="home"] .side > .panel-camera,
+  .mc-app[data-view="home"] .side > .panel-energy,
+  .mc-app[data-view="home"] .side > .panel-media,
+  .mc-app[data-view="home"] .side > .panel-scenes {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 12px !important;
+    overflow: hidden !important;
+  }
+
+  .mc-app[data-view="home"] .panel-camera .camera-preview {
+    height: 150px !important;
+    min-height: 0 !important;
+    max-height: 150px !important;
+  }
+
+  .mc-app[data-view="home"] .panel-scenes {
+    align-self: stretch !important;
+  }
+
+  .mc-app[data-view="home"] .panel-scenes .scene-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    margin-top: 8px !important;
+  }
+
+  .mc-app[data-view="home"] .panel-scenes .scene {
+    min-height: 52px !important;
+    padding: 8px !important;
+  }
+}
+
+/* Profile copy is an identity + greeting pair, not an accessibility label. */
+@media (min-width: 961px) {
+  .mc-app .profile {
+    gap: 10px !important;
+    padding-inline: 6px !important;
+  }
+
+  .mc-app .profile .meta {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  .mc-app .profile h2 {
+    font-size: 17px !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+  .mc-app .profile .muted {
+    font-size: 18px !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* ========================================================================
+   Paper Ink Morning final local HA candidate gate — mobile search/nav flex
+   - Runtime search remains an explicit flex target on phone/portrait.
+   - Seven mobile navigation entries stay in one row without catch-all hiding.
+   ======================================================================== */
+@media (max-width: 640px), (orientation: portrait) {
+  .mc-app .stage-grid > div[style*="position:absolute"][style*="translateX"],
+  .mc-app[data-view="home"] .stage-grid > div[style*="position:absolute"][style*="translateX"],
+  .mc-app:not([data-view]) .stage-grid > div[style*="position:absolute"][style*="translateX"] {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+  }
+
+  .mobile-nav,
+  .mc-app .mobile-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+    gap: 2px !important;
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 88px !important;
+    min-height: 88px !important;
+    padding: 5px 4px calc(5px + env(safe-area-inset-bottom, 0px)) !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+    box-sizing: border-box !important;
+    z-index: 1000 !important;
+  }
+
+  .mobile-nav .nav-button,
+  .mobile-nav .nav-button.active,
+  .mobile-nav .nav-button[aria-current="page"],
+  .mc-app .mobile-nav .nav-button,
+  .mc-app .mobile-nav .nav-button.active,
+  .mc-app .mobile-nav .nav-button[aria-current="page"] {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+}
+
+
+/* Paper Ink Morning desktop surface contrast and room-chip containment. */
+@media (min-width: 641px) and (orientation: landscape) {
+  .mc-app .weather-block,
+  .mc-app .weather-block .weather-description,
+  .mc-app .weather-block .weather-range,
+  .mc-app .weather-current-hl,
+  .mc-app .weather-current-cond,
+  .mc-app .weather-forecast,
+  .mc-app .weather-forecast * {
+    color: var(--pim-ink) !important;
+    text-shadow: none !important;
+  }
+
+  .mc-app .side .section-title h2,
+  .mc-app .side .section-title p,
+  .mc-app .side .glass-card > h2,
+  .mc-app .side .glass-card > h3 {
+    color: var(--pim-ink) !important;
+    text-shadow: none !important;
+  }
+
+  .mc-app .room {
+    overflow: hidden !important;
+  }
+
+  .mc-app .room .room-label {
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    max-width: none !important;
+    padding-right: 96px !important;
+    box-sizing: border-box !important;
+  }
+
+  .mc-app .room .room-chips,
+  .mc-app .room .room-actions,
+  .mc-app .room .room-active {
+    right: 10px !important;
+    top: 10px !important;
+    bottom: auto !important;
+    max-width: 180px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 4px !important;
+  }
+}

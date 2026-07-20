@@ -332,8 +332,8 @@ button {
   min-width: 0;
   text-align: right;
 }
-
-
+
+
 
 .env-list-inline {
   display: flex;
@@ -605,7 +605,7 @@ button {
 /* ==========================================================================
    12. Chips / Filter Tabs
    ========================================================================== */
-
+
 
 .chip {
   min-height: 36px;
@@ -2076,7 +2076,7 @@ button {
 /* ==========================================================================
    22. Editor / Strategy Dialog
    ========================================================================== */
-
+
 
 .sp-wrap {
   display: grid;
@@ -2155,9 +2155,9 @@ button {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--sp-space-md);
 }
-
-
-
+
+
+
 
 .sp-card button {
   min-height: 38px;
@@ -2180,7 +2180,7 @@ button {
   background: rgba(255,255,255,0.16);
   transform: translateY(-1px);
 }
-
+
 
 .sp-list {
   display: grid;
@@ -2621,7 +2621,7 @@ ha-control-switch {
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    Suzhou Moon Garden - final coherent theme layer
    ========================================================================== */
 
@@ -2884,10 +2884,26 @@ textarea {
 
 .room {
   border: 1px solid rgba(255, 255, 255, .75);
-  border-radius: 49% 49% 28px 28px / 31% 31% 28px 28px;
+  border-radius: 46% 46% 28px 28px / 18% 18% 28px 28px;
   box-shadow:
     inset 0 0 0 3px rgba(239, 240, 233, .66),
     0 13px 30px rgba(26, 42, 34, .17);
+}
+
+.room-active {
+  top: 28px;
+  left: 42px;
+}
+
+.room-scenes {
+  top: 28px;
+  right: 42px;
+}
+
+.room-active-chip,
+.room-scene-chip {
+  max-width: 112px;
+  padding-inline: 12px;
 }
 
 .room:hover {
@@ -2971,10 +2987,170 @@ textarea {
   box-shadow: 0 0 0 6px rgba(83, 109, 97, .24), var(--sp-shadow-sm);
 }
 
+/* Moonlit mode: paired with the official -dark asset convention. */
+:host([data-sp-theme="dark"]) {
+  color-scheme: dark;
+  --sp-accent: #8eb5a8;
+  --sp-accent-hover: #b9d2c9;
+  --sp-accent-alpha: rgba(142, 181, 168, .20);
+  --sp-accent-border: rgba(157, 196, 183, .48);
+  --sp-warning: #d2b77a;
+  --sp-error: #cf847d;
+  --sp-text-primary: #edf4f0;
+  --sp-text-secondary: #ceddd6;
+  --sp-text-muted: #acbfb6;
+  --sp-text-tertiary: #8fa79c;
+  --sp-text-quaternary: rgba(223, 238, 231, .18);
+  --sp-text-on-accent: #10251f;
+
+  --glass-thin: rgba(18, 38, 42, .58);
+  --glass-regular: rgba(20, 43, 46, .72);
+  --glass-thick: rgba(15, 34, 38, .82);
+  --glass-ultra-thick: rgba(13, 31, 35, .90);
+  --glass-knob: #dce9e3;
+  --glass-highlight: inset 1px 1px 0 rgba(222, 240, 232, .16);
+  --sp-app-overlay: linear-gradient(145deg, #14292e 0%, #102328 58%, #0b1c22 100%);
+  --sp-stage-overlay:
+    linear-gradient(108deg, rgba(5, 21, 28, .12) 0%, rgba(8, 27, 34, .18) 38%, rgba(9, 25, 34, .08) 67%, rgba(5, 18, 25, .26) 100%);
+  --sp-room-overlay: linear-gradient(180deg, rgba(4, 15, 20, .02) 24%, rgba(4, 15, 20, .28) 56%, rgba(3, 13, 17, .92) 100%);
+  --sp-border-glass: rgba(178, 207, 196, .28);
+  --sp-border-subtle: rgba(176, 205, 195, .18);
+  --sp-border-medium: rgba(176, 205, 195, .30);
+  --sp-shadow-sm: 0 4px 10px rgba(0, 10, 15, .28);
+  --sp-shadow-md: 0 12px 28px rgba(0, 9, 14, .36);
+  --sp-shadow-lg: 0 18px 42px rgba(0, 8, 13, .42);
+  --sp-shadow-xl: 0 24px 60px rgba(0, 7, 12, .48);
+  --sp-shadow-glass: 0 12px 30px rgba(0, 8, 13, .35);
+  --sp-shadow-card: 0 11px 28px rgba(0, 8, 13, .36);
+  --sp-shadow-switch: inset 0 1px 4px rgba(0, 8, 12, .55);
+  --sp-bar-gradient: linear-gradient(180deg, #afc9bf, #688f82);
+  --sp-switch-on-bg: #86aa9e;
+  --sp-switch-off-bg: rgba(174, 201, 191, .25);
+  --sp-scrollbar-thumb: rgba(153, 188, 176, .46);
+  --sp-camera-bg: rgba(3, 17, 22, .34);
+}
+
+:host([data-sp-theme="dark"]) .mc-app {
+  background-color: #102328;
+  background-image: var(--sp-app-overlay);
+}
+
+:host([data-sp-theme="dark"]) .stage {
+  background-color: #10252c;
+  border-color: rgba(197, 220, 211, .24);
+  box-shadow: inset 0 0 0 1px rgba(2, 16, 22, .72), 0 20px 48px rgba(0, 7, 12, .50);
+}
+
+:host([data-sp-theme="dark"]) .welcome h1 {
+  text-shadow: 0 2px 10px rgba(0, 7, 11, .78);
+}
+
+:host([data-sp-theme="dark"]) .sidebar {
+  background: linear-gradient(158deg, rgba(25, 48, 50, .88), rgba(12, 31, 36, .82));
+  border-color: rgba(194, 219, 209, .24);
+  box-shadow: inset 0 0 0 1px rgba(3, 17, 22, .72), 0 16px 38px rgba(0, 7, 12, .42);
+}
+
+:host([data-sp-theme="dark"]) .sidebar::after {
+  opacity: .54;
+  background:
+    radial-gradient(ellipse at 16% 10%, rgba(123, 164, 151, .22), transparent 28%),
+    repeating-linear-gradient(105deg, transparent 0 33px, rgba(177, 207, 196, .045) 33px 34px);
+}
+
+:host([data-sp-theme="dark"]) :where(.profile-img, .sidebar-art img, .item-img) {
+  border-color: rgba(207, 229, 220, .28);
+  box-shadow: inset 0 0 0 1px rgba(2, 16, 21, .70), 0 8px 20px rgba(0, 8, 12, .42);
+}
+
+:host([data-sp-theme="dark"]) .nav-button:hover {
+  background: rgba(111, 148, 136, .18);
+  border-color: rgba(171, 204, 192, .28);
+}
+
+:host([data-sp-theme="dark"]) .nav-button.active {
+  background: linear-gradient(145deg, #86aa9e, #5e8276);
+  border-color: rgba(223, 238, 232, .30);
+  box-shadow: inset 1px 1px 0 rgba(240, 250, 246, .22), inset -1px -1px 0 rgba(0, 17, 22, .38), 0 8px 18px rgba(0, 9, 13, .38);
+}
+
+:host([data-sp-theme="dark"]) .stage-grid > div:first-child:not([class]),
+:host([data-sp-theme="dark"]) :where(.glass-card, .time-card, .panel-energy, .panel-media, .panel-camera, .panel-scenes, .camera-card, .maintenance-card),
+:host([data-sp-theme="dark"]) .device,
+:host([data-sp-theme="dark"]) .scene,
+:host([data-sp-theme="dark"]) .panel-scenes .scene {
+  color: var(--sp-text-primary);
+  background: linear-gradient(145deg, rgba(29, 55, 57, .82), rgba(13, 34, 39, .76)) !important;
+  border-color: rgba(190, 218, 207, .25) !important;
+  box-shadow: inset 0 0 0 1px rgba(2, 16, 21, .66), inset 1px 1px 0 rgba(226, 241, 235, .12), 0 11px 29px rgba(0, 8, 13, .38) !important;
+}
+
+:host([data-sp-theme="dark"]) :where(.weather-row, .chip, .filter-select, .action-btn, .room-scene-chip, .room-active-chip, .status) {
+  color: var(--sp-text-primary);
+  background: rgba(29, 54, 56, .78);
+  border-color: rgba(190, 218, 207, .24);
+  box-shadow: inset 0 0 0 1px rgba(2, 16, 21, .62), 0 7px 17px rgba(0, 8, 13, .34);
+}
+
+:host([data-sp-theme="dark"]) :where(.weather-row:hover, .scene:hover, .device:hover) {
+  background: linear-gradient(145deg, rgba(43, 72, 71, .92), rgba(18, 43, 47, .88)) !important;
+  border-color: rgba(158, 196, 182, .50) !important;
+}
+
+:host([data-sp-theme="dark"]) :where(.weather-state-icon, .time-icon, .dot, .item-icon) {
+  color: var(--sp-accent-hover);
+  background: linear-gradient(145deg, #274a4b, #17353a);
+  border-color: rgba(205, 227, 218, .22);
+  box-shadow: inset 0 0 0 1px rgba(1, 14, 19, .68), 0 6px 14px rgba(0, 7, 11, .34);
+}
+
+:host([data-sp-theme="dark"]) .room {
+  border-color: rgba(201, 225, 216, .30);
+  box-shadow: inset 0 0 0 3px rgba(148, 180, 168, .20), 0 14px 34px rgba(0, 7, 12, .44);
+}
+
+:host([data-sp-theme="dark"]) .room:hover {
+  box-shadow: inset 0 0 0 3px rgba(185, 213, 203, .26), 0 20px 42px rgba(0, 7, 12, .52);
+}
+
+:host([data-sp-theme="dark"]) .media-voltrack {
+  background: rgba(174, 204, 193, .19);
+  box-shadow: inset 0 2px 4px rgba(0, 7, 11, .56);
+}
+
+:host([data-sp-theme="dark"]) .media-volfill {
+  background: linear-gradient(90deg, #b3cec4, #789f92);
+}
+
 @media (min-width: 1181px) and (orientation: landscape) {
   :host {
-    --sp-sidebar-width: 190px;
+    --sp-sidebar-width: 220px;
     --sp-app-padding: 18px;
+  }
+
+  .profile {
+    gap: 10px;
+    padding-inline: 4px;
+  }
+
+  .profile-img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .profile .meta {
+    flex: 1 1 auto;
+  }
+
+  .profile h2 {
+    overflow: visible;
+    text-overflow: clip;
+    font-size: 13px;
+    letter-spacing: .02em;
+  }
+
+  .profile .meta .muted {
+    font-size: 11px;
   }
 
   .stage-grid {
@@ -3034,7 +3210,29 @@ textarea {
   }
 
   .room {
-    border-radius: 38% 38% 22px 22px / 24% 24% 22px 22px;
+    border-radius: 38% 38% 22px 22px / 18% 18% 22px 22px;
+  }
+
+  .room-active {
+    top: 18px;
+    left: 24px;
+  }
+
+  .room-scenes {
+    top: 18px;
+    right: 24px;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 768px) {
+  .room-active {
+    top: 12px;
+    left: 18px;
+  }
+
+  .room-scenes {
+    top: 12px;
+    right: 18px;
   }
 }
 

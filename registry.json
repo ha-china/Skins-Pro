@@ -328,6 +328,14 @@
     "package": "store/iron-man.zip"
   },
   {
+    "id": "kinetic-glass-cinema",
+    "name": "kinetic-glass-cinema",
+    "author": "truemanshum",
+    "version": "1.0.0",
+    "thumbnail": "screenshots/thumbnails/kinetic-glass-cinema.jpg",
+    "package": "store/kinetic-glass-cinema.zip"
+  },
+  {
     "id": "league-of-legends",
     "name": "league-of-legends",
     "author": "xyiqq",

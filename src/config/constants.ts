@@ -106,7 +106,7 @@ export const DEFAULT_CONFIG: DashboardConfig = {
     entity: '',
   },
   home_limits: {
-    devices: 5,
+    devices: 4,
     rooms: 4,
     scenes: 6,
     environment: 5,

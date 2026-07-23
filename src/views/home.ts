@@ -148,7 +148,7 @@ export function renderMobileNav(ctx: RenderContext): TemplateResult {
 }
 
 function renderShortcutDevices(ctx: RenderContext): TemplateResult[] {
-  const limit = ctx.config.home_limits?.devices || 5;
+  const limit = ctx.config.home_limits!.devices!;
   const selectedEntities = ctx.config.home_selection?.devices || [];
 
   let realDevices: RenderedDevice[];
@@ -179,7 +179,7 @@ function renderShortcutDevices(ctx: RenderContext): TemplateResult[] {
 }
 
 function renderHomeRooms(ctx: RenderContext): TemplateResult | typeof nothing {
-  const limit = ctx.config.home_limits?.rooms || 4;
+  const limit = ctx.config.home_limits!.rooms!;
   const selectedRooms = ctx.config.home_selection?.rooms || [];
   const areaRooms = renderAreaRooms(ctx, ctx.areas, false, limit, selectedRooms);
   if (areaRooms !== nothing) return areaRooms;
@@ -204,7 +204,7 @@ function renderHomeRooms(ctx: RenderContext): TemplateResult | typeof nothing {
 }
 
 function renderHomeScenes(ctx: RenderContext): TemplateResult {
-  const limit = ctx.config.home_limits?.scenes || 6;
+  const limit = ctx.config.home_limits!.scenes!;
   const selectedScenes = ctx.config.home_selection?.scenes || [];
   const scenes = renderRealScenes(ctx, limit, selectedScenes);
   if (scenes !== nothing) return scenes;

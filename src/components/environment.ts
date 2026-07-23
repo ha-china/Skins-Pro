@@ -37,7 +37,7 @@ export function renderEnvironment(
       const variant: EnvironmentMetricConfig['variant'] = deviceClass === 'temperature' ? 'temp' : (deviceClass === 'humidity' ? 'hum' : 'pm');
       return { entity: entityId, label, unit, variant };
     })
-    : configuredMetrics).slice(0, config.home_limits?.environment || 5);
+    : configuredMetrics).slice(0, config.home_limits!.environment!);
 
   if (floors && floors.length > 1 && entityRegistry && areas) {
     const areaFloorLookup = new Map<string, string>();

@@ -208,6 +208,14 @@
     "package": "store/free-layout.zip"
   },
   {
+    "id": "frosted_light_glass",
+    "name": "frosted_light_glass",
+    "author": "Skins Pro Contributors",
+    "version": "20260723",
+    "thumbnail": "screenshots/thumbnails/frosted_light_glass.jpg",
+    "package": "store/frosted_light_glass.zip"
+  },
+  {
     "id": "genshin",
     "name": "genshin",
     "author": "xyiqq",

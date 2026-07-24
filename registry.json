@@ -355,7 +355,7 @@
     "id": "legend-of-zelda",
     "name": "legend-of-zelda",
     "author": "xyiqq",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "thumbnail": "screenshots/thumbnails/legend-of-zelda.jpg",
     "package": "store/legend-of-zelda.zip"
   },

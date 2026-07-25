@@ -1,15 +1,15 @@
 {
   "author": "truemanshum",
   "version": "1.0.0",
-  "asset_version": "clay-cozy-home-20260725-v44",
-  "theme_version": "clay-cozy-home-20260725-v44",
+  "asset_version": "clay-cozy-home-20260725-v48",
+  "theme_version": "clay-cozy-home-20260725-v48",
   "title_zh": "欢迎回来！",
   "title_en": "Welcome Back!",
   "subtitle_zh": "今天也是温暖的居家时光",
   "subtitle_en": "It's a calm and cozy day at home.",
   "profile_name_zh": "温馨小家",
   "profile_name_en": "My Home",
-  "profile_subtitle_zh": "陶土·柔光",
+  "profile_subtitle_zh": "陶真·柔光",
   "profile_subtitle_en": "Clay · Soft light",
   "icon_map": {
     "light": "light",

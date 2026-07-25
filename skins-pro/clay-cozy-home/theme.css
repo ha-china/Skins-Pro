@@ -11587,3 +11587,1294 @@ ha-card {
 .mc-app .menu .nav-button {
   min-height: 44px !important;
 }
+
+
+/* ==========================================================================
+   R45 USER COLOR TABLE + STRUCTURE — clay-cozy-home-20260725-v45
+   Lock canvas/sidebar to the confirmed color sheet, then tighten device,
+   environment, media-off and weather frame toward the reference board.
+   ========================================================================== */
+
+:host {
+  --sp-bg: #EFE3D5 !important;
+  --sp-clay-page: #EFE3D5 !important;
+  --sp-clay-oat: #EFE3D5 !important;
+  --sp-clay-rail: #C57D6D !important;
+  --sp-clay-rail-deep: #B87363 !important;
+  --sp-clay-rail-active: #CE8F80 !important;
+  --sp-clay-ink: #4A3A2C !important;
+  --sp-clay-muted: #8C7B6C !important;
+  --sp-text-primary: #4A3A2C !important;
+  --sp-text-secondary: #8C7B6C !important;
+  --sp-accent: #C57D6D !important;
+  color: #4A3A2C !important;
+}
+
+.mc-app {
+  color: #4A3A2C !important;
+  background-color: #EFE3D5 !important;
+  background-image:
+    radial-gradient(circle at 18% 20%, rgba(74, 58, 44, 0.014) 0 1px, transparent 1.35px),
+    radial-gradient(ellipse 60% 45% at 18% 8%, rgba(255, 250, 244, 0.40), transparent 64%),
+    linear-gradient(165deg, #F4EADF 0%, #EFE3D5 52%, #E8D9C8 100%) !important;
+}
+
+.mc-app .sidebar,
+.sidebar {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.10) 0 1px, transparent 1.5px),
+    linear-gradient(172deg, #D08A79 0%, #C57D6D 48%, #B87363 100%) !important;
+  background-color: #C57D6D !important;
+  border: 0 !important;
+  border-radius: 0 28px 28px 0 !important;
+  color: #FFFFFF !important;
+  box-shadow:
+    6px 0 18px rgba(150, 90, 75, 0.25),
+    inset 3px 3px 8px rgba(255, 214, 200, 0.22),
+    inset -3px -4px 10px rgba(120, 55, 45, 0.14) !important;
+}
+
+.mc-app .sidebar .profile .meta h2,
+.mc-app .sidebar .profile .meta .name { color: #FFFFFF !important; }
+.mc-app .sidebar .profile .meta p,
+.mc-app .sidebar .profile .meta .muted { color: rgba(255, 242, 234, 0.85) !important; }
+
+.mc-app .sidebar .menu .nav-button,
+.mc-app .sidebar .menu button {
+  color: rgba(255, 242, 234, 0.85) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+.mc-app .sidebar .menu .nav-button ha-icon,
+.mc-app .sidebar .menu button ha-icon { color: rgba(255, 242, 234, 0.85) !important; }
+.mc-app .sidebar .menu .nav-button.active,
+.mc-app .sidebar .menu button.active {
+  color: #FFFFFF !important;
+  background: #CE8F80 !important;
+  background-image: linear-gradient(160deg, #D9A294 0%, #CE8F80 50%, #C58677 100%) !important;
+  border-radius: 999px !important;
+  box-shadow:
+    4px 5px 10px rgba(135, 62, 50, 0.4),
+    -2px -2px 6px rgba(235, 170, 155, 0.6),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.5) !important;
+}
+.mc-app .sidebar .menu .nav-button.active ha-icon,
+.mc-app .sidebar .menu button.active ha-icon { color: #FFFFFF !important; }
+
+@media (min-width: 901px) {
+  .mc-app .sidebar {
+    border-radius: 0 28px 28px 0 !important;
+    background-color: #C57D6D !important;
+  }
+}
+
+.mc-app .device,
+.mc-app .devices-page-grid .device {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  position: relative !important;
+  gap: 6px !important;
+  padding: 12px 12px 10px !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  background-color: #F6EFE7 !important;
+  background-image:
+    radial-gradient(circle at 18% 16%, rgba(74, 58, 44, 0.012) 0 1px, transparent 1.3px),
+    linear-gradient(150deg, #F8F3EC 0%, #F6EFE7 58%, #F0E6DB 100%) !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.40),
+    -8px -8px 16px rgba(255, 255, 255, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65) !important;
+  color: #4A3A2C !important;
+}
+
+.mc-app .device .device-top {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  flex: 1 1 auto !important;
+  min-height: 78px !important;
+  width: 100% !important;
+  gap: 0 !important;
+}
+
+.mc-app .device .item-img,
+.mc-app .device .item-icon,
+.mc-app .device img.item-img {
+  width: 72px !important;
+  height: 72px !important;
+  min-width: 72px !important;
+  min-height: 72px !important;
+  margin: 4px auto 0 !important;
+  border-radius: 20px !important;
+  border: 0 !important;
+  object-fit: contain !important;
+  background: linear-gradient(145deg, #F8F2EA 0%, #F0E5D8 100%) !important;
+  box-shadow:
+    5px 7px 14px rgba(168, 126, 98, 0.16),
+    -3px -4px 10px rgba(255, 252, 248, 0.88),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.7) !important;
+  filter: saturate(1.04) contrast(1.02) !important;
+}
+
+.mc-app .device .tag-stack {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  z-index: 2 !important;
+  justify-items: end !important;
+}
+
+.mc-app .device .status {
+  min-width: 34px !important;
+  min-height: 28px !important;
+  padding: 0 11px !important;
+  border-radius: 999px !important;
+  border: 0 !important;
+  color: #FFF8F2 !important;
+  background: linear-gradient(160deg, #D29280, #C57D6D) !important;
+  box-shadow:
+    3px 4px 8px rgba(130, 70, 55, 0.18),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.35) !important;
+  font-size: 11px !important;
+  font-weight: 650 !important;
+  line-height: 1 !important;
+}
+.mc-app .device-on-green .status {
+  background: linear-gradient(160deg, #8FB07A, #7EA06A) !important;
+}
+
+.mc-app .device .device-copy {
+  align-self: stretch !important;
+  margin-top: auto !important;
+  min-width: 0 !important;
+}
+.mc-app .device .device-name {
+  color: #4A3A2C !important;
+  font-size: 14px !important;
+  font-weight: 750 !important;
+  line-height: 1.2 !important;
+  margin: 0 0 2px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+.mc-app .device .muted,
+.mc-app .device .control-row .state-word {
+  color: #8C7B6C !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  opacity: 0.9 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  max-width: 100% !important;
+}
+.mc-app .device .muted:empty { display: none !important; }
+
+.mc-app .side > .time-card + .glass-card,
+.mc-app .panel-environment {
+  background-color: #989A7B !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+}
+.mc-app .side > .time-card + .glass-card .env-list,
+.mc-app .panel-environment .env-list {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  align-items: stretch !important;
+}
+.mc-app .side > .time-card + .glass-card .env-row,
+.mc-app .panel-environment .env-row {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  min-width: 0 !important;
+  min-height: 74px !important;
+  padding: 8px 6px !important;
+  text-align: center !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  background: rgba(247, 243, 232, 0.14) !important;
+  box-shadow:
+    inset 2px 2px 4px rgba(60, 50, 40, 0.10),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.14) !important;
+}
+.mc-app .side > .time-card + .glass-card .env-row .dot,
+.mc-app .panel-environment .env-row .dot {
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 50% !important;
+  display: grid !important;
+  place-items: center !important;
+  background: rgba(255, 248, 236, 0.18) !important;
+  color: #FFF8EE !important;
+  flex: 0 0 auto !important;
+}
+.mc-app .side > .time-card + .glass-card .env-row .muted,
+.mc-app .panel-environment .env-row .muted {
+  order: 3 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 2px !important;
+  color: rgba(255, 248, 236, 0.86) !important;
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.mc-app .side > .time-card + .glass-card .env-row .env-value,
+.mc-app .panel-environment .env-row .env-value {
+  order: 2 !important;
+  margin: 0 !important;
+  color: #FFF8EE !important;
+  font-size: 15px !important;
+  font-weight: 750 !important;
+  line-height: 1.1 !important;
+  white-space: nowrap !important;
+}
+
+.mc-app .panel-media {
+  display: flex !important;
+  flex-direction: column !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  background-color: #C77E6D !important;
+}
+.mc-app .panel-media .media-off-state {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  flex: 1 1 auto !important;
+  min-height: 120px !important;
+  padding: 8px 10px 14px !important;
+  text-align: center !important;
+}
+.mc-app .panel-media .media-off-state .media-volbtn {
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  min-height: 58px !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  display: grid !important;
+  place-items: center !important;
+  color: #FFF8F2 !important;
+  background: rgba(255, 248, 240, 0.20) !important;
+  box-shadow:
+    5px 7px 14px rgba(110, 50, 40, 0.20),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.28),
+    inset -2px -3px 5px rgba(100, 45, 35, 0.14) !important;
+}
+.mc-app .panel-media .media-off-state .media-volbtn ha-icon {
+  --mdc-icon-size: 26px !important;
+  color: #FFF8F2 !important;
+}
+.mc-app .panel-media .media-off-state > span {
+  color: rgba(255, 248, 240, 0.92) !important;
+  font-size: 14px !important;
+  font-weight: 650 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.mc-app .weather-with-meta {
+  border: 0 !important;
+  border-radius: 28px !important;
+  box-shadow:
+    10px 14px 28px rgba(168, 126, 98, 0.20),
+    -6px -8px 16px rgba(255, 252, 248, 0.72),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.42),
+    inset 0 0 0 4px rgba(255, 248, 240, 0.14) !important;
+}
+.mc-app .weather-with-meta .weather-block {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.mc-app .weather-current-temp,
+.mc-app .welcome h1,
+.mc-app .section-title h2,
+.mc-app .device-name,
+.mc-app .energy-value,
+.mc-app h1,
+.mc-app h2,
+.mc-app h3 { color: #4A3A2C !important; }
+
+.mc-app .muted,
+.mc-app .welcome p,
+.mc-app .device .muted,
+.mc-app .state-word,
+.mc-app .section-title .muted { color: #8C7B6C !important; }
+
+.mc-app .panel-energy {
+  background-color: #F5EBE1 !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  color: #4A3A2C !important;
+}
+.mc-app .panel-energy .bars,
+.mc-app .energy-bars,
+.mc-app .bars {
+  min-height: 58px !important;
+  align-items: flex-end !important;
+  gap: 4px !important;
+}
+.mc-app .panel-energy .bars span,
+.mc-app .bars span,
+.mc-app .energy-bars span {
+  min-width: 7px !important;
+  border-radius: 7px 7px 2px 2px !important;
+  background: linear-gradient(180deg, #EBB28A 0%, #E3805B 100%) !important;
+}
+.mc-app .panel-scenes {
+  background-color: #8D8E71 !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+}
+
+/* clay-cozy-home-20260725-v46 */
+
+
+/* ==========================================================================
+   R46 OFFICIAL DEVICE CARD STRUCTURE — clay-cozy-home-20260725-v46
+   Restore latest Skins-Pro device grammar (grid top/copy/controls) and only
+   skin materials/colors. Hard-clamp all text/controls inside the card frame.
+   ========================================================================== */
+
+:host {
+  --sp-bg: #EFE3D5 !important;
+  --sp-clay-page: #EFE3D5 !important;
+  --sp-clay-rail: #C57D6D !important;
+  --sp-clay-rail-active: #CE8F80 !important;
+  --sp-clay-card: #F6EFE7 !important;
+  --sp-clay-ink: #4A3A2C !important;
+  --sp-clay-muted: #8C7B6C !important;
+  --sp-text-primary: #4A3A2C !important;
+  --sp-text-secondary: #8C7B6C !important;
+}
+
+/* Canvas + sidebar color sheet */
+.mc-app {
+  color: #4A3A2C !important;
+  background-color: #EFE3D5 !important;
+  background-image:
+    radial-gradient(circle at 18% 20%, rgba(74, 58, 44, 0.014) 0 1px, transparent 1.35px),
+    linear-gradient(165deg, #F4EADF 0%, #EFE3D5 52%, #E8D9C8 100%) !important;
+}
+.mc-app .sidebar,
+.sidebar {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,255,255,0.10) 0 1px, transparent 1.5px),
+    linear-gradient(172deg, #D08A79 0%, #C57D6D 48%, #B87363 100%) !important;
+  background-color: #C57D6D !important;
+  border-radius: 0 28px 28px 0 !important;
+  color: #FFFFFF !important;
+  box-shadow:
+    6px 0 18px rgba(150, 90, 75, 0.25),
+    inset 3px 3px 8px rgba(255, 214, 200, 0.22),
+    inset -3px -4px 10px rgba(120, 55, 45, 0.14) !important;
+}
+.mc-app .sidebar .menu .nav-button,
+.mc-app .sidebar .menu button {
+  color: rgba(255, 242, 234, 0.85) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+.mc-app .sidebar .menu .nav-button.active,
+.mc-app .sidebar .menu button.active {
+  color: #FFFFFF !important;
+  background: #CE8F80 !important;
+  background-image: linear-gradient(160deg, #D9A294 0%, #CE8F80 50%, #C58677 100%) !important;
+  box-shadow:
+    4px 5px 10px rgba(135, 62, 50, 0.4),
+    -2px -2px 6px rgba(235, 170, 155, 0.6),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.5) !important;
+}
+.mc-app .sidebar .profile .meta h2,
+.mc-app .sidebar .profile .meta .name { color: #FFFFFF !important; }
+.mc-app .sidebar .profile .meta p,
+.mc-app .sidebar .profile .meta .muted { color: rgba(255, 242, 234, 0.85) !important; }
+
+/* ===== Official device structure (do not reinvent layout) ===== */
+.mc-app .device,
+.mc-app .devices-page-grid .device {
+  /* official grammar */
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  align-content: stretch !important;
+  justify-items: stretch !important;
+  gap: 0 !important;
+
+  /* frame safety */
+  position: relative !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+
+  /* clay material only */
+  padding: 12px !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  text-align: left !important;
+  color: #4A3A2C !important;
+  background-color: #F6EFE7 !important;
+  background-image:
+    radial-gradient(circle at 18% 16%, rgba(74, 58, 44, 0.012) 0 1px, transparent 1.3px),
+    linear-gradient(150deg, #F8F3EC 0%, #F6EFE7 58%, #F0E6DB 100%) !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.40),
+    -8px -8px 16px rgba(255, 255, 255, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.mc-app .device:hover {
+  transform: translateY(-1px) !important;
+}
+
+/* top row: icon left + status right (official) */
+.mc-app .device .device-top {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  position: relative !important;
+  flex: initial !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.mc-app .device .item-img,
+.mc-app .device .item-icon,
+.mc-app .device img.item-img {
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+  min-height: 52px !important;
+  max-width: 52px !important;
+  max-height: 52px !important;
+  margin: 0 !important;
+  flex: 0 0 52px !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  object-fit: contain !important;
+  background: linear-gradient(145deg, #F8F2EA 0%, #F0E5D8 100%) !important;
+  box-shadow:
+    4px 5px 10px rgba(168, 126, 98, 0.14),
+    -2px -3px 8px rgba(255, 252, 248, 0.85),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.65) !important;
+}
+
+.mc-app .device .tag-stack {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  display: grid !important;
+  justify-items: end !important;
+  align-content: start !important;
+  gap: 4px !important;
+  min-width: 0 !important;
+  max-width: 55% !important;
+  overflow: hidden !important;
+  flex: 0 1 auto !important;
+}
+
+.mc-app .device .status {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 24px !important;
+  height: auto !important;
+  padding: 0 10px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #FFF8F2 !important;
+  background: linear-gradient(160deg, #D29280, #C57D6D) !important;
+  box-shadow:
+    2px 3px 6px rgba(130, 70, 55, 0.16),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.30) !important;
+  font-size: 11px !important;
+  font-weight: 650 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  box-sizing: border-box !important;
+}
+.mc-app .device-on-green .status {
+  background: linear-gradient(160deg, #8FB07A, #7EA06A) !important;
+}
+.mc-app .device-off .status {
+  background: linear-gradient(160deg, #D7C4B4, #C8B3A2) !important;
+  color: #5A4638 !important;
+}
+
+/* middle copy */
+.mc-app .device .device-copy {
+  align-self: end !important;
+  justify-self: stretch !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin-top: auto !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.mc-app .device .device-name {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 0 2px !important;
+  color: #4A3A2C !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  overflow-wrap: normal !important;
+  -webkit-line-clamp: initial !important;
+  line-clamp: initial !important;
+}
+
+.mc-app .device .muted {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  color: #8C7B6C !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.mc-app .device .muted:empty { display: none !important; }
+
+/* bottom control row */
+.mc-app .device .control-row {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin-top: 6px !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.mc-app .device .control-row .state-word {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  color: #8C7B6C !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.mc-app .device .switch,
+.mc-app .device .media-toggle-icon {
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+
+.mc-app .device .switch {
+  width: 42px !important;
+  height: 24px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: rgba(140, 123, 108, 0.18) !important;
+  box-shadow: inset 1px 1px 2px rgba(90, 60, 40, 0.10) !important;
+  position: relative !important;
+}
+.mc-app .device .switch::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 3px !important;
+  left: 3px !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  background: #FFF8F2 !important;
+  box-shadow: 0 1px 3px rgba(90, 60, 40, 0.18) !important;
+}
+.mc-app .device .switch.on {
+  background: linear-gradient(160deg, #D29280, #C57D6D) !important;
+}
+.mc-app .device .switch.on::after {
+  left: 21px !important;
+}
+
+.mc-app .device .media-toggle-icon {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 50% !important;
+  display: grid !important;
+  place-items: center !important;
+  color: #4A3A2C !important;
+  background: rgba(255, 248, 240, 0.72) !important;
+  box-shadow:
+    2px 3px 6px rgba(168, 126, 98, 0.14),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.7) !important;
+}
+
+/* universal in-card overflow clamp */
+.mc-app .device > *,
+.mc-app .device .device-top,
+.mc-app .device .device-copy,
+.mc-app .device .control-row,
+.mc-app .device .tag-stack {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.mc-app .device :is(button, select, input, [role="button"], ha-icon, img, span, p, div) {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* compact devices page still official */
+.mc-app .devices-page-grid .device {
+  min-height: 110px !important;
+  padding: 10px !important;
+}
+.mc-app .devices-page-grid .device .item-img,
+.mc-app .devices-page-grid .device .item-icon {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  max-width: 44px !important;
+  max-height: 44px !important;
+  flex-basis: 44px !important;
+  border-radius: 14px !important;
+}
+
+/* mid widths: keep controls inside */
+@media (min-width: 901px) and (max-width: 1400px) {
+  .mc-app .device {
+    padding: 10px !important;
+  }
+  .mc-app .device .item-img,
+  .mc-app .device .item-icon {
+    width: 46px !important;
+    height: 46px !important;
+    min-width: 46px !important;
+    min-height: 46px !important;
+    max-width: 46px !important;
+    max-height: 46px !important;
+    flex-basis: 46px !important;
+  }
+  .mc-app .device .device-name { font-size: 13px !important; }
+  .mc-app .device .status,
+  .mc-app .device .state-word,
+  .mc-app .device .muted { font-size: 10px !important; }
+  .mc-app .device .control-row { gap: 6px !important; }
+}
+
+/* mobile: same official structure, tighter type */
+@media (max-width: 900px), (orientation: portrait) and (max-width: 1100px) {
+  .mc-app .device {
+    padding: 10px !important;
+  }
+  .mc-app .device .device-name {
+    white-space: nowrap !important;
+  }
+  .mc-app .device .status {
+    max-width: 72px !important;
+  }
+}
+
+/* rooms also stay clipped */
+.mc-app .room {
+  overflow: hidden !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+}
+.mc-app .room-label,
+.mc-app .room-label h3,
+.mc-app .room-label p {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* env labels never break mid-frame */
+.mc-app .side > .time-card + .glass-card .env-row,
+.mc-app .panel-environment .env-row {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+.mc-app .side > .time-card + .glass-card .env-row .muted,
+.mc-app .panel-environment .env-row .muted,
+.mc-app .side > .time-card + .glass-card .env-row .env-value,
+.mc-app .panel-environment .env-row .env-value {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+
+/* clay-cozy-home-20260725-v48 */
+
+/* ==========================================================================
+   R47 FINAL SOFT-CLAY POLISH — clay-cozy-home-20260725-v48
+   - Lock avatar inset ring + active 20px clay capsule
+   - Reassert specialty card materials
+   - Keep official Skins-Pro device grammar with overflow clamps
+   ========================================================================== */
+
+:host {
+  --sp-bg: #EFE3D5 !important;
+  --sp-clay-page: #EFE3D5 !important;
+  --sp-clay-oat: #EFE3D5 !important;
+  --sp-clay-rail: #C57D6D !important;
+  --sp-clay-rail-deep: #B87363 !important;
+  --sp-clay-rail-active: #CE8F80 !important;
+  --sp-clay-card: #F6EFE7 !important;
+  --sp-clay-env: #989A7B !important;
+  --sp-clay-media: #C77E6D !important;
+  --sp-clay-scenes: #8D8E71 !important;
+  --sp-clay-energy: #F5EBE1 !important;
+  --sp-clay-energy-bar: #E3805B !important;
+  --sp-clay-ink: #4A3A2C !important;
+  --sp-clay-muted: #8C7B6C !important;
+  --sp-text-primary: #4A3A2C !important;
+  --sp-text-secondary: #8C7B6C !important;
+  --sp-accent: #C57D6D !important;
+  color: #4A3A2C !important;
+}
+
+/* Canvas */
+.mc-app {
+  color: #4A3A2C !important;
+  background-color: #EFE3D5 !important;
+  background-image:
+    radial-gradient(circle at 18% 20%, rgba(74, 58, 44, 0.014) 0 1px, transparent 1.35px),
+    radial-gradient(ellipse 60% 45% at 18% 8%, rgba(255, 250, 244, 0.36), transparent 64%),
+    linear-gradient(165deg, #F4EADF 0%, #EFE3D5 52%, #E8D9C8 100%) !important;
+}
+
+/* Sidebar clay rail */
+.mc-app .sidebar,
+.sidebar {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.10) 0 1px, transparent 1.5px),
+    linear-gradient(172deg, #D08A79 0%, #C57D6D 48%, #B87363 100%) !important;
+  background-color: #C57D6D !important;
+  border: 0 !important;
+  border-radius: 0 28px 28px 0 !important;
+  color: #FFFFFF !important;
+  box-shadow:
+    6px 0 18px rgba(150, 90, 75, 0.25),
+    inset 3px 3px 8px rgba(255, 214, 200, 0.22),
+    inset -3px -4px 10px rgba(120, 55, 45, 0.14) !important;
+}
+
+/* Avatar: fused recessed clay ring, no hard white border */
+.mc-app .sidebar .profile-img,
+.mc-app .profile-img,
+.profile-img {
+  border: 0 !important;
+  outline: 0 !important;
+  background-color: #B87363 !important;
+  background-image: none !important;
+  border-radius: 50% !important;
+  box-shadow:
+    inset 3px 3px 6px rgba(130, 55, 45, 0.4),
+    inset -3px -3px 6px rgba(235, 165, 150, 0.6) !important;
+  filter: none !important;
+}
+
+.mc-app .sidebar .profile .meta h2,
+.mc-app .sidebar .profile .meta .name,
+.mc-app .profile .meta h2,
+.mc-app .profile .meta .name {
+  color: #FFFFFF !important;
+}
+.mc-app .sidebar .profile .meta p,
+.mc-app .sidebar .profile .meta .muted,
+.mc-app .profile .meta p,
+.mc-app .profile .meta .muted {
+  color: rgba(255, 242, 234, 0.85) !important;
+}
+
+/* Inactive nav */
+.mc-app .sidebar .menu .nav-button,
+.mc-app .sidebar .menu button,
+.mc-app .menu .nav-button:not(.active),
+.mc-app .menu button:not(.active) {
+  color: rgba(255, 242, 234, 0.85) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+.mc-app .sidebar .menu .nav-button ha-icon,
+.mc-app .sidebar .menu button ha-icon {
+  color: rgba(255, 242, 234, 0.85) !important;
+}
+
+/* Active 3D clay capsule */
+.mc-app .sidebar .menu .nav-button.active,
+.mc-app .sidebar .menu button.active,
+.mc-app .menu .nav-button.active,
+.mc-app .menu button.active,
+.mc-app .mobile-nav .nav-button.active {
+  color: #FFFFFF !important;
+  background: #CE8F80 !important;
+  background-image: linear-gradient(160deg, #D9A294 0%, #CE8F80 52%, #C58677 100%) !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  box-shadow:
+    4px 5px 10px rgba(135, 62, 50, 0.4),
+    -2px -2px 6px rgba(235, 170, 155, 0.6),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.5) !important;
+}
+.mc-app .sidebar .menu .nav-button.active ha-icon,
+.mc-app .sidebar .menu button.active ha-icon,
+.mc-app .menu .nav-button.active ha-icon,
+.mc-app .mobile-nav .nav-button.active ha-icon {
+  color: #FFFFFF !important;
+}
+
+/* Standard switch/weather/device clay cards */
+.mc-app .device,
+.mc-app .devices-page-grid .device,
+.mc-app .time-card,
+.mc-app .welcome,
+.mc-app .glass-card:not(.panel-environment):not(.panel-media):not(.panel-scenes):not(.panel-energy) {
+  border: 0 !important;
+  border-radius: 20px !important;
+  color: #4A3A2C !important;
+  background-color: #F6EFE7 !important;
+  background-image:
+    radial-gradient(circle at 18% 16%, rgba(74, 58, 44, 0.012) 0 1px, transparent 1.3px),
+    linear-gradient(150deg, #F8F3EC 0%, #F6EFE7 58%, #F0E6DB 100%) !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.45),
+    -8px -8px 16px rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Official device grammar + overflow safety (latest Skins-Pro) */
+.mc-app .device,
+.mc-app .devices-page-grid .device {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  align-content: stretch !important;
+  justify-items: stretch !important;
+  gap: 0 !important;
+  position: relative !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  padding: 12px !important;
+  text-align: left !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.mc-app .device .device-top,
+.mc-app .device .control-row {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.mc-app .device .device-top {
+  align-items: flex-start !important;
+  flex: initial !important;
+  min-height: 0 !important;
+}
+
+.mc-app .device .item-img,
+.mc-app .device .item-icon,
+.mc-app .device img.item-img {
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+  min-height: 52px !important;
+  max-width: 52px !important;
+  max-height: 52px !important;
+  margin: 0 !important;
+  flex: 0 0 52px !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  object-fit: contain !important;
+  background: linear-gradient(145deg, #F8F2EA 0%, #F0E5D8 100%) !important;
+  box-shadow:
+    4px 5px 10px rgba(168, 126, 98, 0.14),
+    -2px -3px 8px rgba(255, 252, 248, 0.85),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.65) !important;
+}
+
+.mc-app .device .tag-stack {
+  display: grid !important;
+  justify-items: end !important;
+  gap: 4px !important;
+  min-width: 0 !important;
+  max-width: 58% !important;
+  overflow: hidden !important;
+}
+
+.mc-app .device .status {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.mc-app .device .device-copy {
+  align-self: end !important;
+  justify-self: stretch !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin-top: auto !important;
+  overflow: hidden !important;
+}
+
+.mc-app .device .device-name,
+.mc-app .device .muted,
+.mc-app .device .state-word {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.mc-app .device .device-name {
+  color: #4A3A2C !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  margin: 0 0 2px !important;
+}
+
+.mc-app .device .muted,
+.mc-app .device .state-word,
+.mc-app .muted {
+  color: #8C7B6C !important;
+}
+
+.mc-app .device .control-row {
+  margin-top: 6px !important;
+}
+
+.mc-app .device .control-row .state-word {
+  flex: 1 1 auto !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+}
+
+.mc-app .device .switch,
+.mc-app .device .media-toggle-icon {
+  flex: 0 0 auto !important;
+  max-width: none !important;
+}
+
+.mc-app .device .switch {
+  width: 42px !important;
+  height: 24px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: rgba(140, 123, 108, 0.18) !important;
+  box-shadow: inset 1px 1px 2px rgba(90, 60, 40, 0.10) !important;
+  position: relative !important;
+}
+.mc-app .device .switch::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 3px !important;
+  left: 3px !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  background: #FFF8F2 !important;
+  box-shadow: 0 1px 3px rgba(90, 60, 40, 0.18) !important;
+}
+.mc-app .device .switch.on {
+  background: linear-gradient(160deg, #D29280, #C57D6D) !important;
+}
+.mc-app .device .switch.on::after {
+  left: 21px !important;
+}
+
+.mc-app .device > *,
+.mc-app .device .device-top,
+.mc-app .device .device-copy,
+.mc-app .device .control-row,
+.mc-app .device .tag-stack {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.mc-app .devices-page-grid .device {
+  min-height: 110px !important;
+  padding: 10px !important;
+}
+.mc-app .devices-page-grid .device .item-img,
+.mc-app .devices-page-grid .device .item-icon {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  max-width: 44px !important;
+  max-height: 44px !important;
+  flex-basis: 44px !important;
+  border-radius: 14px !important;
+}
+
+/* Specialty cards */
+.mc-app .side > .time-card + .glass-card,
+.mc-app .panel-environment {
+  background-color: #989A7B !important;
+  background-image:
+    linear-gradient(155deg, #A3A586 0%, #989A7B 55%, #8E9072 100%) !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    8px 8px 16px rgba(120, 122, 95, 0.28),
+    -6px -6px 14px rgba(255, 255, 255, 0.22) !important;
+  overflow: hidden !important;
+}
+
+.mc-app .panel-media {
+  background-color: #C77E6D !important;
+  background-image:
+    linear-gradient(155deg, #D18C7B 0%, #C77E6D 55%, #B87363 100%) !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    8px 8px 16px rgba(150, 90, 75, 0.28),
+    -6px -6px 14px rgba(255, 230, 220, 0.25) !important;
+  overflow: hidden !important;
+}
+
+.mc-app .panel-scenes {
+  background-color: #8D8E71 !important;
+  background-image:
+    linear-gradient(155deg, #9A9B7E 0%, #8D8E71 55%, #818265 100%) !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    8px 8px 16px rgba(110, 112, 88, 0.28),
+    -6px -6px 14px rgba(255, 255, 255, 0.18) !important;
+  overflow: hidden !important;
+}
+
+.mc-app .panel-energy {
+  background-color: #F5EBE1 !important;
+  background-image:
+    linear-gradient(150deg, #F8F1E8 0%, #F5EBE1 58%, #EFE3D5 100%) !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  color: #4A3A2C !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.45),
+    -8px -8px 16px rgba(255, 255, 255, 0.85) !important;
+  overflow: hidden !important;
+}
+
+.mc-app .panel-energy .bars span,
+.mc-app .panel-energy .bar,
+.mc-app .energy-bars span,
+.mc-app .bars span,
+.mc-app .bars .bar.on,
+.mc-app .panel-energy .bar.on {
+  background: #E3805B !important;
+  background-image: linear-gradient(180deg, #EBB28A 0%, #E3805B 100%) !important;
+}
+
+/* Text hierarchy on light clay surfaces */
+.mc-app .welcome h1,
+.mc-app .welcome h2,
+.mc-app .section-title,
+.mc-app .device .device-name,
+.mc-app .panel-energy .section-title,
+.mc-app .time-card .time,
+.mc-app .time-card h2 {
+  color: #4A3A2C !important;
+}
+.mc-app .welcome p,
+.mc-app .section-title .muted,
+.mc-app .device .muted,
+.mc-app .device .state-word,
+.mc-app .time-card .muted,
+.mc-app .panel-energy .muted {
+  color: #8C7B6C !important;
+}
+
+/* rooms stay clipped */
+.mc-app .room {
+  overflow: hidden !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+}
+.mc-app .room-label,
+.mc-app .room-label h3,
+.mc-app .room-label p {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* env labels never break mid-frame */
+.mc-app .side > .time-card + .glass-card .env-row,
+.mc-app .panel-environment .env-row {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+.mc-app .side > .time-card + .glass-card .env-row .muted,
+.mc-app .panel-environment .env-row .muted,
+.mc-app .side > .time-card + .glass-card .env-row .env-value,
+.mc-app .panel-environment .env-row .env-value {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+@media (min-width: 901px) and (max-width: 1400px) {
+  .mc-app .device { padding: 10px !important; }
+  .mc-app .device .item-img,
+  .mc-app .device .item-icon {
+    width: 46px !important;
+    height: 46px !important;
+    min-width: 46px !important;
+    min-height: 46px !important;
+    max-width: 46px !important;
+    max-height: 46px !important;
+    flex-basis: 46px !important;
+  }
+  .mc-app .device .device-name { font-size: 13px !important; }
+  .mc-app .device .status,
+  .mc-app .device .state-word,
+  .mc-app .device .muted { font-size: 10px !important; }
+}
+
+@media (max-width: 900px), (orientation: portrait) and (max-width: 1100px) {
+  .mc-app .device { padding: 10px !important; }
+  .mc-app .device .status { max-width: 72px !important; }
+  .mc-app .sidebar,
+  .sidebar { border-radius: 0 !important; }
+}
+
+
+/* clay-cozy-home-20260725-v48 */
+/* R47b: environment card lost to higher-specificity glass-card:not(...) chain */
+.mc-app .side > .time-card + .glass-card,
+.mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+.mc-app .glass-card:has(.env-list),
+.mc-app .glass-card:has(.env-row) {
+  background-color: #989A7B !important;
+  background-image:
+    linear-gradient(155deg, #A3A586 0%, #989A7B 55%, #8E9072 100%) !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    8px 8px 16px rgba(120, 122, 95, 0.28),
+    -6px -6px 14px rgba(255, 255, 255, 0.22) !important;
+  overflow: hidden !important;
+}
+.mc-app .side > .time-card + .glass-card .section-title,
+.mc-app .side > .time-card + .glass-card .section-title h2,
+.mc-app .side > .time-card + .glass-card .env-value,
+.mc-app .glass-card:has(.env-list) .section-title,
+.mc-app .glass-card:has(.env-list) .section-title h2,
+.mc-app .glass-card:has(.env-list) .env-value {
+  color: #FFF8F0 !important;
+}
+.mc-app .side > .time-card + .glass-card .muted,
+.mc-app .glass-card:has(.env-list) .muted {
+  color: rgba(255, 248, 240, 0.82) !important;
+}
+.mc-app .side > .time-card + .glass-card .env-row,
+.mc-app .glass-card:has(.env-list) .env-row {
+  background: rgba(255, 248, 240, 0.14) !important;
+  border: 0 !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+/* desktop sidebar soft right radius must win */
+@media (min-width: 901px) {
+  .mc-app .sidebar,
+  .sidebar {
+    border-radius: 0 28px 28px 0 !important;
+  }
+}
+

@@ -203,11 +203,9 @@ button { font:inherit; }
 .room-label .room-stats { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .room-stats { margin:2px 0 0; font-size:var(--sp-font-2xs); color:rgba(255,255,255,.55); }
 .room-scenes { position:absolute; top:10px; right:10px; z-index:2; display:flex; flex-direction:column; gap:4px; align-items:flex-end; pointer-events:none; }
-.room-scene-chip { pointer-events:auto; border:1px solid rgba(255,255,255,.2); border-radius:var(--sp-radius-pill); padding:4px 14px; background:rgba(0,0,0,.45); color:#fff; cursor:pointer; font-size:var(--sp-font-sm); font-weight:600; white-space:nowrap; text-align:right; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); transition:background .2s; max-width:140px; overflow:hidden; text-overflow:ellipsis; }
-.room-scene-chip:hover { background:rgba(0,0,0,.60); }
+.room-scene-chip,.room-active-chip { pointer-events:auto; display:inline-flex; align-items:center; gap:4px; border:1px solid rgba(255,255,255,.2); border-radius:var(--sp-radius-pill); padding:4px 14px; background:rgba(0,0,0,.45); color:#fff; cursor:pointer; font-size:var(--sp-font-sm); font-weight:600; line-height:1.2; white-space:nowrap; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); transition:background .2s; max-width:140px; overflow:hidden; text-overflow:ellipsis; }
+.room-scene-chip:hover,.room-active-chip:hover { background:rgba(0,0,0,.60); }
 .room-active { position:absolute; z-index:2; top:10px; left:10px; display:flex; flex-direction:column; gap:4px; align-items:flex-start; pointer-events:none; }
-.room-active-chip { pointer-events:auto; display:inline-flex; align-items:center; gap:4px; border:1px solid rgba(255,255,255,.2); border-radius:var(--sp-radius-pill); padding:4px 14px; background:rgba(0,0,0,.45); color:#fff; cursor:pointer; font-size:var(--sp-font-sm); font-weight:600; white-space:nowrap; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); transition:background .2s; max-width:140px; overflow:hidden; text-overflow:ellipsis; }
-.room-active-chip:hover { background:rgba(0,0,0,.60); }
 .side { grid-area:side; min-height:0; min-width:0; height:100%; box-sizing:border-box; padding:4px; margin:-4px; display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:max-content minmax(min-content,1fr); grid-auto-rows:max-content; gap:var(--sp-space-lg); align-content:stretch; overflow:hidden; }
 .glass-card,.time-card { border-radius:var(--sp-radius-glass); padding:var(--sp-space-lg); box-sizing:border-box; background:var(--sp-glass-bg); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:var(--sp-border-width) solid var(--sp-border-glass); box-shadow:var(--sp-shadow-glass); color:var(--sp-text-main); }
 .side > section { min-height:0; min-width:0; }
@@ -541,7 +539,7 @@ button { font:inherit; }
   .item-img,.item-icon { width:40px; height:40px; }
   .room { min-height:160px; }
   .mc-app[data-view="rooms"] .room { min-height:160px; }
-  .room-scene-chip { padding:2px 10px; max-width:110px; }
+  .room-scene-chip,.room-active-chip { padding:2px 10px; max-width:110px; }
 }
 @media (max-width: 480px) {
   /* Fluid clamp() tokens already scale down at this width — only keep
@@ -550,7 +548,7 @@ button { font:inherit; }
   .profile-img { width:36px; height:36px; }
   .item-img,.item-icon { width:36px; height:36px; }
   .device { min-height:90px; }
-  .room-scene-chip { padding:1px 8px; max-width:90px; font-size:var(--sp-font-xs); }
+  .room-scene-chip,.room-active-chip { padding:1px 8px; max-width:90px; font-size:var(--sp-font-xs); }
 }
 .sp-wrap { display:grid; gap:var(--sp-space-lg); padding:var(--sp-space-xl); background:var(--sp-app-overlay); min-height:100%; box-sizing:border-box; }
 .sp-card { border:var(--sp-border-width) solid var(--sp-border-device); border-radius:var(--sp-radius-lg); padding:var(--sp-space-lg); display:grid; gap:var(--sp-space-md); background:var(--sp-panel-bg); box-shadow:var(--sp-shadow-card); }
@@ -651,8 +649,7 @@ button { font:inherit; }
   .room-label { left: 6px; right: 6px; bottom: 4px; }
   .room-label h3 { font-size: var(--sp-font-xs); }
   .room-label .muted { font-size: var(--sp-font-3xs); }
-  .room-scene-chip { padding: 1px 8px; font-size: var(--sp-font-3xs); max-width: 80px; }
-  .room-active-chip { padding: 1px 8px; font-size: var(--sp-font-3xs); }
+  .room-scene-chip,.room-active-chip { padding: 1px 8px; font-size: var(--sp-font-3xs); max-width: 80px; }
   .camera-preview { aspect-ratio: 16/9; min-height: 60px; }
 }
 

@@ -1175,18 +1175,22 @@ button {
   pointer-events: none;
 }
 
-.room-scene-chip {
+.room-scene-chip,
+.room-active-chip {
   pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   border: none;
   border-radius: var(--sp-radius-infinite);
-  padding: 4px 14px;
+  padding: 4px 12px;
   background: var(--glass-ultra-thick);
   color: var(--sp-text-primary);
   cursor: pointer;
   font-size: var(--sp-font-sm);
   font-weight: var(--sp-font-weight-medium);
+  line-height: 1.2;
   white-space: nowrap;
-  text-align: right;
   backdrop-filter: var(--sp-blur-2xs);
   -webkit-backdrop-filter: var(--sp-blur-2xs);
   max-width: 140px;
@@ -1196,12 +1200,11 @@ button {
   box-shadow: var(--glass-highlight);
 }
 
-.room-scene-chip:hover {
+.room-scene-chip:hover,
+.room-active-chip:hover {
   background: rgba(0,0,0,0.06);
 }
 .room-active { position:absolute; z-index:2; top:10px; left:10px; display:flex; flex-direction:column; gap:4px; align-items:flex-start; pointer-events:none; }
-.room-active-chip { pointer-events:auto; display:inline-flex; align-items:center; gap:4px; border:none; border-radius:var(--sp-radius-infinite); padding:4px 14px; background:var(--glass-ultra-thick); color:var(--sp-text-primary); cursor:pointer; font-size:var(--sp-font-sm); font-weight:var(--sp-font-weight-medium); white-space:nowrap; backdrop-filter:var(--sp-blur-2xs); -webkit-backdrop-filter:var(--sp-blur-2xs); transition:background var(--sp-duration-fast) var(--sp-ease-glass); box-shadow:var(--glass-highlight); max-width:140px; overflow:hidden; text-overflow:ellipsis; }
-.room-active-chip:hover { background:rgba(0,0,0,0.06); }
 
 /* ==========================================================================
    16. Side Panel (Right Column)

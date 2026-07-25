@@ -12878,3 +12878,890 @@ ha-card {
   }
 }
 
+
+/* clay-cozy-home-20260725-v49 */
+
+/* ==========================================================================
+   R49 DARK MODE SOFT-CLAY READABILITY — clay-cozy-home-20260725-v49
+   Fix night contrast, kill hard white rims, rebalance specialty cards.
+   Must sit last so it wins over light R47/R48 material locks.
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :host {
+    --sp-bg: #1C1715 !important;
+    --sp-clay-page: #1C1715 !important;
+    --sp-clay-oat: #1C1715 !important;
+    --sp-clay-card: #2B2320 !important;
+    --sp-clay-rail: #C57D6D !important;
+    --sp-clay-rail-deep: #B87363 !important;
+    --sp-clay-rail-active: #CE8F80 !important;
+    --sp-clay-env: #2D3227 !important;
+    --sp-clay-media: #3D2722 !important;
+    --sp-clay-scenes: #2A2B22 !important;
+    --sp-clay-energy: #2B2320 !important;
+    --sp-clay-energy-bar: #E3805B !important;
+    --sp-clay-time: #422D28 !important;
+    --sp-clay-ink: #F5ECE3 !important;
+    --sp-clay-muted: rgba(245, 236, 227, 0.65) !important;
+    --sp-text-primary: #F5ECE3 !important;
+    --sp-text-secondary: rgba(245, 236, 227, 0.65) !important;
+    --sp-accent: #C57D6D !important;
+    --sp-border-glass: transparent !important;
+    --sp-border-subtle: transparent !important;
+    --sp-border-medium: transparent !important;
+    --sp-shadow-sm:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+    --sp-shadow-md:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+    --sp-shadow-lg:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+    --sp-shadow-card:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+    --sp-clay-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+    --sp-clay-shadow-soft:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+    color: #F5ECE3 !important;
+    color-scheme: dark !important;
+  }
+
+  /* Canvas */
+  .mc-app {
+    color: #F5ECE3 !important;
+    background-color: #1C1715 !important;
+    background-image:
+      radial-gradient(circle at 18% 20%, rgba(245, 236, 227, 0.025) 0 1px, transparent 1.4px),
+      radial-gradient(ellipse 55% 40% at 16% 8%, rgba(66, 45, 40, 0.28), transparent 64%),
+      linear-gradient(165deg, #221C19 0%, #1C1715 52%, #161210 100%) !important;
+  }
+
+  /* Welcome / page titles on dark canvas */
+  .mc-app .welcome,
+  .mc-app .welcome h1,
+  .mc-app .welcome h2,
+  .mc-app .welcome .title,
+  .mc-app .section-title,
+  .mc-app .section-title h2,
+  .mc-app .section-title h3,
+  .mc-app h1,
+  .mc-app h2,
+  .mc-app h3 {
+    color: #F5ECE3 !important;
+    text-shadow: none !important;
+  }
+  .mc-app .welcome p,
+  .mc-app .welcome .muted,
+  .mc-app .welcome .subtitle,
+  .mc-app .section-title .muted,
+  .mc-app .section-title p,
+  .mc-app .muted {
+    color: rgba(245, 236, 227, 0.65) !important;
+  }
+
+  /* Kill hard white rims / light clay glows */
+  .mc-app .device,
+  .mc-app .devices-page-grid .device,
+  .mc-app .room,
+  .mc-app .glass-card,
+  .mc-app .time-card,
+  .mc-app .welcome,
+  .mc-app .panel-energy,
+  .mc-app .panel-media,
+  .mc-app .panel-scenes,
+  .mc-app .panel-environment,
+  .mc-app .side > .time-card + .glass-card,
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .glass-card:has(.env-list),
+  .mc-app .glass-card:has(.env-row) {
+    border: none !important;
+    border-width: 0 !important;
+    outline: 0 !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Device cards */
+  .mc-app .device,
+  .mc-app .devices-page-grid .device {
+    background-color: #2B2320 !important;
+    background-image:
+      radial-gradient(circle at 18% 16%, rgba(245, 236, 227, 0.03) 0 1px, transparent 1.3px),
+      linear-gradient(150deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+  }
+  .mc-app .device .device-name,
+  .mc-app .device .device-copy .device-name {
+    color: #FAF5F0 !important;
+  }
+  .mc-app .device .muted,
+  .mc-app .device .state-word,
+  .mc-app .device .device-copy .muted {
+    color: rgba(250, 245, 240, 0.55) !important;
+  }
+  .mc-app .device .item-img,
+  .mc-app .device .item-icon,
+  .mc-app .device img.item-img {
+    background: linear-gradient(145deg, #3A312C 0%, #2F2824 100%) !important;
+    border: none !important;
+    box-shadow:
+      3px 4px 8px rgba(12, 9, 8, 0.45),
+      -2px -2px 6px rgba(75, 62, 55, 0.18) !important;
+  }
+  .mc-app .device .switch {
+    background: rgba(250, 245, 240, 0.12) !important;
+    box-shadow: inset 1px 1px 2px rgba(12, 9, 8, 0.35) !important;
+  }
+  .mc-app .device .switch::after {
+    background: #FAF5F0 !important;
+    box-shadow: 0 1px 3px rgba(12, 9, 8, 0.35) !important;
+  }
+  .mc-app .device .switch.on {
+    background: linear-gradient(160deg, #D29280, #C57D6D) !important;
+  }
+  .mc-app .device .media-toggle-icon {
+    color: #FAF5F0 !important;
+    background: rgba(250, 245, 240, 0.10) !important;
+    box-shadow:
+      2px 3px 6px rgba(12, 9, 8, 0.35),
+      inset 1px 1px 2px rgba(75, 62, 55, 0.25) !important;
+  }
+
+  /* Time / clock card */
+  .mc-app .time-card,
+  .mc-app .side > .time-card {
+    background-color: #422D28 !important;
+    background-image:
+      linear-gradient(155deg, #4C342E 0%, #422D28 55%, #382621 100%) !important;
+    color: #F5ECE3 !important;
+  }
+  .mc-app .time-card .time,
+  .mc-app .time-card h2,
+  .mc-app .time-card h1 {
+    color: #F5ECE3 !important;
+  }
+  .mc-app .time-card .muted,
+  .mc-app .time-card p {
+    color: rgba(245, 236, 227, 0.65) !important;
+  }
+
+  /* Environment */
+  .mc-app .side > .time-card + .glass-card,
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .panel-environment,
+  .mc-app .glass-card:has(.env-list),
+  .mc-app .glass-card:has(.env-row) {
+    background-color: #2D3227 !important;
+    background-image:
+      linear-gradient(155deg, #363B2F 0%, #2D3227 55%, #272B22 100%) !important;
+    color: #F5ECE3 !important;
+  }
+  .mc-app .side > .time-card + .glass-card .section-title,
+  .mc-app .side > .time-card + .glass-card .section-title h2,
+  .mc-app .side > .time-card + .glass-card .env-value,
+  .mc-app .glass-card:has(.env-list) .section-title,
+  .mc-app .glass-card:has(.env-list) .section-title h2,
+  .mc-app .glass-card:has(.env-list) .env-value,
+  .mc-app .panel-environment .section-title,
+  .mc-app .panel-environment .section-title h2,
+  .mc-app .panel-environment .env-value {
+    color: #F5ECE3 !important;
+  }
+  .mc-app .side > .time-card + .glass-card .muted,
+  .mc-app .glass-card:has(.env-list) .muted,
+  .mc-app .panel-environment .muted {
+    color: rgba(245, 236, 227, 0.65) !important;
+  }
+  .mc-app .side > .time-card + .glass-card .env-row,
+  .mc-app .glass-card:has(.env-list) .env-row,
+  .mc-app .panel-environment .env-row {
+    background: rgba(245, 236, 227, 0.08) !important;
+    border: none !important;
+  }
+
+  /* Media */
+  .mc-app .panel-media {
+    background-color: #3D2722 !important;
+    background-image:
+      linear-gradient(155deg, #4A3029 0%, #3D2722 55%, #34211D 100%) !important;
+    color: #F5ECE3 !important;
+  }
+  .mc-app .panel-media .section-title,
+  .mc-app .panel-media .section-title h2,
+  .mc-app .panel-media .device-name,
+  .mc-app .panel-media h2,
+  .mc-app .panel-media h3 {
+    color: #F5ECE3 !important;
+  }
+  .mc-app .panel-media .muted {
+    color: rgba(245, 236, 227, 0.65) !important;
+  }
+
+  /* Scenes — keep muted moss, not glaring */
+  .mc-app .panel-scenes {
+    background-color: #2A2B22 !important;
+    background-image:
+      linear-gradient(155deg, #333428 0%, #2A2B22 55%, #24251E 100%) !important;
+    color: #F5ECE3 !important;
+  }
+  .mc-app .panel-scenes .section-title,
+  .mc-app .panel-scenes .section-title h2,
+  .mc-app .panel-scenes h2,
+  .mc-app .panel-scenes h3 {
+    color: #F5ECE3 !important;
+  }
+  .mc-app .panel-scenes .muted {
+    color: rgba(245, 236, 227, 0.65) !important;
+  }
+
+  /* Energy — dark clay body, bright readable values */
+  .mc-app .panel-energy {
+    background-color: #2B2320 !important;
+    background-image:
+      linear-gradient(150deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+  }
+  .mc-app .panel-energy .section-title,
+  .mc-app .panel-energy .section-title h2,
+  .mc-app .panel-energy .energy-value,
+  .mc-app .panel-energy .value,
+  .mc-app .panel-energy h2,
+  .mc-app .panel-energy h3,
+  .mc-app .panel-energy strong,
+  .mc-app .energy-value {
+    color: #FAF5F0 !important;
+  }
+  .mc-app .panel-energy .muted,
+  .mc-app .panel-energy .unit,
+  .mc-app .panel-energy p {
+    color: rgba(250, 245, 240, 0.55) !important;
+  }
+  .mc-app .panel-energy .bars span,
+  .mc-app .panel-energy .bar,
+  .mc-app .energy-bars span,
+  .mc-app .bars span,
+  .mc-app .bars .bar.on,
+  .mc-app .panel-energy .bar.on {
+    background: #E3805B !important;
+    background-image: linear-gradient(180deg, #EBB28A 0%, #E3805B 100%) !important;
+  }
+
+  /* Welcome strip / generic glass on canvas */
+  .mc-app .welcome,
+  .mc-app .glass-card:not(.panel-media):not(.panel-scenes):not(.panel-energy):not(:has(.env-list)):not(:has(.env-row)) {
+    background-color: #2B2320 !important;
+    background-image:
+      linear-gradient(150deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #F5ECE3 !important;
+  }
+
+  /* Rooms */
+  .mc-app .room {
+    background-color: #2B2320 !important;
+    border: none !important;
+  }
+  .mc-app .room-label,
+  .mc-app .room-label h3,
+  .mc-app .room-label p {
+    color: #FAF5F0 !important;
+    text-shadow: 0 1px 2px rgba(12, 9, 8, 0.55) !important;
+  }
+
+  /* Sidebar stays warm clay rail, text readable */
+  .mc-app .sidebar,
+  .sidebar {
+    background:
+      radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.06) 0 1px, transparent 1.5px),
+      linear-gradient(172deg, #D08A79 0%, #C57D6D 48%, #A86B5C 100%) !important;
+    background-color: #C57D6D !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    box-shadow:
+      6px 0 18px rgba(12, 9, 8, 0.45),
+      inset 3px 3px 8px rgba(255, 214, 200, 0.12),
+      inset -3px -4px 10px rgba(40, 18, 14, 0.28) !important;
+  }
+  .mc-app .sidebar .profile .meta h2,
+  .mc-app .sidebar .profile .meta .name,
+  .mc-app .profile .meta h2,
+  .mc-app .profile .meta .name {
+    color: #FFFFFF !important;
+  }
+  .mc-app .sidebar .profile .meta p,
+  .mc-app .sidebar .profile .meta .muted,
+  .mc-app .profile .meta p,
+  .mc-app .profile .meta .muted {
+    color: rgba(255, 242, 234, 0.85) !important;
+  }
+  .mc-app .sidebar .menu .nav-button,
+  .mc-app .sidebar .menu button {
+    color: rgba(255, 242, 234, 0.85) !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .mc-app .sidebar .menu .nav-button.active,
+  .mc-app .sidebar .menu button.active,
+  .mc-app .menu .nav-button.active,
+  .mc-app .menu button.active,
+  .mc-app .mobile-nav .nav-button.active {
+    color: #FFFFFF !important;
+    background: #CE8F80 !important;
+    background-image: linear-gradient(160deg, #D9A294 0%, #CE8F80 52%, #C58677 100%) !important;
+    border: none !important;
+    border-radius: 20px !important;
+    box-shadow:
+      4px 5px 10px rgba(20, 10, 8, 0.45),
+      -2px -2px 6px rgba(235, 170, 155, 0.22),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.28) !important;
+  }
+
+  /* Extra safety: cards keep no hard rim in dark */
+  .mc-app .device,
+  .mc-app .devices-page-grid .device,
+  .mc-app .room,
+  .mc-app .glass-card,
+  .mc-app .time-card,
+  .mc-app .panel-media,
+  .mc-app .panel-scenes,
+  .mc-app .panel-energy,
+  .mc-app .welcome,
+  .mc-app .side > .time-card + .glass-card {
+    border: none !important;
+    border-style: none !important;
+    outline: 0 !important;
+  }
+}
+
+
+/* clay-cozy-home-20260725-v51 */
+
+/* ==========================================================================
+   R50 DARK MODE CONTRAST/SHADOW FIX — clay-cozy-home-20260725-v51
+   Beat higher-specificity light locks for welcome.quote + time-card shadows.
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  /* Lunar / quote under welcome — must beat .mc-app .welcome .quote light lock */
+  .mc-app .welcome .quote,
+  .mc-app .welcome p.quote,
+  .mc-app .welcome p,
+  .mc-app section.welcome .quote,
+  .mc-app section.welcome p {
+    color: rgba(245, 236, 227, 0.65) !important;
+    opacity: 1 !important;
+  }
+
+  /* Titles remain warm white */
+  .mc-app .welcome h1,
+  .mc-app .welcome h2,
+  .mc-app section.welcome h1,
+  .mc-app section.welcome h2 {
+    color: #F5ECE3 !important;
+  }
+
+  /* Time card: beat .mc-app .side > .time-card multi-layer bright shadow */
+  .mc-app .time-card,
+  .mc-app .side > .time-card,
+  .mc-app section.time-card {
+    background-color: #422D28 !important;
+    background-image:
+      linear-gradient(155deg, #4C342E 0%, #422D28 55%, #382621 100%) !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+    color: #F5ECE3 !important;
+  }
+  .mc-app .time-card::before,
+  .mc-app .time-card::after,
+  .mc-app .side > .time-card::before,
+  .mc-app .side > .time-card::after {
+    box-shadow: none !important;
+    border: none !important;
+    opacity: 0 !important;
+  }
+
+  /* Media also shared that bright shadow selector in light CSS */
+  .mc-app .panel-media,
+  .mc-app .glass-card.panel-media {
+    background-color: #3D2722 !important;
+    background-image:
+      linear-gradient(155deg, #4A3029 0%, #3D2722 55%, #34211D 100%) !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+    color: #F5ECE3 !important;
+  }
+
+  /* Energy readable value + soft dark clay shadow */
+  .mc-app .panel-energy,
+  .mc-app .glass-card.panel-energy {
+    background-color: #2B2320 !important;
+    background-image:
+      linear-gradient(150deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+    color: #FAF5F0 !important;
+  }
+  .mc-app .panel-energy .energy-value,
+  .mc-app .panel-energy .value,
+  .mc-app .panel-energy strong,
+  .mc-app .panel-energy h2,
+  .mc-app .panel-energy h3,
+  .mc-app .energy-value,
+  .mc-app .panel-energy .down,
+  .mc-app .panel-energy span {
+    color: #FAF5F0 !important;
+  }
+  .mc-app .panel-energy .muted,
+  .mc-app .panel-energy .unit,
+  .mc-app .panel-energy p,
+  .mc-app .panel-energy .section-title .muted {
+    color: rgba(250, 245, 240, 0.55) !important;
+  }
+
+  /* Env / scenes keep soft dark clay shadow, no bright rims */
+  .mc-app .side > .time-card + .glass-card,
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .panel-environment,
+  .mc-app .glass-card:has(.env-list),
+  .mc-app .panel-scenes,
+  .mc-app .glass-card.panel-scenes {
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+
+  /* Device cards double-lock */
+  .mc-app .device,
+  .mc-app .devices-page-grid .device,
+  .mc-app button.device {
+    background-color: #2B2320 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+    color: #FAF5F0 !important;
+  }
+  .mc-app .device .device-name {
+    color: #FAF5F0 !important;
+  }
+  .mc-app .device .muted,
+  .mc-app .device .state-word {
+    color: rgba(250, 245, 240, 0.55) !important;
+  }
+}
+
+
+/* clay-cozy-home-20260725-v52 */
+
+/* ==========================================================================
+   R52 OFFICIAL DEVICE/ROOM FRAME SAFETY — clay-cozy-home-20260725-v52
+   Keep latest Skins-Pro device grammar (top / copy / controls) and room
+   overlay grammar, but kill scale transforms and clamp every control inside
+   the card so nothing overflows or stacks on top of siblings.
+   ========================================================================== */
+
+/* ===== Devices: official 3-row grammar + in-frame controls ===== */
+.mc-app .device,
+.mc-app .devices-page-grid .device,
+.mc-app button.device {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-auto-flow: row !important;
+  align-content: stretch !important;
+  justify-items: stretch !important;
+  gap: 6px !important;
+
+  position: relative !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  min-height: 0 !important;
+
+  overflow: hidden !important;
+  padding: 12px !important;
+  text-align: left !important;
+  isolation: isolate !important;
+}
+
+.mc-app .devices-page-grid .device {
+  min-height: 110px !important;
+  padding: 10px !important;
+  gap: 4px !important;
+}
+
+/* rows */
+.mc-app .device .device-top,
+.mc-app .device .device-copy,
+.mc-app .device .control-row {
+  position: relative !important;
+  z-index: 1 !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+.mc-app .device .device-top,
+.mc-app .device .control-row {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.mc-app .device .device-top {
+  align-items: flex-start !important;
+  flex: 0 0 auto !important;
+  min-height: 0 !important;
+  z-index: 2 !important;
+}
+
+.mc-app .device .device-copy {
+  align-self: end !important;
+  justify-self: stretch !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  gap: 2px !important;
+  min-height: 0 !important;
+  z-index: 1 !important;
+}
+
+.mc-app .device .control-row {
+  flex: 0 0 auto !important;
+  margin-top: 0 !important;
+  z-index: 2 !important;
+}
+
+/* kill icon scale that bled into copy/controls */
+.mc-app .item-img,
+.mc-app .item-icon,
+.mc-app .device .item-img,
+.mc-app .device .item-icon,
+.mc-app .device img.item-img,
+.mc-app .devices-page-grid .device .item-img,
+.mc-app .devices-page-grid .device .item-icon {
+  transform: none !important;
+  translate: none !important;
+  scale: none !important;
+  zoom: normal !important;
+  position: static !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+  max-width: 52px !important;
+  max-height: 52px !important;
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+  min-height: 52px !important;
+  object-fit: contain !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.mc-app .devices-page-grid .device .item-img,
+.mc-app .devices-page-grid .device .item-icon,
+.mc-app .devices-page-grid .device img.item-img {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  max-width: 44px !important;
+  max-height: 44px !important;
+  flex-basis: 44px !important;
+  border-radius: 14px !important;
+}
+
+.mc-app .device .item-icon ha-icon,
+.mc-app .item-icon ha-icon {
+  transform: none !important;
+  scale: none !important;
+}
+
+.mc-app .device .tag-stack {
+  display: grid !important;
+  justify-items: end !important;
+  align-content: start !important;
+  gap: 4px !important;
+  min-width: 0 !important;
+  max-width: 55% !important;
+  overflow: hidden !important;
+  flex: 0 1 auto !important;
+}
+
+.mc-app .device .status {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+}
+
+.mc-app .device .device-name,
+.mc-app .device .muted,
+.mc-app .device .state-word {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  transform: none !important;
+}
+
+.mc-app .device .device-name {
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.mc-app .device .muted {
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.mc-app .device .control-row .state-word {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+.mc-app .device .switch,
+.mc-app .device .media-toggle-icon {
+  flex: 0 0 auto !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  transform: none !important;
+  box-sizing: border-box !important;
+}
+
+.mc-app .device .switch {
+  width: 42px !important;
+  min-width: 42px !important;
+  max-width: 42px !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  max-height: 24px !important;
+  overflow: hidden !important;
+  border-radius: 999px !important;
+}
+
+.mc-app .device .switch::after {
+  box-sizing: border-box !important;
+}
+
+.mc-app .device .media-toggle-icon {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  overflow: hidden !important;
+}
+
+/* universal clamp inside device */
+.mc-app .device > *,
+.mc-app .device .device-top > *,
+.mc-app .device .device-copy > *,
+.mc-app .device .control-row > * {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.mc-app .device .switch,
+.mc-app .device .media-toggle-icon,
+.mc-app .device .item-img,
+.mc-app .device .item-icon {
+  max-width: none !important; /* fixed control sizes above */
+}
+
+/* mid densify still official */
+@media (min-width: 901px) and (max-width: 1400px) {
+  .mc-app .device {
+    padding: 10px !important;
+    gap: 4px !important;
+  }
+  .mc-app .device .item-img,
+  .mc-app .device .item-icon,
+  .mc-app .device img.item-img {
+    width: 46px !important;
+    height: 46px !important;
+    min-width: 46px !important;
+    min-height: 46px !important;
+    max-width: 46px !important;
+    max-height: 46px !important;
+    transform: none !important;
+  }
+  .mc-app .device .device-name { font-size: 13px !important; }
+  .mc-app .device .status,
+  .mc-app .device .state-word,
+  .mc-app .device .muted { font-size: 10px !important; }
+}
+
+@media (max-width: 900px), (orientation: portrait) and (max-width: 1100px) {
+  .mc-app .device {
+    padding: 10px !important;
+    gap: 4px !important;
+  }
+  .mc-app .device .item-img,
+  .mc-app .device .item-icon,
+  .mc-app .device img.item-img {
+    transform: none !important;
+  }
+  .mc-app .device .status {
+    max-width: 72px !important;
+  }
+  .mc-app .device .switch {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 22px !important;
+    min-height: 22px !important;
+    max-height: 22px !important;
+  }
+}
+
+/* ===== Rooms: official overlay, clipped frame ===== */
+.mc-app .room {
+  position: relative !important;
+  display: block !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  min-height: 80px !important;
+  aspect-ratio: 4 / 3 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  isolation: isolate !important;
+}
+
+.mc-app .room > img,
+.mc-app .room img {
+  position: absolute !important;
+  inset: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  transform: none !important;
+  scale: none !important;
+  margin: 0 !important;
+  border: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+.mc-app .room-label {
+  position: absolute !important;
+  z-index: 2 !important;
+  left: 12px !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  width: auto !important;
+  max-width: calc(100% - 24px) !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  text-align: left !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mc-app .room-label h3,
+.mc-app .room-label p,
+.mc-app .room-label .muted,
+.mc-app .room-stats {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  margin: 0 !important;
+}
+
+.mc-app .room-label h3 {
+  margin-bottom: 2px !important;
+}
+
+.mc-app .room-scenes {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  left: 10px !important;
+  z-index: 3 !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-end !important;
+  align-content: flex-start !important;
+  gap: 6px !important;
+  max-width: calc(100% - 20px) !important;
+  width: auto !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: auto !important;
+}
+
+.mc-app .room-scene-chip {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+  flex: 0 1 auto !important;
+  transform: none !important;
+}
+
+/* home devices/rooms share row height without letting children paint outside */
+.mc-app .devices,
+.mc-app .rooms,
+.mc-app .stage .stage-grid .bottom-stack .devices,
+.mc-app .stage .stage-grid .bottom-stack .rooms {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+.mc-app .devices > *,
+.mc-app .rooms > * {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}

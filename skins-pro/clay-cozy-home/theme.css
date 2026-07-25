@@ -22,7 +22,7 @@
   --sp-stage-texture: url("./background.jpg");
   --sp-bg:            #F4E7D8;
 
-  /* Ambient light — semi-transparent warm, wallpaper visible for frosted effect */
+  /* Ambient light 鈥?semi-transparent warm, wallpaper visible for frosted effect */
   --sp-app-overlay: radial-gradient(ellipse 70% 55% at 18% 12%, rgba(232,164,142,0.22) 0%, transparent 58%), radial-gradient(ellipse 55% 50% at 88% 18%, rgba(156,181,150,0.18) 0%, transparent 55%), linear-gradient(180deg, rgba(244,231,216,0.35) 0%, rgba(244,231,216,0.12) 45%, rgba(244,231,216,0.42) 100%);
   --sp-stage-overlay: radial-gradient(ellipse 60% 45% at 70% 20%, rgba(255,255,255,0.20) 0%, transparent 60%);
   --sp-room-overlay: linear-gradient(180deg, rgba(90,55,40,0.04) 8%, rgba(90,55,40,0.18) 45%, rgba(70,42,30,0.52) 100%);
@@ -170,7 +170,7 @@ button {
    ========================================================================== */
 
 /* ==========================================================================
-   4. Layout — App Shell
+   4. Layout 鈥?App Shell
    ========================================================================== */
 
 .mc-app {
@@ -345,7 +345,7 @@ button {
 }
 
 /* ==========================================================================
-   7. Home — Stage Grid
+   7. Home 鈥?Stage Grid
    ========================================================================== */
 
 .stage-grid {
@@ -577,7 +577,7 @@ button {
 }
 
 /* ==========================================================================
-   9. Bottom Stack — Shortcuts
+   9. Bottom Stack 鈥?Shortcuts
    ========================================================================== */
 
 .bottom-stack {
@@ -1794,7 +1794,7 @@ button {
 }
 
 /* ==========================================================================
-   19. Responsive — Tablet (≤1180px)
+   19. Responsive 鈥?Tablet (鈮?180px)
    ========================================================================== */
 
 @media (max-width: 1180px) {
@@ -1878,7 +1878,7 @@ button {
 }
 
 /* ==========================================================================
-   20. Responsive — Mobile (≤760px)
+   20. Responsive 鈥?Mobile (鈮?60px)
    ========================================================================== */
 
 @media (max-width: 760px) {
@@ -2063,7 +2063,7 @@ button {
 }
 
 /* ==========================================================================
-   21. Responsive — Small Mobile (≤520px)
+   21. Responsive 鈥?Small Mobile (鈮?20px)
    ========================================================================== */
 
 @media (max-width: 520px) {
@@ -2322,7 +2322,7 @@ button {
   letter-spacing: var(--sp-letter-spacing-wide);
 }
 
-/* Live camera stream fix — hard-clipped rounded stream frame, no static HA logo fallback */
+/* Live camera stream fix 鈥?hard-clipped rounded stream frame, no static HA logo fallback */
 .camera-live,
 .camera-stream-frame {
   --sp-camera-radius: clamp(22px, 2.4vw, 32px);
@@ -2797,9 +2797,9 @@ button {
 }
 
 
-/* R8 SCREENSHOT FIX PACK — 21-check findings from real HA shots
+/* R8 SCREENSHOT FIX PACK 鈥?21-check findings from real HA shots
    F1 desktop middle void: stage-grid 1fr row / residual spacer
-   F2 title still 欢迎回来: force via dashboard title_zh + strings
+   F2 title still 娆㈣繋鍥炴潵: force via dashboard title_zh + strings
    F3 rooms become thin strips on mobile: force min-height + cover
    F4 portrait rail densify: stack side under bottom, no huge CCTV crush of rooms
    F5 weather compact; devices gap; nav 44px
@@ -2853,7 +2853,7 @@ button {
   min-height: 0 !important;
 }
 
-/* Compact welcome/weather — reduce empty visual weight */
+/* Compact welcome/weather 鈥?reduce empty visual weight */
 .welcome { margin: 0 0 6px 0 !important; padding: 0 !important; max-width: none !important; }
 .welcome h1 { margin: 0 0 2px 0 !important; font-size: clamp(24px, 2vw, 34px) !important; }
 .welcome .quote,
@@ -2966,7 +2966,7 @@ button {
 }
 
 
-/* R9 ADAPTIVE LOCK — 1280x800 overlap + no page x-overflow + 44 touch
+/* R9 ADAPTIVE LOCK 鈥?1280x800 overlap + no page x-overflow + 44 touch
    asset_version: clay-cozy-home-20260721-v15
 */
 :host, .mc-app, .stage, .stage-grid, .page-shell, .bottom-stack, .side, .devices, .rooms {
@@ -3140,13 +3140,13 @@ button, .nav-button, .scene, .device button, .sp-add, .sp-del,
 }
 
 
-/* R11 QUALITY LOCK — kill stage void, larger rooms, hide desktop mobile-nav
+/* R11 QUALITY LOCK 鈥?kill stage void, larger rooms, hide desktop mobile-nav
    From failed screenshot: empty frosted band under rooms; tiny room thumbs;
    bottom nav visible on wide layout. CSS/strings only.
    asset_version: clay-cozy-home-20260721-v15
 */
 
-/* App/stage must hug content on desktop — no tall empty glass body */
+/* App/stage must hug content on desktop 鈥?no tall empty glass body */
 :host {
   --sp-runtime-height: auto !important;
   --sp-runtime-min-height: 0px !important;
@@ -3328,7 +3328,7 @@ button, .nav-button, .scene, .mobile-nav button {
   min-width: 44px !important;
 }
 
-/* R13 REFERENCE MATCH — closer to clay mock:
+/* R13 REFERENCE MATCH 鈥?closer to clay mock:
    terracotta/sage accent rails, denser stage, hero weather, equal room tiles,
    desktop hide mobile-nav, no middle void. CSS/strings only.
    asset_version: clay-cozy-home-20260721-v15
@@ -3661,7 +3661,7 @@ button, .nav-button, .scene, .mobile-nav button {
   min-width: 44px !important;
 }
 
-/* R14 AUDIT FIX — from latest real HA screenshots
+/* R14 AUDIT FIX 鈥?from latest real HA screenshots
    1) Fill viewport cream so no white dead zone under stage
    2) Energy panel clay design (bars/value/footer)
    3) Mobile weather meta no vertical glyph stacking
@@ -3674,7 +3674,7 @@ button, .nav-button, .scene, .mobile-nav button {
   --sp-runtime-min-height: 0px !important;
 }
 
-/* Entire card fills viewport with cream clay wall — kills white band under content */
+/* Entire card fills viewport with cream clay wall 鈥?kills white band under content */
 .mc-app {
   min-height: 100vh !important;
   min-height: 100dvh !important;
@@ -3854,7 +3854,7 @@ button, .nav-button, .scene, .mobile-nav button {
   min-width: 44px !important;
 }
 
-/* R15 — bottom cream fill + clay volume + refined energy
+/* R15 鈥?bottom cream fill + clay volume + refined energy
    From latest screenshots:
    - large white under stage (HA panel bleed)
    - device/media volume still default blue
@@ -3949,7 +3949,7 @@ button, .nav-button, .scene, .mobile-nav button {
   pointer-events: none !important;
 }
 
-/* Device-card progress / range (小爱音箱 blue bar) */
+/* Device-card progress / range (灏忕埍闊崇 blue bar) */
 .device progress,
 .device .progress,
 .device ha-control-slider,
@@ -4088,7 +4088,7 @@ button, .nav-button, .scene, .mobile-nav button {
   font-weight: 700 !important;
 }
 
-/* Media panel body on coral clay — ensure volume contrast */
+/* Media panel body on coral clay 鈥?ensure volume contrast */
 .panel-media {
   background: linear-gradient(180deg, #EFA892, #E28B74) !important;
   color: #5C3A2E !important;
@@ -4120,7 +4120,7 @@ button, .nav-button, .scene, .mobile-nav button, .media-volbtn {
   min-width: 44px !important;
 }
 
-/* R16 — weather hero clay mural in the empty mid band + bottom cream
+/* R16 鈥?weather hero clay mural in the empty mid band + bottom cream
    User marked empty middle of weather row (red box). Reference mock has
    full-width clay landscape hero. We keep runtime DOM but paint a clay
    decoration scene into the weather row background.
@@ -4235,7 +4235,7 @@ button, .nav-button, .scene, .mobile-nav button, .media-volbtn {
   word-break: keep-all !important;
 }
 
-/* Middle area intentionally empty of widgets — filled by decoration mural */
+/* Middle area intentionally empty of widgets 鈥?filled by decoration mural */
 .weather-with-meta::after {
   content: "" !important;
   position: absolute !important;
@@ -4251,7 +4251,7 @@ button, .nav-button, .scene, .mobile-nav button, .media-volbtn {
   filter: drop-shadow(0 10px 16px rgba(120,70,45,0.18)) !important;
 }
 
-/* Keep stage content tight under weather — less void */
+/* Keep stage content tight under weather 鈥?less void */
 .welcome-group {
   margin-bottom: 4px !important;
 }
@@ -4318,7 +4318,7 @@ button, .nav-button, .scene, .mobile-nav button, .media-volbtn {
   min-width: 44px !important;
 }
 
-/* R17 MULTI-REVIEW FIX — from latest real screenshot
+/* R17 MULTI-REVIEW FIX 鈥?from latest real screenshot
    FAIL points:
    A) Weather mid shows white floating rectangle + pasted decoration (not mural)
    B) Large empty cream fields beside house
@@ -4410,7 +4410,7 @@ button, .nav-button, .scene, .mobile-nav button, .media-volbtn {
 .mc-app input[type="search"],
 .mc-app .search-input,
 .welcome-group + * input,
-.stage input[placeholder*="搜索"],
+.stage input[placeholder*="鎼滅储"],
 .stage input[placeholder*="search" i] {
   border-radius: 999px !important;
   background: rgba(255,248,242,0.72) !important;
@@ -4439,7 +4439,7 @@ button, .nav-button, .scene, .mobile-nav button, .media-volbtn {
     0 14px 30px rgba(120,70,45,0.12),
     inset 0 1px 0 rgba(255,255,255,0.75) !important;
 
-  /* Layer order bottom→top:
+  /* Layer order bottom鈫抰op:
      1 clay sky/hills gradient
      2 soft landscape wash
      3 decoration as blended mural (multiply kills white plate)
@@ -4605,7 +4605,7 @@ button, .nav-button, .scene, .mobile-nav button, .media-volbtn {
   color: #5C3A2E !important;
 }
 
-/* Device card progress / range (小爱音箱) */
+/* Device card progress / range (灏忕埍闊崇) */
 .device progress,
 .device .progress,
 .panel-media progress {
@@ -4629,7 +4629,7 @@ button, .nav-button, .scene, .mobile-nav button, .media-volbtn {
   border: 2px solid #E28B74 !important;
   margin-top: -3px !important;
 }
-/* Common filled bar divs that may use blue inline — force via filter on known blue-ish bars is risky;
+/* Common filled bar divs that may use blue inline 鈥?force via filter on known blue-ish bars is risky;
    target width-filling children in media/device rows */
 .device .media-volfill,
 .device .volume-fill,
@@ -4788,7 +4788,7 @@ button, .nav-button, .scene, .mobile-nav button, .media-volbtn {
 }
 
 
-/* R18 DECOR CUTOUT — decoration-hero.png now has transparent bg
+/* R18 DECOR CUTOUT 鈥?decoration-hero.png now has transparent bg
    drop multiply (was only to hide white plate); place seamless mural
    asset_version: clay-cozy-home-20260721-v15
 */
@@ -4824,7 +4824,7 @@ button, .nav-button, .scene, .mobile-nav button, .media-volbtn {
   filter: drop-shadow(0 12px 18px rgba(120,70,45,0.18)) !important;
 }
 
-/* no white frosted walls on side chips — softer glass clay */
+/* no white frosted walls on side chips 鈥?softer glass clay */
 .weather-with-meta .weather-block,
 .weather-with-meta .welcome-meta {
   background: rgba(255, 250, 244, 0.48) !important;
@@ -4846,7 +4846,7 @@ button, .nav-button, .scene, .mobile-nav button, .media-volbtn {
 }
 
 
-/* R19 HERO ASSET — transparent decoration-hero.png (white plate removed)
+/* R19 HERO ASSET 鈥?transparent decoration-hero.png (white plate removed)
    asset_version: clay-cozy-home-20260721-v15
 */
 .weather-with-meta::after,
@@ -4858,7 +4858,7 @@ button, .nav-button, .scene, .mobile-nav button, .media-volbtn {
 }
 
 /* ==========================================================================
-   R20 REFERENCE MOCK MATCH — clay cozy home mockup
+   R20 REFERENCE MOCK MATCH 鈥?clay cozy home mockup
    - solid coral sidebar (not glass)
    - cream stage, packed density
    - colored right rail: coral time/media, sage env/scenes, cream energy
@@ -5276,7 +5276,7 @@ ha-card {
 }
 
 /* ==========================================================================
-   R21 LIVE SCREENSHOT FIX — clay-cozy-home-20260722-v17
+   R21 LIVE SCREENSHOT FIX 鈥?clay-cozy-home-20260722-v17
    Desktop fail: weather mid empty cream void (no mural house)
    Mobile fail: vertical title glyphs, weatherW ~104, stacked overflow
    CSS only. Keep strings roles unchanged.
@@ -5339,7 +5339,7 @@ ha-card {
   border: 1px solid rgba(255,255,255,0.85) !important;
 }
 
-/* Mid mural — larger, centered, no empty plate */
+/* Mid mural 鈥?larger, centered, no empty plate */
 .weather-with-meta::after,
 .welcome-group .weather-with-meta::after {
   content: "" !important;
@@ -5381,7 +5381,7 @@ ha-card {
   white-space: normal !important;
 }
 
-/* Side rail order density — less empty cream under rooms */
+/* Side rail order density 鈥?less empty cream under rooms */
 .stage-grid {
   gap: 10px !important;
   padding: 2px 4px 6px 0 !important;
@@ -5543,7 +5543,7 @@ ha-card {
 }
 
 /* ==========================================================================
-   R22 MOBILE + WEATHER DENSITY — clay-cozy-home-20260722-v18
+   R22 MOBILE + WEATHER DENSITY 鈥?clay-cozy-home-20260722-v18
    Live evidence:
    - desktop: house mural OK, still cream gaps beside weather chips
    - mobile: title clipped, CCTV/energy overlap weather, left device rail leak
@@ -5588,7 +5588,7 @@ ha-card {
   }
 }
 
-/* Mobile: single column stage ONLY — hide desktop sidebar completely */
+/* Mobile: single column stage ONLY 鈥?hide desktop sidebar completely */
 @media (max-width: 760px) {
   :host {
     --sp-sidebar-width: 0px !important;
@@ -5740,7 +5740,7 @@ ha-card {
 }
 
 /* ==========================================================================
-   R23 MOBILE SPECIFICITY WIN — clay-cozy-home-20260722-v19
+   R23 MOBILE SPECIFICITY WIN 鈥?clay-cozy-home-20260722-v19
    Root cause (runtime-observed): desktop rules
      .mc-app .stage .stage-grid { grid-template-columns: 1.7fr 300px }
    outrank plain .stage-grid mobile overrides, so mobile keeps 2-col
@@ -5902,7 +5902,7 @@ ha-card {
 }
 
 /* ==========================================================================
-   R24 WEATHER DENSITY — clay-cozy-home-20260722-v20
+   R24 WEATHER DENSITY 鈥?clay-cozy-home-20260722-v20
    Live desktop still shows cream voids left/right of mural house.
    Pack weather chips closer, enlarge mid mural, softer vignette only.
    Keep R23 mobile single-column intact.
@@ -5997,7 +5997,7 @@ ha-card {
 }
 
 /* ==========================================================================
-   R25 WEATHER PACK — clay-cozy-home-20260722-v21
+   R25 WEATHER PACK 鈥?clay-cozy-home-20260722-v21
    Live desktop still has cream voids L/R of mural.
    Strategy: fixed side chip widths + flex mid mural (no minmax 1fr cream),
    mural spans full mid track, chips hug edges.
@@ -6025,7 +6025,7 @@ ha-card {
   overflow: hidden !important;
 }
 
-/* Mural sits in mid track only — no side cream plate */
+/* Mural sits in mid track only 鈥?no side cream plate */
 .mc-app .weather-with-meta::after,
 .mc-app .welcome-group .weather-with-meta::after,
 .weather-with-meta::after,
@@ -6116,7 +6116,7 @@ ha-card {
   }
 }
 
-/* Mobile: full width stack — reset absolute mural pins from R25 desktop */
+/* Mobile: full width stack 鈥?reset absolute mural pins from R25 desktop */
 @media (max-width: 760px) {
   .mc-app .stage .stage-grid .weather-with-meta,
   .mc-app .weather-with-meta,
@@ -6151,7 +6151,7 @@ ha-card {
 }
 
 /* ==========================================================================
-   R26 WEATHER HUG — clay-cozy-home-20260722-v22
+   R26 WEATHER HUG 鈥?clay-cozy-home-20260722-v22
    Live desktop still shows cream bands beside mural (chips not hugging mid).
    Wider fixed chips, mural cover-scale in mid lane, kill side cream plate.
    Mobile R23 flex stack preserved.
@@ -6266,7 +6266,7 @@ ha-card {
 }
 
 /* ==========================================================================
-   R27 WEATHER FULL-CARD MURAL — clay-cozy-home-20260722-v23
+   R27 WEATHER FULL-CARD MURAL 鈥?clay-cozy-home-20260722-v23
    Live desktop: cream voids still left/right of house mural.
    Strategy: put decoration as full-card background (not mid-column only),
    overlay semi-opaque chips on left/right edges so mid is always mural.
@@ -6299,7 +6299,7 @@ ha-card {
     linear-gradient(165deg, #FFF2E4 0%, #E6CDB5 50%, #DCE8D0 100%) !important;
 }
 
-/* Full-card mural — fills entire weather hero, not a mid strip */
+/* Full-card mural 鈥?fills entire weather hero, not a mid strip */
 .mc-app .weather-with-meta::after,
 .mc-app .welcome-group .weather-with-meta::after,
 .weather-with-meta::after,
@@ -6366,7 +6366,7 @@ ha-card {
   box-shadow: 0 8px 16px rgba(120,70,45,0.10) !important;
 }
 
-/* mid column empty on purpose — mural shows through */
+/* mid column empty on purpose 鈥?mural shows through */
 .mc-app .weather-with-meta > *:not(.weather-block):not(.welcome-meta) {
   position: relative !important;
   z-index: 2 !important;
@@ -6420,7 +6420,7 @@ ha-card {
 /* clay-cozy-home-20260722-v23 */
 
 /* ==========================================================================
-   R28 CLAY MATERIAL SYSTEM — clay-cozy-home-20260722-v24
+   R28 CLAY MATERIAL SYSTEM 鈥?clay-cozy-home-20260722-v24
    Target: reference clay mock (fig2) materials on live HA layout (fig1).
    - beige cards #F2E9E1 + subtle noise
    - multi-layer outer + inset clay shadows
@@ -6735,7 +6735,7 @@ ha-card {
 /* Search: clay pill */
 .mc-app input[type="search"],
 .mc-app .search-input,
-.stage input[placeholder*="搜索"],
+.stage input[placeholder*="鎼滅储"],
 .stage input[placeholder*="search" i] {
   background: #F2E9E1 !important;
   background-image: var(--sp-clay-noise) !important;
@@ -6828,7 +6828,7 @@ ha-card {
 /* clay-cozy-home-20260722-v24 */
 
 /* ==========================================================================
-   R29 WEATHER PACK + CLAY DEPTH — clay-cozy-home-20260722-v25
+   R29 WEATHER PACK + CLAY DEPTH 鈥?clay-cozy-home-20260722-v25
    Live v24 still shows large cream voids L/R of house mural; cards need
    stronger clay inset/outset depth vs reference mock.
    ========================================================================== */
@@ -7070,7 +7070,7 @@ ha-card {
 /* clay-cozy-home-20260722-v25 */
 
 /* ==========================================================================
-   R30 POLISH — clay-cozy-home-20260722-v26
+   R30 POLISH 鈥?clay-cozy-home-20260722-v26
    User feedback (exact):
    - top uneven whitespace too large
    - weather/time too empty + pure white
@@ -7324,7 +7324,7 @@ ha-card {
   -webkit-backdrop-filter: none !important;
 }
 
-/* ---- 4) Cards de-white → cream beige ---- */
+/* ---- 4) Cards de-white 鈫?cream beige ---- */
 .mc-app .device,
 .device {
   background: #F8F2EB !important;
@@ -7350,7 +7350,7 @@ ha-card {
   font-size: 11px !important;
 }
 
-/* Media player card (小爱音箱) cream clay */
+/* Media player card (灏忕埍闊崇) cream clay */
 .mc-app .panel-media,
 .panel-media {
   background:
@@ -7529,7 +7529,7 @@ ha-card {
 /* Search cream clay pill */
 .mc-app input[type="search"],
 .mc-app .search-input,
-.stage input[placeholder*="搜索"],
+.stage input[placeholder*="鎼滅储"],
 .stage input[placeholder*="search" i] {
   background: #F8F2EB !important;
   background-image: var(--sp-clay-noise) !important;
@@ -7614,7 +7614,7 @@ ha-card {
 /* clay-cozy-home-20260722-v26 */
 
 /* ==========================================================================
-   R31 DENSITY + MURAL FILL — clay-cozy-home-20260722-v27
+   R31 DENSITY + MURAL FILL 鈥?clay-cozy-home-20260722-v27
    Live v26 evidence:
    - weather L/R cream voids still large
    - big empty cream under rooms
@@ -7623,7 +7623,7 @@ ha-card {
    Strategy: wider mural span, narrower chips, stage align-start, kill bottom void.
    ========================================================================== */
 
-/* Stage hugs content — no stretch empty field */
+/* Stage hugs content 鈥?no stretch empty field */
 .mc-app {
   padding: 6px 10px 10px !important;
   gap: 8px !important;
@@ -7918,8 +7918,8 @@ ha-card {
 /* clay-cozy-home-20260722-v27 */
 
 /* ==========================================================================
-   R32 WEATHER CHIP HUG — clay-cozy-home-20260722-v28
-   Live v27: mural OK mid, but L/R chips stretch full weather height →
+   R32 WEATHER CHIP HUG 鈥?clay-cozy-home-20260722-v28
+   Live v27: mural OK mid, but L/R chips stretch full weather height 鈫?
    tall cream voids under forecast / meta list.
    Fix: align-items:start on weather grid; chips height:auto; mural larger.
    ========================================================================== */
@@ -8055,7 +8055,7 @@ ha-card {
   line-height: 1.25 !important;
 }
 
-/* Stage content-hug — no vertical stretch empty cream */
+/* Stage content-hug 鈥?no vertical stretch empty cream */
 .mc-app {
   height: auto !important;
   min-height: 0 !important;
@@ -8151,7 +8151,7 @@ ha-card {
 /* clay-cozy-home-20260722-v28 */
 
 /* ==========================================================================
-   R33 FULL-BLEED WEATHER + FILL STAGE — clay-cozy-home-20260722-v29
+   R33 FULL-BLEED WEATHER + FILL STAGE 鈥?clay-cozy-home-20260722-v29
    Live v28: chips shorter but weather card still has cream L/R of mural
    because 3-col grid reserves empty columns around house.
    Fix: weather = single full-bleed mural plate; chips absolute overlay.
@@ -8268,7 +8268,7 @@ ha-card {
 
 /* Spacer so weather card keeps height when children absolute */
 .mc-app .weather-with-meta::after {
-  /* already absolute mural — ensure card min-height holds layout */
+  /* already absolute mural 鈥?ensure card min-height holds layout */
 }
 
 /* Numbers */
@@ -8325,7 +8325,7 @@ ha-card {
   box-shadow: var(--sp-clay-shadow) !important;
 }
 
-/* Side rail fill — cream clay consistent */
+/* Side rail fill 鈥?cream clay consistent */
 .mc-app .time-card,
 .mc-app .panel-energy,
 .mc-app .panel-media,
@@ -8420,12 +8420,12 @@ ha-card {
 /* clay-cozy-home-20260722-v29 */
 
 /* ==========================================================================
-   R34 USER SPEC LOCK — clay-cozy-home-20260722-v30
+   R34 USER SPEC LOCK 鈥?clay-cozy-home-20260722-v30
    Exact user checklist:
    1) pull page up; weather/time compact cream #F7F0E8; big time/temp #5A4034;
       secondary #8C7466
    2) soft inset (dark alpha 0.06-0.08) + white highlight inset 6px 6px 16px
-      rgba(255,255,255,0.85); outer blur more diffuse — NO black rim
+      rgba(255,255,255,0.85); outer blur more diffuse 鈥?NO black rim
    3) cards #F8F2EB not white; global text #5A4034; icons scale 1.08
    4) radius 24px; denser device padding/gaps
    Plus live fix: weather mural full-bleed larger; kill bottom cream void.
@@ -8533,7 +8533,7 @@ ha-card {
   border: 1px solid rgba(255, 255, 255, 0.80) !important;
 }
 
-/* House fills the weather card — cover, not tiny mid stamp */
+/* House fills the weather card 鈥?cover, not tiny mid stamp */
 .mc-app .weather-with-meta::after,
 .weather-with-meta::after {
   content: "" !important;
@@ -8556,7 +8556,7 @@ ha-card {
   inset: 0 !important;
   z-index: 0 !important;
   pointer-events: none !important;
-  /* subtle edge only — NOT wide cream columns */
+  /* subtle edge only 鈥?NOT wide cream columns */
   background:
     linear-gradient(90deg, rgba(247, 240, 232, 0.28) 0%, transparent 14%, transparent 86%, rgba(247, 240, 232, 0.28) 100%),
     radial-gradient(ellipse 70% 50% at 50% 100%, rgba(169, 179, 163, 0.28), transparent 70%) !important;
@@ -8716,7 +8716,7 @@ ha-card {
   font-size: 11px !important;
 }
 
-/* Media (小爱音箱) cream clay */
+/* Media (灏忕埍闊崇) cream clay */
 .mc-app .panel-media,
 .panel-media {
   background: #F8F2EB !important;
@@ -8799,7 +8799,7 @@ ha-card {
   box-shadow: var(--sp-clay-shadow) !important;
 }
 
-/* Sidebar coral soft clay — no black rim */
+/* Sidebar coral soft clay 鈥?no black rim */
 .mc-app .sidebar,
 .sidebar {
   background:
@@ -9047,7 +9047,7 @@ ha-card {
 /* clay-cozy-home-20260722-v30 */
 
 /* ==========================================================================
-   R36 MOBILE GRID RELEASE LOCK — clay-cozy-home-20260723-v42
+   R36 MOBILE GRID RELEASE LOCK 鈥?clay-cozy-home-20260723-v42
    Final layer intentionally owns the home composition and responsive gates.
    ========================================================================== */
 
@@ -9481,7 +9481,7 @@ ha-card {
 }
 
 /* ==========================================================================
-   R37 RIGHT RAIL + NON-OCCLUDING TIME — clay-cozy-home-20260723-v42
+   R37 RIGHT RAIL + NON-OCCLUDING TIME 鈥?clay-cozy-home-20260723-v42
    The deployment keeps the home camera slot empty so time/environment stay
    in the right rail; cameras remain available on the Security page.
    ========================================================================== */
@@ -9907,7 +9907,7 @@ ha-card {
 /* clay-cozy-home-20260723-v42 */
 
 /* ==========================================================================
-   R38 MOBILE FLOW + SEVEN-ITEM NAV — clay-cozy-home-20260723-v42
+   R38 MOBILE FLOW + SEVEN-ITEM NAV 鈥?clay-cozy-home-20260723-v42
    Keep time near the weather, preserve all 44px touch targets, and remove
    decorative scrollbars without disabling horizontal forecast gestures.
    ========================================================================== */
@@ -10003,7 +10003,7 @@ ha-card {
 }
 
 /* ==========================================================================
-   R40 MATTE CLAY NAV + CONTROL OVERFLOW GUARD — 20260723-v42
+   R40 MATTE CLAY NAV + CONTROL OVERFLOW GUARD 鈥?20260723-v42
    Match the reference rail: transparent inactive items, one restrained
    terracotta active relief, and no milky-white highlight. Keep dynamic
    device labels and optional compact controls inside every card.
@@ -10203,7 +10203,7 @@ ha-card {
 
 
 /* ==========================================================================
-   R41 SOFT CLAY MATERIAL REDESIGN — clay-cozy-home-20260725-v43
+   R41 SOFT CLAY MATERIAL REDESIGN 鈥?clay-cozy-home-20260725-v43
    Lift the muddy terracotta stack into a real soft-clay system:
    warm oat canvas, refined ash-red rail, embossed 3D nav capsules,
    biscuit device cards, and matte right-rail clay panels.
@@ -10826,7 +10826,7 @@ ha-card {
 
 
 /* ==========================================================================
-   R42 REFERENCE-MATCHED SOFT CLAY — clay-cozy-home-20260725-v44
+   R42 REFERENCE-MATCHED SOFT CLAY 鈥?clay-cozy-home-20260725-v44
    Recalibrate to the official clay reference board:
    dustier rose rail, lighter biscuit cards, softer dual emboss,
    almost borderless clay panels, warmer oat canvas.
@@ -11329,7 +11329,7 @@ ha-card {
 
 
 /* ==========================================================================
-   R42b CLAY EDGE/RADIUS POLISH — clay-cozy-home-20260725-v44
+   R42b CLAY EDGE/RADIUS POLISH 鈥?clay-cozy-home-20260725-v44
    From multi-agent audit: true pill nav, warmer soil emboss, no hard rims.
    ========================================================================== */
 
@@ -11459,7 +11459,7 @@ ha-card {
 
 
 /* ==========================================================================
-   R42c DEVICE/TYPE HIERARCHY — clay-cozy-home-20260725-v44
+   R42c DEVICE/TYPE HIERARCHY 鈥?clay-cozy-home-20260725-v44
    Larger clay icon plates, stronger names, pill status chips, slim rail.
    ========================================================================== */
 
@@ -11590,7 +11590,7 @@ ha-card {
 
 
 /* ==========================================================================
-   R45 USER COLOR TABLE + STRUCTURE — clay-cozy-home-20260725-v45
+   R45 USER COLOR TABLE + STRUCTURE 鈥?clay-cozy-home-20260725-v45
    Lock canvas/sidebar to the confirmed color sheet, then tighten device,
    environment, media-off and weather frame toward the reference board.
    ========================================================================== */
@@ -11955,7 +11955,7 @@ ha-card {
 
 
 /* ==========================================================================
-   R46 OFFICIAL DEVICE CARD STRUCTURE — clay-cozy-home-20260725-v46
+   R46 OFFICIAL DEVICE CARD STRUCTURE 鈥?clay-cozy-home-20260725-v46
    Restore latest Skins-Pro device grammar (grid top/copy/controls) and only
    skin materials/colors. Hard-clamp all text/controls inside the card frame.
    ========================================================================== */
@@ -12368,7 +12368,7 @@ ha-card {
 /* clay-cozy-home-20260725-v48 */
 
 /* ==========================================================================
-   R47 FINAL SOFT-CLAY POLISH — clay-cozy-home-20260725-v48
+   R47 FINAL SOFT-CLAY POLISH 鈥?clay-cozy-home-20260725-v48
    - Lock avatar inset ring + active 20px clay capsule
    - Reassert specialty card materials
    - Keep official Skins-Pro device grammar with overflow clamps
@@ -12882,7 +12882,7 @@ ha-card {
 /* clay-cozy-home-20260725-v49 */
 
 /* ==========================================================================
-   R49 DARK MODE SOFT-CLAY READABILITY — clay-cozy-home-20260725-v49
+   R49 DARK MODE SOFT-CLAY READABILITY 鈥?clay-cozy-home-20260725-v49
    Fix night contrast, kill hard white rims, rebalance specialty cards.
    Must sit last so it wins over light R47/R48 material locks.
    ========================================================================== */
@@ -13107,7 +13107,7 @@ ha-card {
     color: rgba(245, 236, 227, 0.65) !important;
   }
 
-  /* Scenes — keep muted moss, not glaring */
+  /* Scenes 鈥?keep muted moss, not glaring */
   .mc-app .panel-scenes {
     background-color: #2A2B22 !important;
     background-image:
@@ -13124,7 +13124,7 @@ ha-card {
     color: rgba(245, 236, 227, 0.65) !important;
   }
 
-  /* Energy — dark clay body, bright readable values */
+  /* Energy 鈥?dark clay body, bright readable values */
   .mc-app .panel-energy {
     background-color: #2B2320 !important;
     background-image:
@@ -13247,12 +13247,12 @@ ha-card {
 /* clay-cozy-home-20260725-v51 */
 
 /* ==========================================================================
-   R50 DARK MODE CONTRAST/SHADOW FIX — clay-cozy-home-20260725-v51
+   R50 DARK MODE CONTRAST/SHADOW FIX 鈥?clay-cozy-home-20260725-v51
    Beat higher-specificity light locks for welcome.quote + time-card shadows.
    ========================================================================== */
 
 @media (prefers-color-scheme: dark) {
-  /* Lunar / quote under welcome — must beat .mc-app .welcome .quote light lock */
+  /* Lunar / quote under welcome 鈥?must beat .mc-app .welcome .quote light lock */
   .mc-app .welcome .quote,
   .mc-app .welcome p.quote,
   .mc-app .welcome p,
@@ -13371,7 +13371,7 @@ ha-card {
 /* clay-cozy-home-20260725-v52 */
 
 /* ==========================================================================
-   R52 OFFICIAL DEVICE/ROOM FRAME SAFETY — clay-cozy-home-20260725-v52
+   R52 OFFICIAL DEVICE/ROOM FRAME SAFETY 鈥?clay-cozy-home-20260725-v52
    Keep latest Skins-Pro device grammar (top / copy / controls) and room
    overlay grammar, but kill scale transforms and clamp every control inside
    the card so nothing overflows or stacks on top of siblings.
@@ -13764,4 +13764,1578 @@ ha-card {
   max-width: 100% !important;
   min-height: 0 !important;
   overflow: hidden !important;
+}
+
+
+/* clay-cozy-home-20260725-v53 */
+
+/* ==========================================================================
+   R53 REFERENCE CLAY + TABLET NAV LOCK 鈥?clay-cozy-home-20260725-v53
+   1) Soft-clay materials closer to reference board (no hard rims)
+   2) Single mobile-nav gate for phone/tablet portrait
+   3) Keep official device/room structure; only skin + frame safety
+   ========================================================================== */
+
+:host {
+  --sp-bg: #EFE3D5 !important;
+  --sp-clay-page: #EFE3D5 !important;
+  --sp-clay-rail: #C57D6D !important;
+  --sp-clay-rail-active: #CE8F80 !important;
+  --sp-clay-card: #F6EFE7 !important;
+  --sp-clay-env: #989A7B !important;
+  --sp-clay-media: #C77E6D !important;
+  --sp-clay-scenes: #8D8E71 !important;
+  --sp-clay-energy: #F5EBE1 !important;
+  --sp-clay-energy-bar: #E3805B !important;
+  --sp-clay-ink: #4A3A2C !important;
+  --sp-clay-muted: #8C7B6C !important;
+  --sp-text-primary: #4A3A2C !important;
+  --sp-text-secondary: #8C7B6C !important;
+  --sp-border-glass: transparent !important;
+  --sp-border-subtle: transparent !important;
+  --sp-border-medium: transparent !important;
+  --sp-clay-emboss:
+    8px 10px 18px rgba(185, 165, 145, 0.42),
+    -7px -8px 16px rgba(255, 255, 255, 0.88),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.55) !important;
+  --sp-clay-emboss-soft:
+    6px 8px 14px rgba(185, 165, 145, 0.34),
+    -5px -6px 12px rgba(255, 255, 255, 0.82) !important;
+  color: #4A3A2C !important;
+}
+
+/* Canvas oat clay */
+.mc-app {
+  color: #4A3A2C !important;
+  background-color: #EFE3D5 !important;
+  background-image:
+    radial-gradient(circle at 16% 18%, rgba(74, 58, 44, 0.012) 0 1px, transparent 1.4px),
+    radial-gradient(ellipse 58% 42% at 14% 6%, rgba(255, 250, 244, 0.45), transparent 66%),
+    linear-gradient(165deg, #F5EBDF 0%, #EFE3D5 52%, #E9DCCB 100%) !important;
+  overflow-x: hidden !important;
+}
+
+/* Sidebar soft terracotta rail */
+.mc-app .sidebar,
+.sidebar {
+  background:
+    radial-gradient(circle at 18% 14%, rgba(255, 255, 255, 0.12) 0 1px, transparent 1.5px),
+    linear-gradient(172deg, #D29280 0%, #C57D6D 48%, #B87363 100%) !important;
+  background-color: #C57D6D !important;
+  border: 0 !important;
+  border-radius: 0 28px 28px 0 !important;
+  box-shadow:
+    8px 0 22px rgba(150, 90, 75, 0.22),
+    inset 3px 3px 8px rgba(255, 214, 200, 0.24),
+    inset -3px -4px 10px rgba(120, 55, 45, 0.14) !important;
+  color: #FFFFFF !important;
+}
+
+.mc-app .sidebar .profile-img,
+.mc-app .profile-img,
+.profile-img {
+  border: 0 !important;
+  outline: 0 !important;
+  background-color: #B87363 !important;
+  border-radius: 50% !important;
+  box-shadow:
+    inset 3px 3px 6px rgba(130, 55, 45, 0.4),
+    inset -3px -3px 6px rgba(235, 165, 150, 0.6) !important;
+}
+
+.mc-app .sidebar .menu .nav-button,
+.mc-app .sidebar .menu button {
+  color: rgba(255, 242, 234, 0.85) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  box-shadow: none !important;
+}
+.mc-app .sidebar .menu .nav-button.active,
+.mc-app .sidebar .menu button.active {
+  color: #FFFFFF !important;
+  background: #CE8F80 !important;
+  background-image: linear-gradient(160deg, #D9A294 0%, #CE8F80 52%, #C58677 100%) !important;
+  border-radius: 20px !important;
+  box-shadow:
+    4px 5px 10px rgba(135, 62, 50, 0.4),
+    -2px -2px 6px rgba(235, 170, 155, 0.55),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Soft clay cards 鈥?no hard rims */
+.mc-app .device,
+.mc-app .devices-page-grid .device,
+.mc-app .welcome,
+.mc-app .time-card,
+.mc-app .panel-energy,
+.mc-app .glass-card:not(.panel-media):not(.panel-scenes):not(.panel-environment):not(:has(.env-list)) {
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 22px !important;
+  box-shadow: var(--sp-clay-emboss) !important;
+}
+
+.mc-app .device,
+.mc-app .devices-page-grid .device {
+  background-color: #F6EFE7 !important;
+  background-image:
+    radial-gradient(circle at 18% 16%, rgba(74, 58, 44, 0.012) 0 1px, transparent 1.3px),
+    linear-gradient(150deg, #FBF6F0 0%, #F6EFE7 58%, #F0E6DB 100%) !important;
+  color: #4A3A2C !important;
+}
+
+/* status pill = soft clay chip, not hard badge */
+.mc-app .device .status {
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 4px 10px !important;
+  min-height: 22px !important;
+  box-shadow:
+    2px 3px 6px rgba(135, 62, 50, 0.14),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.45) !important;
+}
+
+/* weather / welcome frame softer */
+.mc-app .welcome,
+.mc-app .weather-card,
+.mc-app .welcome-group .weather,
+.mc-app .weather-with-meta,
+.mc-app .weather-panel {
+  border: 0 !important;
+  border-radius: 24px !important;
+  box-shadow: var(--sp-clay-emboss) !important;
+}
+
+.mc-app .welcome h1,
+.mc-app .welcome h2,
+.mc-app .section-title,
+.mc-app .device .device-name {
+  color: #4A3A2C !important;
+}
+.mc-app .welcome p,
+.mc-app .welcome .quote,
+.mc-app .muted,
+.mc-app .device .muted,
+.mc-app .device .state-word {
+  color: #8C7B6C !important;
+}
+
+/* specialty cards */
+.mc-app .time-card,
+.mc-app .side > .time-card {
+  background:
+    linear-gradient(155deg, #D7A090 0%, #C98978 48%, #C07D6C 100%) !important;
+  color: #FFF8F0 !important;
+  border-radius: 22px !important;
+  border: 0 !important;
+  box-shadow:
+    8px 10px 18px rgba(150, 90, 75, 0.28),
+    -5px -6px 12px rgba(255, 230, 220, 0.28),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.28) !important;
+}
+.mc-app .time-card .time,
+.mc-app .time-card h2 { color: #FFF8F0 !important; }
+.mc-app .time-card .muted,
+.mc-app .time-card p { color: rgba(255, 248, 240, 0.78) !important; }
+
+.mc-app .side > .time-card + .glass-card,
+.mc-app .glass-card:has(.env-list),
+.mc-app .panel-environment {
+  background:
+    linear-gradient(155deg, #A4A687 0%, #989A7B 55%, #8E9072 100%) !important;
+  color: #FFF8F0 !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow:
+    8px 10px 18px rgba(120, 122, 95, 0.26),
+    -5px -6px 12px rgba(255, 255, 255, 0.18) !important;
+}
+
+.mc-app .panel-media {
+  background:
+    linear-gradient(155deg, #D18C7B 0%, #C77E6D 55%, #B87363 100%) !important;
+  color: #FFF8F0 !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow:
+    8px 10px 18px rgba(150, 90, 75, 0.28),
+    -5px -6px 12px rgba(255, 230, 220, 0.22) !important;
+}
+
+.mc-app .panel-scenes {
+  background:
+    linear-gradient(155deg, #9A9B7E 0%, #8D8E71 55%, #818265 100%) !important;
+  color: #FFF8F0 !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow:
+    8px 10px 18px rgba(110, 112, 88, 0.26),
+    -5px -6px 12px rgba(255, 255, 255, 0.16) !important;
+}
+
+.mc-app .panel-energy {
+  background:
+    linear-gradient(150deg, #F8F1E8 0%, #F5EBE1 58%, #EFE3D5 100%) !important;
+  color: #4A3A2C !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow: var(--sp-clay-emboss) !important;
+}
+.mc-app .panel-energy .bars span,
+.mc-app .panel-energy .bar,
+.mc-app .bars span,
+.mc-app .bars .bar.on {
+  background: linear-gradient(180deg, #EBB28A 0%, #E3805B 100%) !important;
+  border-radius: 8px 8px 3px 3px !important;
+}
+
+/* rooms soft clip */
+.mc-app .room {
+  border: 0 !important;
+  border-radius: 22px !important;
+  overflow: hidden !important;
+  box-shadow: var(--sp-clay-emboss-soft) !important;
+}
+
+/* ===================== mobile-nav single gate ===================== */
+/* baseline: hidden on desktop host */
+.mc-app .mobile-nav,
+.mobile-nav {
+  display: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+/* phone + tablet portrait only */
+@media (max-width: 900px), (orientation: portrait) and (max-width: 1100px) {
+  .mc-app {
+    display: block !important;
+    overflow: visible !important;
+    padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)) !important;
+    box-sizing: border-box !important;
+  }
+
+  .mc-app .sidebar,
+  .sidebar {
+    display: none !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .mc-app .stage,
+  .stage {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)) !important;
+    box-sizing: border-box !important;
+  }
+
+  .mc-app .mobile-nav,
+  .mobile-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    min-height: calc(58px + env(safe-area-inset-bottom, 0px)) !important;
+    margin: 0 !important;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)) !important;
+    box-sizing: border-box !important;
+
+    z-index: 500 !important;
+    pointer-events: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-x: contain !important;
+    scrollbar-width: none !important;
+
+    border: 0 !important;
+    border-radius: 22px 22px 0 0 !important;
+    background:
+      linear-gradient(180deg, #E8D5C6 0%, #DEC4B3 100%) !important;
+    box-shadow:
+      0 -8px 18px rgba(120, 80, 60, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+  }
+  .mc-app .mobile-nav::-webkit-scrollbar,
+  .mobile-nav::-webkit-scrollbar { display: none !important; }
+
+  .mc-app .mobile-nav .nav-button,
+  .mc-app .mobile-nav button,
+  .mobile-nav .nav-button,
+  .mobile-nav button {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+
+    flex: 1 0 56px !important;
+    min-width: 56px !important;
+    max-width: none !important;
+    min-height: 48px !important;
+    height: auto !important;
+    padding: 6px 8px !important;
+    margin: 0 !important;
+
+    border: 0 !important;
+    border-radius: 16px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: rgba(74, 58, 44, 0.72) !important;
+    writing-mode: horizontal-tb !important;
+  }
+
+  .mc-app .mobile-nav .nav-button ha-icon,
+  .mobile-nav .nav-button ha-icon {
+    color: inherit !important;
+    --mdc-icon-size: 22px !important;
+  }
+
+  .mc-app .mobile-nav .nav-button span,
+  .mobile-nav .nav-button span {
+    display: block !important;
+    max-width: 4.8em !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    color: inherit !important;
+  }
+
+  .mc-app .mobile-nav .nav-button.active,
+  .mc-app .mobile-nav button.active,
+  .mobile-nav .nav-button.active,
+  .mobile-nav button.active {
+    color: #FFFFFF !important;
+    background: #CE8F80 !important;
+    background-image: linear-gradient(160deg, #D9A294 0%, #CE8F80 52%, #C58677 100%) !important;
+    box-shadow:
+      3px 4px 8px rgba(135, 62, 50, 0.28),
+      -2px -2px 5px rgba(255, 236, 228, 0.45),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.45) !important;
+  }
+}
+
+/* desktop / large tablet landscape: never show bottom nav */
+@media (min-width: 901px) and (orientation: landscape),
+       (min-width: 1101px) {
+  .mc-app .mobile-nav,
+  .mobile-nav {
+    display: none !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+  }
+  .mc-app {
+    padding-bottom: 0 !important;
+  }
+}
+/* ==========================================================================
+   R53 MOBILE/TABLET BOTTOM NAV GATE — clay-cozy-home-20260725-v53
+   Final-layer fix only (append, do not delete history):
+   1) neutralize unconditional `.mobile-nav { display:flex !important }` pollution
+   2) single visibility gate: max-width 900px OR portrait + max-width 1100px
+   3) desktop / large-tablet landscape hide bottom bar
+   4) reverse 7-item crop: overflow-x auto + button min-width >= 56px
+   5) z-index ~500, safe-area padding-bottom, warm clay material + active #CE8F80
+   ========================================================================== */
+
+/* Default: hide bottom nav everywhere (wins over historic unconditional flex). */
+.mc-app .mobile-nav,
+.mobile-nav {
+  display: none !important;
+}
+
+/* Desktop / large-tablet landscape: keep sidebar, never show bottom bar. */
+@media (min-width: 901px) and (orientation: landscape),
+       (min-width: 1101px) {
+  .mc-app .mobile-nav,
+  .mobile-nav {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  .mc-app > .sidebar,
+  .mc-app .sidebar {
+    display: flex !important;
+  }
+  .mc-app,
+  .mc-app .stage,
+  .mc-app .stage .stage-grid {
+    padding-bottom: 0 !important;
+  }
+}
+
+/* Unique gate: phone + tablet portrait show fixed bottom bar, hide sidebar. */
+@media (max-width: 900px), (orientation: portrait) and (max-width: 1100px) {
+  .mc-app > .sidebar,
+  .mc-app .sidebar {
+    display: none !important;
+  }
+
+  .mc-app .mobile-nav,
+  .mobile-nav {
+    display: flex !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    z-index: 500 !important;
+    gap: 4px !important;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)) !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    background:
+      radial-gradient(circle at 18% 20%, rgba(92, 64, 48, 0.02) 0 1px, transparent 1.4px),
+      linear-gradient(180deg, #F6EFE7 0%, #EFE3D5 100%) !important;
+    border: 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.72) !important;
+    box-shadow:
+      0 -8px 22px rgba(120, 78, 58, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .mc-app .mobile-nav::-webkit-scrollbar,
+  .mobile-nav::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .mc-app .mobile-nav .nav-button,
+  .mc-app .mobile-nav button,
+  .mobile-nav .nav-button,
+  .mobile-nav button {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 2px !important;
+    min-width: 56px !important;
+    width: auto !important;
+    max-width: none !important;
+    min-height: 48px !important;
+    padding: 6px 8px !important;
+    margin: 0 !important;
+    color: rgba(74, 47, 36, 0.78) !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 18px !important;
+    box-shadow: none !important;
+    white-space: nowrap !important;
+  }
+
+  .mc-app .mobile-nav .nav-button span,
+  .mc-app .mobile-nav button span,
+  .mobile-nav .nav-button span,
+  .mobile-nav button span {
+    display: block !important;
+    max-width: 4.8em !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+  }
+
+  .mc-app .mobile-nav .nav-button ha-icon,
+  .mc-app .mobile-nav button ha-icon,
+  .mobile-nav .nav-button ha-icon,
+  .mobile-nav button ha-icon {
+    color: inherit !important;
+    --mdc-icon-size: 22px !important;
+  }
+
+  .mc-app .mobile-nav .nav-button.active,
+  .mc-app .mobile-nav button.active,
+  .mobile-nav .nav-button.active,
+  .mobile-nav button.active {
+    color: #FFFFFF !important;
+    background: #CE8F80 !important;
+    background-image: linear-gradient(160deg, #D9A294 0%, #CE8F80 52%, #C58677 100%) !important;
+    border: 0 !important;
+    border-radius: 18px !important;
+    box-shadow:
+      3px 4px 8px rgba(135, 62, 50, 0.28),
+      -2px -2px 5px rgba(255, 255, 255, 0.45),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.42) !important;
+  }
+
+  .mc-app .mobile-nav .nav-button.active ha-icon,
+  .mc-app .mobile-nav button.active ha-icon,
+  .mobile-nav .nav-button.active ha-icon,
+  .mobile-nav button.active ha-icon {
+    color: #FFFFFF !important;
+  }
+
+  /* Keep page content clear of the fixed dock + home indicator. */
+  .mc-app {
+    padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .mc-app .stage,
+  .mc-app .stage .stage-grid {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* Dark mode: keep warm clay dock + white active text. */
+@media (prefers-color-scheme: dark) and (max-width: 900px),
+       (prefers-color-scheme: dark) and (orientation: portrait) and (max-width: 1100px) {
+  .mc-app .mobile-nav,
+  .mobile-nav {
+    background:
+      radial-gradient(circle at 18% 20%, rgba(255, 220, 200, 0.03) 0 1px, transparent 1.4px),
+      linear-gradient(180deg, #3A2B24 0%, #2F231D 100%) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow:
+      0 -10px 24px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  }
+  .mc-app .mobile-nav .nav-button,
+  .mc-app .mobile-nav button,
+  .mobile-nav .nav-button,
+  .mobile-nav button {
+    color: rgba(255, 236, 224, 0.78) !important;
+  }
+  .mc-app .mobile-nav .nav-button.active,
+  .mc-app .mobile-nav button.active,
+  .mobile-nav .nav-button.active,
+  .mobile-nav button.active {
+    color: #FFFFFF !important;
+    background: #CE8F80 !important;
+    background-image: linear-gradient(160deg, #D9A294 0%, #CE8F80 52%, #C58677 100%) !important;
+  }
+}
+
+
+/* clay-cozy-home-20260725-v54 */
+
+/* ==========================================================================
+   R54 REFERENCE COLOR + SOFT-CLAY EMBOSS LOCK
+   - Flatten oat canvas / matte terracotta rail
+   - Force inactive nav transparent (no solid capsules)
+   - Warm dual emboss (kill pure-white rim look)
+   - Specialty cards + energy bars lock to user palette
+   - Avatar recessed clay well
+   ========================================================================== */
+
+:host {
+  --sp-bg: #EFE3D5 !important;
+  --sp-clay-page: #EFE3D5 !important;
+  --sp-clay-oat: #EFE3D5 !important;
+  --sp-clay-rail: #C57D6D !important;
+  --sp-clay-rail-deep: #B87363 !important;
+  --sp-clay-rail-active: #CE8F80 !important;
+  --sp-clay-card: #F6EFE7 !important;
+  --sp-clay-env: #989A7B !important;
+  --sp-clay-media: #C77E6D !important;
+  --sp-clay-scenes: #8D8E71 !important;
+  --sp-clay-energy: #F5EBE1 !important;
+  --sp-clay-energy-bar: #E3805B !important;
+  --sp-clay-time: #C8886F !important;
+  --sp-clay-ink: #4A3A2C !important;
+  --sp-clay-muted: #8C7B6C !important;
+  --sp-text-primary: #4A3A2C !important;
+  --sp-text-secondary: #8C7B6C !important;
+  --sp-accent: #C57D6D !important;
+  --sp-border-glass: transparent !important;
+  --sp-border-subtle: transparent !important;
+  --sp-border-medium: transparent !important;
+  --sp-clay-emboss:
+    10px 12px 22px rgba(168, 126, 98, 0.20),
+    3px 4px 8px rgba(150, 110, 85, 0.10),
+    -5px -6px 12px rgba(255, 248, 240, 0.55),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.42),
+    inset -1px -2px 3px rgba(150, 110, 85, 0.08) !important;
+  --sp-clay-emboss-soft:
+    7px 9px 16px rgba(168, 126, 98, 0.14),
+    -4px -5px 10px rgba(255, 248, 240, 0.42) !important;
+  --sp-clay-emboss-coral:
+    8px 10px 18px rgba(140, 80, 65, 0.22),
+    -4px -5px 10px rgba(255, 220, 205, 0.28),
+    inset 2px 2px 4px rgba(255, 240, 230, 0.28),
+    inset -2px -3px 5px rgba(120, 55, 45, 0.14) !important;
+  --sp-clay-emboss-sage:
+    8px 10px 18px rgba(98, 102, 72, 0.20),
+    -4px -5px 10px rgba(236, 236, 210, 0.22),
+    inset 2px 2px 4px rgba(255, 255, 245, 0.18),
+    inset -2px -3px 5px rgba(70, 72, 50, 0.12) !important;
+  color: #4A3A2C !important;
+}
+
+/* 1) Canvas: warm oat, less paper-white */
+.mc-app {
+  color: #4A3A2C !important;
+  background-color: #EFE3D5 !important;
+  background-image:
+    radial-gradient(circle at 18% 16%, rgba(74, 58, 44, 0.012) 0 1px, transparent 1.35px),
+    linear-gradient(168deg, #F1E6D8 0%, #EFE3D5 48%, #EADCCB 100%) !important;
+}
+
+/* 2) Sidebar: matte grey-terracotta, 28px soft right edge */
+.mc-app .sidebar,
+.sidebar {
+  background:
+    radial-gradient(circle at 20% 14%, rgba(255, 230, 220, 0.08) 0 1px, transparent 1.6px),
+    linear-gradient(178deg, #C98878 0%, #C57D6D 42%, #B87363 100%) !important;
+  background-color: #C57D6D !important;
+  border: 0 !important;
+  border-color: transparent !important;
+  border-radius: 0 28px 28px 0 !important;
+  color: #FFFFFF !important;
+  box-shadow:
+    10px 0 24px rgba(140, 78, 62, 0.18),
+    2px 0 0 rgba(255, 220, 205, 0.10),
+    inset 4px 5px 12px rgba(255, 214, 200, 0.18),
+    inset -4px -6px 12px rgba(110, 55, 45, 0.16) !important;
+}
+
+/* 3) Avatar recessed clay well */
+.mc-app .sidebar .profile-img,
+.mc-app .profile-img,
+.profile-img {
+  border: 0 !important;
+  outline: 0 !important;
+  border-color: transparent !important;
+  border-radius: 50% !important;
+  box-sizing: border-box !important;
+  padding: 4px !important;
+  background:
+    radial-gradient(circle at 30% 28%, rgba(255, 220, 205, 0.26), transparent 55%),
+    #B87363 !important;
+  background-color: #B87363 !important;
+  box-shadow:
+    inset 4px 5px 10px rgba(110, 50, 40, 0.35),
+    inset -3px -4px 8px rgba(235, 175, 160, 0.28),
+    0 0 0 1px rgba(120, 60, 48, 0.10),
+    0 8px 16px rgba(110, 55, 45, 0.12) !important;
+  filter: none !important;
+  object-fit: cover !important;
+}
+
+.mc-app .sidebar .profile .meta h2,
+.mc-app .sidebar .profile .meta .name,
+.mc-app .profile .meta h2,
+.mc-app .profile .meta .name {
+  color: #FFFFFF !important;
+}
+.mc-app .sidebar .profile .meta p,
+.mc-app .sidebar .profile .meta .muted,
+.mc-app .profile .meta p,
+.mc-app .profile .meta .muted {
+  color: rgba(255, 242, 234, 0.85) !important;
+}
+
+/* 4) Inactive nav: pure text on rail, NEVER solid capsules */
+.mc-app .sidebar .menu .nav-button,
+.mc-app .sidebar .menu button,
+.mc-app .sidebar .menu .nav-button:not(.active),
+.mc-app .sidebar .menu button:not(.active),
+.mc-app .menu .nav-button:not(.active),
+.mc-app .menu button:not(.active),
+.mc-app .sidebar button.nav-button:not(.active) {
+  color: rgba(255, 242, 234, 0.85) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-color: transparent !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+  border-radius: 999px !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.mc-app .sidebar .menu .nav-button:not(.active) ha-icon,
+.mc-app .sidebar .menu button:not(.active) ha-icon,
+.mc-app .sidebar .menu .nav-button:not(.active) span,
+.mc-app .sidebar .menu button:not(.active) span,
+.mc-app .menu .nav-button:not(.active) ha-icon,
+.mc-app .menu button:not(.active) ha-icon {
+  color: rgba(255, 242, 234, 0.85) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Active nav: raised clay pill #CE8F80 + white */
+.mc-app .sidebar .menu .nav-button.active,
+.mc-app .sidebar .menu button.active,
+.mc-app .menu .nav-button.active,
+.mc-app .menu button.active,
+.mc-app .sidebar button.nav-button.active {
+  color: #FFFFFF !important;
+  background: #CE8F80 !important;
+  background-color: #CE8F80 !important;
+  background-image: linear-gradient(165deg, #D4A090 0%, #CE8F80 55%, #C68778 100%) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  box-shadow:
+    4px 6px 12px rgba(120, 55, 45, 0.28),
+    -2px -3px 6px rgba(255, 214, 200, 0.40),
+    inset 1px 1px 2px rgba(255, 245, 238, 0.45),
+    inset -2px -3px 5px rgba(130, 60, 48, 0.16) !important;
+}
+.mc-app .sidebar .menu .nav-button.active ha-icon,
+.mc-app .sidebar .menu button.active ha-icon,
+.mc-app .menu .nav-button.active ha-icon,
+.mc-app .sidebar .menu .nav-button.active span,
+.mc-app .sidebar .menu button.active span {
+  color: #FFFFFF !important;
+}
+
+/* 5) Cream device / welcome / energy cards: soft clay emboss, no hard rim */
+.mc-app .device,
+.mc-app .devices-page-grid .device,
+.mc-app .welcome,
+.mc-app .panel-energy,
+.mc-app .glass-card:not(.panel-media):not(.panel-scenes):not(.panel-environment):not(:has(.env-list)):not(:has(.env-row)),
+.mc-app .weather-card,
+.mc-app .weather-with-meta,
+.mc-app .weather-panel,
+.mc-app .room {
+  border: 0 !important;
+  border-color: transparent !important;
+  outline: 0 !important;
+  box-shadow: var(--sp-clay-emboss) !important;
+}
+
+.mc-app .device,
+.mc-app .devices-page-grid .device {
+  background-color: #F6EFE7 !important;
+  background-image:
+    radial-gradient(circle at 18% 16%, rgba(74, 58, 44, 0.010) 0 1px, transparent 1.3px),
+    linear-gradient(150deg, #F8F3EC 0%, #F6EFE7 58%, #F1E7DC 100%) !important;
+  border-radius: 20px !important;
+  color: #4A3A2C !important;
+  overflow: hidden !important;
+}
+
+.mc-app .device .item-img,
+.mc-app .device .item-icon {
+  border-radius: 18px !important;
+  border: 0 !important;
+  box-shadow:
+    3px 4px 8px rgba(150, 110, 85, 0.12),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.45) !important;
+  transform: none !important;
+}
+
+.mc-app .device .device-name {
+  color: #4A3A2C !important;
+}
+.mc-app .device .muted,
+.mc-app .device .state-word,
+.mc-app .muted {
+  color: #8C7B6C !important;
+}
+
+.mc-app .welcome,
+.mc-app .weather-card,
+.mc-app .weather-with-meta,
+.mc-app .weather-panel {
+  background-color: #F6EFE7 !important;
+  border-radius: 24px !important;
+  color: #4A3A2C !important;
+}
+
+.mc-app .welcome h1,
+.mc-app .welcome h2,
+.mc-app .section-title,
+.mc-app .section-title h2 {
+  color: #4A3A2C !important;
+}
+.mc-app .welcome p,
+.mc-app .section-title .muted {
+  color: #8C7B6C !important;
+}
+
+.mc-app .room {
+  border-radius: 22px !important;
+  overflow: hidden !important;
+}
+
+/* 6) Clock: soft fog-rose terracotta family */
+.mc-app .time-card,
+.mc-app .side > .time-card {
+  background-color: #C8886F !important;
+  background-image:
+    linear-gradient(155deg, #D19A82 0%, #C8886F 55%, #BD7B64 100%) !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  color: #FFF8F0 !important;
+  box-shadow: var(--sp-clay-emboss-coral) !important;
+  overflow: hidden !important;
+}
+.mc-app .time-card .time,
+.mc-app .time-card h1,
+.mc-app .time-card h2 {
+  color: #FFF8F0 !important;
+}
+.mc-app .time-card .muted,
+.mc-app .time-card p {
+  color: rgba(255, 248, 240, 0.82) !important;
+}
+
+/* 7) Environment sage */
+.mc-app .panel-environment,
+.mc-app .side > .time-card + .glass-card,
+.mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+.mc-app .glass-card:has(.env-list),
+.mc-app .glass-card:has(.env-row) {
+  background-color: #989A7B !important;
+  background-image:
+    linear-gradient(155deg, #9EA07F 0%, #989A7B 58%, #8F9173 100%) !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  color: #FFF8F0 !important;
+  box-shadow: var(--sp-clay-emboss-sage) !important;
+  overflow: hidden !important;
+}
+.mc-app .panel-environment .section-title,
+.mc-app .panel-environment .section-title h2,
+.mc-app .panel-environment .env-value,
+.mc-app .side > .time-card + .glass-card .section-title,
+.mc-app .side > .time-card + .glass-card .section-title h2,
+.mc-app .side > .time-card + .glass-card .env-value,
+.mc-app .glass-card:has(.env-list) .section-title,
+.mc-app .glass-card:has(.env-list) .section-title h2,
+.mc-app .glass-card:has(.env-list) .env-value {
+  color: #FFF8F0 !important;
+}
+.mc-app .panel-environment .muted,
+.mc-app .side > .time-card + .glass-card .muted,
+.mc-app .glass-card:has(.env-list) .muted {
+  color: rgba(255, 248, 240, 0.82) !important;
+}
+.mc-app .panel-environment .env-row,
+.mc-app .side > .time-card + .glass-card .env-row,
+.mc-app .glass-card:has(.env-list) .env-row {
+  background: rgba(255, 248, 240, 0.09) !important;
+  border: 0 !important;
+  border-radius: 14px !important;
+  box-shadow:
+    inset 1px 1px 2px rgba(70, 72, 50, 0.10),
+    inset -1px -1px 2px rgba(255, 255, 245, 0.12) !important;
+}
+
+/* 8) Media coral */
+.mc-app .panel-media,
+.mc-app .glass-card.panel-media {
+  background-color: #C77E6D !important;
+  background-image:
+    linear-gradient(155deg, #CE8A79 0%, #C77E6D 58%, #BD7363 100%) !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  color: #FFF8F0 !important;
+  box-shadow: var(--sp-clay-emboss-coral) !important;
+  overflow: hidden !important;
+}
+.mc-app .panel-media .section-title,
+.mc-app .panel-media .section-title h2,
+.mc-app .panel-media h2,
+.mc-app .panel-media h3,
+.mc-app .panel-media .device-name {
+  color: #FFF8F0 !important;
+}
+.mc-app .panel-media .muted {
+  color: rgba(255, 248, 240, 0.82) !important;
+}
+
+/* 9) Scenes moss */
+.mc-app .panel-scenes {
+  background-color: #8D8E71 !important;
+  background-image:
+    linear-gradient(155deg, #959679 0%, #8D8E71 58%, #848567 100%) !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  color: #FFF8F0 !important;
+  box-shadow: var(--sp-clay-emboss-sage) !important;
+  overflow: hidden !important;
+}
+.mc-app .panel-scenes .section-title,
+.mc-app .panel-scenes .section-title h2,
+.mc-app .panel-scenes h2,
+.mc-app .panel-scenes h3 {
+  color: #FFF8F0 !important;
+}
+.mc-app .panel-scenes .scene,
+.mc-app .panel-scenes button.scene {
+  background: rgba(255, 248, 242, 0.58) !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    3px 4px 8px rgba(70, 72, 50, 0.12),
+    inset 1px 1px 1px rgba(255, 255, 245, 0.22) !important;
+}
+
+/* 10) Energy ivory + solid clay-orange bars */
+.mc-app .panel-energy {
+  background-color: #F5EBE1 !important;
+  background-image:
+    linear-gradient(150deg, #F7F0E7 0%, #F5EBE1 58%, #EFE4D8 100%) !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  color: #4A3A2C !important;
+  box-shadow: var(--sp-clay-emboss) !important;
+  overflow: hidden !important;
+}
+.mc-app .panel-energy .section-title,
+.mc-app .panel-energy .section-title h2,
+.mc-app .panel-energy .energy-value,
+.mc-app .panel-energy .energy-value small {
+  color: #4A3A2C !important;
+}
+.mc-app .panel-energy .muted,
+.mc-app .panel-energy .energy-footer .muted {
+  color: #8C7B6C !important;
+}
+.mc-app .panel-energy .bars span,
+.mc-app .panel-energy .bar,
+.mc-app .panel-energy .bars .bar,
+.mc-app .panel-energy .bar.on,
+.mc-app .panel-energy .bars .bar.on,
+.mc-app .energy-bars span,
+.mc-app .bars span,
+.mc-app .bars .bar,
+.mc-app .bars .bar.on {
+  background: #E3805B !important;
+  background-color: #E3805B !important;
+  background-image: linear-gradient(180deg, #E8926A 0%, #E3805B 72%) !important;
+  border: 0 !important;
+  box-shadow:
+    1px 2px 3px rgba(150, 90, 60, 0.18),
+    inset 0 1px 0 rgba(255, 248, 240, 0.28) !important;
+}
+
+/* 11) Universal hard-rim kill on main clay surfaces */
+.mc-app .device,
+.mc-app .room,
+.mc-app .glass-card,
+.mc-app .time-card,
+.mc-app .panel-energy,
+.mc-app .panel-media,
+.mc-app .panel-scenes,
+.mc-app .panel-environment,
+.mc-app .welcome,
+.mc-app .weather-with-meta,
+.mc-app .sidebar,
+.mc-app .profile-img {
+  border-color: transparent !important;
+  outline: 0 !important;
+}
+
+/* Desktop sidebar radius lock */
+@media (min-width: 901px) {
+  .mc-app .sidebar,
+  .sidebar {
+    border-radius: 0 28px 28px 0 !important;
+  }
+}
+
+/* Dark mode keeps R49 readability, reassert after R54 light locks */
+@media (prefers-color-scheme: dark) {
+  .mc-app {
+    background-color: #1C1715 !important;
+    background-image:
+      radial-gradient(circle at 18% 16%, rgba(255, 236, 224, 0.02) 0 1px, transparent 1.4px),
+      linear-gradient(168deg, #221C19 0%, #1C1715 55%, #181310 100%) !important;
+    color: #F5ECE3 !important;
+  }
+  .mc-app .welcome h1,
+  .mc-app .welcome h2,
+  .mc-app .welcome,
+  .mc-app .section-title,
+  .mc-app .section-title h2 {
+    color: #F5ECE3 !important;
+  }
+  .mc-app .welcome p,
+  .mc-app .muted,
+  .mc-app .section-title .muted {
+    color: rgba(245, 236, 227, 0.65) !important;
+  }
+  .mc-app .device,
+  .mc-app .devices-page-grid .device,
+  .mc-app .panel-energy,
+  .mc-app .glass-card:not(.panel-media):not(.panel-scenes):not(.panel-environment):not(:has(.env-list)):not(:has(.env-row)) {
+    background-color: #2B2320 !important;
+    background-image:
+      linear-gradient(150deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .device .device-name,
+  .mc-app .panel-energy .energy-value,
+  .mc-app .panel-energy .section-title,
+  .mc-app .panel-energy .section-title h2 {
+    color: #FAF5F0 !important;
+  }
+  .mc-app .device .muted,
+  .mc-app .device .state-word,
+  .mc-app .panel-energy .muted {
+    color: rgba(250, 245, 240, 0.55) !important;
+  }
+  .mc-app .time-card,
+  .mc-app .side > .time-card {
+    background-color: #422D28 !important;
+    background-image: linear-gradient(155deg, #4C342E 0%, #422D28 55%, #382621 100%) !important;
+    color: #F5ECE3 !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-environment,
+  .mc-app .side > .time-card + .glass-card,
+  .mc-app .glass-card:has(.env-list),
+  .mc-app .glass-card:has(.env-row) {
+    background-color: #2D3227 !important;
+    background-image: linear-gradient(155deg, #363B2F 0%, #2D3227 55%, #272B22 100%) !important;
+    color: #F5ECE3 !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-media {
+    background-color: #3D2722 !important;
+    background-image: linear-gradient(155deg, #4A3029 0%, #3D2722 55%, #34211D 100%) !important;
+    color: #F5ECE3 !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-scenes {
+    background-color: #2A2B22 !important;
+    background-image: linear-gradient(155deg, #333428 0%, #2A2B22 55%, #24251E 100%) !important;
+    color: #F5ECE3 !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-energy .bars span,
+  .mc-app .bars span,
+  .mc-app .bars .bar.on {
+    background: #E3805B !important;
+    background-image: linear-gradient(180deg, #E8926A 0%, #E3805B 72%) !important;
+  }
+}
+
+
+/* clay-cozy-home-20260725-v55 */
+
+/* ==========================================================================
+   R55 OFFICIAL MODERN DEVICE CONTROLS (CSS-only)
+   Match ha-china/Skins-Pro latest device-card architecture:
+   - ha-control-slider / ha-control-switch
+   - climate .temp-group +/- + filter-select hvac/fan
+   - light brightness slider + color swatch + switch
+   - cover/valve position slider
+   Keep controls inside card frame; no overflow, no overlap.
+   ========================================================================== */
+
+:host {
+  --sp-radius-pill: 999px !important;
+  --sp-radius-device: 20px !important;
+  --control-slider-color: #E3805B !important;
+  --control-slider-background: rgba(185, 165, 145, 0.22) !important;
+  --control-switch-on-color: #C57D6D !important;
+  --control-switch-off-color: rgba(140, 123, 108, 0.28) !important;
+  --ha-control-color: #E3805B !important;
+}
+
+/* Device frame: official grid, room for control-row */
+.mc-app .device,
+.mc-app .devices-page-grid .device {
+  display: grid !important;
+  grid-template-rows: auto 1fr auto !important;
+  align-content: stretch !important;
+  min-height: 148px !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  padding: 12px !important;
+  gap: 6px !important;
+}
+
+.mc-app .devices-page-grid .device {
+  min-height: 120px !important;
+  padding: 10px !important;
+}
+
+.mc-app .device .device-top,
+.mc-app .device .control-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.mc-app .device .device-copy {
+  align-self: end !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+.mc-app .device .device-name,
+.mc-app .device .muted {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Control row must fit slider + switch / temp + selects */
+.mc-app .device .control-row {
+  width: 100% !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-end !important;
+  gap: 4px !important;
+  margin-top: 2px !important;
+  overflow: hidden !important;
+}
+
+.mc-app .device .control-row > * {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Official HA control switch */
+.mc-app .device ha-control-switch,
+.mc-app ha-control-switch {
+  flex: 0 0 auto !important;
+  width: 44px !important;
+  max-width: 48px !important;
+  min-width: 40px !important;
+  margin-left: auto !important;
+  border-radius: 999px !important;
+  --control-switch-thickness: 24px !important;
+  --control-switch-border-radius: 999px !important;
+  --control-switch-padding: 3px !important;
+  --control-switch-on-color: #C57D6D !important;
+  --control-switch-off-color: rgba(140, 123, 108, 0.28) !important;
+  box-shadow:
+    3px 4px 8px rgba(150, 110, 85, 0.16),
+    -2px -2px 5px rgba(255, 248, 240, 0.55) !important;
+}
+
+/* Official HA control slider (light bri / cover pos / etc.) */
+.mc-app .device ha-control-slider,
+.mc-app ha-control-slider,
+.mc-app .device .media-vol-slider {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: 28px !important;
+  border-radius: 999px !important;
+  --control-slider-thickness: 28px !important;
+  --control-slider-border-radius: 999px !important;
+  --control-slider-color: #E3805B !important;
+  --control-slider-background: rgba(185, 165, 145, 0.22) !important;
+  --control-slider-background-opacity: 1 !important;
+  box-shadow:
+    inset 1px 1px 2px rgba(120, 90, 70, 0.12),
+    2px 3px 6px rgba(150, 110, 85, 0.10) !important;
+}
+
+/* Climate: temp-group +/- target */
+.mc-app .device .temp-group,
+.mc-app .temp-group {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 1px !important;
+  flex: 0 0 auto !important;
+  flex-shrink: 0 !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: 32px !important;
+  padding: 2px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: rgba(246, 239, 231, 0.92) !important;
+  box-shadow:
+    3px 4px 8px rgba(150, 110, 85, 0.14),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.55),
+    inset -1px -1px 2px rgba(150, 110, 85, 0.08) !important;
+  overflow: hidden !important;
+}
+
+.mc-app .device .temp-group .media-volbtn,
+.mc-app .temp-group .media-volbtn,
+.mc-app .device .temp-group [role="button"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #4A3A2C !important;
+  cursor: pointer !important;
+  flex: 0 0 auto !important;
+}
+
+.mc-app .device .temp-group .media-volbtn:hover,
+.mc-app .temp-group .media-volbtn:hover {
+  background: rgba(227, 128, 91, 0.16) !important;
+}
+
+.mc-app .device .temp-group .media-volbtn ha-icon,
+.mc-app .temp-group .media-volbtn ha-icon {
+  --mdc-icon-size: 14px !important;
+  color: #4A3A2C !important;
+}
+
+.mc-app .device .temp-group > span,
+.mc-app .temp-group > span {
+  min-width: 22px !important;
+  max-width: 36px !important;
+  text-align: center !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  color: #4A3A2C !important;
+  flex: 0 0 auto !important;
+}
+
+/* Climate HVAC / fan mode selects */
+.mc-app .device .control-row .filter-select,
+.mc-app .device select.filter-select,
+.mc-app .device .control-row select {
+  flex: 0 1 auto !important;
+  flex-shrink: 1 !important;
+  min-width: 48px !important;
+  max-width: 72px !important;
+  min-height: 32px !important;
+  height: 32px !important;
+  padding: 0 16px 0 6px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  color: #4A3A2C !important;
+  background-color: rgba(246, 239, 231, 0.95) !important;
+  background-image: none !important;
+  box-shadow:
+    2px 3px 6px rgba(150, 110, 85, 0.12),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.5) !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Light color swatch */
+.mc-app .device .light-color-swatch,
+.mc-app .light-color-swatch {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
+  flex: 0 0 auto !important;
+  border-radius: 50% !important;
+  border: 2px solid rgba(255, 248, 240, 0.75) !important;
+  box-shadow:
+    2px 3px 6px rgba(150, 110, 85, 0.16),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.35) !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Fan / humidifier preset chips if present */
+.mc-app .device .control-row .chip,
+.mc-app .device .preset-chip,
+.mc-app .device .mode-chip {
+  flex: 0 0 auto !important;
+  max-width: 64px !important;
+  min-height: 28px !important;
+  padding: 0 8px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  font-size: 10px !important;
+  color: #4A3A2C !important;
+  background: rgba(246, 239, 231, 0.92) !important;
+  box-shadow: 2px 3px 6px rgba(150, 110, 85, 0.12) !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Legacy fake .switch still used by some domains in mixed runtimes */
+.mc-app .device .switch {
+  flex: 0 0 auto !important;
+  width: 42px !important;
+  height: 24px !important;
+  max-width: 42px !important;
+}
+
+/* Media toggle icon in control-row */
+.mc-app .device .control-row .media-toggle-icon,
+.mc-app .device .control-row ha-icon.media-toggle-icon {
+  flex: 0 0 auto !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  border-radius: 999px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #4A3A2C !important;
+  background: rgba(246, 239, 231, 0.95) !important;
+  box-shadow:
+    2px 3px 6px rgba(150, 110, 85, 0.12),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.5) !important;
+}
+
+/* Do not let icon scale create overlap with controls */
+.mc-app .device .item-img,
+.mc-app .device .item-icon {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  flex: 0 0 48px !important;
+  transform: none !important;
+  scale: 1 !important;
+}
+
+.mc-app .devices-page-grid .device .item-img,
+.mc-app .devices-page-grid .device .item-icon {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  max-width: 40px !important;
+  max-height: 40px !important;
+  flex-basis: 40px !important;
+}
+
+/* Mid / mobile: keep climate controls inside card */
+@media (min-width: 901px) and (max-width: 1400px) {
+  .mc-app .device {
+    min-height: 132px !important;
+    padding: 10px !important;
+  }
+  .mc-app .device .control-row {
+    gap: 3px !important;
+  }
+  .mc-app .device .control-row .filter-select,
+  .mc-app .device select.filter-select {
+    max-width: 58px !important;
+    min-width: 44px !important;
+    font-size: 9px !important;
+  }
+  .mc-app .device .temp-group {
+    transform: scale(0.96);
+    transform-origin: left center;
+  }
+  .mc-app .device ha-control-slider {
+    --control-slider-thickness: 24px !important;
+    height: 24px !important;
+  }
+}
+
+@media (max-width: 900px), (orientation: portrait) and (max-width: 1100px) {
+  .mc-app .device {
+    min-height: 120px !important;
+    padding: 10px !important;
+  }
+  .mc-app .device .control-row {
+    gap: 3px !important;
+  }
+  .mc-app .device .control-row .filter-select,
+  .mc-app .device select.filter-select {
+    max-width: 52px !important;
+    min-width: 42px !important;
+    padding: 0 14px 0 4px !important;
+  }
+  .mc-app .device ha-control-switch {
+    width: 40px !important;
+  }
+}
+
+/* Dark mode official controls */
+@media (prefers-color-scheme: dark) {
+  .mc-app .device ha-control-switch,
+  .mc-app ha-control-switch {
+    --control-switch-on-color: #C57D6D !important;
+    --control-switch-off-color: rgba(250, 245, 240, 0.14) !important;
+    box-shadow:
+      3px 4px 8px rgba(12, 9, 8, 0.45),
+      -2px -2px 5px rgba(75, 62, 55, 0.18) !important;
+  }
+  .mc-app .device ha-control-slider,
+  .mc-app ha-control-slider {
+    --control-slider-color: #E3805B !important;
+    --control-slider-background: rgba(75, 62, 55, 0.45) !important;
+    box-shadow:
+      inset 1px 1px 2px rgba(12, 9, 8, 0.35),
+      2px 3px 6px rgba(12, 9, 8, 0.25) !important;
+  }
+  .mc-app .device .temp-group,
+  .mc-app .temp-group {
+    background: rgba(66, 45, 40, 0.92) !important;
+    box-shadow:
+      3px 4px 8px rgba(12, 9, 8, 0.4),
+      inset 1px 1px 1px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .device .temp-group .media-volbtn,
+  .mc-app .device .temp-group > span,
+  .mc-app .temp-group .media-volbtn,
+  .mc-app .temp-group > span {
+    color: #FAF5F0 !important;
+  }
+  .mc-app .device .temp-group .media-volbtn ha-icon {
+    color: #FAF5F0 !important;
+  }
+  .mc-app .device .control-row .filter-select,
+  .mc-app .device select.filter-select,
+  .mc-app .device .control-row select {
+    color: #FAF5F0 !important;
+    background-color: rgba(66, 45, 40, 0.95) !important;
+    box-shadow:
+      2px 3px 6px rgba(12, 9, 8, 0.35),
+      inset 1px 1px 1px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .device .control-row .media-toggle-icon,
+  .mc-app .device .control-row ha-icon.media-toggle-icon {
+    color: #FAF5F0 !important;
+    background: rgba(66, 45, 40, 0.95) !important;
+  }
+}
+
+
+/* clay-cozy-home-20260725-v56 */
+
+/* ==========================================================================
+   R56 HOME CLIMATE CONTROLS FIT
+   Keep official temp-group + hvac selects visible inside narrow home cards.
+   ========================================================================== */
+
+.mc-app .devices .device,
+.mc-app .devices-page-grid .device {
+  min-height: 168px !important;
+  align-content: stretch !important;
+}
+
+.mc-app .devices .device .control-row,
+.mc-app .device .control-row {
+  flex-wrap: wrap !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 4px !important;
+  row-gap: 4px !important;
+  overflow: visible !important;
+  max-width: 100% !important;
+}
+
+.mc-app .device .temp-group {
+  order: 0 !important;
+  flex: 0 0 auto !important;
+  max-width: 100% !important;
+  height: 28px !important;
+  transform: none !important;
+}
+.mc-app .device .temp-group .media-volbtn,
+.mc-app .device .temp-group [role="button"] {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  max-width: 24px !important;
+}
+.mc-app .device .temp-group > span {
+  min-width: 18px !important;
+  font-size: 11px !important;
+}
+
+.mc-app .device .control-row .filter-select,
+.mc-app .device select.filter-select,
+.mc-app .device .control-row select {
+  flex: 1 1 52px !important;
+  min-width: 44px !important;
+  max-width: 100% !important;
+  min-height: 28px !important;
+  height: 28px !important;
+  font-size: 10px !important;
+  padding: 0 14px 0 5px !important;
+}
+
+.mc-app .device ha-control-switch {
+  margin-left: auto !important;
+}
+.mc-app .device ha-control-slider {
+  flex: 1 1 72px !important;
+  min-width: 56px !important;
+}
+
+@media (min-width: 1100px) {
+  .mc-app .devices .device {
+    min-height: 176px !important;
+    padding: 10px !important;
+  }
+  .mc-app .devices .device .control-row {
+    gap: 3px !important;
+  }
+}
+
+.mc-app .device .control-row {
+  overflow: visible !important;
+}
+.mc-app .device .device-copy {
+  margin-bottom: 2px !important;
 }

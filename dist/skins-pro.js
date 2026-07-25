@@ -372,35 +372,35 @@ const e={base:"base-texture.jpg",stage:"background.jpg",theme_css:"theme.css",av
       <div class="energy-footer"><span class="muted">${Te(e.config.energy?.compare_text,e.config.energy?.compare_text_zh,e.config.energy?.compare_text_en,e.language,e.translate("compareYesterday"))}</span><span class="down">${n||"--"}</span></div>
     </section>
   `:ee}(e,i,n,s,p)}
-        ${function(e,t){if(!t)return ee;const i=e.states?.[t];if(!i)return ee;const n=i.state;if("off"===n||"unavailable"===n){const n=i.attributes?.friendly_name||t;return X`
+        ${function(e,t){if(!t)return ee;const i=e.states?.[t];if(!i)return ee;const n=e.localize("component.media_player.title")||e.localize("domain.media_player")||"Media Player",s=i.state;if("off"===s||"unavailable"===s){const s=i.attributes?.friendly_name||t;return X`
       <section class="glass-card panel-media">
-        <div class="section-title"><h2>${e.localize("domain.media_player")}</h2></div>
+        <div class="section-title"><h2>${n}</h2></div>
         <div class="media-off-state">
           <button class="media-volbtn" @click=${()=>e.callService("media_player","turn_on",{entity_id:t})} title=${e.localize("ui.card.media_player.turn_on")}><ha-icon icon="mdi:power-standby"></ha-icon></button>
-          <span>${n}</span>
+          <span>${s}</span>
         </div>
       </section>
-    `}const s=i.attributes||{},a=s.media_title||s.friendly_name||t,o=s.media_artist,r=s.entity_picture,c=s.app_name||s.source||"",l="playing"===n,d=s.volume_level,h=void 0!==d&&0===d,p=void 0!==d?Math.round(100*d):void 0;return X`
+    `}const a=i.attributes||{},o=a.media_title||a.friendly_name||t,r=a.media_artist,c=a.entity_picture,l=a.app_name||a.source||"",d="playing"===s,h=a.volume_level,p=void 0!==h&&0===h,u=void 0!==h?Math.round(100*h):void 0;return X`
     <section class="glass-card panel-media">
-      <div class="section-title"><h2>${e.localize("domain.media_player")}</h2></div>
+      <div class="section-title"><h2>${n}</h2></div>
       <div class="media-content">
         <div class="media-row">
-          ${r?X`<div class="media-cover"><img alt="" src=${r}></div>`:X`<div class="media-cover media-cover-null"><ha-icon icon="mdi:music"></ha-icon></div>`}
+          ${c?X`<div class="media-cover"><img alt="" src=${c}></div>`:X`<div class="media-cover media-cover-null"><ha-icon icon="mdi:music"></ha-icon></div>`}
           <div class="media-body">
-            <div class="media-title">${a}</div>
-            ${o?X`<div class="media-artist">${o}</div>`:""}
-            ${c?X`<div class="media-source">${c}</div>`:""}
+            <div class="media-title">${o}</div>
+            ${r?X`<div class="media-artist">${r}</div>`:""}
+            ${l?X`<div class="media-source">${l}</div>`:""}
           </div>
           <div class="media-actions">
             <button class="media-btn" @click=${()=>e.callService("media_player","media_previous_track",{entity_id:t})} title=${e.localize("ui.card.media_player.media_previous")}><ha-icon icon="mdi:skip-previous"></ha-icon></button>
-            <button class="media-btn media-playbtn" @click=${()=>e.callService("media_player","media_play_pause",{entity_id:t})} title=${l?e.localize("ui.card.media_player.media_pause"):e.localize("ui.card.media_player.media_play")}><ha-icon icon=${l?"mdi:pause-circle":"mdi:play-circle"}></ha-icon></button>
+            <button class="media-btn media-playbtn" @click=${()=>e.callService("media_player","media_play_pause",{entity_id:t})} title=${d?e.localize("ui.card.media_player.media_pause"):e.localize("ui.card.media_player.media_play")}><ha-icon icon=${d?"mdi:pause-circle":"mdi:play-circle"}></ha-icon></button>
             <button class="media-btn" @click=${()=>e.callService("media_player","media_next_track",{entity_id:t})} title=${e.localize("ui.card.media_player.media_next")}><ha-icon icon="mdi:skip-next"></ha-icon></button>
           </div>
         </div>
-        ${void 0!==p?X`
+        ${void 0!==u?X`
         <div class="media-row media-volrow">
-          <button class="media-volbtn" @click=${()=>{if(void 0!==d)if(d>0)pi.set(i,d),e.callService("media_player","volume_set",{entity_id:t,volume_level:0});else{const n=pi.get(i)??.3;e.callService("media_player","volume_set",{entity_id:t,volume_level:n})}}}><ha-icon icon=${h?"mdi:volume-off":"mdi:volume-high"}></ha-icon></button>
-          <div class="media-voltrack" @click=${i=>{const n=i.currentTarget.getBoundingClientRect(),s=Math.max(0,Math.min(1,(i.clientX-n.left)/n.width));e.callService("media_player","volume_set",{entity_id:t,volume_level:s})}}><div class="media-volfill" style="width:${p}%"></div></div>
+          <button class="media-volbtn" @click=${()=>{if(void 0!==h)if(h>0)pi.set(i,h),e.callService("media_player","volume_set",{entity_id:t,volume_level:0});else{const n=pi.get(i)??.3;e.callService("media_player","volume_set",{entity_id:t,volume_level:n})}}}><ha-icon icon=${p?"mdi:volume-off":"mdi:volume-high"}></ha-icon></button>
+          <div class="media-voltrack" @click=${i=>{const n=i.currentTarget.getBoundingClientRect(),s=Math.max(0,Math.min(1,(i.clientX-n.left)/n.width));e.callService("media_player","volume_set",{entity_id:t,volume_level:s})}}><div class="media-volfill" style="width:${u}%"></div></div>
         </div>`:""}
       </div>
     </section>

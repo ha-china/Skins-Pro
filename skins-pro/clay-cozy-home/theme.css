@@ -10200,3 +10200,1390 @@ ha-card {
       inset 1px 1px 2px rgba(255, 232, 216, .08) !important;
   }
 }
+
+
+/* ==========================================================================
+   R41 SOFT CLAY MATERIAL REDESIGN — clay-cozy-home-20260725-v43
+   Lift the muddy terracotta stack into a real soft-clay system:
+   warm oat canvas, refined ash-red rail, embossed 3D nav capsules,
+   biscuit device cards, and matte right-rail clay panels.
+   ========================================================================== */
+
+:host {
+  /* Canvas + core materials */
+  --sp-bg: #EFE3D5 !important;
+  --sp-clay-page: #EFE3D5 !important;
+  --sp-clay-card: #F6EFE7 !important;
+  --sp-clay-card-deep: #F0E6DB !important;
+  --sp-clay-rail: #C57D6D !important;
+  --sp-clay-rail-deep: #B87363 !important;
+  --sp-clay-rail-active: #CE8F80 !important;
+  --sp-clay-coral: #C77E6D !important;
+  --sp-clay-coral-deep: #B86F5F !important;
+  --sp-clay-sage: #989A7B !important;
+  --sp-clay-sage-deep: #8D8E71 !important;
+  --sp-clay-energy: #F5EBE1 !important;
+  --sp-clay-energy-accent: #E3805B !important;
+  --sp-clay-ink: #4A3A2C !important;
+  --sp-clay-muted: #8C7B6C !important;
+  --sp-clay-cream: #F6EFE7 !important;
+  --sp-clay-oat: #EFE3D5 !important;
+
+  /* True soft-clay relief (not flat gray drop shadows) */
+  --sp-clay-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.45),
+    -8px -8px 16px rgba(255, 255, 255, 0.85) !important;
+  --sp-clay-shadow-soft:
+    6px 6px 12px rgba(185, 165, 145, 0.32),
+    -6px -6px 12px rgba(255, 255, 255, 0.78) !important;
+  --sp-clay-shadow-pressed:
+    inset 3px 3px 7px rgba(150, 120, 95, 0.22),
+    inset -3px -3px 7px rgba(255, 255, 255, 0.55) !important;
+
+  /* Typography on light clay */
+  --sp-text-primary: #4A3A2C !important;
+  --sp-text-secondary: #8C7B6C !important;
+  --sp-text-tertiary: rgba(140, 123, 108, 0.78) !important;
+  --sp-text-quaternary: rgba(140, 123, 108, 0.52) !important;
+  --sp-accent: #C57D6D !important;
+  --sp-accent-hover: #B87363 !important;
+  --sp-accent-alpha: rgba(197, 125, 109, 0.16) !important;
+  --sp-accent-border: rgba(197, 125, 109, 0.28) !important;
+  color: #4A3A2C !important;
+}
+
+/* 1) Canvas: warm soft oat clay */
+.mc-app {
+  color: #4A3A2C !important;
+  background-color: #EFE3D5 !important;
+  background-image:
+    radial-gradient(circle at 18% 24%, rgba(74, 58, 44, 0.018) 0 1px, transparent 1.3px),
+    radial-gradient(ellipse 58% 42% at 18% 8%, rgba(255, 250, 244, 0.55), transparent 62%),
+    radial-gradient(ellipse 46% 38% at 92% 12%, rgba(197, 125, 109, 0.10), transparent 58%),
+    linear-gradient(160deg, #F4EADF 0%, #EFE3D5 52%, #E8D9C8 100%) !important;
+  background-size:
+    10px 10px,
+    auto,
+    auto,
+    auto !important;
+}
+
+/* 2) Sidebar: refined ash-red terracotta clay rail */
+.mc-app .sidebar,
+.sidebar {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.12) 0 1px, transparent 1.4px),
+    linear-gradient(168deg, #D08A79 0%, #C57D6D 46%, #BA7263 100%) !important;
+  background-color: #C57D6D !important;
+  border: 0 !important;
+  border-radius: 0 28px 28px 0 !important;
+  box-shadow:
+    6px 0 18px rgba(150, 90, 75, 0.25),
+    inset 4px 4px 10px rgba(235, 170, 155, 0.28),
+    inset -4px -5px 12px rgba(120, 55, 45, 0.16) !important;
+  color: rgba(255, 242, 234, 0.92) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.mc-app .sidebar:hover,
+.sidebar:hover {
+  box-shadow:
+    6px 0 18px rgba(150, 90, 75, 0.25),
+    inset 4px 4px 10px rgba(235, 170, 155, 0.28),
+    inset -4px -5px 12px rgba(120, 55, 45, 0.16) !important;
+}
+
+/* Avatar: recessed clay well, no hard white ring */
+.mc-app .profile-img,
+.profile-img {
+  border: 0 !important;
+  outline: 0 !important;
+  background: #B87363 !important;
+  border-radius: 50% !important;
+  box-shadow:
+    inset 3px 3px 6px rgba(130, 55, 45, 0.4),
+    inset -3px -3px 6px rgba(235, 165, 150, 0.6),
+    0 6px 14px rgba(120, 60, 48, 0.18) !important;
+  filter: none !important;
+}
+
+.mc-app .profile .meta h2,
+.mc-app .profile .meta .name,
+.mc-app .profile .meta p,
+.mc-app .profile .meta .muted {
+  color: rgba(255, 242, 234, 0.92) !important;
+  text-shadow: 0 1px 1px rgba(110, 50, 40, 0.18) !important;
+}
+
+.mc-app .profile .meta p,
+.mc-app .profile .meta .muted {
+  color: rgba(255, 242, 234, 0.78) !important;
+  opacity: 1 !important;
+}
+
+/* Nav items: inactive flat clay labels */
+.mc-app .sidebar .menu .nav-button,
+.mc-app .sidebar .menu button,
+.mc-app .menu .nav-button,
+.mc-app .menu button {
+  color: rgba(255, 242, 234, 0.85) !important;
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  outline: 0 !important;
+}
+
+.mc-app .sidebar .menu .nav-button ha-icon,
+.mc-app .sidebar .menu button ha-icon,
+.mc-app .menu .nav-button ha-icon,
+.mc-app .menu button ha-icon {
+  color: rgba(255, 242, 234, 0.85) !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+.mc-app .sidebar .menu .nav-button:not(.active):hover,
+.mc-app .sidebar .menu button:not(.active):hover,
+.mc-app .menu .nav-button:not(.active):hover,
+.mc-app .menu button:not(.active):hover {
+  color: rgba(255, 248, 242, 0.96) !important;
+  background: rgba(140, 70, 58, 0.12) !important;
+  box-shadow: none !important;
+}
+
+/* Active nav: raised 3D clay capsule */
+.mc-app .sidebar .menu .nav-button.active,
+.mc-app .sidebar .menu button.active,
+.mc-app .menu .nav-button.active,
+.mc-app .menu button.active {
+  color: #FFFFFF !important;
+  background: #CE8F80 !important;
+  background-image: linear-gradient(160deg, #D79C8D 0%, #CE8F80 48%, #C58677 100%) !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  box-shadow:
+    4px 5px 10px rgba(135, 62, 50, 0.4),
+    -2px -2px 6px rgba(235, 170, 155, 0.6),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.5) !important;
+  text-shadow: 0 1px 1px rgba(110, 50, 40, 0.18) !important;
+}
+
+.mc-app .sidebar .menu .nav-button.active ha-icon,
+.mc-app .sidebar .menu button.active ha-icon,
+.mc-app .menu .nav-button.active ha-icon,
+.mc-app .menu button.active ha-icon {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+}
+
+/* Sidebar bottom art stays free of white plates */
+.mc-app .sidebar-art,
+.sidebar-art {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 3) Standard light clay cards: biscuit cream + dual emboss */
+.mc-app .device,
+.mc-app .devices-page-grid .device,
+.mc-app .room,
+.mc-app .scene,
+.mc-app .glass-card,
+.mc-app .weather-with-meta .welcome-meta,
+.mc-app .panel-camera,
+.device,
+.room,
+.glass-card {
+  color: #4A3A2C !important;
+  background-color: #F6EFE7 !important;
+  background-image:
+    radial-gradient(circle at 20% 18%, rgba(74, 58, 44, 0.015) 0 1px, transparent 1.3px),
+    linear-gradient(145deg, #F8F3EC 0%, #F6EFE7 55%, #F1E7DC 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.72) !important;
+  border-radius: 20px !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.45),
+    -8px -8px 16px rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Keep weather metrics floating on the hero clay mural */
+.mc-app .weather-with-meta .weather-block {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.mc-app .weather-with-meta {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(74, 58, 44, 0.015) 0 1px, transparent 1.3px),
+    linear-gradient(150deg, #F4EBE2 0%, #EFE3D5 48%, #E8D8C7 100%) !important;
+  border-radius: 24px !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.38),
+    -8px -8px 16px rgba(255, 255, 255, 0.78) !important;
+}
+
+.mc-app .device,
+.mc-app .devices-page-grid .device {
+  border-radius: 18px !important;
+}
+
+.mc-app .room {
+  border-radius: 20px !important;
+}
+
+/* Text hierarchy on light clay */
+.mc-app,
+.mc-app h1,
+.mc-app h2,
+.mc-app h3,
+.mc-app .welcome h1,
+.mc-app .section-title h2,
+.mc-app .device-name,
+.mc-app .room-label h3,
+.mc-app .energy-value,
+.mc-app .weather-current-temp,
+.mc-app .weather-current-cond {
+  color: #4A3A2C !important;
+}
+
+.mc-app .muted,
+.mc-app .section-title .muted,
+.mc-app .device .muted,
+.mc-app .state-word,
+.mc-app .status,
+.mc-app .welcome p,
+.mc-app .weather-current-hl,
+.mc-app .forecast-weekday,
+.mc-app .forecast-low,
+.mc-app .forecast-high,
+.mc-app .panel-energy .muted {
+  color: #8C7B6C !important;
+}
+
+/* Environment: matte sage clay */
+.mc-app .panel-environment,
+.mc-app .side > .time-card + .glass-card,
+.panel-environment {
+  color: #F7F3E8 !important;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1.4px),
+    linear-gradient(155deg, #A3A586 0%, #989A7B 52%, #8F9173 100%) !important;
+  background-color: #989A7B !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 20px !important;
+  box-shadow:
+    8px 8px 16px rgba(110, 112, 85, 0.28),
+    -4px -4px 10px rgba(220, 220, 190, 0.22),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.18) !important;
+}
+
+.mc-app .panel-environment *,
+.mc-app .side > .time-card + .glass-card * {
+  color: #F7F3E8 !important;
+}
+
+.mc-app .side > .time-card + .glass-card .env-row,
+.mc-app .panel-environment .env-row {
+  background: rgba(247, 243, 232, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow:
+    inset 1px 1px 2px rgba(255, 255, 255, 0.14),
+    inset -1px -1px 2px rgba(70, 72, 50, 0.12) !important;
+}
+
+/* Media player: warm coral terracotta */
+.mc-app .panel-media,
+.panel-media {
+  color: #FFF4EA !important;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.10) 0 1px, transparent 1.4px),
+    linear-gradient(155deg, #D28C7B 0%, #C77E6D 50%, #B87161 100%) !important;
+  background-color: #C77E6D !important;
+  border: 1px solid rgba(255, 245, 235, 0.22) !important;
+  border-radius: 20px !important;
+  box-shadow:
+    8px 8px 16px rgba(140, 80, 65, 0.30),
+    -4px -4px 10px rgba(235, 180, 165, 0.22),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.22) !important;
+}
+
+.mc-app .panel-media *,
+.panel-media * {
+  color: #FFF4EA !important;
+}
+
+/* Time card stays terracotta family, slightly softer than media */
+.mc-app .time-card,
+.mc-app .side > .time-card {
+  color: #FFF4EA !important;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.12) 0 1px, transparent 1.4px),
+    linear-gradient(145deg, #D29282 0%, #C57D6D 55%, #B87363 100%) !important;
+  border: 1px solid rgba(255, 245, 235, 0.24) !important;
+  border-radius: 20px !important;
+  box-shadow:
+    8px 8px 16px rgba(140, 80, 65, 0.28),
+    -4px -4px 10px rgba(235, 180, 165, 0.20),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.24) !important;
+}
+
+.mc-app .time-card *,
+.mc-app .side > .time-card * {
+  color: #FFF4EA !important;
+}
+
+.mc-app .time-card .time-icon,
+.mc-app .side > .time-card .time-icon {
+  color: #4A3A2C !important;
+  background: rgba(246, 239, 231, 0.88) !important;
+  border: 0 !important;
+  box-shadow:
+    inset 2px 2px 4px rgba(130, 55, 45, 0.12),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.55),
+    0 4px 10px rgba(120, 60, 48, 0.16) !important;
+}
+
+/* Scenes: matte moss olive */
+.mc-app .panel-scenes,
+.panel-scenes {
+  color: #F4F1E4 !important;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1.4px),
+    linear-gradient(155deg, #989976 0%, #8D8E71 52%, #838465 100%) !important;
+  background-color: #8D8E71 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 20px !important;
+  box-shadow:
+    8px 8px 16px rgba(100, 102, 78, 0.28),
+    -4px -4px 10px rgba(210, 212, 180, 0.18),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.16) !important;
+}
+
+.mc-app .panel-scenes > .section-title *,
+.mc-app .panel-scenes .scene,
+.mc-app .panel-scenes .scene * {
+  color: #F4F1E4 !important;
+}
+
+.mc-app .panel-scenes .scene {
+  background: rgba(244, 241, 228, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    inset 1px 1px 2px rgba(255, 255, 255, 0.12),
+    inset -1px -1px 2px rgba(60, 62, 42, 0.12) !important;
+}
+
+/* Energy: warm ivory + clay-orange activation */
+.mc-app .panel-energy,
+.panel-energy {
+  color: #4A3A2C !important;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(74, 58, 44, 0.015) 0 1px, transparent 1.3px),
+    linear-gradient(145deg, #F8F2EA 0%, #F5EBE1 55%, #EFE3D5 100%) !important;
+  background-color: #F5EBE1 !important;
+  border: 1px solid rgba(255, 255, 255, 0.72) !important;
+  border-radius: 20px !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.45),
+    -8px -8px 16px rgba(255, 255, 255, 0.85) !important;
+}
+
+.mc-app .panel-energy,
+.mc-app .panel-energy h2,
+.mc-app .panel-energy .energy-value,
+.mc-app .panel-energy .section-title h2 {
+  color: #4A3A2C !important;
+}
+
+.mc-app .panel-energy .muted,
+.mc-app .panel-energy .section-title .muted {
+  color: #8C7B6C !important;
+}
+
+.mc-app .panel-energy .bars span,
+.mc-app .panel-energy .bar,
+.mc-app .panel-energy .energy-bar,
+.mc-app .energy-bars span,
+.mc-app .bars span {
+  background: rgba(197, 125, 109, 0.18) !important;
+  box-shadow: inset 1px 1px 2px rgba(140, 100, 80, 0.12) !important;
+}
+
+.mc-app .panel-energy .bars span.active,
+.mc-app .panel-energy .bars span.on,
+.mc-app .panel-energy .bar.active,
+.mc-app .panel-energy .bar-fill,
+.mc-app .panel-energy .energy-fill,
+.mc-app .energy-bars span.active,
+.mc-app .bars span:nth-child(n) {
+  background: linear-gradient(180deg, #EFA57E 0%, #E3805B 100%) !important;
+}
+
+.mc-app .panel-energy .bars span,
+.mc-app .bars span {
+  background-image: linear-gradient(180deg, #EFA57E 0%, #E3805B 100%) !important;
+  opacity: 0.92 !important;
+}
+
+/* Device ON accents keep clay emboss */
+.mc-app .device-on-green {
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.45),
+    -8px -8px 16px rgba(255, 255, 255, 0.85),
+    inset 0 -4px 0 rgba(141, 142, 113, 0.34) !important;
+}
+
+.mc-app .device-on-yellow {
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.45),
+    -8px -8px 16px rgba(255, 255, 255, 0.85),
+    inset 0 -4px 0 rgba(227, 128, 91, 0.34) !important;
+}
+
+.mc-app .device-on-blue {
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.45),
+    -8px -8px 16px rgba(255, 255, 255, 0.85),
+    inset 0 -4px 0 rgba(120, 140, 150, 0.28) !important;
+}
+
+/* Mobile nav inherits soft clay language */
+.mc-app .mobile-nav {
+  background:
+    radial-gradient(circle at 18% 24%, rgba(74, 58, 44, 0.015) 0 1px, transparent 1.3px),
+    linear-gradient(180deg, #F6EFE7 0%, #EFE3D5 100%) !important;
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  box-shadow:
+    0 -8px 18px rgba(185, 165, 145, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+.mc-app .mobile-nav .nav-button {
+  color: rgba(74, 58, 44, 0.72) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.mc-app .mobile-nav .nav-button.active {
+  color: #FFFFFF !important;
+  background: #CE8F80 !important;
+  border-radius: 18px !important;
+  box-shadow:
+    3px 4px 8px rgba(135, 62, 50, 0.28),
+    -2px -2px 5px rgba(255, 255, 255, 0.55),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.45) !important;
+}
+
+/* Desktop rail ownership for the new material system */
+@media (min-width: 901px) {
+  .mc-app .sidebar {
+    border-radius: 0 28px 28px 0 !important;
+    background-color: #C57D6D !important;
+    box-shadow:
+      6px 0 18px rgba(150, 90, 75, 0.25),
+      inset 4px 4px 10px rgba(235, 170, 155, 0.28),
+      inset -4px -5px 12px rgba(120, 55, 45, 0.16) !important;
+  }
+
+  .mc-app .sidebar .menu .nav-button,
+  .mc-app .sidebar .menu button {
+    color: rgba(255, 242, 234, 0.85) !important;
+    background: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .mc-app .sidebar .menu .nav-button.active,
+  .mc-app .sidebar .menu button.active {
+    color: #FFFFFF !important;
+    background: #CE8F80 !important;
+    background-image: linear-gradient(160deg, #D79C8D 0%, #CE8F80 48%, #C58677 100%) !important;
+    border-radius: 20px !important;
+    box-shadow:
+      4px 5px 10px rgba(135, 62, 50, 0.4),
+      -2px -2px 6px rgba(235, 170, 155, 0.6),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.5) !important;
+  }
+}
+
+/* Dark mode: deeper clay, same material logic */
+@media (prefers-color-scheme: dark) {
+  :host {
+    --sp-bg: #2A211C !important;
+    --sp-clay-page: #2A211C !important;
+    --sp-clay-card: #3A2E27 !important;
+    --sp-clay-rail: #8F5A4E !important;
+    --sp-clay-rail-deep: #7A4A40 !important;
+    --sp-clay-rail-active: #A56B5D !important;
+    --sp-clay-coral: #A66A5B !important;
+    --sp-clay-sage: #6F7158 !important;
+    --sp-clay-sage-deep: #636450 !important;
+    --sp-clay-energy: #3A2E27 !important;
+    --sp-clay-energy-accent: #E3805B !important;
+    --sp-clay-ink: #F3E6DA !important;
+    --sp-clay-muted: #C8B4A6 !important;
+    --sp-text-primary: #F3E6DA !important;
+    --sp-text-secondary: #C8B4A6 !important;
+    color: #F3E6DA !important;
+  }
+
+  .mc-app {
+    color: #F3E6DA !important;
+    background-color: #2A211C !important;
+    background-image:
+      radial-gradient(circle at 18% 24%, rgba(255, 235, 220, 0.03) 0 1px, transparent 1.3px),
+      linear-gradient(160deg, #322821 0%, #2A211C 55%, #221A16 100%) !important;
+  }
+
+  .mc-app .sidebar,
+  .sidebar {
+    background:
+      linear-gradient(168deg, #9A6558 0%, #8F5A4E 48%, #7A4A40 100%) !important;
+    background-color: #8F5A4E !important;
+    box-shadow:
+      6px 0 18px rgba(20, 10, 8, 0.35),
+      inset 3px 3px 8px rgba(235, 170, 155, 0.12),
+      inset -3px -4px 10px rgba(30, 12, 10, 0.28) !important;
+  }
+
+  .mc-app .profile-img,
+  .profile-img {
+    background: #7A4A40 !important;
+    box-shadow:
+      inset 3px 3px 6px rgba(30, 12, 10, 0.45),
+      inset -3px -3px 6px rgba(210, 150, 135, 0.22) !important;
+  }
+
+  .mc-app .sidebar .menu .nav-button.active,
+  .mc-app .sidebar .menu button.active,
+  .mc-app .menu .nav-button.active,
+  .mc-app .menu button.active,
+  .mc-app .mobile-nav .nav-button.active {
+    color: #FFFFFF !important;
+    background: #A56B5D !important;
+    box-shadow:
+      4px 5px 10px rgba(16, 8, 6, 0.35),
+      -2px -2px 6px rgba(210, 150, 135, 0.16),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.18) !important;
+  }
+
+  .mc-app .device,
+  .mc-app .room,
+  .mc-app .glass-card,
+  .mc-app .panel-energy {
+    color: #F3E6DA !important;
+    background:
+      linear-gradient(145deg, #43362E 0%, #3A2E27 100%) !important;
+    border-color: rgba(255, 235, 220, 0.08) !important;
+    box-shadow:
+      8px 8px 16px rgba(12, 8, 6, 0.35),
+      -4px -4px 10px rgba(255, 235, 220, 0.04) !important;
+  }
+
+  .mc-app .panel-environment,
+  .mc-app .side > .time-card + .glass-card {
+    background: linear-gradient(155deg, #7A7C60 0%, #6F7158 100%) !important;
+  }
+
+  .mc-app .panel-media,
+  .mc-app .time-card,
+  .mc-app .side > .time-card {
+    background: linear-gradient(155deg, #B47868 0%, #A66A5B 100%) !important;
+  }
+
+  .mc-app .panel-scenes {
+    background: linear-gradient(155deg, #6E7058 0%, #636450 100%) !important;
+  }
+
+  .mc-app h1,
+  .mc-app h2,
+  .mc-app h3,
+  .mc-app .device-name,
+  .mc-app .section-title h2,
+  .mc-app .energy-value {
+    color: #F3E6DA !important;
+  }
+
+  .mc-app .muted,
+  .mc-app .device .muted,
+  .mc-app .state-word,
+  .mc-app .section-title .muted {
+    color: #C8B4A6 !important;
+  }
+}
+
+
+/* ==========================================================================
+   R42 REFERENCE-MATCHED SOFT CLAY — clay-cozy-home-20260725-v44
+   Recalibrate to the official clay reference board:
+   dustier rose rail, lighter biscuit cards, softer dual emboss,
+   almost borderless clay panels, warmer oat canvas.
+   ========================================================================== */
+
+:host {
+  --sp-bg: #EBDDD0 !important;
+  --sp-clay-page: #EBDDD0 !important;
+  --sp-clay-card: #F3EBE1 !important;
+  --sp-clay-card-deep: #EADFCF !important;
+  --sp-clay-rail: #B27C6C !important;
+  --sp-clay-rail-deep: #A56F60 !important;
+  --sp-clay-rail-active: #C58978 !important;
+  --sp-clay-coral: #C48877 !important;
+  --sp-clay-coral-deep: #B87A69 !important;
+  --sp-clay-sage: #99997A !important;
+  --sp-clay-sage-deep: #898A6B !important;
+  --sp-clay-energy: #E8D9C8 !important;
+  --sp-clay-energy-accent: #E09A72 !important;
+  --sp-clay-ink: #5C4030 !important;
+  --sp-clay-muted: #8B7A6B !important;
+  --sp-clay-cream: #F3EBE1 !important;
+  --sp-clay-oat: #EBDDD0 !important;
+  --sp-clay-time: #CE9B85 !important;
+
+  --sp-clay-shadow:
+    7px 9px 18px rgba(170, 140, 115, 0.28),
+    -6px -7px 14px rgba(255, 255, 255, 0.78) !important;
+  --sp-clay-shadow-soft:
+    5px 6px 12px rgba(170, 140, 115, 0.20),
+    -5px -6px 12px rgba(255, 255, 255, 0.72) !important;
+
+  --sp-text-primary: #5C4030 !important;
+  --sp-text-secondary: #8B7A6B !important;
+  --sp-text-tertiary: rgba(139, 122, 107, 0.78) !important;
+  --sp-accent: #B27C6C !important;
+  --sp-accent-hover: #A56F60 !important;
+  color: #5C4030 !important;
+}
+
+/* Canvas: warm paper clay, not gray-mud */
+.mc-app {
+  color: #5C4030 !important;
+  background-color: #EBDDD0 !important;
+  background-image:
+    radial-gradient(circle at 20% 18%, rgba(92, 64, 48, 0.016) 0 1px, transparent 1.35px),
+    radial-gradient(ellipse 62% 46% at 20% 6%, rgba(255, 250, 244, 0.42), transparent 64%),
+    linear-gradient(165deg, #F1E5D8 0%, #EBDDD0 48%, #E4D3C3 100%) !important;
+  background-size: 11px 11px, auto, auto !important;
+}
+
+/* Sidebar: dusty rose clay slab */
+.mc-app .sidebar,
+.sidebar {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.10) 0 1px, transparent 1.5px),
+    linear-gradient(172deg, #C08A79 0%, #B27C6C 46%, #A56F60 100%) !important;
+  background-color: #B27C6C !important;
+  border: 0 !important;
+  border-radius: 0 28px 28px 0 !important;
+  box-shadow:
+    8px 0 22px rgba(130, 78, 64, 0.18),
+    inset 5px 5px 12px rgba(235, 185, 170, 0.22),
+    inset -4px -6px 12px rgba(110, 55, 45, 0.14) !important;
+  color: rgba(255, 244, 236, 0.9) !important;
+}
+
+.mc-app .sidebar:hover,
+.sidebar:hover {
+  box-shadow:
+    8px 0 22px rgba(130, 78, 64, 0.18),
+    inset 5px 5px 12px rgba(235, 185, 170, 0.22),
+    inset -4px -6px 12px rgba(110, 55, 45, 0.14) !important;
+}
+
+/* Avatar clay well */
+.mc-app .profile-img,
+.profile-img {
+  border: 0 !important;
+  background: #A56F60 !important;
+  border-radius: 50% !important;
+  box-shadow:
+    inset 3px 3px 7px rgba(110, 50, 40, 0.35),
+    inset -3px -3px 7px rgba(235, 175, 160, 0.45),
+    0 8px 16px rgba(110, 60, 48, 0.14) !important;
+}
+
+.mc-app .profile .meta h2,
+.mc-app .profile .meta .name {
+  color: #FFF4EC !important;
+  font-weight: 700 !important;
+}
+.mc-app .profile .meta p,
+.mc-app .profile .meta .muted {
+  color: rgba(255, 244, 236, 0.78) !important;
+}
+
+/* Inactive nav: flat labels on rail clay */
+.mc-app .sidebar .menu .nav-button,
+.mc-app .sidebar .menu button,
+.mc-app .menu .nav-button,
+.mc-app .menu button {
+  color: rgba(255, 244, 236, 0.82) !important;
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.mc-app .sidebar .menu .nav-button ha-icon,
+.mc-app .sidebar .menu button ha-icon {
+  color: rgba(255, 244, 236, 0.82) !important;
+  opacity: 1 !important;
+}
+
+.mc-app .sidebar .menu .nav-button:not(.active):hover,
+.mc-app .sidebar .menu button:not(.active):hover {
+  color: #FFF8F2 !important;
+  background: rgba(95, 48, 40, 0.10) !important;
+  box-shadow: none !important;
+}
+
+/* Active nav: soft raised clay capsule */
+.mc-app .sidebar .menu .nav-button.active,
+.mc-app .sidebar .menu button.active,
+.mc-app .menu .nav-button.active,
+.mc-app .menu button.active {
+  color: #FFF8F2 !important;
+  background: #C58978 !important;
+  background-image: linear-gradient(160deg, #D19A89 0%, #C58978 52%, #BA7E6D 100%) !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow:
+    4px 6px 12px rgba(120, 55, 45, 0.28),
+    -2px -3px 7px rgba(235, 185, 170, 0.45),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.42) !important;
+}
+
+.mc-app .sidebar .menu .nav-button.active ha-icon,
+.mc-app .sidebar .menu button.active ha-icon {
+  color: #FFF8F2 !important;
+}
+
+/* Biscuit device/room cards: almost borderless soft clay */
+.mc-app .device,
+.mc-app .devices-page-grid .device,
+.mc-app .room,
+.mc-app .glass-card,
+.mc-app .weather-with-meta .welcome-meta,
+.mc-app .panel-camera,
+.device,
+.room,
+.glass-card {
+  color: #5C4030 !important;
+  background-color: #F3EBE1 !important;
+  background-image:
+    radial-gradient(circle at 18% 16%, rgba(92, 64, 48, 0.012) 0 1px, transparent 1.3px),
+    linear-gradient(150deg, #F7F1E9 0%, #F3EBE1 58%, #EBE1D5 100%) !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow:
+    7px 9px 18px rgba(170, 140, 115, 0.26),
+    -6px -7px 14px rgba(255, 255, 255, 0.82),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.55) !important;
+}
+
+.mc-app .device,
+.mc-app .devices-page-grid .device {
+  border-radius: 20px !important;
+  min-height: 0 !important;
+}
+
+.mc-app .room {
+  border-radius: 22px !important;
+}
+
+.mc-app .weather-with-meta {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(92, 64, 48, 0.012) 0 1px, transparent 1.3px),
+    linear-gradient(150deg, #F0E5D8 0%, #E8D9C8 55%, #E0D0BD 100%) !important;
+  border: 0 !important;
+  border-radius: 28px !important;
+  box-shadow:
+    8px 12px 24px rgba(160, 130, 105, 0.22),
+    -6px -8px 16px rgba(255, 255, 255, 0.7),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.45) !important;
+}
+
+.mc-app .weather-with-meta .weather-block {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Typography */
+.mc-app,
+.mc-app h1,
+.mc-app h2,
+.mc-app h3,
+.mc-app .welcome h1,
+.mc-app .section-title h2,
+.mc-app .device-name,
+.mc-app .room-label h3,
+.mc-app .energy-value,
+.mc-app .weather-current-temp {
+  color: #5C4030 !important;
+}
+
+.mc-app .welcome h1 {
+  font-weight: 760 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.mc-app .muted,
+.mc-app .section-title .muted,
+.mc-app .device .muted,
+.mc-app .state-word,
+.mc-app .status,
+.mc-app .welcome p,
+.mc-app .weather-current-cond,
+.mc-app .weather-current-hl,
+.mc-app .forecast-weekday,
+.mc-app .forecast-low,
+.mc-app .forecast-high {
+  color: #8B7A6B !important;
+}
+
+/* Environment sage matte */
+.mc-app .panel-environment,
+.mc-app .side > .time-card + .glass-card,
+.panel-environment {
+  color: #F4F1E4 !important;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,255,255,0.08) 0 1px, transparent 1.4px),
+    linear-gradient(155deg, #A3A484 0%, #99997A 54%, #8E8F70 100%) !important;
+  background-color: #99997A !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow:
+    7px 9px 18px rgba(100, 102, 78, 0.22),
+    -4px -5px 12px rgba(220, 220, 190, 0.16),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+.mc-app .panel-environment *,
+.mc-app .side > .time-card + .glass-card * { color: #F4F1E4 !important; }
+.mc-app .side > .time-card + .glass-card .env-row,
+.mc-app .panel-environment .env-row {
+  background: rgba(244, 241, 228, 0.14) !important;
+  border: 0 !important;
+  border-radius: 14px !important;
+  box-shadow: inset 1px 1px 2px rgba(255,255,255,0.12), inset -1px -1px 2px rgba(70,72,50,0.10) !important;
+}
+
+/* Time soft peach clay */
+.mc-app .time-card,
+.mc-app .side > .time-card {
+  color: #FFF6EE !important;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,255,255,0.12) 0 1px, transparent 1.4px),
+    linear-gradient(145deg, #D7A790 0%, #CE9B85 55%, #C48F79 100%) !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow:
+    7px 9px 18px rgba(140, 85, 70, 0.22),
+    -4px -5px 12px rgba(240, 200, 180, 0.22),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.28) !important;
+}
+.mc-app .time-card *,
+.mc-app .side > .time-card * { color: #FFF6EE !important; }
+.mc-app .time-card .time-icon,
+.mc-app .side > .time-card .time-icon {
+  color: #5C4030 !important;
+  background: rgba(247, 239, 230, 0.9) !important;
+  border: 0 !important;
+  box-shadow:
+    inset 2px 2px 4px rgba(120, 60, 48, 0.10),
+    inset -2px -2px 4px rgba(255,255,255,0.55),
+    0 4px 10px rgba(120, 60, 48, 0.12) !important;
+}
+
+/* Media coral */
+.mc-app .panel-media,
+.panel-media {
+  color: #FFF4EA !important;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,255,255,0.10) 0 1px, transparent 1.4px),
+    linear-gradient(155deg, #D09280 0%, #C48877 52%, #B87A69 100%) !important;
+  background-color: #C48877 !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow:
+    7px 9px 18px rgba(140, 80, 65, 0.24),
+    -4px -5px 12px rgba(235, 190, 175, 0.18),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.22) !important;
+}
+.mc-app .panel-media *,
+.panel-media * { color: #FFF4EA !important; }
+
+/* Scenes olive */
+.mc-app .panel-scenes,
+.panel-scenes {
+  color: #F3F0E3 !important;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,255,255,0.08) 0 1px, transparent 1.4px),
+    linear-gradient(155deg, #95976F 0%, #898A6B 54%, #7F8062 100%) !important;
+  background-color: #898A6B !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow:
+    7px 9px 18px rgba(95, 97, 72, 0.22),
+    -4px -5px 12px rgba(210, 212, 180, 0.14),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.14) !important;
+}
+.mc-app .panel-scenes > .section-title *,
+.mc-app .panel-scenes .scene,
+.mc-app .panel-scenes .scene * { color: #F3F0E3 !important; }
+.mc-app .panel-scenes .scene {
+  background: rgba(243, 240, 227, 0.14) !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  box-shadow: inset 1px 1px 2px rgba(255,255,255,0.10), inset -1px -1px 2px rgba(55,58,40,0.10) !important;
+}
+
+/* Energy ivory + clay orange bars */
+.mc-app .panel-energy,
+.panel-energy {
+  color: #5C4030 !important;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(92,64,48,0.012) 0 1px, transparent 1.3px),
+    linear-gradient(145deg, #F0E5D8 0%, #E8D9C8 55%, #E1D0BD 100%) !important;
+  background-color: #E8D9C8 !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow:
+    7px 9px 18px rgba(170, 140, 115, 0.24),
+    -6px -7px 14px rgba(255, 255, 255, 0.78) !important;
+}
+.mc-app .panel-energy,
+.mc-app .panel-energy h2,
+.mc-app .panel-energy .energy-value,
+.mc-app .panel-energy .section-title h2 { color: #5C4030 !important; }
+.mc-app .panel-energy .muted,
+.mc-app .panel-energy .section-title .muted { color: #8B7A6B !important; }
+
+.mc-app .panel-energy .bars span,
+.mc-app .panel-energy .bar,
+.mc-app .bars span,
+.mc-app .energy-bars span {
+  background: linear-gradient(180deg, #EBB28A 0%, #E09A72 100%) !important;
+  border-radius: 6px 6px 2px 2px !important;
+  opacity: 0.95 !important;
+  box-shadow: 0 2px 4px rgba(160, 90, 60, 0.12) !important;
+}
+
+/* Device status chips more clay-like */
+.mc-app .device .status,
+.mc-app .device .state-word,
+.mc-app .device .switch,
+.mc-app .device .media-toggle-icon {
+  border-radius: 999px !important;
+}
+
+.mc-app .device-on-green {
+  box-shadow:
+    7px 9px 18px rgba(170, 140, 115, 0.26),
+    -6px -7px 14px rgba(255, 255, 255, 0.82),
+    inset 0 -4px 0 rgba(137, 138, 107, 0.30) !important;
+}
+.mc-app .device-on-yellow {
+  box-shadow:
+    7px 9px 18px rgba(170, 140, 115, 0.26),
+    -6px -7px 14px rgba(255, 255, 255, 0.82),
+    inset 0 -4px 0 rgba(224, 154, 114, 0.32) !important;
+}
+.mc-app .device-on-blue {
+  box-shadow:
+    7px 9px 18px rgba(170, 140, 115, 0.26),
+    -6px -7px 14px rgba(255, 255, 255, 0.82),
+    inset 0 -4px 0 rgba(120, 140, 150, 0.24) !important;
+}
+
+/* Mobile nav soft clay dock */
+.mc-app .mobile-nav {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(92,64,48,0.012) 0 1px, transparent 1.3px),
+    linear-gradient(180deg, #F3EBE1 0%, #EBDDD0 100%) !important;
+  border: 0 !important;
+  box-shadow: 0 -8px 20px rgba(170, 140, 115, 0.22), inset 0 1px 0 rgba(255,255,255,0.7) !important;
+}
+.mc-app .mobile-nav .nav-button {
+  color: rgba(92, 64, 48, 0.72) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+.mc-app .mobile-nav .nav-button.active {
+  color: #FFF8F2 !important;
+  background: #C58978 !important;
+  border-radius: 18px !important;
+  box-shadow:
+    3px 4px 8px rgba(120, 55, 45, 0.22),
+    -2px -2px 5px rgba(255,255,255,0.55),
+    inset 1px 1px 2px rgba(255,255,255,0.4) !important;
+}
+
+@media (min-width: 901px) {
+  .mc-app .sidebar {
+    border-radius: 0 28px 28px 0 !important;
+    background-color: #B27C6C !important;
+    box-shadow:
+      8px 0 22px rgba(130, 78, 64, 0.18),
+      inset 5px 5px 12px rgba(235, 185, 170, 0.22),
+      inset -4px -6px 12px rgba(110, 55, 45, 0.14) !important;
+  }
+  .mc-app .sidebar .menu .nav-button,
+  .mc-app .sidebar .menu button {
+    color: rgba(255, 244, 236, 0.82) !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  .mc-app .sidebar .menu .nav-button.active,
+  .mc-app .sidebar .menu button.active {
+    color: #FFF8F2 !important;
+    background: #C58978 !important;
+    background-image: linear-gradient(160deg, #D19A89 0%, #C58978 52%, #BA7E6D 100%) !important;
+    border-radius: 22px !important;
+    box-shadow:
+      4px 6px 12px rgba(120, 55, 45, 0.28),
+      -2px -3px 7px rgba(235, 185, 170, 0.45),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.42) !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :host {
+    --sp-bg: #2A211C !important;
+    --sp-clay-page: #2A211C !important;
+    --sp-clay-card: #3B2F28 !important;
+    --sp-clay-rail: #8A5B4F !important;
+    --sp-clay-rail-active: #A56F60 !important;
+    --sp-clay-coral: #A66A5B !important;
+    --sp-clay-sage: #6F7158 !important;
+    --sp-clay-sage-deep: #5F614C !important;
+    --sp-clay-energy: #3B2F28 !important;
+    --sp-clay-ink: #F1E4D7 !important;
+    --sp-clay-muted: #C4B0A1 !important;
+    --sp-text-primary: #F1E4D7 !important;
+    --sp-text-secondary: #C4B0A1 !important;
+    color: #F1E4D7 !important;
+  }
+  .mc-app {
+    background-color: #2A211C !important;
+    background-image:
+      radial-gradient(circle at 18% 16%, rgba(255,235,220,0.03) 0 1px, transparent 1.3px),
+      linear-gradient(165deg, #322821 0%, #2A211C 55%, #221A16 100%) !important;
+    color: #F1E4D7 !important;
+  }
+  .mc-app .sidebar,
+  .sidebar {
+    background: linear-gradient(172deg, #966456 0%, #8A5B4F 50%, #7A4E43 100%) !important;
+    background-color: #8A5B4F !important;
+  }
+  .mc-app .sidebar .menu .nav-button.active,
+  .mc-app .sidebar .menu button.active,
+  .mc-app .mobile-nav .nav-button.active {
+    background: #A56F60 !important;
+    color: #FFF8F2 !important;
+  }
+  .mc-app .device,
+  .mc-app .room,
+  .mc-app .panel-energy,
+  .mc-app .glass-card {
+    background: linear-gradient(150deg, #44362E, #3B2F28) !important;
+    color: #F1E4D7 !important;
+    border: 0 !important;
+    box-shadow: 7px 9px 18px rgba(10,8,6,0.34), -3px -4px 10px rgba(255,235,220,0.04) !important;
+  }
+  .mc-app .panel-environment,
+  .mc-app .side > .time-card + .glass-card {
+    background: linear-gradient(155deg, #7A7C60, #6F7158) !important;
+  }
+  .mc-app .panel-media,
+  .mc-app .time-card,
+  .mc-app .side > .time-card {
+    background: linear-gradient(155deg, #B47868, #A66A5B) !important;
+  }
+  .mc-app .panel-scenes {
+    background: linear-gradient(155deg, #6A6C54, #5F614C) !important;
+  }
+  .mc-app h1, .mc-app h2, .mc-app h3, .mc-app .device-name, .mc-app .energy-value {
+    color: #F1E4D7 !important;
+  }
+  .mc-app .muted, .mc-app .device .muted, .mc-app .state-word {
+    color: #C4B0A1 !important;
+  }
+}
+
+
+/* ==========================================================================
+   R42b CLAY EDGE/RADIUS POLISH — clay-cozy-home-20260725-v44
+   From multi-agent audit: true pill nav, warmer soil emboss, no hard rims.
+   ========================================================================== */
+
+:host {
+  --sp-clay-shadow:
+    10px 12px 22px rgba(168, 126, 98, 0.22),
+    3px 4px 8px rgba(168, 126, 98, 0.12),
+    -6px -7px 14px rgba(255, 252, 248, 0.92) !important;
+  --sp-clay-shadow-soft:
+    7px 9px 16px rgba(168, 126, 98, 0.16),
+    -5px -6px 12px rgba(255, 252, 248, 0.82) !important;
+  --sp-shadow-sm: var(--sp-clay-shadow-soft) !important;
+  --sp-shadow-md: var(--sp-clay-shadow-soft) !important;
+  --sp-shadow-lg: var(--sp-clay-shadow) !important;
+  --sp-shadow-card: var(--sp-clay-shadow) !important;
+  --sp-shadow-glass: var(--sp-clay-shadow-soft) !important;
+  --sp-border-glass: transparent !important;
+  --sp-border-subtle: transparent !important;
+  --sp-border-medium: transparent !important;
+}
+
+.mc-app .sidebar,
+.sidebar {
+  border-radius: 0 32px 32px 0 !important;
+  box-shadow:
+    8px 0 22px rgba(140, 78, 62, 0.18),
+    inset 3px 3px 8px rgba(255, 214, 200, 0.22),
+    inset -3px -4px 10px rgba(120, 55, 45, 0.12) !important;
+}
+
+.mc-app .sidebar .menu .nav-button,
+.mc-app .sidebar .menu button,
+.mc-app .menu .nav-button,
+.mc-app .menu button {
+  border-radius: 999px !important;
+}
+
+.mc-app .sidebar .menu .nav-button.active,
+.mc-app .sidebar .menu button.active,
+.mc-app .menu .nav-button.active,
+.mc-app .menu button.active {
+  border-radius: 999px !important;
+  background-image: linear-gradient(160deg, #D9A294 0%, #C58978 48%, #BA7E6D 100%) !important;
+  box-shadow:
+    5px 7px 14px rgba(122, 58, 46, 0.28),
+    -2px -3px 6px rgba(255, 214, 200, 0.55),
+    inset 1px 1px 2px rgba(255, 245, 238, 0.55),
+    inset -2px -3px 5px rgba(130, 60, 48, 0.16) !important;
+}
+
+.mc-app .device,
+.mc-app .devices-page-grid .device,
+.mc-app .room,
+.mc-app .panel-energy,
+.mc-app .glass-card,
+.mc-app .weather-with-meta .welcome-meta {
+  border: 0 !important;
+  box-shadow:
+    9px 11px 20px rgba(168, 126, 98, 0.20),
+    2px 3px 6px rgba(168, 126, 98, 0.10),
+    -6px -7px 14px rgba(255, 252, 248, 0.90),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 0 rgba(186, 150, 120, 0.08) !important;
+}
+
+.mc-app .device { border-radius: 20px !important; }
+.mc-app .room { border-radius: 22px !important; }
+.mc-app .weather-with-meta { border-radius: 30px !important; border: 0 !important; }
+
+.mc-app .time-card,
+.mc-app .side > .time-card,
+.mc-app .panel-media,
+.mc-app .panel-environment,
+.mc-app .side > .time-card + .glass-card,
+.mc-app .panel-scenes,
+.mc-app .panel-energy {
+  border: 0 !important;
+  border-radius: 24px !important;
+}
+
+.mc-app .time-card,
+.mc-app .side > .time-card,
+.mc-app .panel-media {
+  box-shadow:
+    9px 11px 20px rgba(132, 72, 58, 0.24),
+    -4px -5px 12px rgba(255, 214, 200, 0.28),
+    inset 2px 2px 6px rgba(255, 240, 230, 0.28),
+    inset -2px -3px 6px rgba(120, 55, 45, 0.12) !important;
+}
+
+.mc-app .panel-environment,
+.mc-app .side > .time-card + .glass-card,
+.mc-app .panel-scenes {
+  box-shadow:
+    9px 11px 20px rgba(98, 102, 72, 0.22),
+    -4px -5px 12px rgba(236, 236, 210, 0.28),
+    inset 2px 2px 6px rgba(255, 255, 245, 0.20),
+    inset -2px -3px 6px rgba(70, 72, 50, 0.10) !important;
+}
+
+.mc-app .panel-scenes .scene,
+.mc-app .side > .time-card + .glass-card .env-row,
+.mc-app .panel-environment .env-row {
+  border: 0 !important;
+  border-radius: 18px !important;
+  box-shadow:
+    inset 2px 2px 4px rgba(60, 50, 40, 0.12),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.18) !important;
+}
+
+.mc-app .mobile-nav .nav-button,
+.mc-app .mobile-nav .nav-button.active {
+  border-radius: 999px !important;
+}
+
+@media (min-width: 901px) {
+  .mc-app .sidebar {
+    border-radius: 0 32px 32px 0 !important;
+  }
+  .mc-app .sidebar .menu .nav-button,
+  .mc-app .sidebar .menu button,
+  .mc-app .sidebar .menu .nav-button.active,
+  .mc-app .sidebar .menu button.active {
+    border-radius: 999px !important;
+  }
+}
+
+
+/* ==========================================================================
+   R42c DEVICE/TYPE HIERARCHY — clay-cozy-home-20260725-v44
+   Larger clay icon plates, stronger names, pill status chips, slim rail.
+   ========================================================================== */
+
+:host {
+  --sp-sidebar-width: clamp(196px, 13.2vw, 248px) !important;
+}
+
+.mc-app .welcome h1 {
+  color: #4A2F24 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+}
+.mc-app .welcome p,
+.mc-app .welcome .quote {
+  color: rgba(74, 47, 36, 0.62) !important;
+  font-weight: 500 !important;
+}
+
+.mc-app .device {
+  display: grid !important;
+  grid-template-rows: auto 1fr auto !important;
+  align-content: stretch !important;
+  padding: 14px 12px 12px !important;
+  gap: 8px !important;
+}
+
+.mc-app .device .item-icon,
+.mc-app .device .item-img,
+.mc-app .device img.item-img,
+.mc-app .device .device-icon {
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  min-height: 58px !important;
+  border-radius: 18px !important;
+  border: 0 !important;
+  background:
+    linear-gradient(145deg, #F7F0E7 0%, #F0E4D6 100%) !important;
+  box-shadow:
+    4px 6px 12px rgba(168, 126, 98, 0.16),
+    -3px -3px 8px rgba(255, 252, 248, 0.85),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.65) !important;
+  object-fit: contain !important;
+}
+
+.mc-app .device-name {
+  font-size: 15px !important;
+  font-weight: 750 !important;
+  color: #4A2F24 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.2 !important;
+}
+
+.mc-app .device .muted,
+.mc-app .device .state-word {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: #8C7B6C !important;
+}
+
+.mc-app .device .status,
+.mc-app .device .switch,
+.mc-app .device .media-toggle-icon,
+.mc-app .device button.status {
+  min-width: 30px !important;
+  min-height: 30px !important;
+  padding: 0 10px !important;
+  border-radius: 999px !important;
+  border: 0 !important;
+  color: #FFF8F2 !important;
+  background: linear-gradient(160deg, #D29280, #C97B63) !important;
+  box-shadow:
+    3px 4px 8px rgba(130, 70, 55, 0.20),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.35) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+.mc-app .device-on-green .status,
+.mc-app .device-on-green .switch {
+  background: linear-gradient(160deg, #8FB07A, #7EA06A) !important;
+}
+
+.mc-app .panel-environment > .section-title h2,
+.mc-app .panel-media > .section-title h2,
+.mc-app .panel-scenes > .section-title h2 {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #FFF5E8 !important;
+}
+.mc-app .panel-energy .section-title h2,
+.mc-app .panel-energy > .section-title h2 {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #4A2F24 !important;
+}
+
+.mc-app .panel-energy .bars,
+.mc-app .bars,
+.mc-app .energy-bars {
+  align-items: flex-end !important;
+  gap: 5px !important;
+  min-height: 54px !important;
+}
+.mc-app .panel-energy .bars span,
+.mc-app .bars span,
+.mc-app .energy-bars span {
+  min-width: 8px !important;
+  border-radius: 8px 8px 3px 3px !important;
+  background: linear-gradient(180deg, #EBB28A 0%, #E09A72 100%) !important;
+}
+
+.mc-app .sidebar-art {
+  min-height: 120px !important;
+  max-height: 180px !important;
+  margin-top: auto !important;
+}
+.mc-app .sidebar-art img {
+  filter: drop-shadow(4px 10px 14px rgba(90, 50, 40, 0.18)) saturate(1.05) !important;
+}
+
+.mc-app .menu {
+  gap: 8px !important;
+}
+.mc-app .menu .nav-button {
+  min-height: 44px !important;
+}

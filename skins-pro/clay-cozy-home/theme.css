@@ -20664,4 +20664,137 @@ ha-top-app-bar-fixed, app-header, app-toolbar,
   }
 }
 
-/* clay-cozy-home-20260726-v80 */
+/* ==========================================================================
+   R81 — DEEPER CLAY SEARCH RECESS
+   ========================================================================== */
+
+/* The desktop search trigger is an inline-positioned div in the upstream
+   renderer. Keep the selector scoped to that trigger so cards are untouched. */
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid
+  > div[style*="position:absolute"] {
+  background: #E8DCCE !important;
+  background-color: #E8DCCE !important;
+  background-image: none !important;
+  opacity: 1 !important;
+  box-shadow:
+    inset 2px 2px 5px rgba(160, 140, 120, 0.3),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Preserve the same pressed-clay depth in night mode without introducing a
+   bright daytime strip into the dark composition. */
+@media (prefers-color-scheme: dark) {
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid
+    > div[style*="position:absolute"] {
+    background: #2B2320 !important;
+    background-color: #2B2320 !important;
+    background-image: none !important;
+    opacity: 1 !important;
+    box-shadow:
+      inset 2px 2px 5px rgba(12, 9, 8, 0.55),
+      inset -2px -2px 5px rgba(75, 62, 55, 0.28) !important;
+  }
+}
+
+/* ==========================================================================
+   R83 — RIGHT RAIL SOFT-SCULPTED CLAY + NIGHT WEATHER ICON
+   ========================================================================== */
+
+/* Keep the live weather glyph on a light clay chip in both schemes. The
+   explicit icon tokens prevent the night palette from turning cloud/rain
+   paths into the same dark brown as their circular holder. */
+.mc-app.mc-app .weather-with-meta .weather-state-icon {
+  background: rgba(248, 239, 228, 0.94) !important;
+  color: #5A4034 !important;
+  border: 0 !important;
+  box-shadow:
+    2px 3px 7px rgba(118, 83, 66, 0.22),
+    -2px -2px 5px rgba(255, 255, 255, 0.72),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.64) !important;
+}
+.mc-app.mc-app .weather-with-meta .weather-state-icon ha-state-icon {
+  color: #5A4034 !important;
+  --state-icon-color: #5A4034 !important;
+  --paper-item-icon-color: #5A4034 !important;
+}
+
+/* Main rail slabs: broad diffuse shadows and one soft inset highlight make
+   the five independent modules read as hand-shaped pieces of clay. */
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.time-card,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-environment,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-media,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-scenes {
+  border: 0 !important;
+  border-radius: 26px !important;
+  outline: 0 !important;
+  box-shadow:
+    10px 12px 24px -6px rgba(165, 145, 130, 0.45),
+    -6px -6px 16px 0 rgba(255, 255, 255, 0.85),
+    inset 1px 1px 2px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Titles stay clean while the actual values/buttons carry the inset depth. */
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section > .section-title,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > .panel-environment > .env-list {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Three environment wells and scene actions are finger-pressed recesses. */
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > .panel-environment .env-list > .env-row,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > .panel-scenes .scene-grid > .scene {
+  border: 0 !important;
+  border-radius: 18px !important;
+  box-shadow:
+    inset 3px 3px 6px rgba(0, 0, 0, 0.12),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Media power control: a small raised, slightly foamed clay button. */
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > .panel-media .media-off-state > .media-volbtn {
+  border: 0 !important;
+  box-shadow:
+    3px 4px 8px rgba(135, 62, 50, 0.35),
+    -2px -2px 5px rgba(255, 200, 190, 0.5),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Night keeps the same large, diffuse shape without a white halo against the
+   dark canvas. The inner wells retain the requested tactile highlight. */
+@media (prefers-color-scheme: dark) {
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.time-card,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.panel-environment,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.panel-energy,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.panel-media,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.panel-scenes {
+    box-shadow:
+      10px 12px 24px -6px rgba(0, 0, 0, 0.58),
+      -6px -6px 16px 0 rgba(82, 68, 60, 0.24),
+      inset 1px 1px 2px 0 rgba(255, 255, 255, 0.12) !important;
+  }
+  .mc-app.mc-app .weather-with-meta .weather-state-icon,
+  .mc-app.mc-app .weather-with-meta .weather-state-icon ha-state-icon {
+    color: #5A4034 !important;
+    --state-icon-color: #5A4034 !important;
+    --paper-item-icon-color: #5A4034 !important;
+  }
+}
+
+/* clay-cozy-home-20260726-v83 */

@@ -20797,4 +20797,71 @@ ha-top-app-bar-fixed, app-header, app-toolbar,
   }
 }
 
-/* clay-cozy-home-20260726-v83 */
+/* ==========================================================================
+   R84 — SCENE MODE LABEL CONTRAST
+   ========================================================================== */
+
+/* The small mode label is metadata, but it must remain readable against the
+   sage clay slab instead of inheriting the global low-opacity muted token. */
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > .panel-scenes .section-title > .muted {
+  color: #3A3C2A !important;
+  opacity: 1 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > .panel-scenes .section-title > .muted {
+    color: rgba(255, 255, 255, 0.8) !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ==========================================================================
+   R85 — FULL-WIDTH ENERGY CHART CONTRACT
+   ========================================================================== */
+
+/* Support the native Skins-Pro bars plus optional ApexCharts/Mini Graph hosts.
+   The chart always owns the full energy-card content width. */
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .bars,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy apexcharts-card,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy mini-graph-card,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy .apexcharts-canvas,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy .apexcharts-svg {
+  width: 100% !important;
+  min-width: 100% !important;
+  height: 44px !important;
+  display: block !important;
+}
+
+/* Native history points remain real data; when several are present they flow
+   left-to-right across the full-width chart instead of collapsing centrally. */
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .bars {
+  box-sizing: border-box !important;
+  flex: 0 0 44px !important;
+  font-size: 0 !important;
+  line-height: 44px !important;
+  max-height: 44px !important;
+  min-height: 44px !important;
+  overflow: hidden !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .bars > .energy-bar {
+  display: inline-block !important;
+  float: none !important;
+  margin: 0 clamp(4px, 0.65vw, 10px) 0 0 !important;
+  max-width: 18px !important;
+  min-width: 8px !important;
+  vertical-align: bottom !important;
+  width: 2.4% !important;
+}
+
+/* clay-cozy-home-20260726-v86 */

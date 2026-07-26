@@ -15339,3 +15339,5329 @@ ha-card {
 .mc-app .device .device-copy {
   margin-bottom: 2px !important;
 }
+
+
+/* clay-cozy-home-20260725-v57 */
+
+/* ==========================================================================
+   R57 REFERENCE TIGHTEN
+   - Flatter oat canvas (less paper-white)
+   - Wider home device cards so climate temp-group fully fits
+   - Warmer cream device/welcome surfaces
+   - Keep official controls inside frame
+   ========================================================================== */
+
+:host {
+  --sp-bg: #EFE3D5 !important;
+  --sp-clay-page: #EFE3D5 !important;
+  --sp-clay-oat: #EFE3D5 !important;
+  --sp-clay-card: #F3EBE2 !important;
+  --sp-clay-energy: #F3E9DF !important;
+  --sp-clay-emboss:
+    9px 11px 20px rgba(168, 126, 98, 0.18),
+    2px 3px 6px rgba(150, 110, 85, 0.08),
+    -4px -5px 11px rgba(255, 248, 240, 0.42),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.35),
+    inset -1px -2px 3px rgba(150, 110, 85, 0.08) !important;
+}
+
+/* Canvas: exact oat, no bright wash */
+.mc-app {
+  background-color: #EFE3D5 !important;
+  background-image:
+    radial-gradient(circle at 18% 16%, rgba(74, 58, 44, 0.010) 0 1px, transparent 1.3px),
+    linear-gradient(168deg, #EFE3D5 0%, #EFE3D5 58%, #ECDCCB 100%) !important;
+}
+
+/* Home devices: fewer/wider columns so climate ± + modes fit */
+.mc-app .devices {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  gap: 12px !important;
+}
+@media (min-width: 1400px) {
+  .mc-app .devices {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+@media (min-width: 1100px) and (max-width: 1399px) {
+  .mc-app .devices {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+.mc-app .devices .device {
+  min-height: 188px !important;
+  min-width: 0 !important;
+  padding: 12px !important;
+}
+
+/* Climate control row: always keep temp-group intact on one line when possible */
+.mc-app .devices .device .control-row,
+.mc-app .device .control-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 4px !important;
+  row-gap: 6px !important;
+  width: 100% !important;
+  min-height: 32px !important;
+  overflow: visible !important;
+}
+
+.mc-app .device .temp-group {
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 76px !important;
+  max-width: none !important;
+  height: 30px !important;
+  padding: 2px 3px !important;
+  gap: 0 !important;
+}
+.mc-app .device .temp-group .media-volbtn,
+.mc-app .device .temp-group [role="button"] {
+  width: 26px !important;
+  min-width: 26px !important;
+  height: 26px !important;
+}
+.mc-app .device .temp-group > span {
+  min-width: 22px !important;
+  padding: 0 1px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+.mc-app .device .control-row .filter-select,
+.mc-app .device select.filter-select,
+.mc-app .device .control-row select {
+  flex: 1 1 58px !important;
+  min-width: 52px !important;
+  max-width: calc(50% - 4px) !important;
+  height: 30px !important;
+  min-height: 30px !important;
+}
+
+/* Warmer cream cards (still near user #F6EFE7, less paper white) */
+.mc-app .device,
+.mc-app .devices-page-grid .device,
+.mc-app .welcome,
+.mc-app .panel-energy {
+  background-color: #F3EBE2 !important;
+  background-image:
+    radial-gradient(circle at 18% 16%, rgba(74, 58, 44, 0.010) 0 1px, transparent 1.3px),
+    linear-gradient(150deg, #F6F0E8 0%, #F3EBE2 58%, #EDE4D9 100%) !important;
+  box-shadow: var(--sp-clay-emboss) !important;
+  border: 0 !important;
+}
+
+.mc-app .welcome,
+.mc-app .weather-card,
+.mc-app .weather-with-meta,
+.mc-app .weather-panel {
+  background-color: #F3EBE2 !important;
+  border-radius: 24px !important;
+}
+
+/* Sidebar matte lock + inactive truly bare */
+.mc-app .sidebar,
+.sidebar {
+  background-color: #C57D6D !important;
+  background-image:
+    radial-gradient(circle at 20% 14%, rgba(255, 230, 220, 0.06) 0 1px, transparent 1.5px),
+    linear-gradient(180deg, #C98474 0%, #C57D6D 45%, #B87363 100%) !important;
+  border-radius: 0 28px 28px 0 !important;
+}
+.mc-app .sidebar .menu .nav-button:not(.active),
+.mc-app .sidebar .menu button:not(.active) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+.mc-app .sidebar .menu .nav-button.active,
+.mc-app .sidebar .menu button.active {
+  background-color: #CE8F80 !important;
+  background-image: linear-gradient(165deg, #D4A090 0%, #CE8F80 58%, #C68778 100%) !important;
+  color: #FFFFFF !important;
+  border-radius: 999px !important;
+}
+
+/* Energy bars denser clay orange */
+.mc-app .panel-energy .bars span,
+.mc-app .bars span,
+.mc-app .bars .bar,
+.mc-app .bars .bar.on,
+.mc-app .panel-energy .bar.on {
+  background: #E3805B !important;
+  background-image: linear-gradient(180deg, #E8926A 0%, #E3805B 78%) !important;
+}
+
+/* Specialty cards keep palette, slightly less plastic gloss */
+.mc-app .time-card,
+.mc-app .side > .time-card {
+  background-color: #C8886F !important;
+  background-image: linear-gradient(155deg, #D09A82 0%, #C8886F 58%, #BE7C65 100%) !important;
+}
+.mc-app .panel-environment,
+.mc-app .side > .time-card + .glass-card,
+.mc-app .glass-card:has(.env-list),
+.mc-app .glass-card:has(.env-row) {
+  background-color: #989A7B !important;
+  background-image: linear-gradient(155deg, #9C9E7E 0%, #989A7B 60%, #8F9173 100%) !important;
+}
+.mc-app .panel-media {
+  background-color: #C77E6D !important;
+  background-image: linear-gradient(155deg, #CC8877 0%, #C77E6D 60%, #BD7363 100%) !important;
+}
+.mc-app .panel-scenes {
+  background-color: #8D8E71 !important;
+  background-image: linear-gradient(155deg, #939477 0%, #8D8E71 60%, #848567 100%) !important;
+}
+
+/* Text on cream */
+.mc-app .welcome h1,
+.mc-app .welcome h2,
+.mc-app .device .device-name,
+.mc-app .panel-energy .energy-value,
+.mc-app .panel-energy .section-title h2 {
+  color: #4A3A2C !important;
+}
+.mc-app .welcome p,
+.mc-app .device .muted,
+.mc-app .device .state-word,
+.mc-app .panel-energy .muted {
+  color: #8C7B6C !important;
+}
+
+
+/* clay-cozy-home-20260725-v58 */
+
+/* ==========================================================================
+   R58 HOME DEVICE WIDTH + CLIMATE ROW + ENERGY BARS
+   ========================================================================== */
+
+/* Force wider home device cards (max 4 cols on desktop) */
+@media (min-width: 1100px) {
+  .mc-app .devices {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+}
+@media (min-width: 901px) and (max-width: 1099px) {
+  .mc-app .devices {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 900px), (orientation: portrait) and (max-width: 1100px) {
+  .mc-app .devices {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+.mc-app .devices .device {
+  min-height: 200px !important;
+  height: auto !important;
+  overflow: visible !important;
+  padding: 12px !important;
+  grid-template-rows: auto 1fr auto !important;
+}
+
+/* Climate controls: two-line friendly layout, never clip temp steppers */
+.mc-app .devices .device .control-row,
+.mc-app .device .control-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 6px 4px !important;
+  overflow: visible !important;
+  min-height: 34px !important;
+  max-height: none !important;
+}
+
+.mc-app .device .temp-group {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex: 0 0 auto !important;
+  min-width: 84px !important;
+  width: auto !important;
+  height: 32px !important;
+  max-width: none !important;
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+.mc-app .device .temp-group .media-volbtn,
+.mc-app .device .temp-group [role="button"],
+.mc-app .device .temp-group ha-icon {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.mc-app .device .temp-group > span {
+  display: inline-block !important;
+  visibility: visible !important;
+  min-width: 24px !important;
+  color: #4A3A2C !important;
+}
+
+.mc-app .device .control-row .filter-select,
+.mc-app .device select.filter-select,
+.mc-app .device .control-row select {
+  display: inline-flex !important;
+  visibility: visible !important;
+  flex: 1 1 64px !important;
+  min-width: 56px !important;
+  max-width: 96px !important;
+  height: 32px !important;
+}
+
+/* Energy bars: readable clay columns, not pin-dots */
+.mc-app .panel-energy .bars,
+.mc-app .bars {
+  display: flex !important;
+  align-items: flex-end !important;
+  gap: 3px !important;
+  min-height: 44px !important;
+  height: 48px !important;
+  overflow: hidden !important;
+}
+.mc-app .panel-energy .bars span,
+.mc-app .bars span,
+.mc-app .bars .bar {
+  flex: 1 1 0 !important;
+  min-width: 3px !important;
+  max-width: 10px !important;
+  min-height: 6px !important;
+  border-radius: 999px 999px 4px 4px !important;
+  background: #E3805B !important;
+  background-image: linear-gradient(180deg, #E8926A 0%, #E3805B 80%) !important;
+}
+
+/* Inactive nav absolute bare */
+.mc-app .sidebar .menu .nav-button:not(.active),
+.mc-app .sidebar .menu button:not(.active),
+.mc-app .sidebar .menu .nav-button:not(.active):hover,
+.mc-app .sidebar .menu button:not(.active):hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+/* clay-cozy-home-20260725-v59 */
+
+/* ==========================================================================
+   R59 VISIONOS CONTROL FIT + TABLET DOCK + CLAY POLISH
+   Structure ref = official visionOS / latest skins-pro device cards
+   Visual ref = clay cozy palette (NOT glass colors)
+   - Fix climate temp-group clipping (R55 overflow+flex-end root cause)
+   - Soften pure-white emboss rims
+   - Env cells / scenes buttons less paper-white
+   - Tablet/phone bottom nav definitive layout
+   - Dark mode text + card reassert
+   - Keep all changes CSS-only
+   ========================================================================== */
+
+:host {
+  --sp-clay-emboss:
+    8px 8px 16px rgba(185, 165, 145, 0.45),
+    -6px -6px 14px rgba(255, 248, 240, 0.55),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.28),
+    inset -1px -2px 3px rgba(150, 110, 85, 0.08) !important;
+  --sp-clay-emboss-soft:
+    6px 7px 14px rgba(168, 126, 98, 0.16),
+    -4px -5px 10px rgba(255, 248, 240, 0.38) !important;
+  --sp-border-glass: transparent !important;
+  --sp-border-subtle: transparent !important;
+  --sp-border-medium: transparent !important;
+}
+
+html, body, home-assistant, home-assistant-main,
+ha-top-app-bar-fixed, app-header, app-toolbar,
+.header, .toolbar {
+  --app-header-background-color: #EFE3D5 !important;
+  --mdc-theme-primary: #EFE3D5 !important;
+  --primary-background-color: #EFE3D5 !important;
+  --primary-text-color: #4A3A2C !important;
+  background-color: #EFE3D5 !important;
+}
+
+.mc-app .device,
+.mc-app .devices .device,
+.mc-app .devices-page-grid .device {
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  border: none !important;
+  box-sizing: border-box !important;
+}
+
+.mc-app .devices .device {
+  min-height: 168px !important;
+  height: auto !important;
+  padding: 12px 12px 10px !important;
+  grid-template-rows: auto 1fr auto !important;
+}
+
+.mc-app .device .control-row,
+.mc-app .devices .device .control-row,
+.mc-app .devices-page-grid .device .control-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 6px 4px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 34px !important;
+  max-height: none !important;
+  overflow: visible !important;
+  margin-top: 4px !important;
+}
+
+.mc-app .device .control-row > * {
+  min-width: auto !important;
+}
+
+.mc-app .device .temp-group,
+.mc-app .temp-group {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  flex-shrink: 0 !important;
+  gap: 0 !important;
+  min-width: 92px !important;
+  width: auto !important;
+  max-width: none !important;
+  height: 32px !important;
+  padding: 2px !important;
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 3 !important;
+  transform: none !important;
+  background: rgba(239, 227, 213, 0.95) !important;
+  border-radius: 999px !important;
+  border: 0 !important;
+  box-shadow:
+    3px 4px 8px rgba(150, 110, 85, 0.14),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.35),
+    inset -1px -1px 2px rgba(150, 110, 85, 0.08) !important;
+}
+
+.mc-app .device .temp-group .media-volbtn,
+.mc-app .device .temp-group [role="button"],
+.mc-app .temp-group .media-volbtn,
+.mc-app .temp-group [role="button"] {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 28px !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: #4A3A2C !important;
+}
+
+.mc-app .device .temp-group .media-volbtn ha-icon,
+.mc-app .device .temp-group ha-icon,
+.mc-app .temp-group ha-icon {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #4A3A2C !important;
+  --mdc-icon-size: 14px !important;
+}
+
+.mc-app .device .temp-group > span,
+.mc-app .temp-group > span {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex: 0 0 auto !important;
+  min-width: 28px !important;
+  padding: 0 2px !important;
+  text-align: center !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  color: #4A3A2C !important;
+  white-space: nowrap !important;
+}
+
+.mc-app .device .control-row .filter-select,
+.mc-app .device select.filter-select,
+.mc-app .device .control-row select {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex: 0 1 auto !important;
+  flex-shrink: 1 !important;
+  min-width: 52px !important;
+  max-width: 88px !important;
+  width: auto !important;
+  height: 30px !important;
+  padding: 0 18px 0 8px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: #4A3A2C !important;
+  background: rgba(239, 227, 213, 0.95) !important;
+  box-shadow:
+    2px 3px 6px rgba(150, 110, 85, 0.12),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.3) !important;
+}
+
+.mc-app .device ha-control-slider,
+.mc-app .device .media-vol-slider {
+  flex: 1 1 72px !important;
+  min-width: 56px !important;
+  max-width: 100% !important;
+  height: 28px !important;
+  overflow: hidden !important;
+}
+.mc-app .device ha-control-switch {
+  flex: 0 0 44px !important;
+  width: 44px !important;
+  min-width: 40px !important;
+  margin-left: auto !important;
+}
+
+@media (min-width: 1280px) {
+  .mc-app .devices {
+    grid-template-columns: repeat(4, minmax(210px, 1fr)) !important;
+    gap: 14px !important;
+  }
+}
+@media (min-width: 1000px) and (max-width: 1279px) {
+  .mc-app .devices {
+    grid-template-columns: repeat(3, minmax(200px, 1fr)) !important;
+    gap: 12px !important;
+  }
+}
+@media (min-width: 701px) and (max-width: 999px) {
+  .mc-app .devices {
+    grid-template-columns: repeat(2, minmax(180px, 1fr)) !important;
+  }
+}
+@media (max-width: 700px) {
+  .mc-app .devices {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.mc-app .device,
+.mc-app .devices-page-grid .device,
+.mc-app .welcome,
+.mc-app .panel-energy,
+.mc-app .weather-card,
+.mc-app .weather-with-meta,
+.mc-app .weather-panel {
+  background-color: #F6EFE7 !important;
+  background-image:
+    radial-gradient(circle at 18% 16%, rgba(74, 58, 44, 0.012) 0 1px, transparent 1.3px),
+    linear-gradient(150deg, #F7F1E9 0%, #F6EFE7 52%, #EFE3D5 100%) !important;
+  border: none !important;
+  box-shadow: var(--sp-clay-emboss) !important;
+  border-radius: 20px !important;
+}
+
+.mc-app .panel-energy {
+  background-color: #F5EBE1 !important;
+  background-image: linear-gradient(150deg, #F7F0E7 0%, #F5EBE1 58%, #EFE4D8 100%) !important;
+  border-radius: 24px !important;
+}
+
+.mc-app .panel-environment .env-row,
+.mc-app .panel-environment .env-item,
+.mc-app .panel-environment .env-list > *,
+.mc-app .glass-card:has(.env-list) .env-row,
+.mc-app .glass-card:has(.env-list) .env-item,
+.mc-app .glass-card:has(.env-row) > * {
+  background: rgba(255, 248, 240, 0.12) !important;
+  background-color: rgba(255, 248, 240, 0.12) !important;
+  background-image: none !important;
+  color: #FFF8F0 !important;
+  border: 0 !important;
+  box-shadow:
+    inset 1px 1px 2px rgba(70, 72, 50, 0.10),
+    inset -1px -1px 2px rgba(255, 255, 245, 0.10) !important;
+}
+.mc-app .panel-environment,
+.mc-app .glass-card:has(.env-list),
+.mc-app .glass-card:has(.env-row) {
+  background-color: #989A7B !important;
+  background-image: linear-gradient(155deg, #9C9E7E 0%, #989A7B 60%, #8F9173 100%) !important;
+  color: #FFF8F0 !important;
+  border: none !important;
+  box-shadow: var(--sp-clay-emboss-sage, var(--sp-clay-emboss)) !important;
+}
+
+.mc-app .panel-scenes .scene,
+.mc-app .panel-scenes button.scene {
+  background: rgba(141, 142, 113, 0.38) !important;
+  background-color: rgba(141, 142, 113, 0.38) !important;
+  color: #FFF8F0 !important;
+  border: 0 !important;
+  box-shadow:
+    3px 4px 8px rgba(70, 72, 50, 0.14),
+    inset 1px 1px 1px rgba(255, 255, 245, 0.16),
+    inset -1px -2px 3px rgba(70, 72, 50, 0.10) !important;
+}
+
+.mc-app .panel-energy .bars,
+.mc-app .bars {
+  display: flex !important;
+  align-items: flex-end !important;
+  gap: 3px !important;
+  min-height: 44px !important;
+  height: 48px !important;
+}
+.mc-app .panel-energy .bars span,
+.mc-app .bars span,
+.mc-app .bars .bar,
+.mc-app .bars .bar.on {
+  background: #E3805B !important;
+  background-image: linear-gradient(180deg, #E58B66 0%, #E3805B 78%) !important;
+  border: 0 !important;
+  min-width: 3px !important;
+  max-width: 10px !important;
+  border-radius: 999px 999px 4px 4px !important;
+}
+
+.mc-app .sidebar,
+.sidebar {
+  background-color: #C57D6D !important;
+  border-radius: 0 28px 28px 0 !important;
+  box-shadow: 6px 0 18px rgba(150, 90, 75, 0.25) !important;
+}
+.mc-app .sidebar .menu .nav-button:not(.active),
+.mc-app .sidebar .menu button:not(.active) {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  color: rgba(255, 242, 234, 0.85) !important;
+}
+.mc-app .sidebar .menu .nav-button.active,
+.mc-app .sidebar .menu button.active {
+  background-color: #CE8F80 !important;
+  color: #FFFFFF !important;
+  border-radius: 20px !important;
+  box-shadow:
+    4px 5px 10px rgba(135, 62, 50, 0.4),
+    -2px -2px 6px rgba(235, 170, 155, 0.6),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.5) !important;
+}
+
+.mc-app .welcome h1,
+.mc-app .welcome h2,
+.mc-app .device .device-name,
+.mc-app .panel-energy .energy-value,
+.mc-app .panel-energy .section-title h2 {
+  color: #4A3A2C !important;
+}
+.mc-app .welcome p,
+.mc-app .device .muted,
+.mc-app .device .state-word,
+.mc-app .panel-energy .muted {
+  color: #8C7B6C !important;
+}
+
+@media (min-width: 901px) and (orientation: landscape) {
+  .mc-app .mobile-nav,
+  .mobile-nav {
+    display: none !important;
+    height: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  .mc-app .sidebar,
+  .sidebar {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 900px), (orientation: portrait) {
+  .mc-app .sidebar,
+  .sidebar {
+    display: none !important;
+    width: 0 !important;
+    min-width: 0 !important;
+  }
+
+  .mc-app,
+  :host {
+    padding-bottom: 88px !important;
+  }
+  .mc-app .stage,
+  .mc-app .content,
+  .mc-app .main,
+  .mc-app .page {
+    padding-bottom: 24px !important;
+  }
+
+  .mc-app .mobile-nav,
+  .mobile-nav {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    width: auto !important;
+    max-width: calc(100vw - 20px) !important;
+    height: 64px !important;
+    min-height: 64px !important;
+    max-height: 72px !important;
+    margin: 0 !important;
+    padding: 6px 8px !important;
+    z-index: 300 !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 4px !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+    border: 0 !important;
+    border-radius: 22px !important;
+    background:
+      linear-gradient(180deg, rgba(246, 239, 231, 0.96) 0%, rgba(239, 227, 213, 0.94) 100%) !important;
+    box-shadow:
+      6px 10px 20px rgba(150, 110, 85, 0.22),
+      -3px -3px 10px rgba(255, 248, 240, 0.55),
+      inset 1px 1px 1px rgba(255, 248, 240, 0.4) !important;
+    backdrop-filter: none !important;
+    transform: none !important;
+    writing-mode: horizontal-tb !important;
+  }
+
+  .mc-app .mobile-nav .nav-button,
+  .mc-app .mobile-nav button,
+  .mobile-nav .nav-button,
+  .mobile-nav button {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex: 1 1 0 !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 2px !important;
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    min-height: 48px !important;
+    height: 48px !important;
+    padding: 4px 2px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 16px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: rgba(74, 58, 44, 0.72) !important;
+    overflow: visible !important;
+    white-space: nowrap !important;
+  }
+
+  .mc-app .mobile-nav .nav-button ha-icon,
+  .mc-app .mobile-nav button ha-icon,
+  .mobile-nav .nav-button ha-icon,
+  .mobile-nav button ha-icon {
+    display: inline-flex !important;
+    width: 22px !important;
+    height: 22px !important;
+    --mdc-icon-size: 20px !important;
+    color: inherit !important;
+  }
+
+  .mc-app .mobile-nav .nav-button span,
+  .mc-app .mobile-nav button span,
+  .mobile-nav .nav-button span,
+  .mobile-nav button span {
+    display: none !important;
+  }
+
+  .mc-app .mobile-nav .nav-button.active,
+  .mc-app .mobile-nav button.active,
+  .mobile-nav .nav-button.active,
+  .mobile-nav button.active {
+    background-color: #CE8F80 !important;
+    color: #FFFFFF !important;
+    box-shadow:
+      3px 4px 8px rgba(135, 62, 50, 0.28),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.35) !important;
+  }
+
+  .mc-app .devices .device {
+    min-height: 156px !important;
+  }
+  .mc-app .device .control-row {
+    flex-wrap: wrap !important;
+    overflow: visible !important;
+  }
+  .mc-app .device .temp-group {
+    min-width: 88px !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 820px) and (max-width: 1400px) {
+  .mc-app .sidebar,
+  .sidebar {
+    display: none !important;
+  }
+  .mc-app .mobile-nav,
+  .mobile-nav {
+    display: flex !important;
+    position: fixed !important;
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 10px !important;
+    height: 60px !important;
+    z-index: 300 !important;
+  }
+  .mc-app {
+    padding-bottom: 80px !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html, body, home-assistant, home-assistant-main,
+  ha-top-app-bar-fixed, app-header, app-toolbar,
+  .header, .toolbar {
+    --app-header-background-color: #1C1715 !important;
+    --primary-background-color: #1C1715 !important;
+    --primary-text-color: #F5ECE3 !important;
+    background-color: #1C1715 !important;
+  }
+
+  .mc-app {
+    background-color: #1C1715 !important;
+    color: #F5ECE3 !important;
+  }
+  .mc-app .welcome h1,
+  .mc-app .welcome h2,
+  .mc-app .section-title h2,
+  .mc-app .welcome {
+    color: #F5ECE3 !important;
+  }
+  .mc-app .welcome p,
+  .mc-app .muted {
+    color: rgba(245, 236, 227, 0.65) !important;
+  }
+
+  .mc-app .device,
+  .mc-app .devices-page-grid .device,
+  .mc-app .panel-energy,
+  .mc-app .welcome,
+  .mc-app .weather-card,
+  .mc-app .weather-with-meta {
+    background-color: #2B2320 !important;
+    background-image: linear-gradient(150deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .device .device-name,
+  .mc-app .panel-energy .energy-value,
+  .mc-app .panel-energy .section-title h2 {
+    color: #FAF5F0 !important;
+  }
+  .mc-app .device .muted,
+  .mc-app .device .state-word,
+  .mc-app .panel-energy .muted {
+    color: rgba(250, 245, 240, 0.55) !important;
+  }
+
+  .mc-app .time-card {
+    background-color: #422D28 !important;
+    background-image: linear-gradient(155deg, #4C342E 0%, #422D28 55%, #382621 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-environment,
+  .mc-app .glass-card:has(.env-list),
+  .mc-app .glass-card:has(.env-row) {
+    background-color: #2D3227 !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-media {
+    background-color: #3D2722 !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-scenes {
+    background-color: #2A2B22 !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.7),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+
+  .mc-app .device .temp-group,
+  .mc-app .device .control-row .filter-select,
+  .mc-app .device select.filter-select {
+    background: rgba(66, 45, 40, 0.95) !important;
+    color: #FAF5F0 !important;
+    box-shadow:
+      3px 4px 8px rgba(12, 9, 8, 0.4),
+      inset 1px 1px 1px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .device .temp-group .media-volbtn,
+  .mc-app .device .temp-group > span,
+  .mc-app .device .temp-group ha-icon {
+    color: #FAF5F0 !important;
+  }
+
+  .mc-app .mobile-nav,
+  .mobile-nav {
+    background: linear-gradient(180deg, #2B2320 0%, #241E1B 100%) !important;
+    box-shadow:
+      6px 10px 20px rgba(12, 9, 8, 0.55),
+      -3px -3px 10px rgba(75, 62, 55, 0.18) !important;
+  }
+  .mc-app .mobile-nav .nav-button,
+  .mobile-nav .nav-button,
+  .mc-app .mobile-nav button,
+  .mobile-nav button {
+    color: rgba(245, 236, 227, 0.7) !important;
+  }
+  .mc-app .mobile-nav .nav-button.active,
+  .mobile-nav .nav-button.active,
+  .mc-app .mobile-nav button.active,
+  .mobile-nav button.active {
+    background-color: #C57D6D !important;
+    color: #FFFFFF !important;
+  }
+}
+/* clay-cozy-home-20260725-v60 */
+
+/* ==========================================================================
+   R60 OVERRIDE OFFICIAL INLINE HOME DEVICES GRID + DARK SPECIALTY
+   Official home.ts landscape inline style:
+     display:grid; grid-auto-flow:column; grid-auto-columns:minmax(140px,1fr);
+     grid-template-columns:none; overflow-x:auto
+   That forces ~5 narrow columns and clips climate UX on desktop.
+   Force row grid 4-col, keep official control nodes intact.
+   ========================================================================== */
+
+.mc-app .bottom-stack .devices,
+.mc-app .bottom-devices .devices,
+.mc-app .devices,
+.mc-app div.devices {
+  display: grid !important;
+  grid-auto-flow: row !important;
+  grid-auto-columns: unset !important;
+  grid-template-rows: none !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  padding: 4px !important;
+}
+
+@media (min-width: 1280px) {
+  .mc-app .bottom-stack .devices,
+  .mc-app .bottom-devices .devices,
+  .mc-app .devices,
+  .mc-app div.devices {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+}
+@media (min-width: 1000px) and (max-width: 1279px) {
+  .mc-app .bottom-stack .devices,
+  .mc-app .bottom-devices .devices,
+  .mc-app .devices,
+  .mc-app div.devices {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+}
+@media (min-width: 701px) and (max-width: 999px) {
+  .mc-app .bottom-stack .devices,
+  .mc-app .bottom-devices .devices,
+  .mc-app .devices,
+  .mc-app div.devices {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Home climate cards: give control row real width */
+.mc-app .bottom-stack .devices .device,
+.mc-app .devices .device {
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 178px !important;
+  overflow: visible !important;
+}
+
+.mc-app .bottom-stack .devices .device .control-row,
+.mc-app .devices .device .control-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 6px !important;
+  overflow: visible !important;
+}
+
+/* Make [- temp +] unmistakably visible on cream */
+.mc-app .device .temp-group {
+  min-width: 96px !important;
+  background: #EFE3D5 !important;
+  box-shadow:
+    3px 4px 8px rgba(150, 110, 85, 0.16),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.45) !important;
+}
+.mc-app .device .temp-group > span {
+  color: #4A3A2C !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  min-width: 30px !important;
+}
+.mc-app .device .temp-group .media-volbtn,
+.mc-app .device .temp-group [role="button"],
+.mc-app .device .temp-group ha-icon {
+  color: #4A3A2C !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Dark specialty cards: match HA dark class variants too */
+@media (prefers-color-scheme: dark) {
+  .mc-app .time-card,
+  .mc-app .side .time-card,
+  .mc-app .side > .time-card,
+  .mc-app section.time-card {
+    background: #422D28 !important;
+    background-color: #422D28 !important;
+    background-image: linear-gradient(155deg, #4C342E 0%, #422D28 55%, #382621 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12, 9, 8, 0.7), -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-environment,
+  .mc-app section.panel-environment,
+  .mc-app .glass-card.panel-environment,
+  .mc-app .side .panel-environment,
+  .mc-app .side > .glass-card {
+    background: #2D3227 !important;
+    background-color: #2D3227 !important;
+    background-image: linear-gradient(155deg, #363B2F 0%, #2D3227 55%, #272B22 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12, 9, 8, 0.7), -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-media,
+  .mc-app section.panel-media,
+  .mc-app .glass-card.panel-media,
+  .mc-app .side .panel-media {
+    background: #3D2722 !important;
+    background-color: #3D2722 !important;
+    background-image: linear-gradient(155deg, #4A3029 0%, #3D2722 55%, #34211D 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12, 9, 8, 0.7), -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-scenes,
+  .mc-app section.panel-scenes,
+  .mc-app .glass-card.panel-scenes,
+  .mc-app .side .panel-scenes {
+    background: #2A2B22 !important;
+    background-color: #2A2B22 !important;
+    background-image: linear-gradient(155deg, #333428 0%, #2A2B22 55%, #24251E 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12, 9, 8, 0.7), -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-environment .env-row,
+  .mc-app .panel-environment .env-item,
+  .mc-app .panel-environment .env-list > * {
+    background: rgba(250, 245, 240, 0.08) !important;
+    color: #F5ECE3 !important;
+    border: 0 !important;
+  }
+  .mc-app .panel-scenes .scene,
+  .mc-app .panel-scenes button.scene {
+    background: rgba(250, 245, 240, 0.10) !important;
+    color: #F5ECE3 !important;
+  }
+}
+/* clay-cozy-home-20260725-v61 */
+
+/* ==========================================================================
+   R61 CLIMATE ROW STACK + DARK ENV/MEDIA SPECIFICITY + GRID ATTR OVERRIDE
+   ========================================================================== */
+
+/* Beat official inline landscape devices style */
+.mc-app .bottom-stack .bottom-devices .devices[style],
+.mc-app .bottom-devices .devices[style],
+.mc-app .devices[style],
+.mc-app div.devices[style] {
+  display: grid !important;
+  grid-auto-flow: row !important;
+  grid-auto-columns: minmax(0, 1fr) !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  grid-template-rows: none !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  justify-items: stretch !important;
+}
+
+@media (max-width: 1279px) {
+  .mc-app .bottom-stack .bottom-devices .devices[style],
+  .mc-app .devices[style] {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 999px) {
+  .mc-app .bottom-stack .bottom-devices .devices[style],
+  .mc-app .devices[style] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Even if still narrow: put official climate temp-group on its own first row */
+.mc-app .devices .device .control-row,
+.mc-app .bottom-stack .devices .device .control-row {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 6px !important;
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+.mc-app .devices .device .temp-group,
+.mc-app .bottom-stack .devices .device .temp-group {
+  flex: 1 1 100% !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  min-width: 102px !important;
+  justify-content: flex-start !important;
+  order: 0 !important;
+  overflow: visible !important;
+  background: #EFE3D5 !important;
+}
+
+.mc-app .devices .device .temp-group .media-volbtn,
+.mc-app .devices .device .temp-group [role="button"] {
+  width: 30px !important;
+  min-width: 30px !important;
+  height: 30px !important;
+  color: #4A3A2C !important;
+  opacity: 1 !important;
+}
+.mc-app .devices .device .temp-group > span {
+  min-width: 34px !important;
+  color: #4A3A2C !important;
+  font-weight: 800 !important;
+  font-size: 13px !important;
+  opacity: 1 !important;
+}
+.mc-app .devices .device .control-row .filter-select,
+.mc-app .devices .device select.filter-select {
+  flex: 1 1 calc(50% - 6px) !important;
+  min-width: 64px !important;
+  max-width: calc(50% - 4px) !important;
+  order: 1 !important;
+}
+
+.mc-app .devices .device,
+.mc-app .bottom-stack .devices .device {
+  overflow: visible !important;
+  min-height: 188px !important;
+  height: auto !important;
+}
+
+/* Dark env/media: beat high-specificity light locks */
+@media (prefers-color-scheme: dark) {
+  .mc-app .side > .time-card + .glass-card,
+  .mc-app .side > .glass-card.panel-environment,
+  .mc-app .side section.glass-card.panel-environment,
+  .mc-app section.glass-card.panel-environment,
+  .mc-app .glass-card.panel-environment,
+  .mc-app .panel-environment.glass-card,
+  .mc-app .panel-environment {
+    background: #2D3227 !important;
+    background-color: #2D3227 !important;
+    background-image: linear-gradient(155deg, #363B2F 0%, #2D3227 60%, #272B22 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12, 9, 8, 0.7), -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+
+  .mc-app .side > .glass-card.panel-media,
+  .mc-app .side section.glass-card.panel-media,
+  .mc-app section.glass-card.panel-media,
+  .mc-app .glass-card.panel-media,
+  .mc-app .panel-media.glass-card,
+  .mc-app .panel-media {
+    background: #3D2722 !important;
+    background-color: #3D2722 !important;
+    background-image: linear-gradient(155deg, #4A3029 0%, #3D2722 60%, #34211D 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12, 9, 8, 0.7), -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+
+  .mc-app .panel-environment .env-row,
+  .mc-app .panel-environment .env-item,
+  .mc-app .panel-environment .env-list > *,
+  .mc-app .glass-card.panel-environment .env-row,
+  .mc-app .glass-card.panel-environment .env-item {
+    background: rgba(250, 245, 240, 0.08) !important;
+    background-color: rgba(250, 245, 240, 0.08) !important;
+    color: #F5ECE3 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+}
+/* clay-cozy-home-20260725-v62 */
+
+/* ==========================================================================
+   R62 OFFICIAL HOME DEVICES ROW (visionOS structure)
+   Keep official landscape inline model:
+     grid-auto-flow: column + horizontal scroll
+   Only widen columns so climate [- temp +][hvac][fan] fits.
+   Do NOT force 4-col wrap (causes media card stacking overlap).
+   ========================================================================== */
+
+.mc-app .bottom-stack .bottom-devices .devices[style],
+.mc-app .bottom-devices .devices[style],
+.mc-app .devices[style],
+.mc-app div.devices[style],
+.mc-app .devices {
+  display: grid !important;
+  grid-auto-flow: column !important;
+  grid-auto-columns: minmax(230px, 1fr) !important;
+  grid-template-columns: none !important;
+  grid-template-rows: none !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  gap: 12px !important;
+  align-items: stretch !important;
+  padding: 4px 2px 8px !important;
+  scroll-snap-type: x proximity !important;
+}
+
+.mc-app .devices .device,
+.mc-app .bottom-stack .devices .device {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  z-index: 1 !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  width: auto !important;
+  min-width: 230px !important;
+  max-width: 320px !important;
+  min-height: 168px !important;
+  height: auto !important;
+  overflow: hidden !important; /* clip selects; controls sized to fit */
+  scroll-snap-align: start !important;
+}
+
+/* Climate controls: single compact row inside card, official nodes */
+.mc-app .devices .device .control-row,
+.mc-app .bottom-stack .devices .device .control-row {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 4px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  min-height: 32px !important;
+}
+
+.mc-app .devices .device .temp-group,
+.mc-app .bottom-stack .devices .device .temp-group {
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  flex-shrink: 0 !important;
+  width: auto !important;
+  min-width: 96px !important;
+  max-width: 110px !important;
+  order: 0 !important;
+  overflow: hidden !important;
+  background: #EFE3D5 !important;
+}
+
+.mc-app .devices .device .temp-group .media-volbtn,
+.mc-app .devices .device .temp-group [role="button"] {
+  width: 28px !important;
+  min-width: 28px !important;
+  height: 28px !important;
+  color: #4A3A2C !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.mc-app .devices .device .temp-group > span {
+  min-width: 28px !important;
+  color: #4A3A2C !important;
+  font-weight: 800 !important;
+  font-size: 12px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.mc-app .devices .device .control-row .filter-select,
+.mc-app .devices .device select.filter-select {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  max-width: 72px !important;
+  width: auto !important;
+  order: 0 !important;
+  height: 30px !important;
+}
+
+/* Portrait / tablet: allow 2-col wrap grid instead of horizontal strip */
+@media (max-width: 900px), (orientation: portrait) {
+  .mc-app .bottom-stack .bottom-devices .devices[style],
+  .mc-app .devices[style],
+  .mc-app .devices {
+    grid-auto-flow: row !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-columns: unset !important;
+    overflow-x: visible !important;
+  }
+  .mc-app .devices .device {
+    min-width: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+    min-height: 176px !important;
+    overflow: visible !important;
+  }
+  .mc-app .devices .device .control-row {
+    flex-wrap: wrap !important;
+    overflow: visible !important;
+  }
+  .mc-app .devices .device .temp-group {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+    min-width: 102px !important;
+  }
+  .mc-app .devices .device .control-row .filter-select,
+  .mc-app .devices .device select.filter-select {
+    flex: 1 1 calc(50% - 4px) !important;
+    max-width: calc(50% - 4px) !important;
+    min-width: 64px !important;
+  }
+}
+
+/* Dark env final hammer */
+@media (prefers-color-scheme: dark) {
+  .mc-app .side > .time-card + .glass-card.panel-environment,
+  .mc-app .side > .time-card + .glass-card,
+  .mc-app .side .glass-card.panel-environment,
+  .mc-app .side section.panel-environment,
+  .mc-app section.panel-environment,
+  .mc-app .panel-environment {
+    background: #2D3227 !important;
+    background-color: #2D3227 !important;
+    background-image: none !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12, 9, 8, 0.7), -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-environment .section-title,
+  .mc-app .panel-environment .section-title h2,
+  .mc-app .panel-environment .env-list,
+  .mc-app .panel-environment .env-row,
+  .mc-app .panel-environment .env-item {
+    color: #F5ECE3 !important;
+    background: rgba(250, 245, 240, 0.08) !important;
+    background-image: none !important;
+    border: 0 !important;
+  }
+  .mc-app .panel-environment .section-title,
+  .mc-app .panel-environment .section-title h2 {
+    background: transparent !important;
+  }
+}
+/* clay-cozy-home-20260725-v63 */
+
+/* ==========================================================================
+   R63 REFERENCE CLAY POLISH (PR preview pass)
+   - Warmer softer emboss (kill pure-white rim look)
+   - Env/scenes/room frames closer to clay mock
+   - Dark env beat :has() light specificity
+   - HA chrome oat continuity
+   - Keep official climate/device structure
+   ========================================================================== */
+
+:host {
+  --sp-bg: #EFE3D5 !important;
+  --sp-clay-page: #EFE3D5 !important;
+  --sp-clay-card: #F6EFE7 !important;
+  --sp-clay-rail: #C57D6D !important;
+  --sp-clay-rail-active: #CE8F80 !important;
+  --sp-clay-env: #989A7B !important;
+  --sp-clay-media: #C77E6D !important;
+  --sp-clay-scenes: #8D8E71 !important;
+  --sp-clay-energy: #F5EBE1 !important;
+  --sp-clay-energy-bar: #E3805B !important;
+  --sp-clay-ink: #4A3A2C !important;
+  --sp-clay-muted: #8C7B6C !important;
+  --sp-text-primary: #4A3A2C !important;
+  --sp-text-secondary: #8C7B6C !important;
+  --sp-border-glass: transparent !important;
+  --sp-border-subtle: transparent !important;
+  --sp-border-medium: transparent !important;
+
+  /* Soft clay emboss: warm dual light, no pure white 0.85+ glow */
+  --sp-clay-emboss:
+    8px 8px 16px rgba(185, 165, 145, 0.42),
+    2px 3px 6px rgba(150, 110, 85, 0.10),
+    -5px -6px 12px rgba(255, 248, 240, 0.48),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.32),
+    inset -1px -2px 3px rgba(150, 110, 85, 0.08) !important;
+  --sp-clay-emboss-soft:
+    6px 7px 12px rgba(168, 126, 98, 0.14),
+    -3px -4px 8px rgba(255, 248, 240, 0.38) !important;
+  --sp-clay-emboss-coral:
+    7px 9px 16px rgba(140, 80, 65, 0.20),
+    -3px -4px 9px rgba(255, 220, 205, 0.22),
+    inset 1px 1px 2px rgba(255, 240, 230, 0.22),
+    inset -1px -2px 4px rgba(120, 55, 45, 0.12) !important;
+  --sp-clay-emboss-sage:
+    7px 9px 16px rgba(98, 102, 72, 0.18),
+    -3px -4px 9px rgba(236, 236, 210, 0.18),
+    inset 1px 1px 2px rgba(255, 255, 245, 0.14),
+    inset -1px -2px 4px rgba(70, 72, 50, 0.10) !important;
+}
+
+/* Canvas continuous oat (incl. HA chrome best-effort) */
+html, body, home-assistant, home-assistant-main,
+ha-top-app-bar-fixed, app-header, app-toolbar, .header, .toolbar {
+  --app-header-background-color: #EFE3D5 !important;
+  --mdc-theme-primary: #EFE3D5 !important;
+  --primary-background-color: #EFE3D5 !important;
+  --primary-text-color: #4A3A2C !important;
+  --app-header-text-color: #4A3A2C !important;
+  background-color: #EFE3D5 !important;
+  color: #4A3A2C !important;
+}
+
+.mc-app {
+  background-color: #EFE3D5 !important;
+  background-image:
+    radial-gradient(circle at 16% 12%, rgba(74, 58, 44, 0.010) 0 1px, transparent 1.4px),
+    linear-gradient(168deg, #F0E6D8 0%, #EFE3D5 52%, #EADCCB 100%) !important;
+  color: #4A3A2C !important;
+}
+
+/* Sidebar matte terracotta plate */
+.mc-app .sidebar,
+.sidebar {
+  background-color: #C57D6D !important;
+  background-image:
+    radial-gradient(circle at 22% 12%, rgba(255, 230, 220, 0.05) 0 1px, transparent 1.5px),
+    linear-gradient(180deg, #C98474 0%, #C57D6D 48%, #B87363 100%) !important;
+  border: 0 !important;
+  border-radius: 0 28px 28px 0 !important;
+  box-shadow:
+    6px 0 18px rgba(150, 90, 75, 0.25),
+    inset 3px 4px 10px rgba(255, 214, 200, 0.14),
+    inset -3px -5px 12px rgba(110, 55, 45, 0.14) !important;
+}
+
+/* Avatar clay well */
+.mc-app .sidebar .profile-img,
+.mc-app .profile-img,
+.profile-img {
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 50% !important;
+  padding: 4px !important;
+  box-sizing: border-box !important;
+  background: #B87363 !important;
+  box-shadow:
+    inset 3px 3px 6px rgba(130, 55, 45, 0.40),
+    inset -3px -3px 6px rgba(235, 165, 150, 0.45),
+    0 6px 12px rgba(110, 55, 45, 0.12) !important;
+}
+
+/* Inactive bare / active pill */
+.mc-app .sidebar .menu .nav-button:not(.active),
+.mc-app .sidebar .menu button:not(.active) {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  color: rgba(255, 242, 234, 0.85) !important;
+}
+.mc-app .sidebar .menu .nav-button.active,
+.mc-app .sidebar .menu button.active {
+  background-color: #CE8F80 !important;
+  background-image: linear-gradient(165deg, #D4A090 0%, #CE8F80 60%, #C68778 100%) !important;
+  color: #FFFFFF !important;
+  border-radius: 999px !important;
+  box-shadow:
+    4px 5px 10px rgba(135, 62, 50, 0.35),
+    -2px -2px 6px rgba(235, 170, 155, 0.45),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Cream device / energy / welcome — soft clay, no hard rim */
+.mc-app .device,
+.mc-app .devices-page-grid .device,
+.mc-app .welcome,
+.mc-app .panel-energy,
+.mc-app .weather-card,
+.mc-app .weather-with-meta,
+.mc-app .weather-panel {
+  background-color: #F6EFE7 !important;
+  background-image:
+    radial-gradient(circle at 18% 14%, rgba(74, 58, 44, 0.012) 0 1px, transparent 1.3px),
+    linear-gradient(150deg, #F7F1E9 0%, #F6EFE7 55%, #EFE3D5 100%) !important;
+  border: none !important;
+  border-color: transparent !important;
+  outline: 0 !important;
+  border-radius: 20px !important;
+  box-shadow: var(--sp-clay-emboss) !important;
+}
+
+.mc-app .panel-energy {
+  background-color: #F5EBE1 !important;
+  background-image: linear-gradient(150deg, #F7F0E7 0%, #F5EBE1 58%, #EFE4D8 100%) !important;
+  border-radius: 22px !important;
+}
+
+.mc-app .welcome h1,
+.mc-app .welcome h2,
+.mc-app .device .device-name,
+.mc-app .panel-energy .energy-value,
+.mc-app .panel-energy .section-title h2 {
+  color: #4A3A2C !important;
+}
+.mc-app .welcome p,
+.mc-app .device .muted,
+.mc-app .device .state-word,
+.mc-app .panel-energy .muted {
+  color: #8C7B6C !important;
+}
+
+/* Specialty cards */
+.mc-app .time-card,
+.mc-app .side > .time-card {
+  background-color: #C8886F !important;
+  background-image: linear-gradient(155deg, #D09A82 0%, #C8886F 58%, #BE7C65 100%) !important;
+  border: none !important;
+  border-radius: 22px !important;
+  color: #FFF8F0 !important;
+  box-shadow: var(--sp-clay-emboss-coral) !important;
+}
+
+.mc-app .panel-environment,
+.mc-app .glass-card.panel-environment,
+.mc-app .side > .time-card + .glass-card,
+.mc-app .glass-card:has(.env-list),
+.mc-app .glass-card:has(.env-row) {
+  background-color: #989A7B !important;
+  background-image: linear-gradient(155deg, #9C9E7E 0%, #989A7B 62%, #8F9173 100%) !important;
+  border: none !important;
+  border-radius: 22px !important;
+  color: #FFF8F0 !important;
+  box-shadow: var(--sp-clay-emboss-sage) !important;
+}
+
+/* Env chips: flat sage, not paper tiles */
+.mc-app .panel-environment .env-row,
+.mc-app .panel-environment .env-item,
+.mc-app .panel-environment .env-list > *,
+.mc-app .glass-card:has(.env-list) .env-row,
+.mc-app .glass-card:has(.env-list) .env-item,
+.mc-app .glass-card:has(.env-row) .env-row,
+.mc-app .glass-card:has(.env-row) .env-item {
+  background: rgba(255, 248, 240, 0.10) !important;
+  background-color: rgba(255, 248, 240, 0.10) !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow:
+    inset 1px 1px 2px rgba(70, 72, 50, 0.08),
+    inset -1px -1px 2px rgba(255, 255, 245, 0.08) !important;
+  color: #FFF8F0 !important;
+  border-radius: 14px !important;
+}
+
+.mc-app .panel-media,
+.mc-app .glass-card.panel-media {
+  background-color: #C77E6D !important;
+  background-image: linear-gradient(155deg, #CC8877 0%, #C77E6D 60%, #BD7363 100%) !important;
+  border: none !important;
+  border-radius: 22px !important;
+  color: #FFF8F0 !important;
+  box-shadow: var(--sp-clay-emboss-coral) !important;
+}
+
+.mc-app .panel-scenes,
+.mc-app .glass-card.panel-scenes {
+  background-color: #8D8E71 !important;
+  background-image: linear-gradient(155deg, #939477 0%, #8D8E71 60%, #848567 100%) !important;
+  border: none !important;
+  border-radius: 22px !important;
+  color: #FFF8F0 !important;
+  box-shadow: var(--sp-clay-emboss-sage) !important;
+}
+
+.mc-app .panel-scenes .scene,
+.mc-app .panel-scenes button.scene {
+  background: rgba(141, 142, 113, 0.42) !important;
+  background-color: rgba(255, 248, 230, 0.18) !important;
+  color: #FFF8F0 !important;
+  border: 0 !important;
+  border-radius: 14px !important;
+  box-shadow:
+    3px 4px 8px rgba(70, 72, 50, 0.12),
+    inset 1px 1px 1px rgba(255, 255, 245, 0.14),
+    inset -1px -2px 3px rgba(70, 72, 50, 0.08) !important;
+}
+
+/* Energy bars solid clay orange */
+.mc-app .panel-energy .bars span,
+.mc-app .bars span,
+.mc-app .bars .bar,
+.mc-app .bars .bar.on {
+  background: #E3805B !important;
+  background-color: #E3805B !important;
+  background-image: linear-gradient(180deg, #E58B66 0%, #E3805B 82%) !important;
+  border: 0 !important;
+  border-radius: 999px 999px 4px 4px !important;
+  box-shadow: 1px 2px 3px rgba(150, 90, 60, 0.16) !important;
+}
+
+/* Room cards: cream clay frame + soft photo (no hard rim) */
+.mc-app .room {
+  position: relative !important;
+  border: none !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  background-color: #F6EFE7 !important;
+  box-shadow: var(--sp-clay-emboss) !important;
+}
+.mc-app .room::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  border-radius: inherit !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 248, 240, 0.18),
+    inset 0 -40px 48px rgba(74, 58, 44, 0.28) !important;
+  background: linear-gradient(180deg, rgba(246, 239, 231, 0.06) 40%, rgba(74, 58, 44, 0.22) 100%) !important;
+}
+.mc-app .room .room-name,
+.mc-app .room .room-label h3,
+.mc-app .room-label h3 {
+  color: #FFF8F0 !important;
+  text-shadow: 0 1px 2px rgba(74, 58, 44, 0.35) !important;
+}
+.mc-app .room .muted,
+.mc-app .room-label .muted,
+.mc-app .room-stats {
+  color: rgba(255, 248, 240, 0.82) !important;
+}
+
+/* Universal hard-rim kill */
+.mc-app .device,
+.mc-app .room,
+.mc-app .glass-card,
+.mc-app .time-card,
+.mc-app .panel-energy,
+.mc-app .panel-media,
+.mc-app .panel-scenes,
+.mc-app .panel-environment,
+.mc-app .welcome,
+.mc-app .weather-with-meta,
+.mc-app .sidebar,
+.mc-app .profile-img,
+.mc-app .temp-group,
+.mc-app .filter-select {
+  border-color: transparent !important;
+  outline: 0 !important;
+}
+
+/* Keep climate controls readable on cream */
+.mc-app .device .temp-group {
+  background: #EFE3D5 !important;
+  box-shadow:
+    3px 4px 8px rgba(150, 110, 85, 0.12),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.35) !important;
+}
+.mc-app .device .temp-group > span,
+.mc-app .device .temp-group .media-volbtn,
+.mc-app .device .temp-group ha-icon {
+  color: #4A3A2C !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.mc-app .device .control-row .filter-select,
+.mc-app .device select.filter-select {
+  background: #EFE3D5 !important;
+  color: #4A3A2C !important;
+  border: 0 !important;
+}
+
+/* -------- Dark mode: beat light :has() specificity -------- */
+@media (prefers-color-scheme: dark) {
+  html, body, home-assistant, home-assistant-main,
+  ha-top-app-bar-fixed, app-header, app-toolbar, .header, .toolbar {
+    --app-header-background-color: #1C1715 !important;
+    --primary-background-color: #1C1715 !important;
+    --primary-text-color: #F5ECE3 !important;
+    background-color: #1C1715 !important;
+  }
+
+  .mc-app {
+    background-color: #1C1715 !important;
+    background-image:
+      radial-gradient(circle at 16% 12%, rgba(255, 236, 224, 0.02) 0 1px, transparent 1.4px),
+      linear-gradient(168deg, #221C19 0%, #1C1715 55%, #181310 100%) !important;
+    color: #F5ECE3 !important;
+  }
+  .mc-app .welcome h1,
+  .mc-app .welcome h2,
+  .mc-app .section-title h2 {
+    color: #F5ECE3 !important;
+  }
+  .mc-app .welcome p,
+  .mc-app .muted {
+    color: rgba(245, 236, 227, 0.65) !important;
+  }
+
+  .mc-app .device,
+  .mc-app .devices-page-grid .device,
+  .mc-app .panel-energy,
+  .mc-app .welcome,
+  .mc-app .weather-card,
+  .mc-app .weather-with-meta {
+    background-color: #2B2320 !important;
+    background-image: linear-gradient(150deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .device .device-name,
+  .mc-app .panel-energy .energy-value,
+  .mc-app .panel-energy .section-title h2 {
+    color: #FAF5F0 !important;
+  }
+  .mc-app .device .muted,
+  .mc-app .device .state-word,
+  .mc-app .panel-energy .muted {
+    color: rgba(250, 245, 240, 0.55) !important;
+  }
+
+  .mc-app .time-card,
+  .mc-app .side > .time-card,
+  .mc-app section.time-card {
+    background: #422D28 !important;
+    background-color: #422D28 !important;
+    background-image: linear-gradient(155deg, #4C342E 0%, #422D28 55%, #382621 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+
+  /* ENV: include every light-lock selector at equal/higher specificity */
+  .mc-app .panel-environment,
+  .mc-app section.panel-environment,
+  .mc-app .glass-card.panel-environment,
+  .mc-app .side .panel-environment,
+  .mc-app .side section.panel-environment,
+  .mc-app .side > .time-card + .glass-card,
+  .mc-app .side > .time-card + .glass-card.panel-environment,
+  .mc-app .side > .glass-card.panel-environment,
+  .mc-app .glass-card:has(.env-list),
+  .mc-app .glass-card:has(.env-row),
+  .mc-app .side .glass-card:has(.env-list),
+  .mc-app .side .glass-card:has(.env-row) {
+    background: #2D3227 !important;
+    background-color: #2D3227 !important;
+    background-image: none !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-environment .env-row,
+  .mc-app .panel-environment .env-item,
+  .mc-app .panel-environment .env-list > *,
+  .mc-app .glass-card:has(.env-list) .env-row,
+  .mc-app .glass-card:has(.env-list) .env-item,
+  .mc-app .glass-card:has(.env-row) .env-row,
+  .mc-app .glass-card:has(.env-row) .env-item,
+  .mc-app .glass-card.panel-environment .env-row,
+  .mc-app .glass-card.panel-environment .env-item {
+    background: rgba(250, 245, 240, 0.08) !important;
+    background-color: rgba(250, 245, 240, 0.08) !important;
+    background-image: none !important;
+    color: #F5ECE3 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  .mc-app .panel-environment .section-title,
+  .mc-app .panel-environment .section-title h2,
+  .mc-app .glass-card:has(.env-list) .section-title h2 {
+    color: #F5ECE3 !important;
+    background: transparent !important;
+  }
+
+  .mc-app .panel-media,
+  .mc-app section.panel-media,
+  .mc-app .glass-card.panel-media,
+  .mc-app .side .panel-media,
+  .mc-app .side section.panel-media {
+    background: #3D2722 !important;
+    background-color: #3D2722 !important;
+    background-image: linear-gradient(155deg, #4A3029 0%, #3D2722 60%, #34211D 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+
+  .mc-app .panel-scenes,
+  .mc-app section.panel-scenes,
+  .mc-app .glass-card.panel-scenes {
+    background: #2A2B22 !important;
+    background-color: #2A2B22 !important;
+    background-image: none !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-scenes .scene,
+  .mc-app .panel-scenes button.scene {
+    background: rgba(250, 245, 240, 0.10) !important;
+    color: #F5ECE3 !important;
+  }
+
+  .mc-app .device .temp-group,
+  .mc-app .device .control-row .filter-select,
+  .mc-app .device select.filter-select {
+    background: rgba(66, 45, 40, 0.95) !important;
+    color: #FAF5F0 !important;
+    box-shadow:
+      3px 4px 8px rgba(12, 9, 8, 0.40),
+      inset 1px 1px 1px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .device .temp-group > span,
+  .mc-app .device .temp-group .media-volbtn,
+  .mc-app .device .temp-group ha-icon {
+    color: #FAF5F0 !important;
+  }
+
+  .mc-app .room::after {
+    background: linear-gradient(180deg, rgba(28, 23, 21, 0.08) 30%, rgba(12, 9, 8, 0.45) 100%) !important;
+    box-shadow: inset 0 0 0 1px rgba(75, 62, 55, 0.25) !important;
+  }
+}
+
+/* ==========================================================================
+   R64 IMAGE REF + DARK ENV + TABLET DOCK
+   clay-cozy-home-20260726-v64
+   1) Weather hero uses official stage asset background.jpg (not indoor decoration-hero paste)
+   2) Sidebar art stays decoration.png via runtime; do not repurpose hero into weather
+   3) Dark env beats light lock .mc-app .side > section.glass-card:not(...) (0,6,1)
+   4) Tablet/phone bottom dock fixed, content padding, no mid-card overlap capture
+   ========================================================================== */
+
+/* --- Weather mural: restore stage clay landscape reference --- */
+.mc-app .weather-with-meta,
+.mc-app .welcome-group .weather-with-meta,
+.mc-app .welcome-group > .weather-with-meta,
+.mc-app .welcome-group .weather-row,
+.welcome-group .weather-with-meta,
+.weather-with-meta {
+  background-color: #F3E8DC !important;
+  background-image:
+    linear-gradient(115deg, rgba(243, 232, 220, 0.92) 0%, rgba(243, 232, 220, 0.55) 34%, rgba(243, 232, 220, 0.12) 58%, rgba(243, 232, 220, 0.05) 100%),
+    url("./background.jpg") !important;
+  background-size: cover, cover !important;
+  background-position: center, 62% 48% !important;
+  background-repeat: no-repeat, no-repeat !important;
+  border: none !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.35),
+    -6px -6px 14px rgba(255, 255, 255, 0.75) !important;
+  overflow: hidden !important;
+}
+
+.mc-app .weather-with-meta::after,
+.mc-app .welcome-group .weather-with-meta::after,
+.welcome-group .weather-with-meta::after,
+.weather-with-meta::after,
+.mc-app .weather-with-meta::before,
+.welcome-group .weather-with-meta::before,
+.weather-with-meta::before {
+  background-image: none !important;
+  background: none !important;
+  content: none !important;
+  display: none !important;
+}
+
+/* Keep sidebar decor as runtime decoration.png cutout only */
+.mc-app .sidebar-art,
+.sidebar-art,
+.mc-app .sidebar-art img,
+.sidebar-art img {
+  background-image: none !important;
+  object-fit: contain !important;
+}
+
+/* Stage canvas warmth lock */
+.mc-app,
+:host {
+  --sp-clay-canvas: #EFE3D5;
+  --sp-clay-env: #989A7B;
+  --sp-base-texture: url("./background.jpg") !important;
+  --sp-stage-texture: url("./background.jpg") !important;
+  background-color: #EFE3D5 !important;
+}
+
+/* --- Dark env: equal/higher specificity than light lock at ~14619 --- */
+@media (prefers-color-scheme: dark) {
+  .mc-app,
+  :host {
+    --sp-clay-canvas: #1C1715;
+    --sp-clay-env: #2D3227;
+    --sp-text-primary: #F5ECE3;
+    --sp-text-secondary: rgba(245, 236, 227, 0.65);
+    background-color: #1C1715 !important;
+  }
+
+  .mc-app .welcome h1,
+  .mc-app .welcome h2,
+  .mc-app .welcome .subtitle,
+  .mc-app .welcome-group h1,
+  .mc-app .welcome-group h2 {
+    color: #F5ECE3 !important;
+  }
+  .mc-app .welcome .muted,
+  .mc-app .welcome-group .muted,
+  .mc-app .welcome .subtitle {
+    color: rgba(245, 236, 227, 0.65) !important;
+  }
+
+  /* Beat (0,6,1) light sage lock exactly */
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .side > section.glass-card.panel-environment:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .side > .time-card + section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .side > .time-card + section.glass-card.panel-environment,
+  .mc-app .side > .time-card + .glass-card.panel-environment,
+  .mc-app section.glass-card.panel-environment {
+    background: #2D3227 !important;
+    background-color: #2D3227 !important;
+    background-image: none !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes) .section-title,
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes) .section-title h2,
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes) .env-value,
+  .mc-app .side > section.glass-card.panel-environment .section-title h2,
+  .mc-app .side > section.glass-card.panel-environment .env-value {
+    color: #F5ECE3 !important;
+  }
+
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes) .env-row,
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes) .env-item,
+  .mc-app .side > section.glass-card.panel-environment .env-row,
+  .mc-app .side > section.glass-card.panel-environment .env-item {
+    background: rgba(250, 245, 240, 0.08) !important;
+    background-color: rgba(250, 245, 240, 0.08) !important;
+    background-image: none !important;
+    color: #F5ECE3 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .mc-app .device,
+  .mc-app .panel-energy,
+  .mc-app .time-card,
+  .mc-app .panel-media,
+  .mc-app .panel-scenes {
+    border: none !important;
+  }
+
+  .mc-app .device .device-copy h3,
+  .mc-app .device .device-copy .name,
+  .mc-app .panel-energy .energy-value,
+  .mc-app .panel-energy h2,
+  .mc-app .panel-energy .section-title h2 {
+    color: #FAF5F0 !important;
+  }
+  .mc-app .device .muted,
+  .mc-app .device .device-copy .muted,
+  .mc-app .panel-energy .muted {
+    color: rgba(250, 245, 240, 0.55) !important;
+  }
+}
+
+/* --- Tablet / phone bottom dock definitive --- */
+@media (max-width: 900px), (orientation: portrait) and (max-width: 1100px) {
+  .mc-app,
+  :host {
+    padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .mc-app .stage,
+  .mc-app .stage .stage-grid,
+  .mc-app .bottom-stack,
+  .mc-app .content {
+    padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .mc-app .mobile-nav,
+  .mobile-nav {
+    display: flex !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    position: fixed !important;
+    left: 12px !important;
+    right: 12px !important;
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+    width: auto !important;
+    max-width: calc(100vw - 24px) !important;
+    height: 64px !important;
+    min-height: 64px !important;
+    max-height: 72px !important;
+    margin: 0 !important;
+    padding: 6px 8px !important;
+    z-index: 1000 !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 4px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    border-radius: 22px !important;
+    background: linear-gradient(180deg, #F6EFE7 0%, #EFE3D5 100%) !important;
+    box-shadow:
+      6px 10px 22px rgba(150, 90, 75, 0.28),
+      -3px -3px 10px rgba(255, 248, 240, 0.55) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transform: translateZ(0) !important;
+  }
+
+  .mc-app .mobile-nav .nav-button,
+  .mc-app .mobile-nav button,
+  .mobile-nav .nav-button,
+  .mobile-nav button {
+    flex: 1 1 0 !important;
+    min-width: 44px !important;
+    min-height: 48px !important;
+    height: 48px !important;
+    border: 0 !important;
+    border-radius: 16px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: rgba(74, 58, 44, 0.78) !important;
+  }
+
+  .mc-app .mobile-nav .nav-button span,
+  .mc-app .mobile-nav button span,
+  .mobile-nav .nav-button span,
+  .mobile-nav button span {
+    display: none !important;
+  }
+
+  .mc-app .mobile-nav .nav-button.active,
+  .mc-app .mobile-nav button.active,
+  .mobile-nav .nav-button.active,
+  .mobile-nav button.active {
+    background-color: #CE8F80 !important;
+    color: #FFFFFF !important;
+    box-shadow:
+      3px 4px 8px rgba(135, 62, 50, 0.28),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.35) !important;
+  }
+
+  /* Keep rooms/devices clear of dock */
+  .mc-app .rooms,
+  .mc-app .devices,
+  .mc-app .bottom-stack .rooms,
+  .mc-app .bottom-stack .devices {
+    margin-bottom: 8px !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) and (max-width: 900px),
+       (prefers-color-scheme: dark) and (orientation: portrait) and (max-width: 1100px) {
+  .mc-app .mobile-nav,
+  .mobile-nav {
+    background: linear-gradient(180deg, #2B2320 0%, #241E1B 100%) !important;
+    box-shadow:
+      6px 10px 20px rgba(12, 9, 8, 0.55),
+      -3px -3px 10px rgba(75, 62, 55, 0.18) !important;
+  }
+  .mc-app .mobile-nav .nav-button,
+  .mc-app .mobile-nav button,
+  .mobile-nav .nav-button,
+  .mobile-nav button {
+    color: rgba(245, 236, 227, 0.72) !important;
+  }
+  .mc-app .mobile-nav .nav-button.active,
+  .mc-app .mobile-nav button.active,
+  .mobile-nav .nav-button.active,
+  .mobile-nav button.active {
+    background-color: #C57D6D !important;
+    color: #FFFFFF !important;
+  }
+}
+
+/* clay-cozy-home-20260726-v64 */
+
+
+/* ==========================================================================
+   R64b WEATHER MURAL RESTORE (beat .mc-app .stage .stage-grid .welcome-group .weather-with-meta)
+   Use official stage asset background.jpg as full clay landscape mural.
+   decoration-hero remains available as optional right accent, not sole fill.
+   clay-cozy-home-20260726-v64b
+   ========================================================================== */
+.mc-app .stage .stage-grid .welcome-group .weather-with-meta,
+.mc-app .stage .stage-grid .weather-with-meta,
+.mc-app .stage .welcome-group .weather-with-meta,
+.mc-app .welcome-group .weather-with-meta,
+.mc-app .weather-with-meta {
+  background-color: #F3E8DC !important;
+  background-image:
+    linear-gradient(110deg, rgba(243, 232, 220, 0.88) 0%, rgba(243, 232, 220, 0.42) 28%, rgba(243, 232, 220, 0.08) 52%, rgba(243, 232, 220, 0.02) 100%),
+    url("./background.jpg") !important;
+  background-size: cover, cover !important;
+  background-position: center, 58% 42% !important;
+  background-repeat: no-repeat, no-repeat !important;
+  border: none !important;
+}
+
+/* Keep a soft clay accent from decoration-hero on the right, not full cover paste */
+.mc-app .stage .stage-grid .welcome-group .weather-with-meta::after,
+.mc-app .stage .stage-grid .weather-with-meta::after,
+.mc-app .stage .welcome-group .weather-with-meta::after,
+.mc-app .welcome-group .weather-with-meta::after,
+.mc-app .weather-with-meta::after {
+  display: block !important;
+  content: "" !important;
+  position: absolute !important;
+  inset: auto 0 0 auto !important;
+  left: auto !important;
+  top: 8% !important;
+  right: 2% !important;
+  bottom: 4% !important;
+  width: min(46%, 420px) !important;
+  height: auto !important;
+  background: url("./decoration-hero.png") right bottom / contain no-repeat !important;
+  opacity: 0.92 !important;
+  filter: none !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+.mc-app .stage .stage-grid .welcome-group .weather-with-meta::before,
+.mc-app .stage .stage-grid .weather-with-meta::before,
+.mc-app .weather-with-meta::before {
+  display: block !important;
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(90deg, rgba(243, 232, 220, 0.22), transparent 42%, transparent 78%, rgba(243, 232, 220, 0.08)) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+.mc-app .stage .stage-grid .welcome-group .weather-with-meta > *,
+.mc-app .weather-with-meta > * {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* clay-cozy-home-20260726-v64b */
+
+
+/* ==========================================================================
+   R65 REFERENCE CLAY MATCH
+   clay-cozy-home-20260726-v65
+   Goal: closer to clay mock — oat canvas, soft dual emboss, no hard white rims,
+   seamless weather plate (no photo inset), warmer cream devices, flatter sage chips.
+   Keep user palette tokens. CSS/strings only.
+   ========================================================================== */
+
+.mc-app,
+:host {
+  --sp-clay-canvas: #EFE3D5;
+  --sp-clay-canvas-deep: #E8DCCE;
+  --sp-clay-device: #F6EFE7;
+  --sp-clay-device-warm: #F3EBE2;
+  --sp-clay-env: #989A7B;
+  --sp-clay-media: #C77E6D;
+  --sp-clay-scenes: #8D8E71;
+  --sp-clay-energy: #F5EBE1;
+  --sp-clay-energy-bar: #E3805B;
+  --sp-clay-sidebar: #C57D6D;
+  --sp-clay-active: #CE8F80;
+  --sp-clay-clock: #D7A898;
+  --sp-clay-text: #4A3A2C;
+  --sp-clay-muted: #8C7B6C;
+  --sp-clay-emboss:
+    8px 8px 18px rgba(185, 165, 145, 0.42),
+    -7px -7px 16px rgba(255, 255, 255, 0.88);
+  --sp-clay-emboss-soft:
+    6px 8px 16px rgba(170, 145, 125, 0.28),
+    -5px -5px 12px rgba(255, 255, 255, 0.78),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.45);
+  --sp-clay-emboss-sage:
+    6px 8px 14px rgba(90, 95, 70, 0.22),
+    -4px -4px 10px rgba(230, 235, 210, 0.28);
+  --sp-clay-emboss-coral:
+    6px 8px 16px rgba(140, 80, 65, 0.22),
+    -4px -4px 12px rgba(255, 220, 205, 0.28);
+  --sp-text-primary: #4A3A2C !important;
+  --sp-text-secondary: #8C7B6C !important;
+  --sp-base-texture: none !important;
+  --sp-stage-texture: none !important;
+  background:
+    radial-gradient(1200px 700px at 18% -10%, rgba(255, 248, 240, 0.55), transparent 60%),
+    linear-gradient(180deg, #F3E9DE 0%, #EFE3D5 42%, #E9DDD0 100%) !important;
+  background-color: #EFE3D5 !important;
+  color: #4A3A2C !important;
+  border: none !important;
+}
+
+/* Kill HA white chrome flash */
+html, body, home-assistant, home-assistant-main,
+ha-drawer, drawer-content, ha-top-app-bar-fixed,
+app-header, app-toolbar, .header, .toolbar,
+:host, .mc-app {
+  --app-header-background-color: #EFE3D5 !important;
+  --mdc-theme-primary: #EFE3D5 !important;
+  --primary-background-color: #EFE3D5 !important;
+  --secondary-background-color: #EFE3D5 !important;
+  --card-background-color: #F6EFE7 !important;
+  --primary-text-color: #4A3A2C !important;
+  --secondary-text-color: #8C7B6C !important;
+  background-color: #EFE3D5 !important;
+}
+
+.mc-app .stage,
+.mc-app .stage-grid,
+.mc-app main.stage {
+  background: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Sidebar — user terracotta, soft right clay edge */
+.mc-app .sidebar,
+.mc-app > .sidebar,
+.sidebar {
+  background:
+    linear-gradient(180deg, #CC8777 0%, #C57D6D 48%, #BC7465 100%) !important;
+  background-color: #C57D6D !important;
+  border: none !important;
+  border-radius: 0 28px 28px 0 !important;
+  box-shadow: 6px 0 18px rgba(150, 90, 75, 0.25) !important;
+}
+
+.mc-app .sidebar .nav-button,
+.mc-app .sidebar button.nav-button,
+.sidebar .nav-button {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: rgba(255, 242, 234, 0.85) !important;
+}
+.mc-app .sidebar .nav-button ha-icon,
+.sidebar .nav-button ha-icon {
+  color: rgba(255, 242, 234, 0.85) !important;
+}
+.mc-app .sidebar .nav-button.active,
+.mc-app .sidebar button.nav-button.active,
+.sidebar .nav-button.active {
+  background: #CE8F80 !important;
+  color: #FFFFFF !important;
+  border-radius: 20px !important;
+  border: none !important;
+  box-shadow:
+    4px 5px 10px rgba(135, 62, 50, 0.35),
+    -2px -2px 6px rgba(235, 170, 155, 0.45),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.45) !important;
+}
+.mc-app .sidebar .nav-button.active ha-icon,
+.sidebar .nav-button.active ha-icon {
+  color: #FFFFFF !important;
+}
+
+.mc-app .sidebar .avatar,
+.mc-app .sidebar .profile-avatar,
+.sidebar .avatar,
+.sidebar img.avatar {
+  border: none !important;
+  background: #B87363 !important;
+  box-shadow:
+    inset 3px 3px 6px rgba(130, 55, 45, 0.35),
+    inset -3px -3px 6px rgba(235, 165, 150, 0.45) !important;
+}
+
+/* Welcome / title */
+.mc-app .welcome h1,
+.mc-app .welcome h2,
+.mc-app .welcome-group h1,
+.mc-app .welcome-group h2 {
+  color: #4A3A2C !important;
+  text-shadow: none !important;
+}
+.mc-app .welcome .muted,
+.mc-app .welcome .subtitle,
+.mc-app .welcome-group .muted {
+  color: #8C7B6C !important;
+}
+
+.mc-app .search,
+.mc-app input[type="search"],
+.mc-app .welcome-search,
+.mc-app .search-box {
+  background: rgba(246, 239, 231, 0.92) !important;
+  border: none !important;
+  border-radius: 999px !important;
+  color: #8C7B6C !important;
+  box-shadow:
+    inset 2px 2px 5px rgba(170, 145, 125, 0.18),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.75) !important;
+}
+
+/* -------- Weather: seamless cream clay plate (no hard photo inset) -------- */
+.mc-app .stage .stage-grid .welcome-group .weather-with-meta,
+.mc-app .stage .stage-grid .weather-with-meta,
+.mc-app .stage .welcome-group .weather-with-meta,
+.mc-app .welcome-group .weather-with-meta,
+.mc-app .weather-with-meta {
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 210px !important;
+  border-radius: 28px !important;
+  border: none !important;
+  background-color: #F4EADF !important;
+  background-image:
+    linear-gradient(125deg, rgba(246, 239, 231, 0.94) 0%, rgba(246, 239, 231, 0.72) 26%, rgba(246, 239, 231, 0.28) 52%, rgba(246, 239, 231, 0.12) 100%),
+    url("./background.jpg") !important;
+  background-size: cover, cover !important;
+  background-position: center, 55% 40% !important;
+  background-repeat: no-repeat, no-repeat !important;
+  box-shadow: var(--sp-clay-emboss-soft) !important;
+}
+
+/* Remove rectangular decoration-hero paste; keep only soft depth veil */
+.mc-app .stage .stage-grid .welcome-group .weather-with-meta::after,
+.mc-app .stage .stage-grid .weather-with-meta::after,
+.mc-app .stage .welcome-group .weather-with-meta::after,
+.mc-app .welcome-group .weather-with-meta::after,
+.mc-app .weather-with-meta::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+}
+
+.mc-app .stage .stage-grid .welcome-group .weather-with-meta::before,
+.mc-app .stage .stage-grid .weather-with-meta::before,
+.mc-app .weather-with-meta::before {
+  display: block !important;
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: inherit !important;
+  background:
+    radial-gradient(420px 220px at 78% 70%, rgba(255, 248, 240, 0.28), transparent 70%),
+    linear-gradient(90deg, rgba(244, 234, 223, 0.35) 0%, transparent 38%, transparent 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+.mc-app .weather-with-meta > *,
+.mc-app .weather-block,
+.mc-app .weather-current,
+.mc-app .weather-forecast {
+  position: relative !important;
+  z-index: 2 !important;
+  color: #4A3A2C !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.mc-app .weather-current-temp,
+.mc-app .weather-current-cond,
+.mc-app .forecast-day,
+.mc-app .forecast-high,
+.mc-app .forecast-low,
+.mc-app .forecast-weekday {
+  color: #4A3A2C !important;
+}
+.mc-app .weather-current-cond,
+.mc-app .forecast-low,
+.mc-app .forecast-weekday {
+  color: #8C7B6C !important;
+}
+
+/* -------- Device cream clay cards -------- */
+.mc-app .device,
+.mc-app .devices .device,
+.mc-app .bottom-stack .devices .device,
+.mc-app .devices-page-grid .device,
+.mc-app button.device {
+  background:
+    linear-gradient(155deg, #F8F2EB 0%, #F6EFE7 55%, #F1E8DE 100%) !important;
+  background-color: #F6EFE7 !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 22px !important;
+  color: #4A3A2C !important;
+  box-shadow: var(--sp-clay-emboss-soft) !important;
+  overflow: hidden !important;
+}
+.mc-app .device .device-copy h3,
+.mc-app .device .device-copy .name,
+.mc-app .device .name {
+  color: #4A3A2C !important;
+}
+.mc-app .device .muted,
+.mc-app .device .device-copy .muted,
+.mc-app .device .state-word {
+  color: #8C7B6C !important;
+}
+.mc-app .device .item-img,
+.mc-app .device .device-top img {
+  filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* control chips stay inside card, soft clay */
+.mc-app .device .temp-group,
+.mc-app .temp-group {
+  background: rgba(239, 227, 213, 0.95) !important;
+  border: none !important;
+  border-radius: 999px !important;
+  box-shadow:
+    3px 4px 8px rgba(150, 110, 85, 0.12),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.4) !important;
+}
+.mc-app .device .control-row .filter-select,
+.mc-app .device select.filter-select {
+  background: rgba(239, 227, 213, 0.95) !important;
+  border: none !important;
+  border-radius: 999px !important;
+  color: #4A3A2C !important;
+  box-shadow:
+    2px 3px 6px rgba(150, 110, 85, 0.10),
+    inset 1px 1px 1px rgba(255, 248, 240, 0.35) !important;
+}
+
+/* -------- Side cards -------- */
+.mc-app .time-card,
+.mc-app .side > .time-card,
+.mc-app section.time-card {
+  background:
+    linear-gradient(155deg, #E0B3A4 0%, #D7A898 55%, #C99584 100%) !important;
+  background-color: #D7A898 !important;
+  border: none !important;
+  border-radius: 22px !important;
+  color: #FFF8F0 !important;
+  box-shadow: var(--sp-clay-emboss-coral) !important;
+}
+.mc-app .time-card .time,
+.mc-app .time-card h2,
+.mc-app .time-card .time-main {
+  color: #FFF8F0 !important;
+}
+.mc-app .time-card .muted,
+.mc-app .time-card p {
+  color: rgba(255, 248, 240, 0.82) !important;
+}
+
+.mc-app .panel-environment,
+.mc-app .glass-card.panel-environment,
+.mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+.mc-app .side > .time-card + .glass-card,
+.mc-app .side > .time-card + .glass-card.panel-environment {
+  background:
+    linear-gradient(155deg, #9EA07F 0%, #989A7B 58%, #8F9173 100%) !important;
+  background-color: #989A7B !important;
+  border: none !important;
+  border-radius: 22px !important;
+  color: #FFF8F0 !important;
+  box-shadow: var(--sp-clay-emboss-sage) !important;
+}
+.mc-app .panel-environment .section-title h2,
+.mc-app .panel-environment .env-value,
+.mc-app .side > .time-card + .glass-card .section-title h2 {
+  color: #FFF8F0 !important;
+}
+.mc-app .panel-environment .env-row,
+.mc-app .panel-environment .env-item,
+.mc-app .panel-environment .env-list > * {
+  background: rgba(255, 248, 240, 0.14) !important;
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: none !important;
+  color: #FFF8F0 !important;
+}
+
+.mc-app .panel-energy,
+.mc-app .glass-card.panel-energy {
+  background:
+    linear-gradient(155deg, #F8F1E8 0%, #F5EBE1 58%, #EFE3D5 100%) !important;
+  background-color: #F5EBE1 !important;
+  border: none !important;
+  border-radius: 22px !important;
+  color: #4A3A2C !important;
+  box-shadow: var(--sp-clay-emboss-soft) !important;
+}
+.mc-app .panel-energy .energy-bar,
+.mc-app .panel-energy .bar.active,
+.mc-app .panel-energy span.energy-bar.on,
+.mc-app .energy-bars span {
+  background: #E3805B !important;
+}
+
+.mc-app .panel-media,
+.mc-app .glass-card.panel-media,
+.mc-app .side .panel-media {
+  background:
+    linear-gradient(155deg, #D28C7C 0%, #C77E6D 58%, #BA7262 100%) !important;
+  background-color: #C77E6D !important;
+  border: none !important;
+  border-radius: 22px !important;
+  color: #FFF8F0 !important;
+  box-shadow: var(--sp-clay-emboss-coral) !important;
+}
+
+.mc-app .panel-scenes,
+.mc-app .glass-card.panel-scenes {
+  background:
+    linear-gradient(155deg, #97987A 0%, #8D8E71 58%, #828365 100%) !important;
+  background-color: #8D8E71 !important;
+  border: none !important;
+  border-radius: 22px !important;
+  color: #FFF8F0 !important;
+  box-shadow: var(--sp-clay-emboss-sage) !important;
+}
+.mc-app .panel-scenes .scene,
+.mc-app .panel-scenes button.scene {
+  background: rgba(255, 248, 240, 0.16) !important;
+  border: none !important;
+  border-radius: 16px !important;
+  color: #FFF8F0 !important;
+  box-shadow: none !important;
+}
+
+/* Rooms: cream clay frame over photos */
+.mc-app .room,
+.mc-app .rooms .room {
+  border: none !important;
+  border-radius: 22px !important;
+  overflow: hidden !important;
+  box-shadow: var(--sp-clay-emboss-soft) !important;
+  background: #F3EBE2 !important;
+}
+.mc-app .room::after {
+  background: linear-gradient(180deg, rgba(74, 58, 44, 0.02) 35%, rgba(74, 58, 44, 0.42) 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18) !important;
+}
+.mc-app .room .room-label h3 {
+  color: #FFFFFF !important;
+}
+.mc-app .room .room-label .muted {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+/* Global: no hard white 1px rims on clay surfaces */
+.mc-app .device,
+.mc-app .room,
+.mc-app .scene,
+.mc-app .glass-card,
+.mc-app .time-card,
+.mc-app .panel-environment,
+.mc-app .panel-energy,
+.mc-app .panel-media,
+.mc-app .panel-scenes,
+.mc-app .weather-with-meta,
+.mc-app .sidebar .nav-button {
+  border-color: transparent !important;
+  outline: none !important;
+}
+
+/* -------- Dark mode keep previous wins + weather plate -------- */
+@media (prefers-color-scheme: dark) {
+  .mc-app,
+  :host {
+    --sp-clay-canvas: #1C1715;
+    --sp-clay-device: #2B2320;
+    --sp-clay-env: #2D3227;
+    --sp-clay-media: #3D2722;
+    --sp-clay-clock: #422D28;
+    --sp-text-primary: #F5ECE3 !important;
+    --sp-text-secondary: rgba(245, 236, 227, 0.65) !important;
+    background:
+      radial-gradient(900px 600px at 20% -10%, rgba(75, 62, 55, 0.28), transparent 55%),
+      linear-gradient(180deg, #221C19 0%, #1C1715 50%, #181412 100%) !important;
+    background-color: #1C1715 !important;
+    color: #F5ECE3 !important;
+  }
+
+  html, body, home-assistant, home-assistant-main,
+  ha-top-app-bar-fixed, app-header, app-toolbar {
+    --app-header-background-color: #1C1715 !important;
+    --primary-background-color: #1C1715 !important;
+    --primary-text-color: #F5ECE3 !important;
+    background-color: #1C1715 !important;
+  }
+
+  .mc-app .welcome h1,
+  .mc-app .welcome h2,
+  .mc-app .welcome-group h1 {
+    color: #F5ECE3 !important;
+  }
+  .mc-app .welcome .muted,
+  .mc-app .welcome .subtitle {
+    color: rgba(245, 236, 227, 0.65) !important;
+  }
+
+  .mc-app .stage .stage-grid .welcome-group .weather-with-meta,
+  .mc-app .weather-with-meta {
+    background-color: #2B2320 !important;
+    background-image:
+      linear-gradient(125deg, rgba(43, 35, 32, 0.88) 0%, rgba(43, 35, 32, 0.55) 40%, rgba(43, 35, 32, 0.28) 100%),
+      url("./background.jpg") !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .weather-with-meta::after { display: none !important; content: none !important; }
+  .mc-app .weather-current-temp,
+  .mc-app .weather-current-cond,
+  .mc-app .forecast-day,
+  .mc-app .forecast-high {
+    color: #F5ECE3 !important;
+  }
+  .mc-app .weather-current-cond,
+  .mc-app .forecast-low,
+  .mc-app .forecast-weekday {
+    color: rgba(245, 236, 227, 0.65) !important;
+  }
+
+  .mc-app .device,
+  .mc-app .devices .device,
+  .mc-app button.device {
+    background: #2B2320 !important;
+    background-image: linear-gradient(155deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .device .device-copy h3,
+  .mc-app .device .name { color: #FAF5F0 !important; }
+  .mc-app .device .muted { color: rgba(250, 245, 240, 0.55) !important; }
+
+  .mc-app .time-card {
+    background: #422D28 !important;
+    background-image: linear-gradient(155deg, #4C342E 0%, #422D28 55%, #382621 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .side > section.glass-card.panel-environment:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .side > .time-card + section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .side > .time-card + section.glass-card.panel-environment,
+  .mc-app .panel-environment,
+  .mc-app .glass-card.panel-environment {
+    background: #2D3227 !important;
+    background-color: #2D3227 !important;
+    background-image: none !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+
+  .mc-app .panel-media {
+    background: #3D2722 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-scenes {
+    background: #2A2B22 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-energy {
+    background: #2B2320 !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-energy .section-title h2,
+  .mc-app .panel-energy .energy-value { color: #FAF5F0 !important; }
+  .mc-app .panel-energy .muted { color: rgba(250, 245, 240, 0.55) !important; }
+}
+
+/* clay-cozy-home-20260726-v65 */
+
+
+/* ==========================================================================
+   R65b DARK MODE SPEC FIX
+   Beat R65 light locks for device/time/scenes/media/energy under dark scheme.
+   clay-cozy-home-20260726-v65b
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  .mc-app .device,
+  .mc-app .devices .device,
+  .mc-app .bottom-stack .devices .device,
+  .mc-app .devices-page-grid .device,
+  .mc-app button.device {
+    background: #2B2320 !important;
+    background-color: #2B2320 !important;
+    background-image: linear-gradient(155deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .device .device-copy h3,
+  .mc-app .device .device-copy .name,
+  .mc-app .device .name {
+    color: #FAF5F0 !important;
+  }
+  .mc-app .device .muted,
+  .mc-app .device .device-copy .muted,
+  .mc-app .device .state-word {
+    color: rgba(250, 245, 240, 0.55) !important;
+  }
+  .mc-app .device .temp-group,
+  .mc-app .temp-group,
+  .mc-app .device .control-row .filter-select,
+  .mc-app .device select.filter-select {
+    background: rgba(66, 45, 40, 0.95) !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow:
+      3px 4px 8px rgba(12, 9, 8, 0.40),
+      inset 1px 1px 1px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .device .temp-group > span,
+  .mc-app .device .temp-group .media-volbtn,
+  .mc-app .device .temp-group ha-icon {
+    color: #FAF5F0 !important;
+  }
+
+  .mc-app .time-card,
+  .mc-app .side > .time-card,
+  .mc-app section.time-card {
+    background: #422D28 !important;
+    background-color: #422D28 !important;
+    background-image: linear-gradient(155deg, #4C342E 0%, #422D28 55%, #382621 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .time-card .time,
+  .mc-app .time-card h2,
+  .mc-app .time-card .time-main,
+  .mc-app .time-card .muted,
+  .mc-app .time-card p {
+    color: #F5ECE3 !important;
+  }
+  .mc-app .time-card .muted,
+  .mc-app .time-card p {
+    color: rgba(245, 236, 227, 0.75) !important;
+  }
+
+  .mc-app .panel-scenes,
+  .mc-app .glass-card.panel-scenes,
+  .mc-app section.panel-scenes {
+    background: #2A2B22 !important;
+    background-color: #2A2B22 !important;
+    background-image: none !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .panel-scenes .scene,
+  .mc-app .panel-scenes button.scene {
+    background: rgba(250, 245, 240, 0.10) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+  }
+
+  .mc-app .panel-media,
+  .mc-app .glass-card.panel-media,
+  .mc-app .side .panel-media,
+  .mc-app .side section.panel-media {
+    background: #3D2722 !important;
+    background-color: #3D2722 !important;
+    background-image: linear-gradient(155deg, #4A3029 0%, #3D2722 60%, #34211D 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+
+  .mc-app .panel-energy,
+  .mc-app .glass-card.panel-energy {
+    background: #2B2320 !important;
+    background-color: #2B2320 !important;
+    background-image: linear-gradient(155deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+
+  .mc-app .stage .stage-grid .welcome-group .weather-with-meta,
+  .mc-app .stage .stage-grid .weather-with-meta,
+  .mc-app .welcome-group .weather-with-meta,
+  .mc-app .weather-with-meta {
+    background-color: #2B2320 !important;
+    background-image:
+      linear-gradient(125deg, rgba(28, 23, 21, 0.82) 0%, rgba(28, 23, 21, 0.55) 40%, rgba(28, 23, 21, 0.35) 100%),
+      url("./background.jpg") !important;
+    box-shadow:
+      6px 6px 14px rgba(12, 9, 8, 0.70),
+      -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .weather-current-temp,
+  .mc-app .weather-current-cond,
+  .mc-app .forecast-day,
+  .mc-app .forecast-high,
+  .mc-app .forecast-weekday,
+  .mc-app .forecast-low {
+    color: #F5ECE3 !important;
+  }
+  .mc-app .weather-current-cond,
+  .mc-app .forecast-low,
+  .mc-app .forecast-weekday {
+    color: rgba(245, 236, 227, 0.65) !important;
+  }
+
+  .mc-app .welcome h1,
+  .mc-app .welcome h2 {
+    color: #F5ECE3 !important;
+  }
+}
+
+/* clay-cozy-home-20260726-v65b */
+
+
+/* ==========================================================================
+   R66 REFERENCE DELTA CLOSE
+   clay-cozy-home-20260726-v66
+   Close ranked gaps vs clay mock:
+   - canvas/title too paper-white → oat #EFE3D5 / #ECDCCF family
+   - device/energy too chalk-white → warmer bisque cream
+   - env washed → true #989A7B matte
+   - weather photo-dominant → cream clay plate with soft landscape veil
+   - welcome/search glass bars → bare canvas title + inset clay pill
+   Keep user tokens; no hard borders; dark locks preserved.
+   ========================================================================== */
+
+.mc-app,
+:host {
+  --sp-clay-canvas: #EFE3D5;
+  --sp-clay-canvas-deep: #E8D9C8;
+  --sp-clay-device: #F0E7DC;
+  --sp-clay-device-mid: #EBE1D4;
+  --sp-clay-energy: #EFE4D8;
+  --sp-clay-weather: #F0E6DA;
+  --sp-clay-env: #989A7B;
+  --sp-clay-text: #4A3A2C;
+  --sp-clay-muted: #8C7B6C;
+  --sp-clay-emboss:
+    7px 9px 18px rgba(170, 145, 122, 0.34),
+    -6px -7px 14px rgba(255, 250, 244, 0.72),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.35);
+  --sp-clay-emboss-inset:
+    inset 3px 3px 7px rgba(165, 140, 115, 0.18),
+    inset -3px -3px 7px rgba(255, 252, 248, 0.7);
+  background:
+    radial-gradient(1000px 640px at 12% 0%, rgba(255, 246, 236, 0.35), transparent 55%),
+    linear-gradient(180deg, #F0E5D8 0%, #EFE3D5 40%, #E9DCCB 100%) !important;
+  background-color: #EFE3D5 !important;
+  color: #4A3A2C !important;
+}
+
+/* Force oat chrome — kill residual pure white app bars */
+html, body, home-assistant, home-assistant-main,
+ha-drawer, ha-sidebar, drawer-content,
+ha-top-app-bar-fixed, app-header, app-toolbar,
+.header, .toolbar, #view, .content {
+  --app-header-background-color: #EFE3D5 !important;
+  --mdc-theme-primary: #EFE3D5 !important;
+  --primary-background-color: #EFE3D5 !important;
+  --secondary-background-color: #EFE3D5 !important;
+  --card-background-color: #F0E7DC !important;
+  --ha-card-background: #F0E7DC !important;
+  --primary-text-color: #4A3A2C !important;
+  background-color: #EFE3D5 !important;
+  background: #EFE3D5 !important;
+}
+
+.mc-app .stage,
+.mc-app .stage-grid,
+.mc-app main.stage {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Welcome: bare on canvas like reference (no frosted white slab) */
+.mc-app .welcome,
+.mc-app .welcome-group .welcome,
+.mc-app .welcome-header,
+.mc-app .welcome-bar,
+.mc-app .top-welcome,
+.mc-app .welcome-group > .welcome {
+  background: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding-left: 2px !important;
+}
+.mc-app .welcome h1,
+.mc-app .welcome h2,
+.mc-app .welcome-group h1,
+.mc-app .welcome-group h2 {
+  color: #4A3A2C !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  text-shadow: 0 1px 0 rgba(255, 248, 240, 0.35) !important;
+  background: transparent !important;
+}
+.mc-app .welcome .muted,
+.mc-app .welcome .subtitle,
+.mc-app .welcome-group .muted,
+.mc-app .welcome-group .subtitle {
+  color: #8C7B6C !important;
+  background: transparent !important;
+}
+
+/* Search: soft inset clay pill, not glass white */
+.mc-app .search,
+.mc-app .search-box,
+.mc-app .welcome-search,
+.mc-app input[type="search"],
+.mc-app .welcome input,
+.mc-app .top-search,
+.mc-app .search-field {
+  background: #E8DCCE !important;
+  border: none !important;
+  border-radius: 999px !important;
+  color: #8C7B6C !important;
+  box-shadow: var(--sp-clay-emboss-inset) !important;
+  backdrop-filter: none !important;
+}
+
+/* Weather: cream clay plate dominant (reference style), landscape only soft veil */
+.mc-app .stage .stage-grid .welcome-group .weather-with-meta,
+.mc-app .stage .stage-grid .weather-with-meta,
+.mc-app .stage .welcome-group .weather-with-meta,
+.mc-app .welcome-group .weather-with-meta,
+.mc-app .weather-with-meta {
+  background-color: #F0E6DA !important;
+  background-image:
+    linear-gradient(145deg,
+      rgba(240, 230, 218, 0.97) 0%,
+      rgba(240, 230, 218, 0.90) 34%,
+      rgba(240, 230, 218, 0.62) 58%,
+      rgba(240, 230, 218, 0.38) 100%),
+    url("./background.jpg") !important;
+  background-size: cover, 118% auto !important;
+  background-position: center, 70% 42% !important;
+  border: none !important;
+  border-radius: 28px !important;
+  box-shadow:
+    8px 10px 22px rgba(165, 140, 115, 0.28),
+    -6px -8px 16px rgba(255, 252, 248, 0.78),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(180, 150, 125, 0.08) !important;
+}
+.mc-app .weather-with-meta::after {
+  display: none !important;
+  content: none !important;
+}
+.mc-app .weather-with-meta::before {
+  display: block !important;
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: inherit !important;
+  background:
+    radial-gradient(520px 260px at 82% 78%, rgba(200, 170, 130, 0.10), transparent 70%),
+    linear-gradient(90deg, rgba(240, 230, 218, 0.25) 0%, transparent 45%) !important;
+  box-shadow: none !important;
+  border: none !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+.mc-app .weather-current-temp,
+.mc-app .weather-block,
+.mc-app .forecast-high {
+  color: #4A3A2C !important;
+}
+.mc-app .weather-current-cond,
+.mc-app .forecast-low,
+.mc-app .forecast-weekday {
+  color: #8C7B6C !important;
+}
+
+/* Devices: warmer bisque (close ref #E8DBCB), not chalk white */
+.mc-app .device,
+.mc-app .devices .device,
+.mc-app .bottom-stack .devices .device,
+.mc-app .devices-page-grid .device,
+.mc-app button.device {
+  background:
+    linear-gradient(160deg, #F4EBE2 0%, #F0E7DC 48%, #E9DFD2 100%) !important;
+  background-color: #F0E7DC !important;
+  border: none !important;
+  border-radius: 22px !important;
+  color: #4A3A2C !important;
+  box-shadow: var(--sp-clay-emboss) !important;
+}
+.mc-app .device .device-copy h3,
+.mc-app .device .name { color: #4A3A2C !important; }
+.mc-app .device .muted,
+.mc-app .device .state-word { color: #8C7B6C !important; }
+
+/* Status tags: soft clay chips */
+.mc-app .device .tag-stack .status,
+.mc-app .device .status,
+.mc-app .device .badge {
+  border: none !important;
+  box-shadow:
+    2px 3px 6px rgba(150, 110, 85, 0.12),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Energy: warmer ivory closer to ref #E4CFBA family */
+.mc-app .panel-energy,
+.mc-app .glass-card.panel-energy {
+  background:
+    linear-gradient(155deg, #F3E8DC 0%, #EFE4D8 55%, #E8DCCE 100%) !important;
+  background-color: #EFE4D8 !important;
+  border: none !important;
+  border-radius: 22px !important;
+  color: #4A3A2C !important;
+  box-shadow: var(--sp-clay-emboss) !important;
+}
+.mc-app .panel-energy .energy-bar,
+.mc-app .panel-energy .bar,
+.mc-app .energy-bars > span,
+.mc-app .panel-energy span.energy-bar {
+  background: #E3805B !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 220, 200, 0.35) !important;
+}
+
+/* Environment: true matte sage, flatter chips */
+.mc-app .panel-environment,
+.mc-app .glass-card.panel-environment,
+.mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+.mc-app .side > .time-card + .glass-card,
+.mc-app .side > .time-card + .glass-card.panel-environment {
+  background: #989A7B !important;
+  background-color: #989A7B !important;
+  background-image: linear-gradient(155deg, #9B9D7E 0%, #989A7B 60%, #909274 100%) !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    6px 8px 16px rgba(90, 95, 70, 0.22),
+    -4px -5px 12px rgba(220, 225, 200, 0.22) !important;
+}
+.mc-app .panel-environment .env-row,
+.mc-app .panel-environment .env-item,
+.mc-app .panel-environment .env-list > * {
+  background: rgba(255, 248, 240, 0.12) !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 14px !important;
+}
+
+/* Clock: soft dusty rose like ref #CAA094 */
+.mc-app .time-card,
+.mc-app .side > .time-card,
+.mc-app section.time-card {
+  background:
+    linear-gradient(155deg, #D4B0A4 0%, #CAA094 55%, #C09488 100%) !important;
+  background-color: #CAA094 !important;
+  border: none !important;
+  border-radius: 22px !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    6px 8px 16px rgba(140, 95, 80, 0.22),
+    -4px -5px 12px rgba(255, 230, 220, 0.28) !important;
+}
+
+/* Media / scenes keep tokens, softer emboss */
+.mc-app .panel-media,
+.mc-app .glass-card.panel-media {
+  background:
+    linear-gradient(155deg, #CE8878 0%, #C77E6D 58%, #BB7262 100%) !important;
+  background-color: #C77E6D !important;
+  border: none !important;
+  box-shadow:
+    6px 8px 16px rgba(140, 80, 65, 0.24),
+    -4px -5px 12px rgba(255, 220, 205, 0.22) !important;
+}
+.mc-app .panel-scenes,
+.mc-app .glass-card.panel-scenes {
+  background:
+    linear-gradient(155deg, #949578 0%, #8D8E71 58%, #858668 100%) !important;
+  background-color: #8D8E71 !important;
+  border: none !important;
+  box-shadow:
+    6px 8px 16px rgba(90, 95, 70, 0.22),
+    -4px -5px 12px rgba(220, 225, 200, 0.2) !important;
+}
+
+/* Rooms: warmer clay frame edge */
+.mc-app .room,
+.mc-app .rooms .room {
+  border: none !important;
+  border-radius: 22px !important;
+  background: #E8D9C8 !important;
+  box-shadow: var(--sp-clay-emboss) !important;
+}
+.mc-app .room::after {
+  background: linear-gradient(180deg, rgba(74,58,44,0.02) 40%, rgba(74,58,44,0.46) 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14) !important;
+}
+
+/* Sidebar active: keep user #CE8F80 but softer clay capsule */
+.mc-app .sidebar .nav-button.active,
+.sidebar .nav-button.active {
+  background: #CE8F80 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: 20px !important;
+  box-shadow:
+    4px 5px 10px rgba(135, 62, 50, 0.32),
+    -2px -2px 6px rgba(235, 170, 155, 0.42),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.42) !important;
+}
+
+/* Universal: no hard rims */
+.mc-app .device,
+.mc-app .room,
+.mc-app .scene,
+.mc-app .glass-card,
+.mc-app .time-card,
+.mc-app .weather-with-meta,
+.mc-app .panel-environment,
+.mc-app .panel-energy,
+.mc-app .panel-media,
+.mc-app .panel-scenes {
+  border: none !important;
+  outline: none !important;
+}
+
+/* Dark: restate key cards so R66 light warmth cannot leak */
+@media (prefers-color-scheme: dark) {
+  .mc-app, :host {
+    background:
+      radial-gradient(900px 560px at 15% 0%, rgba(75,62,55,0.25), transparent 55%),
+      linear-gradient(180deg, #221C19 0%, #1C1715 100%) !important;
+    background-color: #1C1715 !important;
+  }
+  html, body, home-assistant, home-assistant-main,
+  ha-top-app-bar-fixed, app-header, app-toolbar {
+    --app-header-background-color: #1C1715 !important;
+    --primary-background-color: #1C1715 !important;
+    background: #1C1715 !important;
+    background-color: #1C1715 !important;
+  }
+  .mc-app .device,
+  .mc-app .devices .device,
+  .mc-app .bottom-stack .devices .device,
+  .mc-app .devices-page-grid .device,
+  .mc-app button.device {
+    background: #2B2320 !important;
+    background-image: linear-gradient(155deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .time-card,
+  .mc-app .side > .time-card,
+  .mc-app section.time-card {
+    background: #422D28 !important;
+    background-image: linear-gradient(155deg, #4C342E 0%, #422D28 55%, #382621 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-environment,
+  .mc-app .glass-card.panel-environment,
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .side > .time-card + .glass-card,
+  .mc-app .side > .time-card + .glass-card.panel-environment {
+    background: #2D3227 !important;
+    background-color: #2D3227 !important;
+    background-image: none !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-energy,
+  .mc-app .glass-card.panel-energy {
+    background: #2B2320 !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-media,
+  .mc-app .glass-card.panel-media {
+    background: #3D2722 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-scenes,
+  .mc-app .glass-card.panel-scenes {
+    background: #2A2B22 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .weather-with-meta,
+  .mc-app .stage .stage-grid .welcome-group .weather-with-meta {
+    background-color: #2B2320 !important;
+    background-image:
+      linear-gradient(145deg, rgba(28,23,21,0.88) 0%, rgba(28,23,21,0.55) 50%, rgba(28,23,21,0.35) 100%),
+      url("./background.jpg") !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .welcome h1, .mc-app .welcome h2 { color: #F5ECE3 !important; }
+  .mc-app .welcome .muted, .mc-app .welcome .subtitle { color: rgba(245,236,227,0.65) !important; }
+  .mc-app .search, .mc-app .search-box, .mc-app input[type="search"] {
+    background: #2B2320 !important;
+    color: rgba(245,236,227,0.7) !important;
+    box-shadow: inset 2px 2px 6px rgba(12,9,8,0.55), inset -2px -2px 5px rgba(75,62,55,0.2) !important;
+  }
+}
+
+/* clay-cozy-home-20260726-v66 */
+
+
+/* ==========================================================================
+   R67 SEARCH PILL + WARMTH CLOSE
+   clay-cozy-home-20260726-v67
+   1) Official search is an anonymous absolute div using --sp-glass-bg inline
+   2) Override glass vars + absolute pill to clay inset (kills frosted white bar)
+   3) Push device/energy closer to ref bisque (#E8DBCB / #E4CFBA)
+   4) Env true matte #989A7B, chips flatter
+   ========================================================================== */
+
+.mc-app,
+:host {
+  --sp-glass-bg: rgba(232, 220, 206, 0.88) !important;
+  --sp-glass-border: transparent !important;
+  --sp-glass-bg-strong: rgba(240, 230, 218, 0.92) !important;
+  --sp-text-secondary: #8C7B6C !important;
+  --sp-text-primary: #4A3A2C !important;
+  --sp-text-tertiary: rgba(140, 123, 108, 0.75) !important;
+  --sp-clay-device: #EBE1D4;
+  --sp-clay-energy: #E8D8C6;
+  background:
+    radial-gradient(980px 600px at 14% 0%, rgba(255, 246, 236, 0.28), transparent 58%),
+    linear-gradient(180deg, #EFE3D5 0%, #ECDCCF 48%, #E8D6C4 100%) !important;
+  background-color: #EFE3D5 !important;
+}
+
+/* Absolute search pill (inline-styled in home.ts) */
+.mc-app .stage-grid > div[style*="position:absolute"],
+.mc-app .stage .stage-grid > div[style*="position:absolute"],
+.mc-app .stage-grid > div[style*="border-radius"][style*="absolute"] {
+  background: #E6D9C9 !important;
+  background-color: #E6D9C9 !important;
+  background-image: none !important;
+  border: none !important;
+  border-color: transparent !important;
+  color: #8C7B6C !important;
+  box-shadow:
+    inset 3px 3px 7px rgba(160, 135, 110, 0.20),
+    inset -2px -2px 6px rgba(255, 252, 248, 0.72) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.mc-app .stage-grid > div[style*="position:absolute"] ha-icon,
+.mc-app .stage-grid > div[style*="position:absolute"] span {
+  color: #8C7B6C !important;
+  --mdc-icon-size: 18px !important;
+}
+
+/* Welcome bare title + quote */
+.mc-app .welcome,
+.mc-app .welcome-group .welcome,
+.mc-app section.welcome {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+.mc-app .welcome h1,
+.mc-app .welcome-group h1 {
+  color: #4A3A2C !important;
+  background: transparent !important;
+}
+.mc-app .welcome .quote,
+.mc-app .welcome p.quote,
+.mc-app .welcome-group .quote {
+  color: #8C7B6C !important;
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+/* Devices → ref bisque family */
+.mc-app .device,
+.mc-app .devices .device,
+.mc-app .bottom-stack .devices .device,
+.mc-app .devices-page-grid .device,
+.mc-app button.device {
+  background:
+    linear-gradient(160deg, #F0E6DB 0%, #EBE1D4 48%, #E5D9CA 100%) !important;
+  background-color: #EBE1D4 !important;
+  border: none !important;
+  border-radius: 22px !important;
+  box-shadow:
+    7px 9px 18px rgba(165, 140, 115, 0.30),
+    -5px -6px 14px rgba(255, 250, 244, 0.70),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.28) !important;
+  color: #4A3A2C !important;
+}
+
+/* Energy → ref warm ivory */
+.mc-app .panel-energy,
+.mc-app .glass-card.panel-energy {
+  background:
+    linear-gradient(155deg, #EDDFD0 0%, #E8D8C6 55%, #E2D0BC 100%) !important;
+  background-color: #E8D8C6 !important;
+  border: none !important;
+  box-shadow:
+    7px 9px 18px rgba(165, 140, 115, 0.28),
+    -5px -6px 14px rgba(255, 250, 244, 0.68) !important;
+  color: #4A3A2C !important;
+}
+.mc-app .panel-energy .energy-bar,
+.mc-app .panel-energy .bar,
+.mc-app .energy-bars > span,
+.mc-app .panel-energy span.energy-bar {
+  background: #E3805B !important;
+  border: none !important;
+}
+
+/* Env true sage + flat chips (beat washed overlays) */
+.mc-app .panel-environment,
+.mc-app .glass-card.panel-environment,
+.mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+.mc-app .side > .time-card + .glass-card,
+.mc-app .side > .time-card + .glass-card.panel-environment,
+.mc-app .side > section.glass-card.panel-environment {
+  background: #989A7B !important;
+  background-color: #989A7B !important;
+  background-image: none !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    6px 8px 16px rgba(90, 95, 70, 0.20),
+    -4px -5px 12px rgba(220, 225, 200, 0.18) !important;
+}
+.mc-app .panel-environment .env-row,
+.mc-app .panel-environment .env-item,
+.mc-app .panel-environment .env-list > *,
+.mc-app .side > .time-card + .glass-card .env-row,
+.mc-app .side > .time-card + .glass-card .env-item {
+  background: rgba(255, 248, 240, 0.10) !important;
+  background-color: rgba(255, 248, 240, 0.10) !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 14px !important;
+  color: #FFF8F0 !important;
+}
+
+/* Weather cream plate soft emboss */
+.mc-app .stage .stage-grid .welcome-group .weather-with-meta,
+.mc-app .weather-with-meta {
+  background-color: #EFE4D6 !important;
+  background-image:
+    linear-gradient(145deg,
+      rgba(239, 228, 214, 0.96) 0%,
+      rgba(239, 228, 214, 0.88) 36%,
+      rgba(239, 228, 214, 0.55) 62%,
+      rgba(239, 228, 214, 0.32) 100%),
+    url("./background.jpg") !important;
+  border: none !important;
+  border-radius: 28px !important;
+  box-shadow:
+    8px 10px 22px rgba(160, 135, 110, 0.26),
+    -6px -8px 16px rgba(255, 252, 248, 0.75),
+    inset 0 1px 0 rgba(255, 255, 255, 0.40) !important;
+}
+
+/* Clock keep ref match */
+.mc-app .time-card,
+.mc-app .side > .time-card,
+.mc-app section.time-card {
+  background: #CAA094 !important;
+  background-image: linear-gradient(155deg, #D2A99C 0%, #CAA094 55%, #C09488 100%) !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+}
+
+/* Dark: keep locks + clay search pill */
+@media (prefers-color-scheme: dark) {
+  .mc-app, :host {
+    --sp-glass-bg: rgba(43, 35, 32, 0.92) !important;
+    --sp-glass-border: transparent !important;
+    --sp-text-secondary: rgba(245, 236, 227, 0.65) !important;
+    background: #1C1715 !important;
+    background-color: #1C1715 !important;
+  }
+  .mc-app .stage-grid > div[style*="position:absolute"],
+  .mc-app .stage .stage-grid > div[style*="position:absolute"] {
+    background: #2B2320 !important;
+    background-color: #2B2320 !important;
+    color: rgba(245, 236, 227, 0.7) !important;
+    border: none !important;
+    box-shadow:
+      inset 3px 3px 7px rgba(12, 9, 8, 0.55),
+      inset -2px -2px 5px rgba(75, 62, 55, 0.22) !important;
+  }
+  .mc-app .stage-grid > div[style*="position:absolute"] ha-icon,
+  .mc-app .stage-grid > div[style*="position:absolute"] span {
+    color: rgba(245, 236, 227, 0.7) !important;
+  }
+  .mc-app .device,
+  .mc-app .devices .device,
+  .mc-app .bottom-stack .devices .device,
+  .mc-app .devices-page-grid .device,
+  .mc-app button.device {
+    background: #2B2320 !important;
+    background-image: linear-gradient(155deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-energy,
+  .mc-app .glass-card.panel-energy {
+    background: #2B2320 !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .time-card,
+  .mc-app .side > .time-card,
+  .mc-app section.time-card {
+    background: #422D28 !important;
+    background-image: linear-gradient(155deg, #4C342E 0%, #422D28 55%, #382621 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-environment,
+  .mc-app .glass-card.panel-environment,
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .side > .time-card + .glass-card,
+  .mc-app .side > .time-card + .glass-card.panel-environment {
+    background: #2D3227 !important;
+    background-color: #2D3227 !important;
+    background-image: none !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-media { background: #3D2722 !important; border: none !important; box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important; }
+  .mc-app .panel-scenes { background: #2A2B22 !important; border: none !important; box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important; }
+  .mc-app .welcome h1 { color: #F5ECE3 !important; }
+  .mc-app .welcome .quote { color: rgba(245,236,227,0.65) !important; }
+}
+/* ==========================================================================
+   R68 IMAGE RESTORE + REF COLOR/BORDER CLOSE
+   clay-cozy-home-20260726-v68
+   1) Restore reference-matching skin images:
+      - avatar.png = clay girl (v39)
+      - decoration.png = house diorama sidebar art (v39)
+      - decoration-hero.png = weather house/sun/hills mural (v39)
+   2) Weather mural must use decoration-hero.png (previous correct image ref),
+      NOT indoor vase/cat substitutes and not cream-only plate.
+   3) Tone search pill down; warm devices toward ref bisque; kill hard white borders.
+   4) Keep official climate/device structure; dual clay emboss only.
+   ========================================================================== */
+
+.mc-app,
+:host {
+  --sp-base-texture: url("./background.jpg") !important;
+  --sp-stage-texture: url("./background.jpg") !important;
+  --sp-glass-bg: rgba(232, 220, 206, 0.72) !important;
+  --sp-glass-border: transparent !important;
+  --sp-glass-bg-strong: rgba(240, 230, 218, 0.82) !important;
+  --sp-text-primary: #4A3A2C !important;
+  --sp-text-secondary: #8C7B6C !important;
+  --sp-clay-device: #E8DBCB;
+  --sp-clay-energy: #F5EBE1;
+  --sp-clay-clock: #D7A99C;
+  background:
+    radial-gradient(980px 600px at 14% 0%, rgba(255, 246, 236, 0.22), transparent 58%),
+    linear-gradient(180deg, #EFE3D5 0%, #ECDCCF 50%, #E8D6C4 100%) !important;
+  background-color: #EFE3D5 !important;
+}
+
+/* Search pill: smaller visual weight, soft clay inset, no frosted white */
+.mc-app .stage-grid > div[style*="position:absolute"],
+.mc-app .stage .stage-grid > div[style*="position:absolute"] {
+  background: rgba(230, 217, 201, 0.78) !important;
+  background-color: rgba(230, 217, 201, 0.78) !important;
+  background-image: none !important;
+  border: none !important;
+  color: rgba(140, 123, 108, 0.78) !important;
+  box-shadow:
+    inset 2px 2px 5px rgba(160, 135, 110, 0.16),
+    inset -1px -1px 4px rgba(255, 252, 248, 0.55) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  opacity: 0.92 !important;
+  max-width: min(360px, 34vw) !important;
+  transform: scale(0.92);
+  transform-origin: left top;
+}
+.mc-app .stage-grid > div[style*="position:absolute"] ha-icon,
+.mc-app .stage-grid > div[style*="position:absolute"] span {
+  color: rgba(140, 123, 108, 0.75) !important;
+  --mdc-icon-size: 16px !important;
+  font-size: 13px !important;
+}
+
+/* Weather: restore decoration-hero clay house/sun/hills mural */
+.mc-app .weather-with-meta,
+.mc-app .welcome-group .weather-with-meta,
+.mc-app .welcome-group > .weather-with-meta,
+.mc-app .stage .stage-grid .welcome-group .weather-with-meta,
+.welcome-group .weather-with-meta,
+.weather-with-meta {
+  background-color: #EFE4D6 !important;
+  background-image:
+    linear-gradient(105deg,
+      rgba(239, 228, 214, 0.88) 0%,
+      rgba(239, 228, 214, 0.55) 28%,
+      rgba(239, 228, 214, 0.18) 48%,
+      rgba(239, 228, 214, 0.05) 62%,
+      rgba(239, 228, 214, 0.00) 100%),
+    url("./decoration-hero.png") !important;
+  background-size: cover, cover !important;
+  background-position: center, 72% 58% !important;
+  background-repeat: no-repeat, no-repeat !important;
+  border: none !important;
+  border-radius: 26px !important;
+  box-shadow:
+    8px 10px 20px rgba(165, 140, 115, 0.28),
+    -6px -7px 16px rgba(255, 252, 248, 0.72) !important;
+  overflow: hidden !important;
+}
+.mc-app .weather-with-meta::before,
+.mc-app .weather-with-meta::after,
+.welcome-group .weather-with-meta::before,
+.welcome-group .weather-with-meta::after,
+.weather-with-meta::before,
+.weather-with-meta::after {
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.mc-app .weather-with-meta .weather-block,
+.mc-app .weather-with-meta .weather-current,
+.mc-app .weather-block {
+  background: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.mc-app .weather-current-temp,
+.mc-app .weather-current-cond,
+.mc-app .weather-current-hl,
+.mc-app .forecast-weekday,
+.mc-app .weather-with-meta .temp,
+.mc-app .weather-with-meta h2,
+.mc-app .weather-with-meta h3 {
+  color: #4A3A2C !important;
+  text-shadow: 0 1px 0 rgba(255, 252, 248, 0.35);
+}
+
+/* Devices: warmer bisque toward ref #E8DBCB / #DBC9B5, emboss only */
+.mc-app .device,
+.mc-app .devices .device,
+.mc-app .bottom-stack .devices .device,
+.mc-app .devices-page-grid .device,
+.mc-app button.device {
+  background:
+    linear-gradient(160deg, #EDE1D2 0%, #E8DBCB 48%, #E0D0BD 100%) !important;
+  background-color: #E8DBCB !important;
+  border: none !important;
+  border-radius: 22px !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.42),
+    -8px -8px 16px rgba(255, 255, 255, 0.78),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.28) !important;
+  color: #4A3A2C !important;
+  overflow: hidden !important;
+}
+.mc-app .device .name,
+.mc-app .device .device-name,
+.mc-app .device h3,
+.mc-app .device .title {
+  color: #4A3A2C !important;
+}
+.mc-app .device .muted,
+.mc-app .device .domain,
+.mc-app .device .subtitle,
+.mc-app .device .state-text {
+  color: #8C7B6C !important;
+}
+
+/* Energy ivory + clay orange bars */
+.mc-app .panel-energy,
+.mc-app .glass-card.panel-energy {
+  background:
+    linear-gradient(155deg, #F8F0E8 0%, #F5EBE1 55%, #EFE3D5 100%) !important;
+  background-color: #F5EBE1 !important;
+  border: none !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.38),
+    -8px -8px 16px rgba(255, 255, 255, 0.80) !important;
+  color: #4A3A2C !important;
+}
+.mc-app .panel-energy .energy-value,
+.mc-app .panel-energy .value,
+.mc-app .panel-energy h2,
+.mc-app .panel-energy h3 {
+  color: #4A3A2C !important;
+}
+.mc-app .panel-energy .energy-bar,
+.mc-app .panel-energy .bar,
+.mc-app .energy-bars > span,
+.mc-app .panel-energy span.energy-bar {
+  background: #E3805B !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Clock soft terracotta closer to ref */
+.mc-app .time-card,
+.mc-app .side > .time-card,
+.mc-app section.time-card {
+  background: #D7A99C !important;
+  background-image: linear-gradient(155deg, #E0B6AA 0%, #D7A99C 55%, #CFA093 100%) !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    7px 9px 18px rgba(150, 100, 85, 0.22),
+    -5px -6px 14px rgba(255, 236, 228, 0.35) !important;
+}
+
+/* Env / media / scenes locks */
+.mc-app .panel-environment,
+.mc-app .glass-card.panel-environment,
+.mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+.mc-app .side > .time-card + .glass-card {
+  background: #989A7B !important;
+  background-color: #989A7B !important;
+  background-image: none !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    6px 8px 16px rgba(90, 95, 70, 0.20),
+    -4px -5px 12px rgba(220, 225, 200, 0.16) !important;
+}
+.mc-app .panel-media,
+.mc-app .glass-card.panel-media {
+  background: #C77E6D !important;
+  background-color: #C77E6D !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    6px 8px 16px rgba(135, 70, 55, 0.22),
+    -4px -5px 12px rgba(235, 180, 165, 0.18) !important;
+}
+.mc-app .panel-scenes,
+.mc-app .glass-card.panel-scenes {
+  background: #8D8E71 !important;
+  background-color: #8D8E71 !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    6px 8px 16px rgba(90, 95, 70, 0.20),
+    -4px -5px 12px rgba(220, 225, 200, 0.16) !important;
+}
+
+/* Rooms: soft clay frame, no hard white ring, image contained */
+.mc-app .room,
+.mc-app .rooms .room,
+.mc-app .bottom-stack .rooms .room {
+  border: none !important;
+  border-radius: 22px !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.35),
+    -6px -6px 14px rgba(255, 255, 255, 0.70) !important;
+  overflow: hidden !important;
+}
+.mc-app .room img,
+.mc-app .rooms .room img {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Global hard-border kill on clay cards */
+.mc-app .device,
+.mc-app .room,
+.mc-app .glass-card,
+.mc-app .time-card,
+.mc-app .weather-with-meta,
+.mc-app .panel-energy,
+.mc-app .panel-media,
+.mc-app .panel-scenes,
+.mc-app .panel-environment {
+  border-color: transparent !important;
+  outline: none !important;
+}
+
+/* Sidebar art: house decoration must remain visible and unclipped */
+.mc-app .sidebar-art,
+.sidebar-art {
+  display: block !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  min-height: 150px !important;
+  max-height: 240px !important;
+  margin-top: auto !important;
+  overflow: visible !important;
+}
+.mc-app .sidebar-art img,
+.sidebar-art img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  filter: drop-shadow(5px 10px 14px rgba(74, 47, 36, 0.18)) saturate(1.04) !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Avatar recessed clay well */
+.mc-app .sidebar .avatar,
+.mc-app .sidebar .profile-img,
+.mc-app .avatar img,
+.mc-app .profile-img {
+  border: none !important;
+  box-shadow:
+    inset 3px 3px 6px rgba(130, 55, 45, 0.35),
+    inset -3px -3px 6px rgba(235, 165, 150, 0.45) !important;
+  background-color: #B87363 !important;
+}
+
+/* Climate controls stay inside device card */
+.mc-app .device .control-row,
+.mc-app .device .temp-group,
+.mc-app .device .filter-select,
+.mc-app button.device .control-row {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+.mc-app .device .temp-group {
+  flex-wrap: nowrap !important;
+  gap: 4px !important;
+}
+.mc-app .device .temp-group button,
+.mc-app .device .control-row button,
+.mc-app .device .filter-select {
+  flex: 0 0 auto !important;
+  max-width: 100% !important;
+}
+
+/* Dark mode keep locks + no hard white */
+@media (prefers-color-scheme: dark) {
+  .mc-app, :host {
+    --sp-glass-bg: rgba(43, 35, 32, 0.90) !important;
+    --sp-glass-border: transparent !important;
+    background: #1C1715 !important;
+    background-color: #1C1715 !important;
+  }
+  .mc-app .stage-grid > div[style*="position:absolute"],
+  .mc-app .stage .stage-grid > div[style*="position:absolute"] {
+    background: #2B2320 !important;
+    color: rgba(245, 236, 227, 0.65) !important;
+    border: none !important;
+    box-shadow:
+      inset 3px 3px 7px rgba(12, 9, 8, 0.55),
+      inset -2px -2px 5px rgba(75, 62, 55, 0.22) !important;
+    opacity: 0.95 !important;
+  }
+  .mc-app .weather-with-meta,
+  .mc-app .welcome-group .weather-with-meta,
+  .weather-with-meta {
+    background-image:
+      linear-gradient(105deg,
+        rgba(28, 23, 21, 0.72) 0%,
+        rgba(28, 23, 21, 0.35) 34%,
+        rgba(28, 23, 21, 0.12) 58%,
+        rgba(28, 23, 21, 0.00) 100%),
+      url("./decoration-hero.png") !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12, 9, 8, 0.7), -4px -4px 10px rgba(75, 62, 55, 0.25) !important;
+  }
+  .mc-app .weather-current-temp,
+  .mc-app .weather-current-cond,
+  .mc-app .weather-with-meta h2,
+  .mc-app .weather-with-meta h3 {
+    color: #F5ECE3 !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+  }
+  .mc-app .device,
+  .mc-app .devices .device,
+  .mc-app button.device {
+    background: #2B2320 !important;
+    background-image: linear-gradient(155deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-energy { background: #2B2320 !important; color: #FAF5F0 !important; border: none !important; box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important; }
+  .mc-app .time-card { background: #422D28 !important; color: #F5ECE3 !important; border: none !important; box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important; }
+  .mc-app .panel-environment,
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .side > .time-card + .glass-card {
+    background: #2D3227 !important; color: #F5ECE3 !important; border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-media { background: #3D2722 !important; border: none !important; box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important; }
+  .mc-app .panel-scenes { background: #2A2B22 !important; border: none !important; box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important; }
+  .mc-app .welcome h1 { color: #F5ECE3 !important; }
+  .mc-app .welcome .quote { color: rgba(245,236,227,0.65) !important; }
+}
+/* ==========================================================================
+   R68B DARK SPEC LOCK
+   clay-cozy-home-20260726-v68b
+   Raise dark-mode selector specificity above R68 light locks so device/clock/
+   scenes actually dim under prefers-color-scheme: dark.
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  .mc-app .device,
+  .mc-app .devices .device,
+  .mc-app .bottom-stack .devices .device,
+  .mc-app .devices-page-grid .device,
+  .mc-app button.device,
+  .mc-app .stage .bottom-stack .devices .device,
+  .mc-app .stage-grid .bottom-stack .devices .device {
+    background: #2B2320 !important;
+    background-color: #2B2320 !important;
+    background-image: linear-gradient(155deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .device .name,
+  .mc-app .device .device-name,
+  .mc-app .device h3,
+  .mc-app .device .title,
+  .mc-app button.device .name {
+    color: #FAF5F0 !important;
+  }
+  .mc-app .device .muted,
+  .mc-app .device .domain,
+  .mc-app .device .subtitle,
+  .mc-app .device .state-text {
+    color: rgba(250, 245, 240, 0.55) !important;
+  }
+
+  .mc-app .time-card,
+  .mc-app .side > .time-card,
+  .mc-app section.time-card,
+  .mc-app .side .time-card,
+  .mc-app .stage .side > .time-card {
+    background: #422D28 !important;
+    background-color: #422D28 !important;
+    background-image: linear-gradient(155deg, #4C342E 0%, #422D28 55%, #382621 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+
+  .mc-app .panel-scenes,
+  .mc-app .glass-card.panel-scenes,
+  .mc-app .side > .panel-scenes,
+  .mc-app .side > section.panel-scenes,
+  .mc-app .side .glass-card.panel-scenes {
+    background: #2A2B22 !important;
+    background-color: #2A2B22 !important;
+    background-image: none !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+
+  .mc-app .panel-energy,
+  .mc-app .glass-card.panel-energy,
+  .mc-app .side > .panel-energy {
+    background: #2B2320 !important;
+    background-color: #2B2320 !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+
+  .mc-app .panel-media,
+  .mc-app .glass-card.panel-media,
+  .mc-app .side > .panel-media {
+    background: #3D2722 !important;
+    background-color: #3D2722 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+
+  .mc-app .panel-environment,
+  .mc-app .glass-card.panel-environment,
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .side > .time-card + .glass-card,
+  .mc-app .side > .time-card + .glass-card.panel-environment {
+    background: #2D3227 !important;
+    background-color: #2D3227 !important;
+    background-image: none !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+
+  .mc-app .room,
+  .mc-app .rooms .room,
+  .mc-app .bottom-stack .rooms .room {
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+}
+/* ==========================================================================
+   R69 REF DELTA CLOSE + BORDER SOFTEN
+   clay-cozy-home-20260726-v69
+   Measured gaps vs reference board (v68b):
+   - sidebar +26 / active +57 → deepen rail + active capsule
+   - deviceFace +30 → warmer bisque #DBC9B5 family
+   - energyFace +52 → less white ivory #E8D8C4
+   - weatherMid +37 → thinner cream veil so hero mural reads
+   - kill residual 1px white inset rings; dual clay emboss only
+   ========================================================================== */
+
+.mc-app,
+:host {
+  --sp-clay-page: #EFE3D5 !important;
+  --sp-clay-rail: #C57D6D !important;
+  --sp-clay-rail-deep: #B87363 !important;
+  --sp-clay-rail-active: #C98878 !important;
+  --sp-clay-device: #DBC9B5 !important;
+  --sp-clay-energy: #E8D8C4 !important;
+  --sp-clay-clock: #C99284 !important;
+  --sp-clay-env: #989A7B !important;
+  --sp-clay-media: #C77E6D !important;
+  --sp-clay-scenes: #8D8E71 !important;
+  --sp-text-primary: #4A3A2C !important;
+  --sp-text-secondary: #8C7B6C !important;
+  --sp-glass-border: transparent !important;
+  background:
+    radial-gradient(920px 560px at 12% 0%, rgba(255, 246, 236, 0.18), transparent 60%),
+    linear-gradient(180deg, #EFE3D5 0%, #E7D2BF 100%) !important;
+  background-color: #EFE3D5 !important;
+}
+
+/* fix typo-safe background below */
+.mc-app,
+:host {
+  background:
+    radial-gradient(920px 560px at 12% 0%, rgba(255, 246, 236, 0.18), transparent 60%),
+    linear-gradient(180deg, #EFE3D5 0%, #ECD9C8 52%, #E7D2BF 100%) !important;
+  background-color: #EFE3D5 !important;
+}
+
+/* Sidebar deepen toward ref terracotta */
+.mc-app .sidebar,
+.mc-app aside.sidebar,
+.sidebar {
+  background: #C57D6D !important;
+  background-image:
+    linear-gradient(180deg, #CC8776 0%, #C57D6D 42%, #BC7463 100%) !important;
+  border: none !important;
+  border-radius: 0 28px 28px 0 !important;
+  box-shadow: 6px 0 18px rgba(150, 90, 75, 0.25) !important;
+}
+.mc-app .sidebar .nav-button.active,
+.mc-app .sidebar .menu .nav-button.active,
+.mc-app .sidebar .menu button.active,
+.mc-app .menu .nav-button.active {
+  background: #C98878 !important;
+  background-image: linear-gradient(160deg, #D09484 0%, #C98878 55%, #C07F6F 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: 20px !important;
+  box-shadow:
+    4px 5px 10px rgba(135, 62, 50, 0.36),
+    -2px -2px 6px rgba(235, 170, 155, 0.45),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.35) !important;
+}
+.mc-app .sidebar .nav-button:not(.active),
+.mc-app .sidebar .menu .nav-button:not(.active),
+.mc-app .sidebar .menu button:not(.active) {
+  background: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: rgba(255, 242, 234, 0.85) !important;
+}
+
+/* Weather: let decoration-hero mural dominate */
+.mc-app .weather-with-meta,
+.mc-app .welcome-group .weather-with-meta,
+.mc-app .welcome-group > .weather-with-meta,
+.mc-app .stage .stage-grid .welcome-group .weather-with-meta,
+.welcome-group .weather-with-meta,
+.weather-with-meta {
+  background-color: #E8DCCB !important;
+  background-image:
+    linear-gradient(108deg,
+      rgba(232, 220, 203, 0.72) 0%,
+      rgba(232, 220, 203, 0.38) 24%,
+      rgba(232, 220, 203, 0.10) 42%,
+      rgba(232, 220, 203, 0.00) 58%),
+    url("./decoration-hero.png") !important;
+  background-size: cover, cover !important;
+  background-position: center, 70% 55% !important;
+  background-repeat: no-repeat, no-repeat !important;
+  border: none !important;
+  border-radius: 26px !important;
+  box-shadow:
+    8px 10px 18px rgba(165, 140, 115, 0.30),
+    -6px -7px 14px rgba(255, 250, 244, 0.55) !important;
+  overflow: hidden !important;
+}
+.mc-app .weather-with-meta::before,
+.mc-app .weather-with-meta::after,
+.welcome-group .weather-with-meta::before,
+.welcome-group .weather-with-meta::after {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background-image: none !important;
+}
+
+/* Devices: warmer denser bisque, soft emboss, no white ring */
+.mc-app .device,
+.mc-app .devices .device,
+.mc-app .bottom-stack .devices .device,
+.mc-app .devices-page-grid .device,
+.mc-app button.device,
+.mc-app .stage .bottom-stack .devices .device {
+  background:
+    linear-gradient(160deg, #E6D6C4 0%, #DBC9B5 48%, #D3C0AA 100%) !important;
+  background-color: #DBC9B5 !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 22px !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.45),
+    -8px -8px 16px rgba(255, 252, 248, 0.62),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.18) !important;
+  color: #4A3A2C !important;
+  overflow: hidden !important;
+}
+.mc-app .device .control-row,
+.mc-app button.device .control-row,
+.mc-app .device .temp-group {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  gap: 4px !important;
+}
+.mc-app .device .temp-group button,
+.mc-app .device .control-row button,
+.mc-app .device .filter-select,
+.mc-app .device select.filter-select {
+  flex: 0 1 auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  border: none !important;
+  box-shadow:
+    2px 2px 4px rgba(160, 135, 110, 0.18),
+    -1px -1px 3px rgba(255, 252, 248, 0.45) !important;
+}
+
+/* Energy: denser warm ivory (less paper-white) */
+.mc-app .panel-energy,
+.mc-app .glass-card.panel-energy,
+.mc-app .side > .panel-energy {
+  background:
+    linear-gradient(155deg, #EDDFD0 0%, #E8D8C4 55%, #E1CFB8 100%) !important;
+  background-color: #E8D8C4 !important;
+  border: none !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.40),
+    -8px -8px 16px rgba(255, 252, 248, 0.58) !important;
+  color: #4A3A2C !important;
+}
+.mc-app .panel-energy .energy-bar,
+.mc-app .panel-energy .bar,
+.mc-app .energy-bars > span,
+.mc-app .panel-energy span.energy-bar {
+  background: #E3805B !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Clock denser coral clay */
+.mc-app .time-card,
+.mc-app .side > .time-card,
+.mc-app section.time-card,
+.mc-app .side .time-card {
+  background: #C99284 !important;
+  background-image: linear-gradient(155deg, #D3A093 0%, #C99284 55%, #C08778 100%) !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    7px 9px 16px rgba(140, 90, 75, 0.24),
+    -4px -5px 12px rgba(240, 200, 185, 0.22) !important;
+}
+
+/* Env / media / scenes denser matte */
+.mc-app .panel-environment,
+.mc-app .glass-card.panel-environment,
+.mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+.mc-app .side > .time-card + .glass-card {
+  background: #989A7B !important;
+  background-color: #989A7B !important;
+  background-image: none !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    6px 8px 14px rgba(90, 95, 70, 0.22),
+    -3px -4px 10px rgba(210, 215, 190, 0.12) !important;
+}
+.mc-app .panel-media,
+.mc-app .glass-card.panel-media,
+.mc-app .side > .panel-media {
+  background: #C77E6D !important;
+  background-color: #C77E6D !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    6px 8px 14px rgba(135, 70, 55, 0.24),
+    -3px -4px 10px rgba(235, 180, 165, 0.14) !important;
+}
+.mc-app .panel-scenes,
+.mc-app .glass-card.panel-scenes,
+.mc-app .side > .panel-scenes {
+  background: #8D8E71 !important;
+  background-color: #8D8E71 !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    6px 8px 14px rgba(90, 95, 70, 0.22),
+    -3px -4px 10px rgba(210, 215, 190, 0.12) !important;
+}
+
+/* Rooms: soft frame only */
+.mc-app .room,
+.mc-app .rooms .room,
+.mc-app .bottom-stack .rooms .room {
+  border: none !important;
+  outline: none !important;
+  border-radius: 22px !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.34),
+    -6px -6px 12px rgba(255, 252, 248, 0.50) !important;
+  overflow: hidden !important;
+}
+
+/* Global kill hard white hairline rings on clay surfaces */
+.mc-app .device,
+.mc-app .room,
+.mc-app .glass-card,
+.mc-app .time-card,
+.mc-app .weather-with-meta,
+.mc-app .panel-energy,
+.mc-app .panel-media,
+.mc-app .panel-scenes,
+.mc-app .panel-environment,
+.mc-app .sidebar .nav-button.active {
+  border-color: transparent !important;
+  outline: none !important;
+  /* neutralize leftover 1px white inset rings from earlier layers */
+  background-clip: padding-box !important;
+}
+
+/* Search remains subdued */
+.mc-app .stage-grid > div[style*="position:absolute"],
+.mc-app .stage .stage-grid > div[style*="position:absolute"] {
+  background: rgba(224, 210, 192, 0.70) !important;
+  background-color: rgba(224, 210, 192, 0.70) !important;
+  border: none !important;
+  box-shadow:
+    inset 2px 2px 5px rgba(150, 125, 100, 0.16),
+    inset -1px -1px 3px rgba(255, 250, 244, 0.40) !important;
+  opacity: 0.88 !important;
+  transform: scale(0.90);
+  transform-origin: left top;
+  max-width: min(340px, 32vw) !important;
+}
+
+/* Dark keep denser tokens with high specificity */
+@media (prefers-color-scheme: dark) {
+  .mc-app, :host {
+    background: #1C1715 !important;
+    background-color: #1C1715 !important;
+    --sp-glass-border: transparent !important;
+  }
+  .mc-app .device,
+  .mc-app .devices .device,
+  .mc-app .bottom-stack .devices .device,
+  .mc-app .devices-page-grid .device,
+  .mc-app button.device,
+  .mc-app .stage .bottom-stack .devices .device {
+    background: #2B2320 !important;
+    background-color: #2B2320 !important;
+    background-image: linear-gradient(155deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .time-card,
+  .mc-app .side > .time-card,
+  .mc-app section.time-card,
+  .mc-app .side .time-card {
+    background: #422D28 !important;
+    background-color: #422D28 !important;
+    background-image: linear-gradient(155deg, #4C342E 0%, #422D28 55%, #382621 100%) !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-energy,
+  .mc-app .glass-card.panel-energy,
+  .mc-app .side > .panel-energy {
+    background: #2B2320 !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-environment,
+  .mc-app .glass-card.panel-environment,
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .side > .time-card + .glass-card {
+    background: #2D3227 !important;
+    background-color: #2D3227 !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-media,
+  .mc-app .glass-card.panel-media,
+  .mc-app .side > .panel-media {
+    background: #3D2722 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-scenes,
+  .mc-app .glass-card.panel-scenes,
+  .mc-app .side > .panel-scenes {
+    background: #2A2B22 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .weather-with-meta,
+  .mc-app .welcome-group .weather-with-meta,
+  .weather-with-meta {
+    background-image:
+      linear-gradient(108deg,
+        rgba(28, 23, 21, 0.66) 0%,
+        rgba(28, 23, 21, 0.28) 30%,
+        rgba(28, 23, 21, 0.08) 52%,
+        rgba(28, 23, 21, 0.00) 68%),
+      url("./decoration-hero.png") !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .welcome h1 { color: #F5ECE3 !important; }
+  .mc-app .welcome .quote { color: rgba(245,236,227,0.65) !important; }
+  .mc-app .stage-grid > div[style*="position:absolute"] {
+    background: #2B2320 !important;
+    color: rgba(245,236,227,0.65) !important;
+    border: none !important;
+    box-shadow: inset 3px 3px 7px rgba(12,9,8,0.55), inset -2px -2px 5px rgba(75,62,55,0.22) !important;
+  }
+}
+/* ==========================================================================
+   R76 SAFE-ASSET + CLEAN RIGHT RAIL + VISIONOS CONTROLS
+   clay-cozy-home-20260726-v76
+   Pixel-sampled from reference board:
+   rail mid #AD6E5D / top #BA7F6F / active #B1746F
+   device #E8DBCB / energy #E5D3BD / clock #CD8B75 / scenes #939475
+   weather veil thinner; search nearly ghost; climate row no clip
+   ========================================================================== */
+
+.mc-app,
+:host {
+  --sp-clay-rail: #AD6E5D !important;
+  --sp-clay-rail-top: #BA7F6F !important;
+  --sp-clay-rail-deep: #A56758 !important;
+  --sp-clay-rail-active: #B87A68 !important;
+  --sp-clay-device: #E8DBCB !important;
+  --sp-clay-energy: #E5D3BD !important;
+  --sp-clay-clock: #CD8B75 !important;
+  --sp-clay-scenes: #939475 !important;
+  --sp-clay-env: #989A7B !important;
+  --sp-clay-media: #BE7A68 !important;
+  background-color: #EFE3D5 !important;
+  background:
+    radial-gradient(900px 540px at 10% 0%, rgba(255,246,236,0.14), transparent 62%),
+    linear-gradient(180deg, #EFE3D5 0%, #EAD8C7 55%, #E6D1BD 100%) !important;
+}
+
+/* Sidebar: denser terracotta matching ref rail samples */
+.mc-app .sidebar,
+.mc-app aside.sidebar,
+.sidebar {
+  background: #AD6E5D !important;
+  background-image:
+    linear-gradient(180deg, #BA7F6F 0%, #AD6E5D 38%, #A56758 100%) !important;
+  border: none !important;
+  border-radius: 0 28px 28px 0 !important;
+  box-shadow: 6px 0 18px rgba(120, 70, 55, 0.28) !important;
+}
+.mc-app .sidebar .nav-button.active,
+.mc-app .sidebar .menu .nav-button.active,
+.mc-app .sidebar .menu button.active,
+.mc-app .menu .nav-button.active {
+  background: #B87A68 !important;
+  background-image: linear-gradient(160deg, #C48775 0%, #B87A68 52%, #AD6E5D 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: 20px !important;
+  box-shadow:
+    3px 4px 8px rgba(110, 50, 40, 0.35),
+    -2px -2px 5px rgba(220, 160, 145, 0.35),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.28) !important;
+}
+.mc-app .sidebar .nav-button:not(.active),
+.mc-app .sidebar .menu .nav-button:not(.active),
+.mc-app .sidebar .menu button:not(.active) {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: rgba(255, 242, 234, 0.85) !important;
+}
+.mc-app .sidebar .avatar,
+.mc-app .sidebar .profile-img,
+.mc-app .profile-img,
+.mc-app .avatar img {
+  border: none !important;
+  background-color: #A56758 !important;
+  box-shadow:
+    inset 3px 3px 6px rgba(110, 45, 35, 0.40),
+    inset -3px -3px 6px rgba(220, 155, 140, 0.40) !important;
+}
+
+/* Weather mural: very light text plate only on left */
+.mc-app .weather-with-meta,
+.mc-app .welcome-group .weather-with-meta,
+.mc-app .welcome-group > .weather-with-meta,
+.mc-app .stage .stage-grid .welcome-group .weather-with-meta,
+.welcome-group .weather-with-meta,
+.weather-with-meta {
+  background-color: #E5D6C4 !important;
+  background-image:
+    linear-gradient(105deg,
+      rgba(229, 214, 196, 0.55) 0%,
+      rgba(229, 214, 196, 0.22) 18%,
+      rgba(229, 214, 196, 0.06) 34%,
+      rgba(229, 214, 196, 0.00) 48%),
+    url("./decoration-hero.png") !important;
+  background-size: cover, cover !important;
+  background-position: center, 68% 52% !important;
+  border: none !important;
+  border-radius: 26px !important;
+  box-shadow:
+    8px 10px 18px rgba(150, 125, 100, 0.28),
+    -5px -6px 12px rgba(255, 250, 244, 0.45) !important;
+}
+.mc-app .weather-with-meta::before,
+.mc-app .weather-with-meta::after,
+.welcome-group .weather-with-meta::before,
+.welcome-group .weather-with-meta::after {
+  display: none !important;
+  content: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Devices slightly lighter bisque toward sampled #E8DBCB */
+.mc-app .device,
+.mc-app .devices .device,
+.mc-app .bottom-stack .devices .device,
+.mc-app .devices-page-grid .device,
+.mc-app button.device,
+.mc-app .stage .bottom-stack .devices .device {
+  background:
+    linear-gradient(160deg, #EDDFD0 0%, #E8DBCB 50%, #E1D0BC 100%) !important;
+  background-color: #E8DBCB !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 22px !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.42),
+    -7px -7px 14px rgba(255, 252, 248, 0.58),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.16) !important;
+  overflow: hidden !important;
+}
+
+/* Climate controls: prevent right-edge clipping */
+.mc-app .device .control-row,
+.mc-app button.device .control-row {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  padding-inline: 2px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-start !important;
+  gap: 3px !important;
+  overflow: hidden !important;
+}
+.mc-app .device .temp-group {
+  flex: 0 1 auto !important;
+  min-width: 0 !important;
+  max-width: 48% !important;
+  gap: 2px !important;
+}
+.mc-app .device .temp-group button,
+.mc-app .device .control-row > button,
+.mc-app .device .filter-select,
+.mc-app .device select.filter-select {
+  flex: 0 1 auto !important;
+  min-width: 0 !important;
+  max-width: 4.6em !important;
+  padding-inline: 6px !important;
+  font-size: 12px !important;
+  border: none !important;
+  box-shadow:
+    2px 2px 4px rgba(150, 125, 100, 0.16),
+    -1px -1px 2px rgba(255, 252, 248, 0.40) !important;
+}
+
+/* Energy sampled ivory */
+.mc-app .panel-energy,
+.mc-app .glass-card.panel-energy,
+.mc-app .side > .panel-energy {
+  background:
+    linear-gradient(155deg, #EBDCCB 0%, #E5D3BD 55%, #DFCBB4 100%) !important;
+  background-color: #E5D3BD !important;
+  border: none !important;
+  box-shadow:
+    8px 8px 16px rgba(185, 165, 145, 0.38),
+    -7px -7px 14px rgba(255, 252, 248, 0.55) !important;
+  color: #4A3A2C !important;
+}
+
+/* Clock sampled coral */
+.mc-app .time-card,
+.mc-app .side > .time-card,
+.mc-app section.time-card,
+.mc-app .side .time-card {
+  background: #CD8B75 !important;
+  background-image: linear-gradient(155deg, #D49882 0%, #CD8B75 55%, #C4816B 100%) !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    7px 9px 16px rgba(130, 80, 65, 0.24),
+    -4px -5px 10px rgba(235, 190, 170, 0.20) !important;
+}
+
+/* Scenes denser olive */
+.mc-app .panel-scenes,
+.mc-app .glass-card.panel-scenes,
+.mc-app .side > .panel-scenes {
+  background: #939475 !important;
+  background-color: #939475 !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    6px 8px 14px rgba(85, 90, 65, 0.22),
+    -3px -4px 10px rgba(200, 205, 180, 0.10) !important;
+}
+
+/* Media slightly denser coral */
+.mc-app .panel-media,
+.mc-app .glass-card.panel-media,
+.mc-app .side > .panel-media {
+  background: #BE7A68 !important;
+  background-color: #BE7A68 !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+  box-shadow:
+    6px 8px 14px rgba(125, 65, 50, 0.24),
+    -3px -4px 10px rgba(230, 175, 160, 0.12) !important;
+}
+
+/* Env keep sage lock */
+.mc-app .panel-environment,
+.mc-app .glass-card.panel-environment,
+.mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+.mc-app .side > .time-card + .glass-card {
+  background: #989A7B !important;
+  background-color: #989A7B !important;
+  border: none !important;
+  color: #FFF8F0 !important;
+}
+
+/* Rooms: no hard edge */
+.mc-app .room,
+.mc-app .rooms .room,
+.mc-app .bottom-stack .rooms .room {
+  border: none !important;
+  outline: none !important;
+  box-shadow:
+    8px 8px 16px rgba(175, 155, 135, 0.32),
+    -5px -5px 12px rgba(255, 252, 248, 0.45) !important;
+}
+
+/* Search: ghost pill, almost disappears like reference (no search) */
+.mc-app .stage-grid > div[style*="position:absolute"],
+.mc-app .stage .stage-grid > div[style*="position:absolute"] {
+  background: rgba(232, 220, 206, 0.35) !important;
+  background-color: rgba(232, 220, 206, 0.35) !important;
+  border: none !important;
+  box-shadow:
+    inset 1px 1px 3px rgba(150, 125, 100, 0.10),
+    inset -1px -1px 2px rgba(255, 252, 248, 0.25) !important;
+  opacity: 0.55 !important;
+  transform: scale(0.84);
+  transform-origin: left top;
+  max-width: min(300px, 28vw) !important;
+  pointer-events: auto !important;
+}
+.mc-app .stage-grid > div[style*="position:absolute"] ha-icon,
+.mc-app .stage-grid > div[style*="position:absolute"] span {
+  opacity: 0.65 !important;
+  font-size: 12px !important;
+  --mdc-icon-size: 14px !important;
+}
+
+/* Hard border kill */
+.mc-app .device,
+.mc-app .room,
+.mc-app .glass-card,
+.mc-app .time-card,
+.mc-app .weather-with-meta,
+.mc-app .panel-energy,
+.mc-app .panel-media,
+.mc-app .panel-scenes,
+.mc-app .panel-environment {
+  border: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mc-app, :host { background: #1C1715 !important; background-color: #1C1715 !important; }
+  .mc-app .device,
+  .mc-app .devices .device,
+  .mc-app .bottom-stack .devices .device,
+  .mc-app .devices-page-grid .device,
+  .mc-app button.device,
+  .mc-app .stage .bottom-stack .devices .device {
+    background: #2B2320 !important;
+    background-color: #2B2320 !important;
+    background-image: linear-gradient(155deg, #322925 0%, #2B2320 58%, #241E1B 100%) !important;
+    color: #FAF5F0 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .time-card,
+  .mc-app .side > .time-card,
+  .mc-app section.time-card,
+  .mc-app .side .time-card {
+    background: #422D28 !important;
+    background-color: #422D28 !important;
+    color: #F5ECE3 !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-energy, .mc-app .glass-card.panel-energy, .mc-app .side > .panel-energy {
+    background: #2B2320 !important; color: #FAF5F0 !important; border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-environment,
+  .mc-app .glass-card.panel-environment,
+  .mc-app .side > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes),
+  .mc-app .side > .time-card + .glass-card {
+    background: #2D3227 !important; color: #F5ECE3 !important; border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-media, .mc-app .glass-card.panel-media, .mc-app .side > .panel-media {
+    background: #3D2722 !important; border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .panel-scenes, .mc-app .glass-card.panel-scenes, .mc-app .side > .panel-scenes {
+    background: #2A2B22 !important; border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .weather-with-meta,
+  .mc-app .welcome-group .weather-with-meta,
+  .weather-with-meta {
+    background-image:
+      linear-gradient(105deg,
+        rgba(28,23,21,0.58) 0%,
+        rgba(28,23,21,0.22) 22%,
+        rgba(28,23,21,0.05) 42%,
+        rgba(28,23,21,0) 58%),
+      url("./decoration-hero.png") !important;
+    border: none !important;
+    box-shadow: 6px 6px 14px rgba(12,9,8,0.7), -4px -4px 10px rgba(75,62,55,0.25) !important;
+  }
+  .mc-app .welcome h1 { color: #F5ECE3 !important; }
+  .mc-app .welcome .quote { color: rgba(245,236,227,0.65) !important; }
+  .mc-app .stage-grid > div[style*="position:absolute"] {
+    background: rgba(43,35,32,0.82) !important;
+    border: none !important;
+    opacity: 0.7 !important;
+    box-shadow: inset 2px 2px 5px rgba(12,9,8,0.5), inset -1px -1px 3px rgba(75,62,55,0.2) !important;
+  }
+}
+
+/* Right rail: flat, clean surfaces without dirty edge lines or cast shadows. */
+.mc-app .stage-grid > .side,
+.mc-app .stage-grid > .side > .time-card,
+.mc-app .stage-grid > .side > section.glass-card,
+.mc-app .stage-grid > .side > .time-card .time-icon,
+.mc-app .stage-grid > .side > section.glass-card .env-row,
+.mc-app .stage-grid > .side > section.glass-card .env-row .dot,
+.mc-app .stage-grid > .side > section.glass-card.panel-energy,
+.mc-app .stage-grid > .side > section.glass-card.panel-media,
+.mc-app .stage-grid > .side > section.glass-card.panel-media .media-volbtn,
+.mc-app .stage-grid > .side > section.glass-card.panel-scenes,
+.mc-app .stage-grid > .side > section.glass-card.panel-scenes .scene {
+  border: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.mc-app .stage-grid > .side > .time-card .time-icon {
+  background: rgba(247, 239, 230, 0.34) !important;
+}
+
+/* Official Skins-Pro visionOS 20260719 device-card/control contract. */
+.mc-app .bottom-stack .devices > .device,
+.mc-app .devices-page-grid > .device,
+.mc-app button.device {
+  min-width: 0 !important;
+  min-height: 148px !important;
+  padding: 14px !important;
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  gap: 7px !important;
+  cursor: pointer !important;
+  text-align: left !important;
+  overflow: hidden !important;
+  transition:
+    transform 180ms cubic-bezier(.2,.8,.2,1),
+    background-color 180ms cubic-bezier(.2,.8,.2,1),
+    box-shadow 180ms cubic-bezier(.2,.8,.2,1) !important;
+}
+@media (hover: hover) {
+  .mc-app .bottom-stack .devices > .device:hover,
+  .mc-app .devices-page-grid > .device:hover,
+  .mc-app button.device:hover {
+    transform: translateY(-2px) !important;
+  }
+}
+.mc-app .bottom-stack .devices > .device:active,
+.mc-app .devices-page-grid > .device:active,
+.mc-app button.device:active {
+  transform: scale(.985) !important;
+}
+.mc-app .bottom-stack .devices > .device:focus-visible,
+.mc-app .devices-page-grid > .device:focus-visible,
+.mc-app button.device:focus-visible {
+  outline: 2px solid rgba(173, 110, 93, .62) !important;
+  outline-offset: 2px !important;
+}
+.mc-app .device .device-top,
+.mc-app .device .control-row {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 4px !important;
+  box-sizing: border-box !important;
+}
+.mc-app .device .device-copy {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  align-self: end !important;
+}
+.mc-app .device .device-name,
+.mc-app .devices-page-grid .device .device-name {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 0 2px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  overflow-wrap: anywhere !important;
+}
+.mc-app .device .muted,
+.mc-app .device .state-word {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+.mc-app .device .state-word {
+  flex: 1 1 auto !important;
+}
+.mc-app .device .tag-stack,
+.mc-app .device .status {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+.mc-app .device .status {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+.mc-app .device .item-img,
+.mc-app .device .item-icon {
+  width: 52px !important;
+  height: 52px !important;
+  flex: 0 0 52px !important;
+}
+.mc-app .device .control-row {
+  min-height: 32px !important;
+  overflow: hidden !important;
+}
+.mc-app .device .control-row > ha-control-slider,
+.mc-app .device .control-row > .media-vol-slider {
+  flex: 1 1 64px !important;
+  min-width: 42px !important;
+  max-width: 100% !important;
+}
+.mc-app .device .control-row > ha-control-switch {
+  flex: 0 0 44px !important;
+  width: 44px !important;
+  max-width: 44px !important;
+  margin-left: auto !important;
+}
+.mc-app .device .control-row .temp-group {
+  flex: 0 1 auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  gap: 1px !important;
+}
+.mc-app .device .control-row .media-volbtn {
+  flex: 0 0 32px !important;
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: rgba(247, 239, 230, .52) !important;
+}
+.mc-app .device .control-row > .filter-select,
+.mc-app .device .control-row select.filter-select {
+  flex: 0 1 72px !important;
+  min-width: 48px !important;
+  max-width: 72px !important;
+  min-height: 32px !important;
+  padding: 0 16px 0 5px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+}
+
+/* The environment card used a higher-specificity legacy shadow selector. */
+.mc-app .stage .stage-grid > .side > section.glass-card.panel-environment:not(.panel-energy):not(.panel-media):not(.panel-scenes) {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side > section.glass-card.panel-energy {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Keep the desktop rail proportional at 1366px and capped on ultrawide. */
+@media (min-width: 1181px) {
+  .mc-app .stage .stage-grid {
+    grid-template-columns: minmax(0, 1fr) clamp(360px, 32%, 520px) !important;
+  }
+  .mc-app .stage .stage-grid > .side {
+    width: 100% !important;
+    max-width: 520px !important;
+    justify-self: end !important;
+  }
+}
+@media (min-width: 901px) {
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .bottom-stack.bottom-stack > .bottom-devices.bottom-devices > .devices.devices[style],
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid .bottom-stack.bottom-stack .devices.devices {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    grid-auto-columns: minmax(0, 1fr) !important;
+    grid-auto-flow: row !important;
+    overflow-x: hidden !important;
+    scrollbar-width: none !important;
+  }
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid .bottom-stack.bottom-stack .devices.devices::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+
+/* Do not switch 1366x768 desktop layouts to the mobile navigation. */
+@media (orientation: landscape) and (min-width: 761px) {
+  .mc-app .sidebar,
+  .mc-app aside.sidebar {
+    display: flex !important;
+  }
+  .mc-app .mobile-nav {
+    display: none !important;
+  }
+}
+
+/* visionOS keeps two compact columns in portrait; controls wrap when needed. */
+@media (orientation: portrait) and (max-width: 900px) {
+  .mc-app .devices,
+  .mc-app .devices-page-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  }
+  .mc-app .bottom-stack .devices > .device,
+  .mc-app .devices-page-grid > .device,
+  .mc-app button.device {
+    min-height: 132px !important;
+    padding: 10px !important;
+  }
+  .mc-app .device .item-img,
+  .mc-app .device .item-icon {
+    width: 40px !important;
+    height: 40px !important;
+    flex-basis: 40px !important;
+  }
+  .mc-app .device .control-row {
+    flex-wrap: wrap !important;
+    align-content: center !important;
+    overflow: visible !important;
+  }
+  .mc-app .mobile-nav .nav-button span {
+    display: block !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 9px !important;
+  }
+}
+@media (max-width: 480px) {
+  .mc-app .bottom-stack .devices > .device,
+  .mc-app .devices-page-grid > .device,
+  .mc-app button.device {
+    min-height: 120px !important;
+  }
+  .mc-app .device .item-img,
+  .mc-app .device .item-icon {
+    width: 36px !important;
+    height: 36px !important;
+    flex-basis: 36px !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .mc-app .stage-grid > .side > .time-card .time-icon {
+    background: rgba(247, 239, 230, .12) !important;
+  }
+  .mc-app .device .control-row .media-volbtn {
+    background: rgba(247, 239, 230, .10) !important;
+  }
+}
+
+/* ==========================================================================
+   R77 DEVICE TYPOGRAPHY + CONTROL DEPTH + LEGIBILITY
+   clay-cozy-home-20260726-v77
+   ========================================================================== */
+
+/* Long entity names stay on one line without pushing controls off-card. */
+.mc-app.mc-app .bottom-stack .devices .device .device-name,
+.mc-app.mc-app .devices-page-grid .device .device-name {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+}
+
+/* Temperature/state badges are true flex capsules, including inline-styled ones. */
+.mc-app.mc-app .device .tag-stack .status {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 28px !important;
+  min-height: 24px !important;
+  padding: 4px 8px !important;
+  box-sizing: border-box !important;
+  line-height: 1 !important;
+  text-align: center !important;
+}
+
+/* Climate steppers: stronger ink and a restrained pressed-clay surface. */
+.mc-app.mc-app .device .control-row .temp-group .media-volbtn,
+.mc-app.mc-app .device .control-row .temp-group [role="button"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 5px !important;
+  box-sizing: border-box !important;
+  color: #4A3A2C !important;
+  background: rgba(247, 239, 230, 0.72) !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow:
+    inset 1px 1px 2px rgba(150, 110, 85, 0.12),
+    0 2px 4px rgba(150, 110, 85, 0.14) !important;
+}
+.mc-app.mc-app .device .control-row .temp-group .media-volbtn ha-icon,
+.mc-app.mc-app .device .control-row .temp-group [role="button"] ha-icon {
+  color: #4A3A2C !important;
+}
+.mc-app.mc-app .device .control-row .temp-group .media-volbtn:active,
+.mc-app.mc-app .device .control-row .temp-group [role="button"]:active {
+  transform: translateY(1px) !important;
+  box-shadow:
+    inset 2px 2px 4px rgba(120, 85, 66, 0.22),
+    0 1px 2px rgba(150, 110, 85, 0.10) !important;
+}
+.mc-app.mc-app .device .control-row .temp-group > span {
+  color: #4A3A2C !important;
+}
+
+/* Sage environment panel: icons and explanatory copy use the same warm white. */
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-environment .env-row .dot,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-environment .env-row .dot ha-icon,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-environment .env-row .muted {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* The inline search trigger reads as a shallow clay recess. */
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid
+  > div[style*="position:absolute"] {
+  box-shadow:
+    inset 2px 2px 5px rgba(180, 160, 140, 0.30),
+    inset -1px -1px 2px rgba(255, 252, 248, 0.24) !important;
+}
+
+/* A bottom-only dark veil keeps room captions readable on every source image. */
+.mc-app.mc-app .bottom-stack .rooms .room {
+  position: relative !important;
+  isolation: isolate !important;
+}
+.mc-app.mc-app .bottom-stack .rooms .room::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: auto 0 0 0 !important;
+  width: 100% !important;
+  height: 52% !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(32, 22, 17, 0) 0%,
+      rgba(32, 22, 17, 0.12) 34%,
+      rgba(32, 22, 17, 0.62) 100%
+    ) !important;
+  border: none !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+.mc-app.mc-app .bottom-stack .rooms .room .room-label {
+  z-index: 2 !important;
+  background: transparent !important;
+}
+.mc-app.mc-app .bottom-stack .rooms .room .room-label h3,
+.mc-app.mc-app .bottom-stack .rooms .room .room-label p,
+.mc-app.mc-app .bottom-stack .rooms .room .room-label .muted {
+  color: #FFF8F0 !important;
+  text-shadow: 0 1px 3px rgba(24, 16, 12, 0.72) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mc-app.mc-app .device .control-row .temp-group .media-volbtn,
+  .mc-app.mc-app .device .control-row .temp-group [role="button"] {
+    color: #F5ECE3 !important;
+    background: rgba(247, 239, 230, 0.12) !important;
+    box-shadow:
+      inset 1px 1px 2px rgba(12, 9, 8, 0.34),
+      0 2px 4px rgba(12, 9, 8, 0.22) !important;
+  }
+  .mc-app.mc-app .device .control-row .temp-group .media-volbtn ha-icon,
+  .mc-app.mc-app .device .control-row .temp-group [role="button"] ha-icon,
+  .mc-app.mc-app .device .control-row .temp-group > span {
+    color: #F5ECE3 !important;
+  }
+}
+
+/* ==========================================================================
+   R78 ENERGY STACK + NARROW-DESKTOP CONTROL FIT
+   clay-cozy-home-20260726-v78
+   ========================================================================== */
+
+/* Keep the energy heading/value and chart in separate vertical regions. */
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 0 !important;
+  padding: 16px 18px 14px !important;
+  box-sizing: border-box !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .section-title {
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  margin: 0 0 4px !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .section-title h2 {
+  margin: 0 !important;
+  color: #4A3A2C !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .energy-value {
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: baseline !important;
+  width: 100% !important;
+  margin: 0 !important;
+  color: #4A3A2C !important;
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.02em !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .energy-value small {
+  margin-left: 4px !important;
+  color: #8C7B6C !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .bars {
+  flex: 0 0 48px !important;
+  align-self: stretch !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  margin: 12px 0 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  gap: 4px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .bars > .energy-bar {
+  flex: 1 1 0 !important;
+  min-width: 6px !important;
+  max-width: 22px !important;
+  margin: 0 !important;
+  align-self: flex-end !important;
+  background: #E3805B !important;
+  background-color: #E3805B !important;
+  border: none !important;
+  border-radius: 7px 7px 4px 4px !important;
+  box-shadow: none !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .bars:has(> .energy-bar:only-child) {
+  justify-content: center !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .bars > .energy-bar:only-child {
+  flex: 0 0 28px !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .energy-footer {
+  flex: 0 0 14px !important;
+  width: 100% !important;
+  min-height: 14px !important;
+  margin: 4px 0 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  line-height: 1 !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .energy-footer > .muted {
+  display: none !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .energy-footer > .down {
+  margin-left: auto !important;
+  color: #8C7B6C !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+}
+
+/* The official climate row fits five cards without clipping at 1366px. */
+.mc-app.mc-app .bottom-stack .devices .device .control-row,
+.mc-app.mc-app .devices-page-grid .device .control-row {
+  gap: 2px !important;
+  padding-inline: 0 !important;
+}
+.mc-app.mc-app .bottom-stack .devices .device .control-row .temp-group,
+.mc-app.mc-app .devices-page-grid .device .control-row .temp-group {
+  flex: 0 0 94px !important;
+  width: 94px !important;
+  min-width: 94px !important;
+  max-width: 94px !important;
+  padding: 0 !important;
+  gap: 1px !important;
+  box-sizing: border-box !important;
+}
+.mc-app.mc-app .bottom-stack .devices .device .control-row > .filter-select,
+.mc-app.mc-app .bottom-stack .devices .device .control-row > select.filter-select,
+.mc-app.mc-app .devices-page-grid .device .control-row > .filter-select,
+.mc-app.mc-app .devices-page-grid .device .control-row > select.filter-select {
+  flex: 1 1 0 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 72px !important;
+  padding: 0 14px 0 4px !important;
+  box-sizing: border-box !important;
+}
+@media (min-width: 901px) and (max-width: 1500px) {
+  .mc-app.mc-app .bottom-stack .devices > .device,
+  .mc-app.mc-app .devices-page-grid > .device,
+  .mc-app.mc-app button.device {
+    padding: 8px !important;
+  }
+  .mc-app.mc-app .bottom-stack .devices .device .control-row,
+  .mc-app.mc-app .devices-page-grid .device .control-row {
+    gap: 1px !important;
+  }
+  .mc-app.mc-app .bottom-stack .devices .device .control-row .temp-group,
+  .mc-app.mc-app .devices-page-grid .device .control-row .temp-group {
+    flex-basis: 78px !important;
+    width: 78px !important;
+    min-width: 78px !important;
+    max-width: 78px !important;
+  }
+  .mc-app.mc-app .bottom-stack .devices .device .control-row
+    .temp-group .media-volbtn,
+  .mc-app.mc-app .bottom-stack .devices .device .control-row
+    .temp-group [role="button"],
+  .mc-app.mc-app .devices-page-grid .device .control-row
+    .temp-group .media-volbtn,
+  .mc-app.mc-app .devices-page-grid .device .control-row
+    .temp-group [role="button"] {
+    flex: 0 0 26px !important;
+    width: 26px !important;
+    min-width: 26px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 4px !important;
+  }
+  .mc-app.mc-app .bottom-stack .devices .device .control-row
+    .temp-group > span,
+  .mc-app.mc-app .devices-page-grid .device .control-row
+    .temp-group > span {
+    flex: 0 0 24px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+  }
+  .mc-app.mc-app .bottom-stack .devices .device .control-row > .filter-select,
+  .mc-app.mc-app .bottom-stack .devices .device .control-row > select.filter-select,
+  .mc-app.mc-app .devices-page-grid .device .control-row > .filter-select,
+  .mc-app.mc-app .devices-page-grid .device .control-row > select.filter-select {
+    padding: 0 10px 0 2px !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.panel-energy > .section-title h2,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.panel-energy > .energy-value {
+    color: #F5ECE3 !important;
+  }
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.panel-energy > .energy-value small,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.panel-energy > .energy-footer > .down {
+    color: rgba(245, 236, 227, 0.68) !important;
+  }
+}
+
+/* Three selected semantic rooms fill the desktop row; four-room defaults stay unchanged. */
+@media (min-width: 901px) {
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid
+    .bottom-stack.bottom-stack .rooms.rooms:has(> .room:nth-child(3):last-child) {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-auto-columns: minmax(0, 1fr) !important;
+  }
+}
+
+/* Night weather art stays explicit and visible above legacy dark-mode fills. */
+@media (prefers-color-scheme: dark) {
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid
+    .welcome-group .weather-with-meta,
+  .mc-app.mc-app .weather-with-meta {
+    background-color: #E5D6C4 !important;
+    background-image:
+      linear-gradient(
+        105deg,
+        rgba(28, 23, 21, 0.22) 0%,
+        rgba(28, 23, 21, 0.10) 24%,
+        rgba(28, 23, 21, 0.02) 44%,
+        rgba(28, 23, 21, 0) 60%
+      ),
+      url("./decoration-hero.png") !important;
+    background-size: cover, cover !important;
+    background-position: center, center !important;
+    background-repeat: no-repeat, no-repeat !important;
+    background-blend-mode: normal !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
+  .mc-app.mc-app .weather-with-meta::before,
+  .mc-app.mc-app .weather-with-meta::after {
+    content: none !important;
+    display: none !important;
+  }
+}
+
+/* clay-cozy-home-20260726-v80 */

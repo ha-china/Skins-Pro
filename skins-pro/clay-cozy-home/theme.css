@@ -20864,4 +20864,452 @@ ha-top-app-bar-fixed, app-header, app-toolbar,
   width: 2.4% !important;
 }
 
-/* clay-cozy-home-20260726-v86 */
+/* ==========================================================================
+   R91 — ORIGINAL CLAY DIORAMA + FOUR-LAYER MATERIAL SYSTEM
+   ========================================================================== */
+
+:host,
+.mc-app.mc-app,
+.mc-app.mc-app .stage.stage {
+  background-image: none !important;
+}
+.mc-app.mc-app .sidebar.sidebar,
+.mc-app.mc-app .weather-with-meta,
+.mc-app.mc-app .bottom-stack.bottom-stack .devices.devices > .device.device,
+.mc-app.mc-app .devices-page-grid.devices-page-grid > .device.device,
+.mc-app.mc-app button.device.device,
+.mc-app.mc-app .bottom-stack.bottom-stack .rooms.rooms > .room.room,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.time-card,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes):not(.panel-camera) {
+  border: 0 !important;
+  border-color: transparent !important;
+  outline: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid
+  .welcome-group .weather-with-meta.weather-with-meta {
+  border-radius: 36px !important;
+}
+.mc-app.mc-app .bottom-stack.bottom-stack
+  .devices.devices > .device.device,
+.mc-app.mc-app .devices-page-grid.devices-page-grid > .device.device,
+.mc-app.mc-app button.device.device {
+  border-radius: 24px !important;
+}
+.mc-app.mc-app .bottom-stack.bottom-stack
+  .rooms.rooms > .room.room {
+  border-radius: 28px !important;
+  overflow: hidden !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.time-card,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card {
+  border-radius: 28px !important;
+}
+
+/* Float the desktop sidebar inside its existing grid track. */
+@media (min-width: 901px) and (orientation: landscape) {
+  .mc-app.mc-app {
+    padding-bottom: 0 !important;
+  }
+  .mc-app.mc-app > .sidebar.sidebar,
+  .mc-app.mc-app > aside.sidebar.sidebar {
+    align-self: center !important;
+    justify-self: center !important;
+    width: calc(100% - 24px) !important;
+    min-width: 0 !important;
+    max-width: calc(100% - 24px) !important;
+    height: calc(100% - 24px) !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    border-radius: 32px !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :host,
+  .mc-app.mc-app,
+  .mc-app.mc-app .stage.stage {
+    background: #F7EFE9 !important;
+    background-color: #F7EFE9 !important;
+  }
+
+  .mc-app.mc-app > .sidebar.sidebar,
+  .mc-app.mc-app > aside.sidebar.sidebar {
+    background: #C98370 !important;
+    background-color: #C98370 !important;
+    background-image: none !important;
+    color: #4A3028 !important;
+    box-shadow:
+      12px 16px 24px -8px rgba(133, 75, 60, 0.36),
+      -8px -8px 16px 0 rgba(255, 220, 210, 0.62),
+      inset 3px 3px 6px 0 rgba(255, 235, 228, 0.56),
+      inset -4px -4px 8px 0 rgba(105, 52, 44, 0.16) !important;
+  }
+
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid
+    .welcome-group .weather-with-meta.weather-with-meta,
+  .mc-app.mc-app .bottom-stack.bottom-stack
+    .devices.devices > .device.device,
+  .mc-app.mc-app .devices-page-grid.devices-page-grid > .device.device,
+  .mc-app.mc-app button.device.device,
+  .mc-app.mc-app .bottom-stack.bottom-stack
+    .rooms.rooms > .room.room,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.panel-energy {
+    box-shadow:
+      12px 16px 24px -8px rgba(165, 115, 95, 0.35),
+      -8px -8px 16px 0 rgba(255, 255, 255, 0.8),
+      inset 3px 3px 6px 0 rgba(255, 255, 255, 0.9),
+      inset -4px -4px 8px 0 rgba(135, 90, 70, 0.15) !important;
+  }
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid
+    .welcome-group .weather-with-meta.weather-with-meta {
+    background-color: #EBDCCB !important;
+    background-image:
+      linear-gradient(
+        90deg,
+        rgba(247, 239, 233, 0.04) 0%,
+        rgba(247, 239, 233, 0) 54%
+      ),
+      var(--sp-stage-texture) !important;
+    background-position: center, center !important;
+    background-repeat: no-repeat, no-repeat !important;
+    background-size: cover, cover !important;
+  }
+  .mc-app.mc-app .bottom-stack.bottom-stack
+    .devices.devices > .device.device,
+  .mc-app.mc-app .devices-page-grid.devices-page-grid > .device.device,
+  .mc-app.mc-app button.device.device {
+    background: #F3E7DA !important;
+    background-color: #F3E7DA !important;
+    background-image: none !important;
+  }
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.panel-energy {
+    background: #EAD8C5 !important;
+    background-color: #EAD8C5 !important;
+    background-image: none !important;
+  }
+
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.time-card,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.panel-media {
+    background: #CF8873 !important;
+    background-color: #CF8873 !important;
+    background-image: none !important;
+    box-shadow:
+      12px 16px 24px -8px rgba(145, 83, 67, 0.34),
+      -8px -8px 16px 0 rgba(255, 220, 210, 0.58),
+      inset 3px 3px 6px 0 rgba(255, 238, 230, 0.50),
+      inset -4px -4px 8px 0 rgba(105, 52, 44, 0.16) !important;
+  }
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.panel-environment,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes):not(.panel-camera),
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.panel-scenes {
+    background: #98A78C !important;
+    background-color: #98A78C !important;
+    background-image: none !important;
+    box-shadow:
+      12px 16px 24px -8px rgba(94, 108, 82, 0.34),
+      -8px -8px 16px 0 rgba(235, 241, 227, 0.58),
+      inset 3px 3px 6px 0 rgba(247, 250, 241, 0.48),
+      inset -4px -4px 8px 0 rgba(62, 76, 54, 0.16) !important;
+  }
+
+  .mc-app.mc-app > .sidebar.sidebar .nav-button {
+    border: 0 !important;
+    border-radius: 20px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .mc-app.mc-app > .sidebar.sidebar .nav-button:hover,
+  .mc-app.mc-app > .sidebar.sidebar .nav-button.active {
+    background: #E7AE9B !important;
+    color: #4A3028 !important;
+    box-shadow:
+      inset 3px 3px 7px rgba(119, 63, 50, 0.22),
+      inset -3px -3px 7px rgba(255, 229, 219, 0.58) !important;
+  }
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > .panel-environment .env-list > .env-row,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes):not(.panel-camera)
+      .env-list > .env-row,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > .panel-scenes .scene-grid > .scene {
+    border-radius: 20px !important;
+    box-shadow:
+      inset 4px 4px 8px rgba(70, 82, 61, 0.22),
+      inset -4px -4px 8px rgba(255, 255, 255, 0.52) !important;
+  }
+  .mc-app.mc-app .device .control-row .temp-group {
+    border-radius: 18px !important;
+    background: rgba(232, 216, 200, 0.72) !important;
+    box-shadow:
+      inset 2px 2px 5px rgba(135, 90, 70, 0.17),
+      inset -2px -2px 5px rgba(255, 255, 255, 0.74) !important;
+  }
+  .mc-app.mc-app .device .control-row .media-volbtn,
+  .mc-app.mc-app .device .control-row > .filter-select,
+  .mc-app.mc-app .device .control-row > select.filter-select {
+    background: #EFE1D3 !important;
+    color: #4A3A2C !important;
+    border: 0 !important;
+    box-shadow:
+      2px 3px 6px rgba(135, 90, 70, 0.16),
+      inset 1px 1px 3px rgba(255, 255, 255, 0.76),
+      inset -2px -2px 4px rgba(135, 90, 70, 0.12) !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :host,
+  .mc-app.mc-app,
+  .mc-app.mc-app .stage.stage {
+    background: #1C1715 !important;
+    background-color: #1C1715 !important;
+  }
+  .mc-app.mc-app > .sidebar.sidebar,
+  .mc-app.mc-app > aside.sidebar.sidebar,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid
+    .welcome-group .weather-with-meta.weather-with-meta,
+  .mc-app.mc-app .bottom-stack.bottom-stack
+    .devices.devices > .device.device,
+  .mc-app.mc-app .devices-page-grid.devices-page-grid > .device.device,
+  .mc-app.mc-app button.device.device,
+  .mc-app.mc-app .bottom-stack.bottom-stack
+    .rooms.rooms > .room.room,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.time-card,
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card {
+    box-shadow:
+      12px 16px 24px -8px rgba(0, 0, 0, 0.62),
+      -8px -8px 16px 0 rgba(82, 68, 60, 0.22),
+      inset 3px 3px 6px 0 rgba(255, 255, 255, 0.10),
+      inset -4px -4px 8px 0 rgba(0, 0, 0, 0.24) !important;
+  }
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid
+    .welcome-group .weather-with-meta.weather-with-meta {
+    background-image:
+      linear-gradient(
+        105deg,
+        rgba(28, 23, 21, 0.48) 0%,
+        rgba(28, 23, 21, 0.34) 34%,
+        rgba(28, 23, 21, 0.22) 68%,
+        rgba(28, 23, 21, 0.18) 100%
+      ),
+      var(--sp-stage-texture) !important;
+    background-position: center, center !important;
+    background-repeat: no-repeat, no-repeat !important;
+    background-size: cover, cover !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid
+    .welcome-group .weather-with-meta.weather-with-meta {
+    border-radius: 28px !important;
+  }
+  .mc-app.mc-app .bottom-stack.bottom-stack
+    .devices.devices > .device.device,
+  .mc-app.mc-app .devices-page-grid.devices-page-grid > .device.device,
+  .mc-app.mc-app button.device.device,
+  .mc-app.mc-app .bottom-stack.bottom-stack
+    .rooms.rooms > .room.room {
+    border-radius: 24px !important;
+  }
+}
+
+@media (prefers-color-scheme: light) and (max-width: 520px) {
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid
+    .welcome-group .weather-with-meta.weather-with-meta {
+    background-image:
+      linear-gradient(
+        90deg,
+        rgba(247, 239, 233, 0.92) 0%,
+        rgba(247, 239, 233, 0.82) 62%,
+        rgba(247, 239, 233, 0.22) 82%,
+        rgba(247, 239, 233, 0) 100%
+      ),
+      var(--sp-stage-texture) !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) and (max-width: 520px) {
+  .mc-app.mc-app .stage.stage .stage-grid.stage-grid
+    .welcome-group .weather-with-meta.weather-with-meta {
+    background-image:
+      linear-gradient(
+        90deg,
+        rgba(28, 23, 21, 0.78) 0%,
+        rgba(28, 23, 21, 0.60) 62%,
+        rgba(28, 23, 21, 0.24) 82%,
+        rgba(28, 23, 21, 0.18) 100%
+      ),
+      var(--sp-stage-texture) !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .mc-app.mc-app .weather-with-meta .weather-current-hl,
+  .mc-app.mc-app .weather-with-meta .forecast-weekday,
+  .mc-app.mc-app .weather-with-meta .forecast-icon,
+  .mc-app.mc-app .weather-with-meta .forecast-icon ha-icon,
+  .mc-app.mc-app .weather-with-meta .forecast-high {
+    color: rgba(255, 255, 255, 0.84) !important;
+    --state-icon-color: rgba(255, 255, 255, 0.84) !important;
+    --paper-item-icon-color: rgba(255, 255, 255, 0.84) !important;
+  }
+  .mc-app.mc-app .weather-with-meta .forecast-low {
+    color: rgba(255, 255, 255, 0.62) !important;
+  }
+}
+
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > .panel-environment .env-list > .env-row,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes):not(.panel-camera)
+    .env-list > .env-row,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > .panel-scenes .scene-grid > .scene {
+  border-radius: 20px !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-environment,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card:not(.panel-energy):not(.panel-media):not(.panel-scenes):not(.panel-camera),
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-media,
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-scenes {
+  border-radius: 28px !important;
+}
+
+/* Current runtime renders the environment module as a plain glass-card.
+   Keep this terminal lock separate so both old and new DOM contracts match. */
+@media (prefers-color-scheme: light) {
+  .mc-app.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.glass-card:not([class*="panel-"]) {
+    background: #98A78C !important;
+    background-color: #98A78C !important;
+    background-image: none !important;
+    border-radius: 28px !important;
+    box-shadow:
+      12px 16px 24px -8px rgba(94, 108, 82, 0.34),
+      -8px -8px 16px 0 rgba(235, 241, 227, 0.58),
+      inset 3px 3px 6px 0 rgba(247, 250, 241, 0.48),
+      inset -4px -4px 8px 0 rgba(62, 76, 54, 0.16) !important;
+  }
+  .mc-app.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.glass-card:not([class*="panel-"])
+      .env-list > .env-row {
+    border-radius: 20px !important;
+    box-shadow:
+      inset 4px 4px 8px rgba(70, 82, 61, 0.22),
+      inset -4px -4px 8px rgba(255, 255, 255, 0.52) !important;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .mc-app.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.glass-card:not([class*="panel-"]) {
+    background: #2D3227 !important;
+    background-color: #2D3227 !important;
+    background-image: none !important;
+    border-radius: 28px !important;
+    box-shadow:
+      12px 16px 24px -8px rgba(0, 0, 0, 0.62),
+      -8px -8px 16px 0 rgba(82, 68, 60, 0.22),
+      inset 3px 3px 6px 0 rgba(255, 255, 255, 0.10),
+      inset -4px -4px 8px 0 rgba(0, 0, 0, 0.24) !important;
+  }
+  .mc-app.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > section.glass-card.glass-card:not([class*="panel-"])
+      .env-list > .env-row,
+  .mc-app.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+    > .panel-environment .env-list > .env-row {
+    border-radius: 20px !important;
+    box-shadow:
+      inset 4px 4px 8px rgba(0, 0, 0, 0.28),
+      inset -4px -4px 8px rgba(255, 255, 255, 0.12) !important;
+  }
+}
+
+.mc-app.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.glass-card:not([class*="panel-"])
+    .env-list > .env-row .muted,
+.mc-app.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.glass-card:not([class*="panel-"])
+    .env-list > .env-row .dot,
+.mc-app.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.glass-card:not([class*="panel-"])
+    .env-list > .env-row .dot ha-icon,
+.mc-app.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > .panel-environment .env-list > .env-row .muted,
+.mc-app.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > .panel-environment .env-list > .env-row .dot,
+.mc-app.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > .panel-environment .env-list > .env-row .dot ha-icon {
+  color: rgba(255, 255, 255, 0.85) !important;
+  --state-icon-color: rgba(255, 255, 255, 0.85) !important;
+  --paper-item-icon-color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* ==========================================================================
+   R92 — 48PX ENERGY CHART + SINGLE NON-POSITIVE SAMPLE FALLBACK
+   ========================================================================== */
+
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .bars {
+  flex: 0 0 48px !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  line-height: 48px !important;
+}
+
+/* Some cumulative sensors expose one negative delta instead of hourly history.
+   Preserve every valid multi-point series; only replace that invalid one-point
+   state with a quiet clay placeholder so it never resembles a broken line. */
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .bars
+  :is(.energy-bar.energy-bar-level-0:only-child) {
+  visibility: hidden !important;
+}
+.mc-app.mc-app .stage.stage .stage-grid.stage-grid > .side.side
+  > section.glass-card.panel-energy > .bars:has(> .energy-bar.energy-bar-level-0:only-child) {
+  background:
+    linear-gradient(#E3805B, #E3805B) 0% 100% / 3.2% 12px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 6% 100% / 3.2% 18px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 12% 100% / 3.2% 9px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 18% 100% / 3.2% 24px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 24% 100% / 3.2% 14px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 30% 100% / 3.2% 30px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 36% 100% / 3.2% 20px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 42% 100% / 3.2% 34px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 48% 100% / 3.2% 17px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 54% 100% / 3.2% 26px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 60% 100% / 3.2% 12px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 66% 100% / 3.2% 22px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 72% 100% / 3.2% 31px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 78% 100% / 3.2% 16px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 84% 100% / 3.2% 28px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 90% 100% / 3.2% 11px no-repeat,
+    linear-gradient(#E3805B, #E3805B) 96% 100% / 3.2% 20px no-repeat !important;
+}
+
+/* clay-cozy-home-20260726-v92 */

@@ -2908,8 +2908,8 @@ ha-control-slider {
 
 @media (orientation: portrait), (max-width: 760px) {
   .stage {
-    background-size: cover, auto 520px;
-    background-position: center, 30% top;
+    background-size: cover, auto 460px;
+    background-position: center, 30% -24px;
     background-repeat: no-repeat, no-repeat;
   }
 

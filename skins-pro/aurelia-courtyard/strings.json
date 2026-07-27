@@ -1,9 +1,11 @@
 {
   "author": "truemanshum",
-  "version": "20260727.2",
+  "version": "20260727.3",
   "dark_mode": true,
   "title_zh": "欢迎回来！",
   "title_en": "Welcome Back!",
+  "subtitle_zh": "光落中庭，万物有序",
+  "subtitle_en": "Light settles into quiet order",
   "profile_subtitle_zh": "曜庭入室 · 昼夜有序",
   "profile_subtitle_en": "Aurelia living · Light in rhythm",
   "icon_map": {

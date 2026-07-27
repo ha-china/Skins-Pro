@@ -4,13 +4,12 @@
   "dark_mode": true,
   "title_zh": "欢迎回来！",
   "title_en": "Welcome Back!",
-  "subtitle_zh": "家的状态，安静而清晰。",
-  "subtitle_en": "Home, quietly in balance.",
-  "profile_subtitle_zh": "柔光 · 玻璃 · 日常",
-  "profile_subtitle_en": "Soft light · Glass · Everyday",
+  "profile_subtitle_zh": "雾光入室 · 昼夜自明",
+  "profile_subtitle_en": "Frosted light · Quiet living",
   "icon_map": {
     "light": "light",
     "input_boolean": "switch",
+    "input_button": "button",
     "button": "button",
     "scene": "light",
     "climate": "climate",
@@ -30,6 +29,7 @@
     "sensor": "sensor",
     "person": "person",
     "vacuum": "vacuum",
+    "lawn_mower": "vacuum",
     "device_tracker": "device_tracker",
     "update": "update"
   }

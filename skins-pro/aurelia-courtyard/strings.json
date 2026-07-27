@@ -1,11 +1,11 @@
 {
   "author": "truemanshum",
-  "version": "20260727",
+  "version": "20260727.2",
   "dark_mode": true,
   "title_zh": "欢迎回来！",
   "title_en": "Welcome Back!",
-  "profile_subtitle_zh": "雾光入室 · 昼夜自明",
-  "profile_subtitle_en": "Frosted light · Quiet living",
+  "profile_subtitle_zh": "曜庭入室 · 昼夜有序",
+  "profile_subtitle_en": "Aurelia living · Light in rhythm",
   "icon_map": {
     "light": "light",
     "input_boolean": "switch",

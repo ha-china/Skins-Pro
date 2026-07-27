@@ -1,6 +1,6 @@
 ﻿/* ==========================================================================
-   FROSTED LIGHT GLASS — Skins Pro
-   Pearl acrylic · Milk glass · Quiet domestic light
+   AURELIA COURTYARD — Skins Pro
+   Pearl mineral glass · Celadon precision · Champagne lightwell
    Author: truemanshum
    ========================================================================== */
 
@@ -2090,7 +2090,7 @@ button {
 }
 
 /* ==========================================================================
-   24. Frosted Light Glass Material Layer
+   24. Aurelia Courtyard Material System
 
    The structural rules above intentionally follow the current Skins-Pro
    runtime. This final layer owns the skin's visual language and both color
@@ -2102,33 +2102,34 @@ button {
   color-scheme: light;
 
   /* Canvas */
-  --sp-bg-main: #F4F5F7;
+  --sp-bg-main: #EEF3F3;
   --sp-bg-gradient:
-    radial-gradient(120% 120% at 20% 10%, #FFFFFF 0%, #ECEEF2 60%, #E2E5EA 100%);
+    radial-gradient(120% 120% at 18% 8%, #FBFDFC 0%, #E8EFF0 58%, #DCE6E8 100%);
   --sp-app-overlay:
-    radial-gradient(70% 80% at 12% 4%, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.20) 46%, transparent 78%),
-    radial-gradient(45% 55% at 93% 92%, rgba(205,216,230,0.22) 0%, transparent 72%);
+    radial-gradient(70% 80% at 10% 4%, rgba(255,255,255,0.80) 0%, rgba(239,248,247,0.24) 46%, transparent 78%),
+    radial-gradient(45% 55% at 92% 90%, rgba(79,135,150,0.12) 0%, transparent 72%);
   --sp-stage-overlay:
-    linear-gradient(135deg, rgba(255,255,255,0.14), rgba(230,234,240,0.08));
+    linear-gradient(135deg, rgba(255,255,255,0.10), rgba(79,135,150,0.025));
   --sp-room-overlay:
-    linear-gradient(180deg, rgba(245,247,250,0.00) 18%, rgba(246,248,251,0.48) 68%, rgba(240,243,247,0.92) 100%);
+    linear-gradient(180deg, rgba(238,245,244,0.00) 18%, rgba(238,246,245,0.46) 68%, rgba(231,240,240,0.92) 100%);
 
-  /* Milk glass */
-  --sp-glass-bg: rgba(255,255,255,0.52);
-  --sp-glass-bg-strong: rgba(255,255,255,0.66);
-  --sp-glass-bg-soft: rgba(255,255,255,0.34);
+  /* Pearl mineral glass */
+  --sp-glass-bg: rgba(246,250,249,0.58);
+  --sp-glass-bg-strong: rgba(249,252,251,0.72);
+  --sp-glass-bg-soft: rgba(238,247,246,0.40);
   --sp-glass-backdrop-filter: blur(25px) saturate(120%);
   --sp-glass-radius: 24px;
-  --sp-glass-border: rgba(255,255,255,0.85);
-  --sp-glass-border-soft: rgba(255,255,255,0.65);
+  --sp-glass-border: rgba(255,255,255,0.90);
+  --sp-glass-border-soft: rgba(216,235,233,0.74);
   --sp-glass-shadow:
-    0 20px 40px -15px rgba(160,168,180,0.35),
-    inset 0 2px 6px rgba(255,255,255,0.90),
-    inset 0 -1px 2px rgba(58,61,68,0.03);
+    0 20px 42px -16px rgba(84,111,119,0.28),
+    inset 0 2px 6px rgba(255,255,255,0.92),
+    inset 0 -1px 2px rgba(47,91,98,0.05);
   --sp-glass-shadow-hover:
-    0 24px 48px -17px rgba(148,157,171,0.40),
+    0 24px 50px -17px rgba(68,105,114,0.34),
+    0 0 26px -20px rgba(212,167,106,0.34),
     inset 1px 1.5px 1px rgba(255,255,255,0.96),
-    inset -1px -1.5px 2px rgba(58,61,68,0.04);
+    inset -1px -1.5px 2px rgba(47,91,98,0.06);
 
   /* Current runtime/editor compatibility aliases */
   --sp-device-bg: var(--sp-glass-bg-soft);
@@ -2142,58 +2143,59 @@ button {
   --sp-radius-card: var(--sp-radius-lg);
 
   /* Runtime aliases */
-  --glass-thin: rgba(255,255,255,0.42);
+  --glass-thin: rgba(242,249,248,0.48);
   --glass-regular: var(--sp-glass-bg);
-  --glass-thick: rgba(255,255,255,0.34);
+  --glass-thick: rgba(232,243,241,0.38);
   --glass-ultra-thick: var(--sp-glass-bg-strong);
-  --glass-knob: #F9FAFB;
+  --glass-knob: #F8FBFA;
   --glass-highlight:
     inset 1px 1.5px 1px rgba(255,255,255,0.95),
     inset -1px -1.5px 2px rgba(58,61,68,0.04);
 
   /* Type */
-  --sp-text-primary: #3A3D44;
-  --sp-text-secondary: #5F6874;
-  --sp-text-tertiary: #66717F;
-  --sp-text-quaternary: rgba(176,182,194,0.52);
-  --sp-text-on-accent: #3A3D44;
+  --sp-text-primary: #27373D;
+  --sp-text-secondary: #536970;
+  --sp-text-tertiary: #60777D;
+  --sp-text-quaternary: rgba(95,122,128,0.48);
+  --sp-text-on-accent: #FFFFFF;
   --sp-font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
     "Segoe UI Variable", "Segoe UI", sans-serif;
 
-  /* Quiet semantic color */
-  --sp-accent: #A9CEDD;
-  --sp-accent-hover: #92C0D2;
-  --sp-accent-alpha: rgba(178,215,229,0.28);
-  --sp-accent-border: rgba(145,190,208,0.42);
-  --sp-accent-glow: 0 10px 26px -14px rgba(126,174,193,0.42);
-  --sp-warning: #D8B68A;
+  /* Celadon precision and champagne lightwell */
+  --sp-accent: #477C88;
+  --sp-accent-hover: #386B76;
+  --sp-accent-alpha: rgba(79,135,150,0.18);
+  --sp-accent-border: rgba(79,135,150,0.38);
+  --sp-accent-glow: 0 10px 28px -14px rgba(79,135,150,0.48);
+  --sp-warm-accent: #D4A76A;
+  --sp-warning: #C69354;
   --sp-error: #D68F95;
   --sp-red-alpha: rgba(214,143,149,0.14);
   --sp-color-negative: #A94F5A;
-  --sp-color-progress: #B2D7E5;
-  --sp-color-progress-bg: rgba(215,222,230,0.40);
-  --sp-focus-ring: #4D7484;
-  --sp-unavailable-bg: rgba(176,182,194,0.28);
-  --sp-unavailable-border: rgba(124,132,145,0.18);
+  --sp-color-progress: #79AFB8;
+  --sp-color-progress-bg: rgba(79,135,150,0.16);
+  --sp-focus-ring: #477C88;
+  --sp-unavailable-bg: rgba(109,131,136,0.20);
+  --sp-unavailable-border: rgba(79,107,113,0.16);
 
   /* Refractive edges and depth */
   --sp-border-w: 1px;
   --sp-border-glass: var(--sp-glass-border);
-  --sp-border-subtle: rgba(124,132,145,0.10);
-  --sp-border-medium: rgba(124,132,145,0.16);
-  --sp-shadow-sm: 0 10px 24px -16px rgba(150,160,175,0.30);
+  --sp-border-subtle: rgba(79,117,125,0.10);
+  --sp-border-medium: rgba(79,117,125,0.18);
+  --sp-shadow-sm: 0 10px 24px -16px rgba(75,106,114,0.28);
   --sp-shadow-md:
-    0 16px 32px -16px rgba(150,160,175,0.32),
+    0 16px 32px -16px rgba(75,106,114,0.30),
     inset 1px 1px 0 rgba(255,255,255,0.72);
   --sp-shadow-lg:
-    0 24px 52px -22px rgba(142,152,168,0.34),
+    0 24px 52px -22px rgba(69,101,109,0.32),
     inset 1px 1px 0 rgba(255,255,255,0.70);
-  --sp-shadow-xl: 0 32px 70px -26px rgba(136,147,164,0.38);
+  --sp-shadow-xl: 0 32px 70px -26px rgba(60,93,101,0.36);
   --sp-shadow-glass: var(--sp-glass-shadow);
   --sp-shadow-card: var(--sp-glass-shadow);
   --sp-shadow-device:
-    0 16px 34px -18px rgba(150,160,175,0.36),
+    0 16px 34px -18px rgba(72,105,113,0.32),
     inset 1px 1.5px 1px rgba(255,255,255,0.90),
     inset -1px -1.5px 2px rgba(58,61,68,0.035);
   --sp-shadow-switch: inset 0 1px 2px rgba(58,61,68,0.08);
@@ -2212,77 +2214,78 @@ button {
   --sp-blur-2xs: blur(10px) saturate(112%);
 
   /* Controls */
-  --sp-bar-gradient: linear-gradient(90deg, #B2D7E5, #C6DFE7);
+  --sp-bar-gradient: linear-gradient(90deg, #5E98A4, #91C0C4 62%, #D4A76A);
   --sp-bar-min: 12px;
-  --sp-switch-on-bg: #B2D7E5;
-  --sp-switch-off-bg: rgba(176,182,194,0.32);
-  --sp-scrollbar-track: rgba(215,222,230,0.18);
-  --sp-scrollbar-thumb: rgba(140,146,158,0.34);
-  --sp-camera-bg: rgba(236,238,242,0.56);
+  --sp-switch-on-bg: #5E98A4;
+  --sp-switch-off-bg: rgba(111,135,140,0.28);
+  --sp-scrollbar-track: rgba(79,135,150,0.10);
+  --sp-scrollbar-thumb: rgba(79,117,125,0.34);
+  --sp-camera-bg: rgba(234,243,242,0.62);
 }
 
 :host([data-sp-theme="dark"]) {
   color-scheme: dark;
 
-  --sp-bg-main: #182235;
+  --sp-bg-main: #0F1D29;
   --sp-bg-gradient:
-    radial-gradient(120% 120% at 18% 8%, #33435C 0%, #202D42 54%, #151E2E 100%);
+    radial-gradient(120% 120% at 16% 8%, #28414D 0%, #172A37 50%, #0B1722 100%);
   --sp-app-overlay:
-    radial-gradient(72% 82% at 10% 2%, rgba(116,145,183,0.20) 0%, rgba(67,88,118,0.08) 48%, transparent 78%),
-    radial-gradient(42% 48% at 88% 92%, rgba(229,175,112,0.10) 0%, transparent 70%);
+    radial-gradient(72% 82% at 10% 2%, rgba(94,156,170,0.18) 0%, rgba(46,90,100,0.08) 48%, transparent 78%),
+    radial-gradient(42% 48% at 86% 90%, rgba(229,181,121,0.10) 0%, transparent 70%);
   --sp-stage-overlay:
-    linear-gradient(135deg, rgba(123,151,187,0.08), rgba(20,29,44,0.12));
+    linear-gradient(135deg, rgba(94,156,170,0.055), rgba(8,18,26,0.10));
   --sp-room-overlay:
-    linear-gradient(180deg, rgba(19,29,45,0.02) 18%, rgba(20,29,44,0.28) 64%, rgba(13,20,32,0.70) 100%);
+    linear-gradient(180deg, rgba(9,22,31,0.02) 18%, rgba(11,25,35,0.26) 64%, rgba(7,16,24,0.72) 100%);
 
-  --sp-glass-bg: rgba(75,92,118,0.36);
-  --sp-glass-bg-strong: rgba(86,104,132,0.48);
-  --sp-glass-bg-soft: rgba(62,78,103,0.26);
-  --sp-glass-border: rgba(184,205,232,0.34);
-  --sp-glass-border-soft: rgba(165,188,217,0.22);
+  --sp-glass-bg: rgba(25,48,59,0.54);
+  --sp-glass-bg-strong: rgba(31,59,70,0.68);
+  --sp-glass-bg-soft: rgba(20,42,53,0.40);
+  --sp-glass-border: rgba(126,185,191,0.32);
+  --sp-glass-border-soft: rgba(107,166,174,0.22);
   --sp-glass-shadow:
-    0 22px 48px -18px rgba(5,11,22,0.64),
-    inset 1px 1.5px 1px rgba(208,224,244,0.22),
-    inset -1px -1.5px 2px rgba(2,7,15,0.22);
+    0 22px 48px -18px rgba(2,9,14,0.72),
+    inset 1px 1.5px 1px rgba(137,199,203,0.20),
+    inset -1px -1.5px 2px rgba(1,7,11,0.28);
   --sp-glass-shadow-hover:
-    0 28px 56px -18px rgba(5,10,20,0.70),
-    0 0 28px -20px rgba(236,183,119,0.40),
-    inset 1px 1.5px 1px rgba(220,232,248,0.26),
-    inset -1px -1.5px 2px rgba(2,7,15,0.26);
+    0 28px 56px -18px rgba(2,8,13,0.78),
+    0 0 30px -19px rgba(229,181,121,0.46),
+    inset 1px 1.5px 1px rgba(145,207,210,0.24),
+    inset -1px -1.5px 2px rgba(1,6,10,0.32);
 
-  --glass-thin: rgba(91,110,139,0.30);
+  --glass-thin: rgba(39,72,82,0.42);
   --glass-regular: var(--sp-glass-bg);
-  --glass-thick: rgba(65,82,108,0.28);
+  --glass-thick: rgba(20,46,57,0.38);
   --glass-ultra-thick: var(--sp-glass-bg-strong);
-  --glass-knob: #DCE5F0;
+  --glass-knob: #D9E8E7;
   --glass-highlight:
-    inset 1px 1.5px 1px rgba(210,225,244,0.22),
-    inset -1px -1.5px 2px rgba(2,7,15,0.24);
+    inset 1px 1.5px 1px rgba(145,207,210,0.22),
+    inset -1px -1.5px 2px rgba(1,7,11,0.30);
 
-  --sp-text-primary: #E8EDF4;
-  --sp-text-secondary: #B6C0CE;
-  --sp-text-tertiary: #A6B2C2;
-  --sp-text-quaternary: rgba(135,148,166,0.48);
-  --sp-text-on-accent: #FFFFFF;
+  --sp-text-primary: #EDF5F3;
+  --sp-text-secondary: #B7C9C9;
+  --sp-text-tertiary: #99B0B2;
+  --sp-text-quaternary: rgba(127,158,161,0.48);
+  --sp-text-on-accent: #10252C;
 
-  --sp-accent: #477C92;
-  --sp-accent-hover: #568DA4;
-  --sp-accent-alpha: rgba(182,214,228,0.18);
-  --sp-accent-border: rgba(182,214,228,0.32);
-  --sp-accent-glow: 0 12px 30px -16px rgba(182,214,228,0.42);
-  --sp-warning: #D9B487;
+  --sp-accent: #7DB7BE;
+  --sp-accent-hover: #91C8CC;
+  --sp-accent-alpha: rgba(125,183,190,0.18);
+  --sp-accent-border: rgba(125,183,190,0.34);
+  --sp-accent-glow: 0 12px 30px -16px rgba(125,183,190,0.48);
+  --sp-warm-accent: #E5B579;
+  --sp-warning: #E0B77F;
   --sp-error: #D49AA0;
   --sp-red-alpha: rgba(212,154,160,0.15);
   --sp-color-negative: #D49AA0;
-  --sp-color-progress: #9FC8D8;
-  --sp-color-progress-bg: rgba(118,137,162,0.30);
-  --sp-focus-ring: #C5E0EA;
-  --sp-unavailable-bg: rgba(54,68,91,0.52);
-  --sp-unavailable-border: rgba(174,196,224,0.18);
+  --sp-color-progress: #88C0C6;
+  --sp-color-progress-bg: rgba(79,124,132,0.30);
+  --sp-focus-ring: #B8E2E2;
+  --sp-unavailable-bg: rgba(18,38,49,0.58);
+  --sp-unavailable-border: rgba(107,166,174,0.18);
 
   --sp-border-glass: var(--sp-glass-border);
-  --sp-border-subtle: rgba(174,196,224,0.12);
-  --sp-border-medium: rgba(174,196,224,0.20);
+  --sp-border-subtle: rgba(107,166,174,0.12);
+  --sp-border-medium: rgba(107,166,174,0.22);
   --sp-shadow-sm: 0 12px 26px -16px rgba(5,10,20,0.64);
   --sp-shadow-md:
     0 18px 38px -18px rgba(5,10,20,0.68),
@@ -2294,11 +2297,11 @@ button {
   --sp-shadow-glass: var(--sp-glass-shadow);
   --sp-shadow-card: var(--sp-glass-shadow);
   --sp-shadow-device: var(--sp-glass-shadow);
-  --sp-switch-on-bg: #B6D6E4;
-  --sp-switch-off-bg: rgba(135,148,166,0.34);
-  --sp-scrollbar-track: rgba(21,30,45,0.22);
-  --sp-scrollbar-thumb: rgba(182,192,206,0.32);
-  --sp-camera-bg: rgba(24,34,53,0.48);
+  --sp-switch-on-bg: #7DB7BE;
+  --sp-switch-off-bg: rgba(93,126,132,0.34);
+  --sp-scrollbar-track: rgba(9,25,34,0.26);
+  --sp-scrollbar-thumb: rgba(125,183,190,0.30);
+  --sp-camera-bg: rgba(14,32,43,0.56);
 }
 
 /* --------------------------------------------------------------------------
@@ -2321,15 +2324,15 @@ button {
   background-position: center, center;
   border: 1px solid var(--sp-glass-border-soft);
   box-shadow:
-    0 28px 60px -28px rgba(142,152,168,0.40),
+    0 28px 60px -28px rgba(67,104,112,0.34),
     inset 1px 1px 0 rgba(255,255,255,0.62);
 }
 
 :host([data-sp-theme="dark"]) .stage {
   box-shadow:
-    0 30px 68px -24px rgba(3,8,17,0.76),
-    inset 1px 1px 0 rgba(210,225,244,0.16),
-    inset 0 -1px 0 rgba(236,183,119,0.08);
+    0 30px 68px -24px rgba(1,7,12,0.82),
+    inset 1px 1px 0 rgba(126,185,191,0.16),
+    inset 0 -1px 0 rgba(229,181,121,0.10);
 }
 
 /* --------------------------------------------------------------------------
@@ -2395,7 +2398,13 @@ button {
   height: 1px;
   border-radius: 999px;
   background:
-    linear-gradient(90deg, transparent, rgba(255,255,255,0.88), transparent);
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(79,135,150,0.48) 42%,
+      rgba(212,167,106,0.38) 66%,
+      transparent
+    );
   pointer-events: none;
   opacity: 0.82;
 }
@@ -2409,9 +2418,53 @@ button {
 :host([data-sp-theme="dark"]) .sp-card::after,
 :host([data-sp-theme="dark"]) .nav-dialog::after {
   background:
-    linear-gradient(90deg, transparent, rgba(241,190,126,0.62), transparent);
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(125,183,190,0.50) 38%,
+      rgba(229,181,121,0.72) 66%,
+      transparent
+    );
   opacity: 0.72;
-  box-shadow: 0 -5px 18px rgba(235,178,108,0.20);
+  box-shadow: 0 -5px 18px rgba(229,181,121,0.22);
+}
+
+@media (orientation: landscape) and (min-width: 761px) {
+  .side {
+    position: relative;
+  }
+
+  .side::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 4%;
+    bottom: 4%;
+    left: -10px;
+    width: 1px;
+    background:
+      linear-gradient(
+        180deg,
+        transparent,
+        rgba(79,135,150,0.42) 28%,
+        rgba(212,167,106,0.44) 68%,
+        transparent
+      );
+    box-shadow: 0 0 18px rgba(79,135,150,0.16);
+    pointer-events: none;
+  }
+
+  :host([data-sp-theme="dark"]) .side::before {
+    background:
+      linear-gradient(
+        180deg,
+        transparent,
+        rgba(125,183,190,0.48) 28%,
+        rgba(229,181,121,0.58) 68%,
+        transparent
+      );
+    box-shadow: 0 0 20px rgba(229,181,121,0.18);
+  }
 }
 
 .sidebar > *,
@@ -2855,8 +2908,8 @@ ha-control-slider {
 
 @media (orientation: portrait), (max-width: 760px) {
   .stage {
-    background-size: cover, auto 640px;
-    background-position: center, center top;
+    background-size: cover, auto 520px;
+    background-position: center, 30% top;
     background-repeat: no-repeat, no-repeat;
   }
 

@@ -113,7 +113,6 @@ button {
   display: grid;
   grid-template-columns: var(--sp-sidebar-width) minmax(0, 1fr);
   gap: var(--sp-space-lg);
-  background-repeat: no-repeat, no-repeat;
   overflow: clip;
 }
 
@@ -1307,6 +1306,9 @@ button {
   border-radius: var(--sp-radius-pill);
   color: var(--sp-text-primary);
   cursor: pointer;
+  isolation: isolate;
+  overflow: hidden;
+  line-height: 0;
   transition:
     background var(--sp-duration-fast) var(--sp-ease-glass),
     border-color var(--sp-duration-fast) var(--sp-ease-glass);
@@ -1320,6 +1322,11 @@ button {
 
 .media-btn ha-icon {
   --mdc-icon-size: 22px;
+  display: block;
+  width: var(--mdc-icon-size);
+  height: var(--mdc-icon-size);
+  flex: 0 0 var(--mdc-icon-size);
+  color: currentColor;
 }
 
 .media-playbtn ha-icon {
@@ -1328,6 +1335,11 @@ button {
 
 .media-volbtn ha-icon {
   --mdc-icon-size: 20px;
+  display: block;
+  width: var(--mdc-icon-size);
+  height: var(--mdc-icon-size);
+  flex: 0 0 var(--mdc-icon-size);
+  color: currentColor;
 }
 
 .media-toggle-icon {

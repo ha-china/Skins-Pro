@@ -3192,8 +3192,9 @@ ha-control-slider {
 @media (orientation: landscape) and (max-height: 820px) {
   .side {
     grid-template-rows: max-content max-content;
-    grid-auto-rows: minmax(132px, max-content);
+    grid-auto-rows: max-content;
     gap: 10px;
+    align-content: start;
     overflow: auto;
     overscroll-behavior: contain;
     scrollbar-color: var(--sp-scrollbar-thumb) var(--sp-scrollbar-track);

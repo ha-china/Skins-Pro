@@ -1,6 +1,6 @@
 {
   "name": "skins-pro",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "Skins Pro for Home Assistant",
   "main": "dist/skins-pro.js",
   "type": "module",

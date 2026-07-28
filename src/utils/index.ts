@@ -288,7 +288,9 @@ export function assetHref(config?: DashboardConfig, key?: string): string {
   if (key !== 'theme_css') return url;
   const skin = selectedSkin(config);
   const cacheKey = encodeURIComponent(`${skin}|${config?.resource_pack?.base_path || '__AUTO__'}`);
-  return `${url}${url.includes('?') ? '&' : '?'}skin=${cacheKey}`;
+  const version = SKIN_METADATA_CACHE[skin]?.strings?.version;
+  const ts = version !== undefined ? `&v=${String(version)}` : '';
+  return `${url}${url.includes('?') ? '&' : '?'}skin=${cacheKey}${ts}`;
 }
 
 export function skinString(skin: string, key: string): string {

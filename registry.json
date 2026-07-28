@@ -40,6 +40,14 @@
     "package": "store/animal-crossing.zip"
   },
   {
+    "id": "aurelia-courtyard",
+    "name": "aurelia-courtyard",
+    "author": "truemanshum",
+    "version": "20260727.5",
+    "thumbnail": "screenshots/thumbnails/aurelia-courtyard.jpg",
+    "package": "store/aurelia-courtyard.zip"
+  },
+  {
     "id": "black-myth-wukong",
     "name": "black-myth-wukong",
     "author": "xyiqq",

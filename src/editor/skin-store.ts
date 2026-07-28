@@ -7,6 +7,8 @@ export const CDN_STORE = 'https://skins.hachina.dpdns.org';
 export const STATS_API = 'https://hachina.dpdns.org';
 
 const SKIN_DEP_URL = 'https://github.com/ha-china/skins-pro-hass';
+const BATCH_SIZE = 20;
+const SKIN_STATS_CACHE_MS = 5 * 60 * 1000;
 
 function linkifyDep(text: string, lang: Language): string {
   const label = lang === 'zh-CN' ? '集成' : 'integration';
@@ -24,6 +26,7 @@ function getVoterId(): string {
 }
 
 export let skinStats: Record<string, { downloads: number; liked: number }> = {};
+let skinStatsFetchTs = 0;
 
 function getLikedSkins(): Set<string> {
   try {
@@ -48,6 +51,8 @@ export interface SkinStoreTheme {
   downloads?: number;
   likes?: number;
   userLiked?: boolean;
+  tags?: string[];
+  description?: string;
 }
 
 export interface SkinStoreState {
@@ -56,6 +61,31 @@ export interface SkinStoreState {
   error: string;
   themes: SkinStoreTheme[];
   searchQuery: string;
+  hasMore: boolean;
+  displayedCount: number;
+}
+
+function filterThemes(themes: SkinStoreTheme[], query: string): SkinStoreTheme[] {
+  const q = query.trim();
+  if (!q) return themes;
+
+  const tokens = q.toLowerCase().split(/\s+/).filter(Boolean);
+  if (tokens.length === 0) return themes;
+
+  return themes.filter(theme => {
+    const haystack = [
+      theme.id,
+      theme.name || '',
+      theme.author || '',
+      ...(theme.tags || []),
+      theme.description || '',
+    ].join(' ').toLowerCase();
+
+    for (const token of tokens) {
+      if (!haystack.includes(token)) return false;
+    }
+    return true;
+  });
 }
 
 export function renderSkinStore(
@@ -72,20 +102,24 @@ export function renderSkinStore(
     content = `<p style="text-align:center;padding:40px 0;color:var(--sp-error,#e44)">${t(language, 'editorSkinStoreLoadFailed')}</p>`;
   } else {
     const downloaded: string[] = config.downloaded_skins || [];
-    const query = (state.searchQuery || '').toLowerCase().trim();
-    const filtered = query ? state.themes.filter(th => th.id.toLowerCase().includes(query) || (th.name || '').toLowerCase().includes(query) || (th.author || '').toLowerCase().includes(query)) : state.themes;
-    content = `
-      <input type="text" class="store-search" data-store-search placeholder="${t(language, 'editorSkinStoreSearch')}" value="${state.searchQuery || ''}" style="width:100%;box-sizing:border-box;padding:10px 14px;border-radius:var(--sp-radius-pill,999px);border:1px solid var(--sp-border-muted,var(--divider-color,rgba(0,0,0,0.12)));background:var(--sp-device-bg,rgba(128,128,128,0.06));color:var(--sp-text-main,inherit);font:inherit;font-size:var(--sp-font-xs,14px);outline:none;margin-bottom:var(--sp-space-md,16px);">
-      <div class="store-grid">${filtered.map(theme => {
+    const filtered = filterThemes(state.themes, state.searchQuery);
+    const displayedCount = state.displayedCount || BATCH_SIZE;
+    const visible = filtered.slice(0, displayedCount);
+
+    const cards = visible.map(theme => {
       const installed = downloaded.includes(theme.id);
       const dlCount = theme.downloads ?? '-';
       const likeCount = theme.likes ?? 0;
       const likedClass = theme.userLiked ? ' liked' : '';
+      const tagsHtml = theme.tags?.length
+        ? `<div class="store-tags">${theme.tags.slice(0, 4).map(tag => `<span class="store-tag">${tag}</span>`).join('')}</div>`
+        : '';
       return `
       <div class="store-card ${installed ? 'store-installed' : ''}" data-store-theme="${theme.id}">
         <img src="${CDN_STORE}/${theme.thumbnail}" alt="${theme.name}" class="store-thumb" loading="lazy">
         <div class="store-info">
           <span class="store-name">${theme.name}${theme.author ? `<a href="https://github.com/${theme.author}" target="_blank" rel="noopener noreferrer" class="store-author">${theme.author}</a>` : ''}${theme.hasUpdate ? `<span class="store-update-badge">${t(language, 'editorSkinStoreNewVersion')}</span>` : ''}</span>
+          ${tagsHtml}
           <div class="store-actions">
             <span class="store-dl-count">⬇ ${dlCount}</span>
             <button class="store-like${likedClass}" data-store-like="${theme.id}">
@@ -100,7 +134,24 @@ export function renderSkinStore(
           }
         </div>
       </div>`;
-    }).join('')}</div>`;
+    });
+
+    const remaining = Math.max(0, filtered.length - displayedCount);
+    const loader = remaining > 0
+      ? `<div class="store-load-more" data-store-load-more style="text-align:center;padding:16px;color:var(--sp-accent,#78a8b8);cursor:pointer;font-size:var(--sp-font-xs,13px);border-top:1px solid var(--sp-border-muted,var(--divider-color,rgba(0,0,0,0.08)));margin-top:12px">
+          ${t(language, 'showAll')} (${remaining} ${t(language, 'devices')})
+        </div>`
+      : '';
+
+    const resultLabel = filtered.length > 0
+      ? `<div class="store-result-count" style="font-size:var(--sp-font-3xs,10px);color:var(--sp-text-muted,#888);margin-bottom:8px;padding:0 4px">${displayedCount} / ${filtered.length}</div>`
+      : '';
+
+    content = `
+      <input type="text" class="store-search" data-store-search placeholder="${t(language, 'editorSkinStoreSearch')}" value="${state.searchQuery || ''}" style="width:100%;box-sizing:border-box;padding:10px 14px;border-radius:var(--sp-radius-pill,999px);border:1px solid var(--sp-border-muted,var(--divider-color,rgba(0,0,0,0.12)));background:var(--sp-device-bg,rgba(128,128,128,0.06));color:var(--sp-text-main,inherit);font:inherit;font-size:var(--sp-font-xs,14px);outline:none;margin-bottom:var(--sp-space-md,16px);">
+      ${resultLabel}
+      <div class="store-grid">${cards}</div>
+      ${loader}`;
   }
 
   return `
@@ -121,31 +172,40 @@ export async function fetchSkinThemes(): Promise<SkinStoreTheme[]> {
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const data = await res.json() as SkinStoreTheme[];
   const themes = Array.isArray(data) ? data : [];
-  for (let i = themes.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [themes[i], themes[j]] = [themes[j]!, themes[i]!];
-  }
   return themes;
 }
 
 export async function fetchLocalSkinVersions(skins: string[]): Promise<Record<string, string>> {
+  if (skins.length === 0) return {};
   const results: Record<string, string> = {};
-  await Promise.all(skins.map(async (skin) => {
-    try {
-      const res = await fetch(`/local/skins-pro/${skin}/strings.json?v=${Date.now()}`);
-      if (res.ok) {
-        const data = await res.json() as Record<string, unknown>;
-        if (typeof data.version === 'string' && data.version) results[skin] = data.version;
-      }
-    } catch { /* ignore */ }
-  }));
+  const chunkSize = 8;
+  const chunks: string[][] = [];
+  for (let i = 0; i < skins.length; i += chunkSize) {
+    chunks.push(skins.slice(i, i + chunkSize));
+  }
+  for (const chunk of chunks) {
+    await Promise.all(chunk.map(async (skin) => {
+      try {
+        const res = await fetch(`/local/skins-pro/${skin}/strings.json?v=${Date.now()}`);
+        if (res.ok) {
+          const data = await res.json() as Record<string, unknown>;
+          if (typeof data.version === 'string' && data.version) results[skin] = data.version;
+        }
+      } catch { /* ignore */ }
+    }));
+  }
   return results;
 }
 
 export async function fetchSkinStats(): Promise<void> {
+  const now = Date.now();
+  if (skinStatsFetchTs > 0 && (now - skinStatsFetchTs) < SKIN_STATS_CACHE_MS) return;
   try {
     const res = await fetch(`${STATS_API}/api/stats`);
-    if (res.ok) skinStats = await res.json();
+    if (res.ok) {
+      skinStats = await res.json();
+      skinStatsFetchTs = now;
+    }
   } catch { /* ignore */ }
 }
 

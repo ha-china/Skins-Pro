@@ -27,6 +27,7 @@ export interface EditorHost {
   state: EditorState;
   onChange: (next: Partial<EditorState>) => void;
   reload: () => void;
+  renderSkinStoreOnly: () => void;
 }
 
 export function bindEditorEvents(host: EditorHost): void {
@@ -37,7 +38,11 @@ export function bindEditorEvents(host: EditorHost): void {
   bindListButtons(host);
   bindBgUpload(host);
   bindNavDialog(host);
-  bindSkinStore(host);
+  bindSkinStoreOpen(host);
+}
+
+export function bindSkinStoreActions(_root: ShadowRoot, host: EditorHost): void {
+  bindSkinStoreActionButtons(host);
 }
 
 function bindEntityPickers(host: EditorHost): void {
@@ -186,12 +191,12 @@ function bindNavDialog(host: EditorHost): void {
   }
 }
 
-function bindSkinStore(host: EditorHost): void {
+function bindSkinStoreOpen(host: EditorHost): void {
   const storeBtn = host.root.querySelector<HTMLElement>('[data-skin-store]');
   if (storeBtn) {
     storeBtn.addEventListener('click', async () => {
-      host.onChange({ skinStore: { ...host.state.skinStore, open: true, loading: true, error: '', searchQuery: '' } });
-      host.reload();
+      host.onChange({ skinStore: { ...host.state.skinStore, open: true, loading: true, error: '', searchQuery: '', hasMore: true, displayedCount: 20 } });
+      host.renderSkinStoreOnly();
       try {
         const themes = await fetchSkinThemes();
         await fetchSkinStats();
@@ -205,29 +210,33 @@ function bindSkinStore(host: EditorHost): void {
           userLiked: isSkinLiked(th.id),
         }));
         merged.sort((a, b) => Number(!!b.hasUpdate) - Number(!!a.hasUpdate));
-        host.onChange({ skinStore: { open: true, loading: false, error: '', themes: merged, searchQuery: host.state.skinStore.searchQuery || '' } });
+        const hasMore = merged.length > 20;
+        host.onChange({ skinStore: { open: true, loading: false, error: '', themes: merged, searchQuery: '', hasMore, displayedCount: 20 } });
       } catch (err) {
-        host.onChange({ skinStore: { ...host.state.skinStore, loading: false, error: String(err) } });
+        host.onChange({ skinStore: { ...host.state.skinStore, loading: false, error: String(err), displayedCount: 20, hasMore: false } });
       }
-      host.reload();
+      host.renderSkinStoreOnly();
     });
   }
-  const storeOverlay = host.root.querySelector<HTMLElement>('[data-store-overlay]');
-  if (storeOverlay) {
-    storeOverlay.addEventListener('click', (e) => {
-      if (e.target === storeOverlay) {
+
+  host.root.querySelectorAll('[data-store-overlay]').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
         host.onChange({ skinStore: { ...host.state.skinStore, open: false } });
-        host.reload();
+        host.renderSkinStoreOnly();
       }
     });
-  }
-  const storeCloseBtn = host.root.querySelector<HTMLElement>('[data-store-close]');
-  if (storeCloseBtn) {
-    storeCloseBtn.addEventListener('click', () => {
+  });
+
+  host.root.querySelectorAll('[data-store-close]').forEach(btn => {
+    btn.addEventListener('click', () => {
       host.onChange({ skinStore: { ...host.state.skinStore, open: false } });
-      host.reload();
+      host.renderSkinStoreOnly();
     });
-  }
+  });
+}
+
+function bindSkinStoreActionButtons(host: EditorHost): void {
   host.root.querySelectorAll<HTMLElement>('[data-store-remove]').forEach(btn => {
     btn.addEventListener('click', () => {
       const skin = btn.getAttribute('data-store-remove');
@@ -237,6 +246,7 @@ function bindSkinStore(host: EditorHost): void {
       host.reload();
     });
   });
+
   host.root.querySelectorAll<HTMLElement>('[data-store-download]').forEach(btn => {
     btn.addEventListener('click', async () => {
       const skin = btn.getAttribute('data-store-download');
@@ -257,15 +267,25 @@ function bindSkinStore(host: EditorHost): void {
       }
     });
   });
-  const searchInput = host.root.querySelector<HTMLInputElement>('[data-store-search]');
-  if (searchInput) {
-    searchInput.addEventListener('input', () => {
-      host.onChange({ skinStore: { ...host.state.skinStore, searchQuery: searchInput.value } });
-      host.reload();
-      const restored = host.root.querySelector<HTMLInputElement>('[data-store-search]');
-      if (restored && restored !== searchInput) { restored.focus(); restored.setSelectionRange(searchInput.value.length, searchInput.value.length); }
+
+  const loadMoreBtn = host.root.querySelector<HTMLElement>('[data-store-load-more]');
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      const q = (host.state.skinStore.searchQuery || '').trim();
+      const filtered = q
+        ? host.state.skinStore.themes.filter(th => {
+            const tokens = q.toLowerCase().split(/\s+/).filter(Boolean);
+            const haystack = [th.id, th.name || '', th.author || '', ...(th.tags || []), th.description || ''].join(' ').toLowerCase();
+            return tokens.every(t => haystack.includes(t));
+          })
+        : host.state.skinStore.themes;
+      const next = host.state.skinStore.displayedCount + 20;
+      const hasMore = next < filtered.length;
+      host.onChange({ skinStore: { ...host.state.skinStore, displayedCount: next, hasMore } });
+      host.renderSkinStoreOnly();
     });
   }
+
   host.root.querySelectorAll<HTMLElement>('[data-store-like]').forEach(btn => {
     btn.addEventListener('click', async () => {
       const skin = btn.getAttribute('data-store-like');
@@ -278,6 +298,7 @@ function bindSkinStore(host: EditorHost): void {
       btn.innerHTML = `${result.liked ? '❤️' : '🤍'} <span class="store-like-count">${result.total}</span>`;
     });
   });
+
   host.root.querySelectorAll<HTMLElement>('.store-thumb').forEach(img => {
     img.addEventListener('click', () => {
       const skin = (img.closest('[data-store-theme]') as HTMLElement)?.getAttribute('data-store-theme');
@@ -290,4 +311,17 @@ function bindSkinStore(host: EditorHost): void {
       host.root.appendChild(overlay);
     });
   });
+
+  const searchInput = host.root.querySelector<HTMLInputElement>('[data-store-search]');
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      host.onChange({ skinStore: { ...host.state.skinStore, searchQuery: searchInput.value, displayedCount: 20 } });
+      host.renderSkinStoreOnly();
+      const restored = host.root.querySelector<HTMLInputElement>('[data-store-search]');
+      if (restored && restored !== searchInput) {
+        restored.focus();
+        restored.setSelectionRange(searchInput.value.length, searchInput.value.length);
+      }
+    });
+  }
 }

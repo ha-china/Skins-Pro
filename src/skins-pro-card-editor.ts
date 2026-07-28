@@ -2,7 +2,8 @@ import type { AreaRegistryEntry, HomeAssistant, TranslationKey } from './types';
 import { assetHref, getTranslate, normalizeLanguage } from './utils';
 import { type DashboardConfigRecord } from './editor/config';
 import { renderEditorTemplate } from './editor/template';
-import { bindEditorEvents, type EditorState } from './editor/events';
+import { bindEditorEvents, bindSkinStoreActions, type EditorState } from './editor/events';
+import { renderSkinStore } from './editor/skin-store';
 
 export class SkinsProCardEditor extends HTMLElement {
   private _state: EditorState = {
@@ -10,7 +11,7 @@ export class SkinsProCardEditor extends HTMLElement {
     hass: undefined,
     language: 'en',
     navDialogOpen: false,
-    skinStore: { open: false, loading: false, error: '', themes: [], searchQuery: '' },
+    skinStore: { open: false, loading: false, error: '', themes: [], searchQuery: '', hasMore: false, displayedCount: 20 },
   };
   private _areas: AreaRegistryEntry[] = [];
   private _areasLoaded = false;
@@ -84,6 +85,24 @@ export class SkinsProCardEditor extends HTMLElement {
       state: this._state,
       onChange: (next) => { this._state = { ...this._state, ...next }; },
       reload: () => this.render(),
+      renderSkinStoreOnly: () => this.renderSkinStoreOnly(),
+    });
+  }
+
+  public renderSkinStoreOnly(): void {
+    if (!this.shadowRoot) return;
+    const storeOverlay = this.shadowRoot.querySelector('[data-store-overlay]');
+    if (!storeOverlay) return;
+    const language = this._currentLanguage();
+    storeOverlay.outerHTML = renderSkinStore(this._state.skinStore, this._state.config, language);
+
+    bindSkinStoreActions(this.shadowRoot, {
+      el: this,
+      root: this.shadowRoot,
+      state: this._state,
+      onChange: (next) => { this._state = { ...this._state, ...next }; },
+      reload: () => this.render(),
+      renderSkinStoreOnly: () => this.renderSkinStoreOnly(),
     });
   }
 }

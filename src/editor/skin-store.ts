@@ -93,28 +93,55 @@ export function renderSkinStore(
   config: DashboardConfigRecord,
   language: Language,
 ): string {
-  if (!state.open) return '';
+  const displayStyle = state.open ? 'display:flex' : 'display:none';
 
-  let content: string;
+  if (!state.open) {
+    return `
+    <div class="nav-overlay" data-store-overlay style="${displayStyle}">
+      <div class="nav-dialog" style="max-width:1200px;width:95vw">
+        <h3>${t(language, 'editorSkinStore')}</h3>
+        <div data-store-body></div>
+      </div>
+    </div>`;
+  }
+
+  return `
+    <div class="nav-overlay" data-store-overlay style="${displayStyle}">
+      <div class="nav-dialog" style="max-width:1200px;width:95vw">
+        <h3>${t(language, 'editorSkinStore')} <span class="store-dependency" style="font-size:0.7em;font-weight:400;color:var(--sp-text-muted,#888)">${linkifyDep(t(language, 'editorSkinStoreDependency'), language)}</span></h3>
+        <div data-store-body>
+          ${renderSkinStoreBody(state, config, language)}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+export function renderSkinStoreBody(
+  state: SkinStoreState,
+  config: DashboardConfigRecord,
+  language: Language,
+): string {
   if (state.loading) {
-    content = `<p style="text-align:center;padding:40px 0;color:var(--sp-text-muted,#888)">${t(language, 'loadingQuote')}</p>`;
-  } else if (state.error) {
-    content = `<p style="text-align:center;padding:40px 0;color:var(--sp-error,#e44)">${t(language, 'editorSkinStoreLoadFailed')}</p>`;
-  } else {
-    const downloaded: string[] = config.downloaded_skins || [];
-    const filtered = filterThemes(state.themes, state.searchQuery);
-    const displayedCount = state.displayedCount || BATCH_SIZE;
-    const visible = filtered.slice(0, displayedCount);
+    return `<p style="text-align:center;padding:40px 0;color:var(--sp-text-muted,#888)">${t(language, 'loadingQuote')}</p>`;
+  }
+  if (state.error) {
+    return `<p style="text-align:center;padding:40px 0;color:var(--sp-error,#e44)">${t(language, 'editorSkinStoreLoadFailed')}</p>`;
+  }
+  const downloaded: string[] = config.downloaded_skins || [];
+  const filtered = filterThemes(state.themes, state.searchQuery);
+  const displayedCount = state.displayedCount || BATCH_SIZE;
+  const visible = filtered.slice(0, displayedCount);
 
-    const cards = visible.map(theme => {
-      const installed = downloaded.includes(theme.id);
-      const dlCount = theme.downloads ?? '-';
-      const likeCount = theme.likes ?? 0;
-      const likedClass = theme.userLiked ? ' liked' : '';
-      const tagsHtml = theme.tags?.length
-        ? `<div class="store-tags">${theme.tags.slice(0, 4).map(tag => `<span class="store-tag">${tag}</span>`).join('')}</div>`
-        : '';
-      return `
+  const cards = visible.map(theme => {
+    const installed = downloaded.includes(theme.id);
+    const dlCount = theme.downloads ?? '-';
+    const likeCount = theme.likes ?? 0;
+    const likedClass = theme.userLiked ? ' liked' : '';
+    const tagsHtml = theme.tags?.length
+      ? `<div class="store-tags">${theme.tags.slice(0, 4).map(tag => `<span class="store-tag">${tag}</span>`).join('')}</div>`
+      : '';
+    return `
       <div class="store-card ${installed ? 'store-installed' : ''}" data-store-theme="${theme.id}">
         <img src="${CDN_STORE}/${theme.thumbnail}" alt="${theme.name}" class="store-thumb" loading="lazy">
         <div class="store-info">
@@ -134,37 +161,27 @@ export function renderSkinStore(
           }
         </div>
       </div>`;
-    });
+  });
 
-    const remaining = Math.max(0, filtered.length - displayedCount);
-    const loader = remaining > 0
-      ? `<div class="store-load-more" data-store-load-more style="text-align:center;padding:16px;color:var(--sp-accent,#78a8b8);cursor:pointer;font-size:var(--sp-font-xs,13px);border-top:1px solid var(--sp-border-muted,var(--divider-color,rgba(0,0,0,0.08)));margin-top:12px">
-          ${t(language, 'showAll')} (${remaining} ${t(language, 'devices')})
-        </div>`
-      : '';
+  const remaining = Math.max(0, filtered.length - displayedCount);
+  const loader = remaining > 0
+    ? `<div class="store-load-indicator" style="text-align:center;padding:12px;font-size:var(--sp-font-2xs,11px);color:var(--sp-text-muted,#888)">
+        ${t(language, 'showAll')} (${remaining})
+      </div>`
+    : '';
 
-    const resultLabel = filtered.length > 0
-      ? `<div class="store-result-count" style="font-size:var(--sp-font-3xs,10px);color:var(--sp-text-muted,#888);margin-bottom:8px;padding:0 4px">${displayedCount} / ${filtered.length}</div>`
-      : '';
-
-    content = `
-      <input type="text" class="store-search" data-store-search placeholder="${t(language, 'editorSkinStoreSearch')}" value="${state.searchQuery || ''}" style="width:100%;box-sizing:border-box;padding:10px 14px;border-radius:var(--sp-radius-pill,999px);border:1px solid var(--sp-border-muted,var(--divider-color,rgba(0,0,0,0.12)));background:var(--sp-device-bg,rgba(128,128,128,0.06));color:var(--sp-text-main,inherit);font:inherit;font-size:var(--sp-font-xs,14px);outline:none;margin-bottom:var(--sp-space-md,16px);">
-      ${resultLabel}
-      <div class="store-grid">${cards}</div>
-      ${loader}`;
-  }
+  const resultLabel = filtered.length > 0
+    ? `<div class="store-result-count" style="font-size:var(--sp-font-3xs,10px);color:var(--sp-text-muted,#888);margin-bottom:8px;padding:0 4px">${displayedCount} / ${filtered.length}</div>`
+    : '';
 
   return `
-    <div class="nav-overlay" data-store-overlay style="display:flex">
-      <div class="nav-dialog" style="max-width:1200px;width:95vw">
-        <h3>${t(language, 'editorSkinStore')} <span class="store-dependency" style="font-size:0.7em;font-weight:400;color:var(--sp-text-muted,#888)">${linkifyDep(t(language, 'editorSkinStoreDependency'), language)}</span></h3>
-        ${content}
-        <div class="nav-dialog-actions">
-          <button class="nav-cancel" data-store-close>${t(language, 'editorSkinStoreClose')}</button>
-        </div>
-      </div>
-    </div>
-  `;
+      <input type="text" class="store-search" data-store-search placeholder="${t(language, 'editorSkinStoreSearch')}" value="${state.searchQuery || ''}" style="width:100%;box-sizing:border-box;padding:10px 14px;border-radius:var(--sp-radius-pill,999px);border:1px solid var(--sp-border-muted,var(--divider-color,rgba(0,0,0,0.12)));background:var(--sp-device-bg,rgba(128,128,128,0.06));color:var(--sp-text-main,inherit);font:inherit;font-size:var(--sp-font-xs,14px);outline:none;margin-bottom:var(--sp-space-md,16px);">
+      ${resultLabel}
+      <div class="store-grid">${cards.join('')}</div>
+      ${loader}
+      <div class="nav-dialog-actions">
+        <button class="nav-cancel" data-store-close>${t(language, 'editorSkinStoreClose')}</button>
+      </div>`;
 }
 
 export async function fetchSkinThemes(): Promise<SkinStoreTheme[]> {

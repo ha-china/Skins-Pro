@@ -209,7 +209,7 @@ function bindSkinStoreOpen(host: EditorHost): void {
           likes: skinStats[th.id]?.liked ?? 0,
           userLiked: isSkinLiked(th.id),
         }));
-        merged.sort((a, b) => Number(!!b.hasUpdate) - Number(!!a.hasUpdate));
+        merged.sort((a, b) => (Number(!!b.hasUpdate) - Number(!!a.hasUpdate)) || ((b.downloads ?? 0) - (a.downloads ?? 0)));
         const hasMore = merged.length > 20;
         host.onChange({ skinStore: { open: true, loading: false, error: '', themes: merged, searchQuery: '', hasMore, displayedCount: 20 } });
       } catch (err) {
@@ -237,6 +237,22 @@ function bindSkinStoreOpen(host: EditorHost): void {
 }
 
 function bindSkinStoreActionButtons(host: EditorHost): void {
+  host.root.querySelectorAll('[data-store-overlay]').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        host.onChange({ skinStore: { ...host.state.skinStore, open: false } });
+        host.renderSkinStoreOnly();
+      }
+    });
+  });
+
+  host.root.querySelectorAll('[data-store-close]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      host.onChange({ skinStore: { ...host.state.skinStore, open: false } });
+      host.renderSkinStoreOnly();
+    });
+  });
+
   host.root.querySelectorAll<HTMLElement>('[data-store-remove]').forEach(btn => {
     btn.addEventListener('click', () => {
       const skin = btn.getAttribute('data-store-remove');
@@ -268,21 +284,24 @@ function bindSkinStoreActionButtons(host: EditorHost): void {
     });
   });
 
-  const loadMoreBtn = host.root.querySelector<HTMLElement>('[data-store-load-more]');
-  if (loadMoreBtn) {
-    loadMoreBtn.addEventListener('click', () => {
-      const q = (host.state.skinStore.searchQuery || '').trim();
-      const filtered = q
-        ? host.state.skinStore.themes.filter(th => {
-            const tokens = q.toLowerCase().split(/\s+/).filter(Boolean);
-            const haystack = [th.id, th.name || '', th.author || '', ...(th.tags || []), th.description || ''].join(' ').toLowerCase();
-            return tokens.every(t => haystack.includes(t));
-          })
-        : host.state.skinStore.themes;
-      const next = host.state.skinStore.displayedCount + 20;
-      const hasMore = next < filtered.length;
-      host.onChange({ skinStore: { ...host.state.skinStore, displayedCount: next, hasMore } });
-      host.renderSkinStoreOnly();
+  const storeGrid = host.root.querySelector<HTMLElement>('.store-grid');
+  if (storeGrid) {
+    storeGrid.addEventListener('scroll', () => {
+      if (!host.state.skinStore.hasMore) return;
+      if (storeGrid.scrollTop + storeGrid.clientHeight >= storeGrid.scrollHeight - 60) {
+        const q = (host.state.skinStore.searchQuery || '').trim();
+        const filtered = q
+          ? host.state.skinStore.themes.filter(th => {
+              const tokens = q.toLowerCase().split(/\s+/).filter(Boolean);
+              const haystack = [th.id, th.name || '', th.author || '', ...(th.tags || []), th.description || ''].join(' ').toLowerCase();
+              return tokens.every(t => haystack.includes(t));
+            })
+          : host.state.skinStore.themes;
+        const next = host.state.skinStore.displayedCount + 20;
+        const hasMore = next < filtered.length;
+        host.onChange({ skinStore: { ...host.state.skinStore, displayedCount: next, hasMore } });
+        host.renderSkinStoreOnly();
+      }
     });
   }
 

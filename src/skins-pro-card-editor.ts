@@ -3,7 +3,7 @@ import { assetHref, getTranslate, normalizeLanguage } from './utils';
 import { type DashboardConfigRecord } from './editor/config';
 import { renderEditorTemplate } from './editor/template';
 import { bindEditorEvents, bindSkinStoreActions, type EditorState } from './editor/events';
-import { renderSkinStore } from './editor/skin-store';
+import { renderSkinStoreBody } from './editor/skin-store';
 
 export class SkinsProCardEditor extends HTMLElement {
   private _state: EditorState = {
@@ -91,10 +91,20 @@ export class SkinsProCardEditor extends HTMLElement {
 
   public renderSkinStoreOnly(): void {
     if (!this.shadowRoot) return;
-    const storeOverlay = this.shadowRoot.querySelector('[data-store-overlay]');
-    if (!storeOverlay) return;
+    const storeOverlay = this.shadowRoot.querySelector('[data-store-overlay]') as HTMLElement;
+    const storeBody = this.shadowRoot.querySelector('[data-store-body]') as HTMLElement;
+    const oldGrid = this.shadowRoot.querySelector('.store-grid');
+    const savedScroll = oldGrid ? oldGrid.scrollTop : 0;
     const language = this._currentLanguage();
-    storeOverlay.outerHTML = renderSkinStore(this._state.skinStore, this._state.config, language);
+    const state = this._state.skinStore;
+
+    if (storeOverlay) {
+      storeOverlay.style.display = state.open ? 'flex' : 'none';
+    }
+
+    if (storeBody) {
+      storeBody.innerHTML = state.open ? renderSkinStoreBody(state, this._state.config, language) : '';
+    }
 
     bindSkinStoreActions(this.shadowRoot, {
       el: this,
@@ -104,6 +114,11 @@ export class SkinsProCardEditor extends HTMLElement {
       reload: () => this.render(),
       renderSkinStoreOnly: () => this.renderSkinStoreOnly(),
     });
+
+    const newGrid = this.shadowRoot.querySelector('.store-grid');
+    if (newGrid && savedScroll > 0) {
+      newGrid.scrollTop = savedScroll;
+    }
   }
 }
 

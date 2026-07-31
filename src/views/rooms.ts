@@ -113,6 +113,7 @@ export function renderAreaRooms(
       </div>
     ` : nothing;
 
+    const summary = html`<p class="muted">${room.summary || '-'}</p>`;
     if (showSummary) {
       return html`
         <button class="room" @click=${() => ctx.onRoomSelect(room.name)}>
@@ -120,7 +121,7 @@ export function renderAreaRooms(
           ${sceneChips}
           <div class="room-label">
             <h3>${room.name}</h3>
-            <p class="muted">${room.summary}</p>
+            ${summary}
           </div>
           ${activeCountsRow}
         </button>
@@ -133,7 +134,7 @@ export function renderAreaRooms(
         ${sceneChips}
         <div class="room-label">
           <h3>${room.name}</h3>
-          <p class="muted">${room.summary}</p>
+          ${summary}
           <p class="room-stats">${countLabel}</p>
         </div>
         ${activeCountsRow}

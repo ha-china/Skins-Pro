@@ -133,8 +133,7 @@ export function areaSummaryById(
     }
   }
 
-  if (parts.length > 0) return parts.join(' · ');
-  return t(language, 'entityCount', { count: entries.length });
+  return parts.length > 0 ? parts.join(' · ') : '';
 }
 
 export function areaCounts(

@@ -136,6 +136,14 @@
     "package": "store/deltaforce.zip"
   },
   {
+    "id": "digimon-light",
+    "name": "digimon-light",
+    "author": "xyiqq",
+    "version": "1.1.0",
+    "thumbnail": "screenshots/thumbnails/digimon-light.jpg",
+    "package": "store/digimon-light.zip"
+  },
+  {
     "id": "dota-2",
     "name": "dota-2",
     "author": "xyiqq",

@@ -340,7 +340,7 @@ const e={base:"base-texture.jpg",stage:"background.jpg",theme_css:"theme.css",av
         </section>
         <section class="bottom-block">
           <div class="section-title"><h2>${e.translate("rooms")}</h2><p class="muted">${e.translate("roomSnapshots")}</p></div>
-          <div class="rooms">${function(e){const t=e.config.home_limits.rooms,i=e.config.home_selection?.rooms||[],n=wi(e,e.areas,!1,t,i);if(n!==ee)return n;const s=ki(e.config.rooms,e.areas);return 0===s.length?ee:X`${s.map(t=>{const i=t.image||"room_living",n=t.info_entity?Be(e.hass,t.info_entity,e.language):"",s=e.areas?.length?function(e,t,i,n,s,a){const o=t?.find(t=>t.name===(e.name||e.name_zh||e.name_en));return o?qt(o.area_id,i,n,s,a):"Home Assistant Area"}(t,e.areas,e.hass,e.entityRegistry,e.deviceRegistry,e.language):"--",a=t.name||"--";return X`
+          <div class="rooms">${function(e){const t=e.config.home_limits.rooms,i=e.config.home_selection?.rooms||[],n=wi(e,e.areas,!1,t,i,!1);if(n!==ee)return n;const s=ki(e.config.rooms,e.areas);return 0===s.length?ee:X`${s.map(t=>{const i=t.image||"room_living",n=t.info_entity?Be(e.hass,t.info_entity,e.language):"",s=e.areas?.length?function(e,t,i,n,s,a){const o=t?.find(t=>t.name===(e.name||e.name_zh||e.name_en));return o?qt(o.area_id,i,n,s,a):"Home Assistant Area"}(t,e.areas,e.hass,e.entityRegistry,e.deviceRegistry,e.language):"--",a=t.name||"--";return X`
       <button class="room" @click=${()=>t.target?e.onNavigatePath(t.target):void 0}>
         ${ei(e.config,i,a,"")}
         <div class="room-label">

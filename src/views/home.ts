@@ -181,7 +181,7 @@ function renderShortcutDevices(ctx: RenderContext): TemplateResult[] {
 function renderHomeRooms(ctx: RenderContext): TemplateResult | typeof nothing {
   const limit = ctx.config.home_limits!.rooms!;
   const selectedRooms = ctx.config.home_selection?.rooms || [];
-  const areaRooms = renderAreaRooms(ctx, ctx.areas, false, limit, selectedRooms);
+  const areaRooms = renderAreaRooms(ctx, ctx.areas, false, limit, selectedRooms, false);
   if (areaRooms !== nothing) return areaRooms;
 
   const rooms = getRoomsForRender(ctx.config.rooms, ctx.areas);

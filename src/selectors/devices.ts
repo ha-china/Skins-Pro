@@ -27,45 +27,75 @@ export function getRealDevicesForRender(
 ): RenderedDevice[] {
   if (!deviceRegistry || !entityRegistry || !hass) return [];
 
-  return deviceRegistry
-    .filter((device) => !device.disabled_by)
-    .map((device, index) => {
-      const entities = entityRegistry
-        ?.filter((entry) => entry.device_id === device.id && !entry.hidden_by && !entry.disabled_by)
-        .map((entry) => entry.entity_id) || [];
-      if (entities.length === 0) return undefined;
+  const usedEntityIds = new Set<string>();
+  const rendered: RenderedDevice[] = [];
 
-      const nonUpdateEntities = entities.filter((entityId) => !entityId.startsWith('update.') && !entityId.startsWith('device_tracker.'));
-      if (nonUpdateEntities.length === 0) return undefined;
-      const preferredEntity = nonUpdateEntities.find((entityId) => PREFERRED_DOMAINS.test(entityId)) || nonUpdateEntities[0];
-      if (!preferredEntity || !hass) return undefined;
+  const renderEntry = (
+    entityId: string,
+    index: number,
+  ): RenderedDevice | undefined => {
+    if (usedEntityIds.has(entityId)) return undefined;
+    if (entityId.startsWith('update.') || entityId.startsWith('device_tracker.')) return undefined;
 
-      const stateObj = hass.states[preferredEntity];
-      const state = stateObj?.state || 'unknown';
-      const domain = preferredEntity.split('.')[0] || 'sensor';
-      const icon = String(stateObj?.attributes?.icon || iconForDomain(domain));
-      const name = String(stateObj?.attributes?.friendly_name || preferredEntity);
-      if (/pre-?release/i.test(name)) return undefined;
-      const subtitle = areaNameForEntity(preferredEntity, entityRegistry, deviceRegistry, areas) || '';
-      const detail = domain || '--';
+    const stateObj = hass!.states[entityId];
+    const state = stateObj?.state || 'unknown';
+    const domain = entityId.split('.')[0] || 'sensor';
+    const icon = String(stateObj?.attributes?.icon || iconForDomain(domain));
+    const name = String(stateObj?.attributes?.friendly_name || entityId);
+    if (/pre-?release/i.test(name)) return undefined;
+    const subtitle = areaNameForEntity(entityId, entityRegistry, deviceRegistry, areas) || '';
+    const detail = domain || '--';
 
-      return {
-        entityId: preferredEntity,
-        name,
-        subtitle,
-        detail,
-        state,
-        icon,
-        color: DEVICE_COLORS[index % DEVICE_COLORS.length]!,
-      };
+    usedEntityIds.add(entityId);
+    return {
+      entityId,
+      name,
+      subtitle,
+      detail,
+      state,
+      icon,
+      color: DEVICE_COLORS[index % DEVICE_COLORS.length]!,
+    };
+  };
+
+  for (const device of deviceRegistry) {
+    if (device.disabled_by) continue;
+    const entities = entityRegistry
+      .filter((entry) => entry.device_id === device.id && !entry.hidden_by && !entry.disabled_by)
+      .map((entry) => entry.entity_id);
+    if (entities.length === 0) continue;
+
+    const nonUpdateEntities = entities.filter((id) => !id.startsWith('update.') && !id.startsWith('device_tracker.'));
+    if (nonUpdateEntities.length === 0) continue;
+    const preferredEntity = nonUpdateEntities.find((id) => PREFERRED_DOMAINS.test(id)) || nonUpdateEntities[0];
+    if (!preferredEntity) continue;
+
+    const renderedDevice = renderEntry(preferredEntity, rendered.length);
+    if (renderedDevice) rendered.push(renderedDevice);
+  }
+
+  // Include standalone entities (e.g. KNX) that belong to no device
+  const deviceIds = new Set(deviceRegistry.filter((d) => !d.disabled_by).map((d) => d.id));
+  const orphanEntities = entityRegistry
+    .filter((entry) => {
+      if (entry.hidden_by || entry.disabled_by) return false;
+      if (!entry.device_id) return true;
+      return !deviceIds.has(entry.device_id);
     })
-    .filter((device): device is RenderedDevice => Boolean(device))
-    .filter((d) => {
-      if (filters.filterRoom && d.subtitle !== filters.filterRoom) return false;
-      if (filters.filterType && deviceTypeGroupKey(d.detail) !== filters.filterType) return false;
-      if (filters.hideUnassigned && !d.subtitle) return false;
-      return true;
-    });
+    .filter((entry) => PREFERRED_DOMAINS.test(entry.entity_id) || entry.entity_id.startsWith('binary_sensor.'))
+    .slice(0, 300);
+
+  for (const entry of orphanEntities) {
+    const renderedDevice = renderEntry(entry.entity_id, rendered.length);
+    if (renderedDevice) rendered.push(renderedDevice);
+  }
+
+  return rendered.filter((d) => {
+    if (filters.filterRoom && d.subtitle !== filters.filterRoom) return false;
+    if (filters.filterType && deviceTypeGroupKey(d.detail) !== filters.filterType) return false;
+    if (filters.hideUnassigned && !d.subtitle) return false;
+    return true;
+  });
 }
 
 export function deviceTypeGroupKey(detail: string): string {

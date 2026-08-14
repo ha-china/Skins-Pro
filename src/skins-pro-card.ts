@@ -54,6 +54,9 @@ import { renderAutomationsView } from './views/automations';
 import { renderEnergyView } from './views/energy';
 import { renderSecurityView } from './views/security';
 import { renderSearchOverlay } from './views/search';
+import { fetchSkinThemes, fetchSkinStats, fetchLocalSkinVersions, isSkinLiked, skinStats, type SkinStoreState, renderSkinStore } from './editor/skin-store';
+import { bindSkinStoreActions, type EditorHost } from './editor/events';
+import { EDITOR_CSS as STORE_CSS } from './editor/template';
 
 export class SkinsProCard extends LitElement {
   private _config?: DashboardConfig;
@@ -98,6 +101,8 @@ export class SkinsProCard extends LitElement {
   @state() private _searchFilter = 'all';
 
   @state() private _sidebarHidden = false;
+  @state() private _kioskStoreOpen = false;
+  private _kioskStore: SkinStoreState = { open: false, loading: false, error: '', themes: [], searchQuery: '', hasMore: false, displayedCount: 20 };
   // Manual double-click detector state. We can't rely on the native `dblclick`
   // event because DevTools device-emulation mode (and real touch devices)
   // translate clicks to touch events where `dblclick` is suppressed to make
@@ -144,6 +149,7 @@ export class SkinsProCard extends LitElement {
     super.connectedCallback();
     window.addEventListener('resize', this._handleWindowResize);
     window.addEventListener('orientationchange', this._handleWindowResize);
+    this.addEventListener('config-changed', this._handleKioskConfigChanged as EventListener);
     // ResizeObserver watches the card's own box — this fires when HA's sidebar
     // opens/closes, when the card is placed inside a Sections dashboard column,
     // or whenever the parent reflows. Width changes are the responsive signal;
@@ -172,6 +178,7 @@ export class SkinsProCard extends LitElement {
     super.disconnectedCallback();
     window.removeEventListener('resize', this._handleWindowResize);
     window.removeEventListener('orientationchange', this._handleWindowResize);
+    this.removeEventListener('config-changed', this._handleKioskConfigChanged as EventListener);
     this._ro?.disconnect();
     this._ro = undefined;
     this._unsubOrientation?.();
@@ -458,6 +465,9 @@ export class SkinsProCard extends LitElement {
 
     return html`
       <link rel="stylesheet" href="${assetHref(this._config, 'theme_css')}">
+      <style>
+        .sp-kiosk-store-btn{position:fixed;bottom:12px;right:12px;z-index:998;width:36px;height:36px;border-radius:50%;border:1px solid var(--sp-border-device,var(--sp-border-glass,rgba(0,0,0,0.12)));background:var(--sp-card-bg,var(--ha-card-background,#fff));box-shadow:0 1px 3px rgba(0,0,0,0.15);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0.5;transition:opacity 0.2s}.sp-kiosk-store-btn:hover{opacity:1}.store-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:4px}.store-tag{padding:1px 5px;border-radius:3px;background:var(--sp-badge-bg,rgba(0,0,0,0.08));font-size:var(--sp-font-4xs,9px);color:var(--sp-text-muted,#888)}.store-update-badge{display:inline-block;margin-left:4px;padding:0 4px;border-radius:3px;background:var(--sp-warning,#f90);color:#fff;font-size:var(--sp-font-4xs,9px);font-weight:700;vertical-align:middle}${STORE_CSS}
+      </style>
       <ha-card>
         ${registriesLoading}
         <div class="mc-app" data-view=${this._view} data-sidebar=${this._sidebarHidden ? 'hidden' : 'visible'}>
@@ -474,8 +484,74 @@ export class SkinsProCard extends LitElement {
               (f) => { this._searchFilter = f; },
             )
           : nothing}
+        ${document.body.classList.contains('skins-pro-kiosk')
+          ? html`
+            <button class="sp-kiosk-store-btn" @click=${() => void this._openKioskStore()} title="${translate('editorSkinStore')}">
+              <ha-icon icon="mdi:palette-swatch" style="--mdc-icon-size:18px"></ha-icon>
+            </button>
+          `
+          : nothing}
+        ${this._kioskStoreOpen ? html`<div id="kiosk-store-container"></div>` : nothing}
       </ha-card>
     `;
+  }
+
+  private _openKioskStore(): void {
+    this._kioskStoreOpen = true;
+    this._kioskStore = { ...this._kioskStore, open: true, loading: true, error: '', searchQuery: '', hasMore: true, displayedCount: 20 };
+    this.requestUpdate();
+    void this._loadKioskStore();
+  }
+
+  private async _loadKioskStore(): Promise<void> {
+    try {
+      const themes = await fetchSkinThemes();
+      await fetchSkinStats();
+      const downloaded: string[] = this._config?.downloaded_skins || [];
+      const localVersions = await fetchLocalSkinVersions(downloaded);
+      const merged = themes.map((th) => ({
+        ...th,
+        hasUpdate: downloaded.includes(th.id) && !!th.version && localVersions[th.id] !== th.version,
+        downloads: skinStats[th.id]?.downloads,
+        likes: skinStats[th.id]?.liked ?? 0,
+        userLiked: isSkinLiked(th.id),
+      }));
+      merged.sort((a, b) => (Number(!!b.hasUpdate) - Number(!!a.hasUpdate)) || ((b.downloads ?? 0) - (a.downloads ?? 0)));
+      const hasMore = merged.length > 20;
+      this._kioskStore = { ...this._kioskStore, loading: false, error: '', themes: merged, searchQuery: '', hasMore, displayedCount: 20 };
+    } catch (err) {
+      this._kioskStore = { ...this._kioskStore, loading: false, error: String(err), displayedCount: 20, hasMore: false };
+    }
+    this._renderKioskStoreBody();
+  }
+
+  private _handleKioskConfigChanged = (e: CustomEvent): void => {
+    if (!e.detail?.config) return;
+    this._config = e.detail.config as DashboardConfig;
+    this.requestUpdate();
+  };
+
+  private _createStoreHost(): EditorHost {
+    return {
+      el: this,
+      root: this.shadowRoot!,
+      state: {
+        config: this._config as any,
+        hass: this._hass,
+        language: this._getLanguage(),
+        navDialogOpen: false,
+        skinStore: this._kioskStore,
+      },
+      onChange: (next) => {
+        if (next.skinStore) {
+          this._kioskStore = next.skinStore;
+          if (!next.skinStore.open) this._kioskStoreOpen = false;
+        }
+        if (next.config) this._config = next.config as any;
+      },
+      reload: () => this._renderKioskStoreBody(),
+      renderSkinStoreOnly: () => this._renderKioskStoreBody(),
+    };
   }
 
   private renderRegistryLoading(language: Language): TemplateResult | typeof nothing {
@@ -503,6 +579,25 @@ export class SkinsProCard extends LitElement {
       applyFullscreenHeight(this._host());
       toggleKiosk();
     }
+    this._renderKioskStoreBody();
+  }
+
+  private _renderKioskStoreBody(): void {
+    const container = this.shadowRoot?.getElementById('kiosk-store-container');
+    if (!container) return;
+    const store = this._kioskStore;
+    if (!store.open) { container.innerHTML = ''; return; }
+    const oldGrid = container.querySelector('.store-grid');
+    const savedScroll = oldGrid ? oldGrid.scrollTop : 0;
+    container.innerHTML = renderSkinStore(store, this._config as any, this._getLanguage());
+    const newGrid = container.querySelector('.store-grid');
+    if (newGrid && savedScroll > 0) newGrid.scrollTop = savedScroll;
+    bindSkinStoreActions(this.shadowRoot!, this._createStoreHost());
+  }
+
+  private _getLanguage(): Language {
+    const lang = this._config?.language === 'auto' ? this._hass?.language : this._config?.language;
+    return normalizeLanguage(lang || 'en');
   }
 
   private _resolveTheme(): 'light' | 'dark' {

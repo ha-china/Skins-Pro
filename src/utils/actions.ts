@@ -9,16 +9,19 @@ const TURN_ON_SERVICE: Record<string, string> = {
   cover: 'open_cover',
   valve: 'open_valve',
   button: 'press',
+  vacuum: 'start',
 };
 const TURN_OFF_SERVICE: Record<string, string> = {
   lock: 'lock',
   cover: 'close_cover',
   valve: 'close_valve',
+  vacuum: 'return_to_base',
 };
 const TOGGLE_SERVICE: Record<string, string> = {
   lock: 'toggle',
   cover: 'toggle',
   valve: 'toggle',
+  vacuum: 'toggle',
 };
 
 export function turnOnService(domain: string): string {

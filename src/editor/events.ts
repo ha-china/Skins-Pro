@@ -9,7 +9,7 @@ import {
   type DashboardConfigRecord,
 } from './config';
 import { parseNavSave } from './nav-dialog';
-import { CDN_STORE, downloadSkin, fetchSkinThemes, fetchSkinStats, fetchLocalSkinVersions, toggleLike, isSkinLiked, skinStats, removeSkin, type SkinStoreState } from './skin-store';
+import { CDN_STORE, downloadSkin, loadStoreThemes, STORE_PAGE_SIZE, toggleLike, removeSkin, type SkinStoreState } from './skin-store';
 import { uploadBackgroundImage } from './bg-upload';
 import { ENTITY_PICKER_TAG } from './pickers';
 
@@ -195,25 +195,15 @@ function bindSkinStoreOpen(host: EditorHost): void {
   const storeBtn = host.root.querySelector<HTMLElement>('[data-skin-store]');
   if (storeBtn) {
     storeBtn.addEventListener('click', async () => {
-      host.onChange({ skinStore: { ...host.state.skinStore, open: true, loading: true, error: '', searchQuery: '', hasMore: true, displayedCount: 20 } });
+      host.onChange({ skinStore: { ...host.state.skinStore, open: true, loading: true, error: '', searchQuery: '', hasMore: true, displayedCount: STORE_PAGE_SIZE } });
       host.renderSkinStoreOnly();
       try {
-        const themes = await fetchSkinThemes();
-        await fetchSkinStats();
         const downloaded: string[] = host.state.config.downloaded_skins || [];
-        const localVersions = await fetchLocalSkinVersions(downloaded);
-        const merged = themes.map(th => ({
-          ...th,
-          hasUpdate: downloaded.includes(th.id) && !!th.version && localVersions[th.id] !== th.version,
-          downloads: skinStats[th.id]?.downloads,
-          likes: skinStats[th.id]?.liked ?? 0,
-          userLiked: isSkinLiked(th.id),
-        }));
-        merged.sort((a, b) => (Number(!!b.hasUpdate) - Number(!!a.hasUpdate)) || ((b.downloads ?? 0) - (a.downloads ?? 0)));
-        const hasMore = merged.length > 20;
-        host.onChange({ skinStore: { open: true, loading: false, error: '', themes: merged, searchQuery: '', hasMore, displayedCount: 20 } });
+        const merged = await loadStoreThemes(downloaded);
+        const hasMore = merged.length > STORE_PAGE_SIZE;
+        host.onChange({ skinStore: { open: true, loading: false, error: '', themes: merged, searchQuery: '', hasMore, displayedCount: STORE_PAGE_SIZE } });
       } catch (err) {
-        host.onChange({ skinStore: { ...host.state.skinStore, loading: false, error: String(err), displayedCount: 20, hasMore: false } });
+        host.onChange({ skinStore: { ...host.state.skinStore, loading: false, error: String(err), displayedCount: STORE_PAGE_SIZE, hasMore: false } });
       }
       host.renderSkinStoreOnly();
     });
@@ -297,7 +287,7 @@ function bindSkinStoreActionButtons(host: EditorHost): void {
               return tokens.every(t => haystack.includes(t));
             })
           : host.state.skinStore.themes;
-        const next = host.state.skinStore.displayedCount + 20;
+        const next = host.state.skinStore.displayedCount + STORE_PAGE_SIZE;
         const hasMore = next < filtered.length;
         host.onChange({ skinStore: { ...host.state.skinStore, displayedCount: next, hasMore } });
         host.renderSkinStoreOnly();
@@ -311,10 +301,12 @@ function bindSkinStoreActionButtons(host: EditorHost): void {
       if (!skin) return;
       const result = await toggleLike(skin);
       if (!result) return;
-      const countSpan = btn.querySelector('.store-like-count');
-      if (countSpan) countSpan.textContent = String(result.total);
       btn.classList.toggle('liked', result.liked);
-      btn.innerHTML = `${result.liked ? '❤️' : '🤍'} <span class="store-like-count">${result.total}</span>`;
+      btn.textContent = result.liked ? '❤️' : '🤍';
+      const countSpan = document.createElement('span');
+      countSpan.className = 'store-like-count';
+      countSpan.textContent = String(result.total);
+      btn.appendChild(countSpan);
     });
   });
 
@@ -325,7 +317,7 @@ function bindSkinStoreActionButtons(host: EditorHost): void {
       host.root.querySelector('#sp-lightbox')?.remove();
       const overlay = document.createElement('div');
       overlay.id = 'sp-lightbox';
-      overlay.style.cssText = `position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.7) url("${CDN_STORE}/screenshots/${skin}.png") no-repeat center/contain;cursor:pointer`;
+      overlay.style.cssText = `position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.7) url("${CDN_STORE}/screenshots/${encodeURIComponent(skin)}.png") no-repeat center/contain;cursor:pointer`;
       overlay.addEventListener('click', () => overlay.remove());
       host.root.appendChild(overlay);
     });
@@ -334,7 +326,7 @@ function bindSkinStoreActionButtons(host: EditorHost): void {
   const searchInput = host.root.querySelector<HTMLInputElement>('[data-store-search]');
   if (searchInput) {
     searchInput.addEventListener('input', () => {
-      host.onChange({ skinStore: { ...host.state.skinStore, searchQuery: searchInput.value, displayedCount: 20 } });
+      host.onChange({ skinStore: { ...host.state.skinStore, searchQuery: searchInput.value, displayedCount: STORE_PAGE_SIZE } });
       host.renderSkinStoreOnly();
       const restored = host.root.querySelector<HTMLInputElement>('[data-store-search]');
       if (restored && restored !== searchInput) {

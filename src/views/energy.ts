@@ -12,7 +12,7 @@ function energyLabel(ctx: RenderContext, key: string): string {
   if (key === 'todayEnergy' || key === 'gridReturn') {
     return ctx.translate(key as TranslationKey);
   }
-  return ctx.hass.localize('ui.panel.energy.' + key) || key;
+  return ctx.hass.localize?.('ui.panel.energy.' + key) || key;
 }
 
 export function renderEnergyView(
@@ -67,14 +67,13 @@ export function renderHomeEnergyCard(
   energyBars: TemplateResult,
 ): TemplateResult | typeof nothing {
   if (!ctx.config.energy?.entity) return nothing;
-  const isPortrait = window.matchMedia('(orientation: portrait)').matches;
-  if (isPortrait && energyValue === '--') return nothing;
-
+  // Portrait + no data hides via .sp-energy-nodata in the structural CSS —
+  // no JS breakpoint branch, so rotation reacts instantly.
   return html`
-    <section class="glass-card panel-energy" style="height:auto;min-height:0;flex:0 0 auto;align-self:auto;">
+    <section class="glass-card panel-energy sp-energy-home-card${energyValue === '--' ? ' sp-energy-nodata' : ''}">
       <div class="section-title"><h2>${ctx.translate('todayEnergy')}</h2></div>
       <div class="energy-value">${energyValue}<small> ${energyUnit}</small></div>
-      <div class="bars" style="height:clamp(12px,4vw,48px);margin-top:clamp(4px,1.2vw,12px);">${energyBars}</div>
+      <div class="bars sp-energy-bars">${energyBars}</div>
       <div class="energy-footer"><span class="muted">${localizedText(ctx.config.energy?.compare_text, ctx.config.energy?.compare_text_zh, ctx.config.energy?.compare_text_en, ctx.language, ctx.translate('compareYesterday'))}</span><span class="down">${compareValue || '--'}</span></div>
     </section>
   `;

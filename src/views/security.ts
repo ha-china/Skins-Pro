@@ -1,12 +1,13 @@
 import { html, nothing } from 'lit';
 import type { TemplateResult } from 'lit';
 
-import type { HassEntity, RenderedDevice } from '../types';
+import type { HassEntity } from '../types';
 import type { RenderContext } from '../render/context';
 import { renderPageShell } from '../components/page-shell';
 import { renderImage } from '../render/context';
-import { assetKeyForDomain, deviceStateLabel, selectedSkin, t } from '../utils';
+import { assetKeyForDomain, cameraSnapshotUrl, deviceStateLabel, selectedSkin, t } from '../utils';
 import { setAlarmMode } from '../components/alarm-code-dialog';
+import { DEVICE_COLORS } from '../selectors/devices';
 
 const SECURITY_TOGGLE_DOMAINS = new Set([
   'light', 'switch', 'fan', 'cover', 'valve', 'media_player', 'lock',
@@ -49,12 +50,7 @@ function renderSecurityCards(ctx: RenderContext): TemplateResult | typeof nothin
     const stateObj = ctx.hass.states?.[entity.entity_id];
     const entityPicture = String(stateObj?.attributes?.entity_picture || '');
     const accessToken = String(stateObj?.attributes?.access_token || '');
-    const baseUrl = entityPicture
-      || (accessToken
-        ? `/api/camera_proxy/${entity.entity_id}?token=${encodeURIComponent(accessToken)}`
-        : '');
-    const sep = baseUrl.includes('?') ? '&' : '?';
-    const snapshotUrl = baseUrl ? `${baseUrl}${sep}ts=${Date.now()}` : '';
+    const snapshotUrl = entityPicture || (accessToken ? cameraSnapshotUrl(entity.entity_id, accessToken) : '');
     return html`
       <button class="camera-card" @click=${() => ctx.onHandleAction(entity.entity_id, 'more-info')}>
         <div class="camera-preview" style="aspect-ratio:auto;min-height:0;max-height:none;background:transparent;">
@@ -78,7 +74,7 @@ function renderSecurityCards(ctx: RenderContext): TemplateResult | typeof nothin
       ? deviceStateLabel(entity.state, ctx.language, ctx.hass, 'alarm_control_panel')
       : deviceStateLabel(entity.state, ctx.language, ctx.hass, domain);
     const assetKey = assetKeyForDomain(skin, domain);
-    const tones: RenderedDevice['color'][] = ['red', 'green', 'blue', 'purple', 'yellow', 'brown'];
+    const tones = DEVICE_COLORS;
     const statusClass = entity.state === 'unavailable' ? 'device-unavailable' : `device-on-${tones[index % tones.length]}`;
     const togglable = SECURITY_TOGGLE_DOMAINS.has(domain);
 
@@ -103,9 +99,9 @@ function renderSecurityCards(ctx: RenderContext): TemplateResult | typeof nothin
 
       const armBtns = isPending
         ? html`<ha-icon icon=${isTriggered ? 'mdi:bell-ring' : 'mdi:shield-lock'} style=${iconStyle}></ha-icon>`
-        : html`${fallbackArms.slice(0, 3).map(m => html`<ha-icon icon=${m.i} style=${iconStyle} title=${m.title} @click=${(e: Event) => { e.stopPropagation(); void setAlarmMode(e.currentTarget as HTMLElement, ctx.hass, entity.entity_id, m.s, false); }}></ha-icon>`)}`;
+        : html`${fallbackArms.slice(0, 3).map(m => html`<ha-icon role="button" aria-label=${m.title} icon=${m.i} style=${iconStyle} title=${m.title} @click=${(e: Event) => { e.stopPropagation(); void setAlarmMode(e.currentTarget as HTMLElement, ctx.hass, entity.entity_id, m.s, false); }}></ha-icon>`)}`;
       const disarmBtn = (isArmed || isTriggered)
-        ? html`<ha-icon icon="mdi:shield-off" style=${iconStyle} title=${aLocal('disarmed')} @click=${(e: Event) => { e.stopPropagation(); void setAlarmMode(e.currentTarget as HTMLElement, ctx.hass, entity.entity_id, 'alarm_disarm', true); }}></ha-icon>`
+        ? html`<ha-icon role="button" aria-label=${aLocal('disarmed')} icon="mdi:shield-off" style=${iconStyle} title=${aLocal('disarmed')} @click=${(e: Event) => { e.stopPropagation(); void setAlarmMode(e.currentTarget as HTMLElement, ctx.hass, entity.entity_id, 'alarm_disarm', true); }}></ha-icon>`
         : '';
       control = html`<div class="control-row" style="justify-content:flex-end;gap:6px" @click=${(e: Event) => e.stopPropagation()}>${armBtns}${disarmBtn}</div>`;
     } else if (togglable) {

@@ -6,6 +6,28 @@ import { STRINGS } from '../i18n';
 
 export const BUNDLED_SKINS: readonly string[] = SKINS;
 
+// Sentinel for resource_pack.base_path meaning "resolve from the selected skin".
+export const AUTO_BASE_PATH = '__AUTO__';
+
+// Root directory of downloaded skins served from HA's /local/ storage.
+export const SKINS_PRO_LOCAL_BASE = '/local/skins-pro/';
+
+// Intl.DateTimeFormat construction is expensive; cache instances by
+// locale+options. Capped to avoid unbounded growth from odd locales.
+const dtFormatCache = new Map<string, Intl.DateTimeFormat>();
+const DT_FORMAT_CACHE_MAX = 64;
+
+function cachedDtFormat(locale: string, opts: Intl.DateTimeFormatOptions): Intl.DateTimeFormat {
+  const key = `${locale}${JSON.stringify(opts)}`;
+  let fmt = dtFormatCache.get(key);
+  if (!fmt) {
+    if (dtFormatCache.size >= DT_FORMAT_CACHE_MAX) dtFormatCache.clear();
+    fmt = new Intl.DateTimeFormat(locale, opts);
+    dtFormatCache.set(key, fmt);
+  }
+  return fmt;
+}
+
 interface SkinMetadata {
   strings: Record<string, string>;
   iconMap: Record<string, string>;
@@ -27,7 +49,7 @@ export async function loadSkinMetadata(skin: string): Promise<boolean> {
   if (SKIN_METADATA_LOADING.has(skin)) return false;
   SKIN_METADATA_LOADING.add(skin);
   try {
-    const res = await fetch(`/local/skins-pro/${skin}/strings.json?v=${Date.now()}`);
+    const res = await fetch(`${SKINS_PRO_LOCAL_BASE}${skin}/strings.json?v=${Date.now()}`);
     if (!res.ok) return false;
     const data = (await res.json()) as Record<string, unknown>;
     SKIN_METADATA_CACHE[skin] = {
@@ -53,6 +75,7 @@ export type { TranslationKey } from '../types';
 
 export * from './actions';
 export * from './breakpoints';
+export * from './camera';
 
 export function normalizeLanguage(language?: string): Language {
   if ((language || '').toLowerCase().startsWith('zh')) {
@@ -104,9 +127,9 @@ function formatRawState(raw: string, language: Language): string {
     if (!isNaN(d.getTime())) {
       const isDateOnly = /^\d{4}-\d{2}-\d{2}$/.test(raw);
       if (isDateOnly) {
-        return new Intl.DateTimeFormat(language, { year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
+        return cachedDtFormat(language, { year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
       }
-      return new Intl.DateTimeFormat(language, {
+      return cachedDtFormat(language, {
         year: 'numeric', month: '2-digit', day: '2-digit',
         hour: '2-digit', minute: '2-digit',
       }).format(d);
@@ -131,6 +154,18 @@ export function t(
     }
   }
   return str;
+}
+
+// Escape for interpolation into HTML strings built with template literals and
+// assigned via innerHTML (editor + skin store). Escapes both text content and
+// double/single-quoted attribute values.
+export function escapeHtml(value: unknown): string {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 export function defaultResourceBasePath(): string {
@@ -169,8 +204,11 @@ export function stateValue(hass: HomeAssistant | undefined, entityId?: string, _
 
 export function timeText(hass: HomeAssistant | undefined, language: Language): string {
   const locale = hass?.locale?.language || language;
-  const fmt24 = hass?.locale?.time_format !== '12h';
-  return new Intl.DateTimeFormat(locale, { hour: fmt24 ? '2-digit' : 'numeric', minute: '2-digit', hour12: !fmt24 }).format(new Date());
+  // Only force 12h/24h when Home Assistant says so explicitly; 'language' /
+  // 'system' / undefined must fall through to the locale's own convention.
+  const tf = hass?.locale?.time_format;
+  const hour12: boolean | undefined = tf === '12h' ? true : tf === '24h' ? false : undefined;
+  return cachedDtFormat(locale, { hour: hour12 === false ? '2-digit' : 'numeric', minute: '2-digit', hour12 }).format(new Date());
 }
 
 export function dateText(hass: HomeAssistant | undefined, language: Language): string {
@@ -182,12 +220,16 @@ export function dateText(hass: HomeAssistant | undefined, language: Language): s
     case 'YMD': opts = { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short' }; break;
     default: opts = { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' }; break;
   }
-  return new Intl.DateTimeFormat(locale, opts).format(new Date());
+  return cachedDtFormat(locale, opts).format(new Date());
 }
 
 export function formatRelativeTime(isoDate: Date, language: Language): string {
+  // A single invalid timestamp (missing last_changed, malformed scene state)
+  // must not throw mid-render and blank out whole card sections.
+  const time = isoDate instanceof Date ? isoDate.getTime() : NaN;
+  if (!Number.isFinite(time)) return '--';
   const now = new Date();
-  const diff = now.getTime() - isoDate.getTime();
+  const diff = now.getTime() - time;
   const seconds = Math.floor(diff / 1000);
   const rtf = new Intl.RelativeTimeFormat(language, { numeric: 'auto' });
   if (seconds < 0) return rtf.format(0, 'seconds');
@@ -266,11 +308,11 @@ export function assetUrl(config?: DashboardConfig, key?: string): string {
   if (!key) return '';
   const skin = selectedSkin(config);
   const configuredBasePath = config?.resource_pack?.base_path || '';
-  let basePath = configuredBasePath === '__AUTO__' || !configuredBasePath
+  let basePath = configuredBasePath === AUTO_BASE_PATH || !configuredBasePath
     ? bundledSkinBasePath(skin)
     : configuredBasePath;
   if (!SKINS.includes(skin)) {
-    basePath = `/local/skins-pro/${skin}/`;
+    basePath = `${SKINS_PRO_LOCAL_BASE}${skin}/`;
   }
   const asset = config?.resource_pack?.assets?.[key] || DEFAULT_ASSETS[key] || '';
   if (!asset) return '';
@@ -287,7 +329,7 @@ export function assetHref(config?: DashboardConfig, key?: string): string {
   if (!url) return '';
   if (key !== 'theme_css') return url;
   const skin = selectedSkin(config);
-  const cacheKey = encodeURIComponent(`${skin}|${config?.resource_pack?.base_path || '__AUTO__'}`);
+  const cacheKey = encodeURIComponent(`${skin}|${config?.resource_pack?.base_path || AUTO_BASE_PATH}`);
   const version = SKIN_METADATA_CACHE[skin]?.strings?.version;
   const ts = version !== undefined ? `&v=${String(version)}` : '';
   return `${url}${url.includes('?') ? '&' : '?'}skin=${cacheKey}${ts}`;
@@ -296,5 +338,26 @@ export function assetHref(config?: DashboardConfig, key?: string): string {
 export function skinString(skin: string, key: string): string {
   const data = SKIN_METADATA_CACHE[skin]?.strings || SKIN_METADATA_CACHE[DEFAULT_SKIN]?.strings || {};
   return data[key] || '';
+}
+
+const preloadedDarkSkins = new Set<string>();
+
+// Warm the browser cache with a skin's `-dark` asset variants while the card is
+// still in light mode, so the theme flip doesn't flash unstyled images. Only
+// skin-pack relative resources are preloaded (never absolute/CDN URLs).
+export function preloadDarkAssets(config: DashboardConfig): void {
+  const skin = selectedSkin(config);
+  if (!skinSupportsDark(skin) || preloadedDarkSkins.has(skin)) return;
+  preloadedDarkSkins.add(skin);
+  const keys = new Set([...Object.keys(config?.resource_pack?.assets || {}), ...Object.keys(DEFAULT_ASSETS)]);
+  for (const key of keys) {
+    if (key === 'theme_css') continue;
+    const url = assetUrl(config, key);
+    if (!url || /^https?:\/\//.test(url) || url.startsWith('/')) continue; // 只预加载皮肤包内相对资源
+    const darkUrl = url.replace(/(\.[^.]+)$/, '-dark$1');
+    if (darkUrl === url) continue;
+    const img = new Image();
+    img.src = darkUrl;
+  }
 }
 

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skins-Pro viewport harness</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #202225; }
+  /* Production HA defines ha-card as a block card container; the harness must
+     mimic that or layout metrics differ from reality. */
+  ha-card { display: block; }
+  skins-pro-card {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+  }
+  #warmup-note { position: fixed; left: 8px; top: 8px; z-index: 5; font: 12px monospace; color: #9aa; opacity: .7; }
+</style>
+</head>
+<body>
+<div id="warmup-note">booting…</div>
+<script type="module">
+  // Minimal fake Home Assistant environment so the built card renders without
+  // a real HA backend. Used by scripts/viewport-check.mjs for responsive
+  // regression screenshots; also handy for manual debugging in a browser.
+  import '../dist/skins-pro.js';
+
+  const attr = (extra = {}) => ({ ...extra });
+
+  const STATES = {
+    'sun.sun': { entity_id: 'sun.sun', state: 'above_horizon', attributes: { friendly_name: 'Sun', elevation: 32 } },
+    'weather.home': { entity_id: 'weather.home', state: 'sunny', attributes: { friendly_name: 'Weather', temperature: 24, humidity: 55 } },
+    'input_text.quote': { entity_id: 'input_text.quote', state: 'Welcome home', attributes: { friendly_name: 'Quote' } },
+    'sensor.energy_today': { entity_id: 'sensor.energy_today', state: '12.3', attributes: { friendly_name: 'Energy Today', unit_of_measurement: 'kWh', state_class: 'total_increasing', device_class: 'energy' } },
+    'light.living': { entity_id: 'light.living', state: 'on', attributes: { friendly_name: 'Living Light', brightness: 200, supported_color_modes: ['color_temp', 'hs'], color_temp: 320, min_mireds: 153, max_mireds: 500 } },
+    'light.bedroom': { entity_id: 'light.bedroom', state: 'off', attributes: { friendly_name: 'Bedroom Light', supported_color_modes: ['brightness'] } },
+    'switch.garden_pump': { entity_id: 'switch.garden_pump', state: 'on', attributes: { friendly_name: 'Garden Pump' } },
+    'climate.living_ac': { entity_id: 'climate.living_ac', state: 'cool', attributes: { friendly_name: 'Living AC', hvac_mode: 'cool', hvac_modes: ['off', 'cool', 'heat', 'auto', 'dry', 'fan_only'], current_temperature: 26.5, temperature: 24, min_temp: 16, max_temp: 30, target_temp_step: 1, fan_modes: ['auto', 'low', 'high'], fan_mode: 'auto', supported_features: 6 } },
+    'fan.ceiling': { entity_id: 'fan.ceiling', state: 'off', attributes: { friendly_name: 'Ceiling Fan', percentage_step: 1, preset_modes: ['normal', 'night'], percentage: 0 } },
+    'humidifier.bedroom': { entity_id: 'humidifier.bedroom', state: 'on', attributes: { friendly_name: 'Bedroom Humidifier', humidity: 55, current_humidity: 42, min_humidity: 0, max_humidity: 100, available_modes: ['normal', 'eco'], mode: 'normal' } },
+    'water_heater.boiler': { entity_id: 'water_heater.boiler', state: 'eco', attributes: { friendly_name: 'Boiler', current_temperature: 48, temperature: 55, min_temp: 40, max_temp: 65, operation_list: ['off', 'eco', 'performance'], operation_mode: 'eco', supported_features: 1 } },
+    'vacuum.roborock': { entity_id: 'vacuum.roborock', state: 'docked', attributes: { friendly_name: 'Roborock', battery_level: 88, fan_speed: 'balanced', fan_speed_list: ['silent', 'balanced', 'turbo'], supported_features: 63 } },
+    'media_player.living_speaker': { entity_id: 'media_player.living_speaker', state: 'playing', attributes: { friendly_name: 'Living Speaker', volume_level: 0.4, media_title: 'Title', media_artist: 'Artist', entity_picture: '/api/art.svg', supported_features: 20873 } },
+    'lock.front_door': { entity_id: 'lock.front_door', state: 'locked', attributes: { friendly_name: 'Front Door' } },
+    'alarm_control_panel.home': { entity_id: 'alarm_control_panel.home', state: 'disarmed', attributes: { friendly_name: 'Alarm', supported_features: 7 } },
+    'camera.front_door': { entity_id: 'camera.front_door', state: 'idle', attributes: { friendly_name: 'Front Door Cam', access_token: 'harness-token' } },
+    'scene.movies': { entity_id: 'scene.movies', state: '2026-09-12T10:00:00+00:00', attributes: { friendly_name: 'Movies' } },
+    'scene.morning': { entity_id: 'scene.morning', state: '2026-09-12T07:00:00+00:00', attributes: { friendly_name: 'Morning' } },
+    'automation.morning_routine': { entity_id: 'automation.morning_routine', state: 'on', attributes: { friendly_name: 'Morning Routine', last_triggered: '2026-09-12T07:00:05+00:00' } },
+    'sensor.temperature': { entity_id: 'sensor.temperature', state: '23.5', attributes: { friendly_name: 'Temperature', device_class: 'temperature', unit_of_measurement: '°C' } },
+    'sensor.humidity': { entity_id: 'sensor.humidity', state: '52', attributes: { friendly_name: 'Humidity', device_class: 'humidity', unit_of_measurement: '%' } },
+    'binary_sensor.front_door_contact': { entity_id: 'binary_sensor.front_door_contact', state: 'off', attributes: { friendly_name: 'Front Door Contact', device_class: 'door' } },
+    'cover.living_blinds': { entity_id: 'cover.living_blinds', state: 'open', attributes: { friendly_name: 'Living Blinds', current_position: 70, supported_features: 15 } },
+    'person.admin': { entity_id: 'person.admin', state: 'home', attributes: { friendly_name: 'Admin' } },
+  };
+
+  // HA always provides last_changed; without it relative-time formatting would
+  // exercise the invalid-date path instead of the real one.
+  const RECENT_ISO = new Date(Date.now() - 5 * 60000).toISOString();
+  for (const s of Object.values(STATES)) s.last_changed = RECENT_ISO;
+
+  const AREAS = [
+    { area_id: 'living_room', floor_id: 'ground', name: 'Living Room', picture: null, icon: null, aliases: [] },
+    { area_id: 'kitchen', floor_id: 'ground', name: 'Kitchen', picture: null, icon: null, aliases: [] },
+    { area_id: 'bedroom', floor_id: 'first', name: 'Bedroom', picture: null, icon: null, aliases: [] },
+    { area_id: 'garden', floor_id: null, name: 'Garden', picture: null, icon: null, aliases: [] },
+  ];
+
+  const DEVICES = [
+    { id: 'dev-1', area_id: 'living_room', name: 'Living Hub' },
+    { id: 'dev-2', area_id: 'kitchen', name: 'Kitchen Hub' },
+    { id: 'dev-3', area_id: 'bedroom', name: 'Bedroom Hub' },
+    { id: 'dev-4', area_id: 'garden', name: 'Garden Hub' },
+  ];
+
+  const areaFor = (entityId) => ({
+    'light.living': 'living_room', 'climate.living_ac': 'living_room', 'media_player.living_speaker': 'living_room',
+    'cover.living_blinds': 'living_room', 'camera.front_door': 'living_room', 'scene.movies': 'living_room',
+    'switch.garden_pump': 'garden', 'vacuum.roborock': 'garden',
+    'light.bedroom': 'bedroom', 'humidifier.bedroom': 'bedroom',
+    'lock.front_door': 'kitchen', 'alarm_control_panel.home': 'kitchen', 'binary_sensor.front_door_contact': 'kitchen',
+    'fan.ceiling': 'kitchen', 'water_heater.boiler': 'kitchen', 'scene.morning': 'kitchen',
+  }[entityId] || null);
+
+  const ENTITIES = Object.keys(STATES).map((id) => ({
+    entity_id: id,
+    area_id: areaFor(id),
+    device_id: null,
+    disabled_by: null,
+    hidden_by: null,
+    entity_category: null,
+    platform: 'harness',
+    name: null,
+    icon: null,
+  }));
+
+  const FORECAST = Array.from({ length: 5 }, (_, i) => ({
+    datetime: new Date(Date.now() + (i + 1) * 86400000).toISOString(),
+    condition: ['sunny', 'partlycloudy', 'cloudy', 'rainy', 'sunny'][i],
+    temperature: 22 + i,
+    templow: 14 + i,
+    precipitation: i * 0.4,
+  }));
+
+  const sentMessage = (msg) => {
+    switch (msg.type) {
+      case 'config/area_registry/list': return AREAS;
+      case 'config/device_registry/list': return DEVICES;
+      case 'config/entity_registry/list': return ENTITIES;
+      case 'config/floor_registry/list': return [
+        { floor_id: 'ground', name: 'Ground Floor', level: 0, icon: null, aliases: [] },
+        { floor_id: 'first', name: 'First Floor', level: 1, icon: null, aliases: [] },
+      ];
+      case 'energy/get_prefs':
+      case 'energy/get_preferences': return { energy_sources: [] };
+      default: return null;
+    }
+  };
+
+  const hass = {
+    language: 'en',
+    locale: { language: 'en-US', time_format: 'language', date_format: 'language' },
+    user: { id: 'demo', name: 'Demo User', is_admin: true },
+    states: STATES,
+    localize: () => undefined,
+    callService: async () => undefined,
+    callWS: async (msg) => sentMessage(msg),
+    connection: {
+      sendMessagePromise: async (msg) => sentMessage(msg),
+      subscribeMessage: (msg, callback) => {
+        if (msg && msg.type === 'weather/subscribe_forecast') {
+          callback({ forecast: FORECAST });
+        }
+        return Promise.resolve(() => {});
+      },
+    },
+  };
+
+  const card = document.createElement('skins-pro-card');
+  document.body.appendChild(card);
+  card.setConfig({
+    type: 'custom:skins-pro-card',
+    language: 'en',
+    weather: { entity: 'weather.home' },
+    info: { entity: 'input_text.quote' },
+    energy: { entity: 'sensor.energy_today', unit: 'kWh' },
+    camera: { entity: 'camera.front_door' },
+    media_player: { entity: 'media_player.living_speaker' },
+    home_selection: {},
+  });
+  card.hass = hass;
+  window.__skinsProCard = card;
+
+  customElements.whenDefined('skins-pro-card').then(() => {
+    setTimeout(() => { document.getElementById('warmup-note').textContent = 'ready'; }, 400);
+  });
+</script>
+</body>
+</html>

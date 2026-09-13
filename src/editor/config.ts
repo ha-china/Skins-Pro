@@ -1,4 +1,5 @@
 import { SKINS } from '../skins/generated';
+import { AUTO_BASE_PATH, escapeHtml } from '../utils';
 
 export type DashboardConfigRecord = Record<string, any>;
 
@@ -75,7 +76,7 @@ export function applySkin(el: HTMLElement, current: DashboardConfigRecord, skin:
   next.resource_pack = next.resource_pack || {};
   next.resource_pack.skin = skin;
   if (SKINS.includes(skin)) {
-    next.resource_pack.base_path = '__AUTO__';
+    next.resource_pack.base_path = AUTO_BASE_PATH;
   }
   fire(el, next);
   return next;
@@ -84,7 +85,7 @@ export function applySkin(el: HTMLElement, current: DashboardConfigRecord, skin:
 export function buildSkinOptions(config: DashboardConfigRecord): string {
   const current = config.resource_pack?.skin || 'modern';
   const downloaded = ((config.downloaded_skins || []) as string[]).filter((s) => !SKINS.includes(s));
-  const bundled = (SKINS as readonly string[]).map((s) => `<option value="${s}"${s === current ? ' selected' : ''}>${s}</option>`).join('');
-  const extra = downloaded.map((s) => `<option value="${s}"${s === current ? ' selected' : ''}>${s}</option>`).join('');
+  const bundled = (SKINS as readonly string[]).map((s) => `<option value="${escapeHtml(s)}"${s === current ? ' selected' : ''}>${escapeHtml(s)}</option>`).join('');
+  const extra = downloaded.map((s) => `<option value="${escapeHtml(s)}"${s === current ? ' selected' : ''}>${escapeHtml(s)}</option>`).join('');
   return bundled + extra;
 }

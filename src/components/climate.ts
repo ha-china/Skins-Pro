@@ -3,21 +3,21 @@ import type { TemplateResult } from 'lit';
 
 import type { DashboardConfig, HomeAssistant, RenderedDevice } from '../types';
 import type { Language } from '../i18n';
-import { assetKeyForDomain, deviceStateLabel, formatRelativeTime, selectedSkin } from '../utils';
+import { assetKeyForDomain, formatRelativeTime, selectedSkin } from '../utils';
 import { renderImage } from '../render/context';
+import { DEVICE_SELECT_STYLE, deviceStatusClass, hassLocalizeChain, makeDoService, renderDeviceUnavailableCard, renderTempStepper } from './device-shell';
 
 const HVAC_ORDER = ['auto', 'cool', 'heat', 'fan_only', 'dry', 'off'];
 
 function lab(mode: string, hass: HomeAssistant): string {
-  return hass.localize(`component.climate.entity_component._.state.${mode}`)
-    || hass.localize(`component.climate.state.${mode}`)
-    || mode;
+  return hassLocalizeChain(hass, [`component.climate.entity_component._.state.${mode}`, `component.climate.state.${mode}`], mode);
 }
 function fanLab(mode: string, hass: HomeAssistant): string {
-  return hass.localize(`component.climate.entity_component._.state_attributes.fan_mode.state.${mode}`)
-    || hass.localize(`component.climate.fan.${mode}`)
-    || hass.localize(`component.climate.state.${mode}`)
-    || mode;
+  return hassLocalizeChain(hass, [
+    `component.climate.entity_component._.state_attributes.fan_mode.state.${mode}`,
+    `component.climate.fan.${mode}`,
+    `component.climate.state.${mode}`,
+  ], mode);
 }
 
 export function renderClimateCard(
@@ -32,10 +32,7 @@ export function renderClimateCard(
   const stateObj = hass.states?.[device.entityId];
 
   if (!stateObj) {
-    return html`<button class="device device-off" @click=${() => onHandleAction(device.entityId, 'more-info')}>
-      <div class="device-top">${renderImage(config, assetKey, device.name, 'item-img')}<div class="tag-stack"><div class="status">${deviceStateLabel(device.state, language, hass, 'climate')}</div></div></div>
-      <div class="device-copy"><p class="device-name">${device.name}</p><p class="muted">${hass.states?.[device.entityId]?.last_changed ? formatRelativeTime(new Date(hass.states[device.entityId]!.last_changed), language) : device.subtitle}</p></div>
-    </button>`;
+    return renderDeviceUnavailableCard(config, hass, device, language, onHandleAction, 'climate');
   }
 
   const a = stateObj.attributes || {};
@@ -52,19 +49,16 @@ export function renderClimateCard(
   const step = (a.target_temp_step as number) ?? 1;
 
   const showFan = fanModes.length > 1;
-  const statusClass = stateObj.state === 'unavailable' ? 'device-unavailable' : `device-on-${device.color}`;
+  const statusClass = deviceStatusClass(stateObj.state, stateObj.state !== 'unavailable', device.color);
   const stateForTime = hass.states?.[device.entityId];
 const lastTime = stateForTime?.last_changed
   ? formatRelativeTime(new Date(stateForTime.last_changed), language)
   : undefined;
 
-  const doService = (service: string, data: Record<string, unknown>) => {
-    void hass.callService('climate', service, { entity_id: device.entityId, ...data });
-  };
+  const doService = makeDoService(hass, 'climate', device.entityId);
 
-  const adjustTemp = (delta: number) => {
+  const adjustTemp = (next: number) => {
     const cur = targetTemp ?? minT;
-    const next = Math.min(maxT, Math.max(minT, cur + delta));
     if (next !== cur) doService('set_temperature', { temperature: next });
   };
 
@@ -83,16 +77,12 @@ const lastTime = stateForTime?.last_changed
         <p class="muted">${lastTime || device.subtitle}</p>
       </div>
       <div class="control-row" style="gap:2px" @click=${(e: Event) => e.stopPropagation()}>
-<div class="temp-group" style="display:flex;align-items:center;gap:1px;flex-shrink:0">
-            <div class="media-volbtn" role="button" style="width:28px;height:32px;padding:0;box-shadow:none" @click=${(e: Event) => { e.stopPropagation(); adjustTemp(-step); }}><ha-icon icon="mdi:minus" style="--mdc-icon-size:14px"></ha-icon></div>
-            <span style="font-weight:700;font-size:var(--sp-font-2xs);min-width:20px;text-align:center">${targetTemp !== undefined ? tempDisplay(targetTemp) : '--'}</span>
-            <div class="media-volbtn" role="button" style="width:28px;height:32px;padding:0;box-shadow:none" @click=${(e: Event) => { e.stopPropagation(); adjustTemp(step); }}><ha-icon icon="mdi:plus" style="--mdc-icon-size:14px"></ha-icon></div>
-        </div>
-        <select class="filter-select" style="font-size:var(--sp-font-3xs);min-height:32px;min-width:48px;padding:0 16px 0 4px;background-size:8px;flex-shrink:0" @change=${(e: Event) => { e.stopPropagation(); doService('set_hvac_mode', { hvac_mode: (e.target as HTMLSelectElement).value }); }} @click=${(e: Event) => e.stopPropagation()}>
+        ${renderTempStepper({ value: targetTemp, min: minT, max: maxT, step, display: tempDisplay, onAdjust: adjustTemp, minSpanWidth: '20px' })}
+        <select class="filter-select" style=${DEVICE_SELECT_STYLE} @change=${(e: Event) => { e.stopPropagation(); doService('set_hvac_mode', { hvac_mode: (e.target as HTMLSelectElement).value }); }} @click=${(e: Event) => e.stopPropagation()}>
           ${hvacModes.map(m => html`<option value=${m} ?selected=${m === hvacMode}>${lab(m, hass)}</option>`)}
         </select>
         ${showFan ? html`
-        <select class="filter-select" style="font-size:var(--sp-font-3xs);min-height:32px;min-width:48px;padding:0 16px 0 4px;background-size:8px;flex-shrink:0" @change=${(e: Event) => { e.stopPropagation(); doService('set_fan_mode', { fan_mode: (e.target as HTMLSelectElement).value }); }} @click=${(e: Event) => e.stopPropagation()}>
+        <select class="filter-select" style=${DEVICE_SELECT_STYLE} @change=${(e: Event) => { e.stopPropagation(); doService('set_fan_mode', { fan_mode: (e.target as HTMLSelectElement).value }); }} @click=${(e: Event) => e.stopPropagation()}>
           ${fanModes.map(m => html`<option value=${m} ?selected=${m === fanMode}>${fanLab(m, hass)}</option>`)}
         </select>` : ''}
       </div>

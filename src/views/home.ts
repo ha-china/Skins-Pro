@@ -13,9 +13,11 @@ import { renderBars } from '../components/energy-bars';
 import { renderHomeEnergyCard } from './energy';
 import { renderAreaRooms } from './rooms';
 import { getRoomsForRender, areaFallbackInfo } from '../selectors/rooms';
-import { getRealDevicesForRender } from '../selectors/devices';
+import { getRealDevicesForRender, DEVICE_COLORS } from '../selectors/devices';
 import { renderDeviceCard } from '../components/device-card';
+import { alarmStateIcon } from '../components/alarm-control-panel';
 import {
+  cameraSnapshotUrl,
   dateText,
   formatRelativeTime,
   localizedText,
@@ -39,16 +41,11 @@ export function renderHomeView(
   const alarmEntityId = Object.keys(ctx.hass.states || {}).find(e => e.startsWith('alarm_control_panel.')) || '';
   const alarmStateObj = alarmEntityId ? ctx.hass.states?.[alarmEntityId] : undefined;
   const alarmState = alarmStateObj?.state || '';
-  const alarmIconMap: Record<string, string> = {
-    disarmed: 'mdi:shield-off', armed_home: 'mdi:shield-home', armed_away: 'mdi:shield-lock',
-    armed_night: 'mdi:shield-moon', armed_vacation: 'mdi:shield-airplane', triggered: 'mdi:bell-ring',
-    pending: 'mdi:shield-sync', arming: 'mdi:shield-sync',
-  };
-  const alarmIcon = alarmIconMap[alarmState] || 'mdi:shield-lock';
+  const alarmIcon = alarmStateIcon(alarmState);
 
   const cameraCard = hasCamera ? (() => {
     const accessToken = String(cameraState?.attributes?.access_token || '');
-    const snapshotUrl = accessToken ? `/api/camera_proxy/${cameraEntityId}?token=${encodeURIComponent(accessToken)}&ts=${Date.now()}` : '';
+    const snapshotUrl = accessToken ? cameraSnapshotUrl(cameraEntityId, accessToken) : '';
     return html`
       <section class="glass-card panel-camera" @click=${() => ctx.onHandleAction(cameraEntityId, 'more-info')}>
         <div class="section-title"><h2>${cameraState?.attributes?.friendly_name || cameraEntityId}</h2></div>
@@ -60,15 +57,14 @@ export function renderHomeView(
   })() : nothing;
 
   const energyBars = renderBars(ctx.energyHistory || []);
-  const homeDevicesStyle = window.matchMedia('(orientation: landscape)').matches
-    ? 'display:grid;grid-auto-flow:column;grid-auto-columns:minmax(140px,1fr);grid-template-columns:none;overflow-x:auto;overflow-y:hidden;padding:var(--sp-space-xs);'
-    : 'padding:var(--sp-space-xs);';
 
   return html`
     <div class="stage-grid">
       <div
-        style="position:absolute;top:var(--sp-space-sm,8px);${window.matchMedia('(orientation: portrait)').matches ? 'right:var(--sp-space-sm,8px);width:auto;max-width:60%;' : 'left:37.5%;transform:translateX(-50%);width:37.5%;'}z-index:10;display:flex;align-items:center;gap:10px;padding:10px 20px;border-radius:var(--sp-radius-pill,999px);background:var(--sp-glass-bg,rgba(255,255,255,0.12));border:1px solid var(--sp-glass-border,rgba(255,255,255,0.15));cursor:pointer;color:var(--sp-text-secondary,rgba(255,255,255,0.5));font-size:15px;"
+        class="sp-search-entry"
+        role="button" tabindex="0"
         @click=${() => ctx.onOpenSearch()}
+        @keydown=${(e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ctx.onOpenSearch(); } }}
       >
         <ha-icon icon="mdi:magnify" style="--mdc-icon-size:20px;flex-shrink:0;"></ha-icon>
         <span>${ctx.translate('searchPlaceholder')}</span>
@@ -93,7 +89,7 @@ export function renderHomeView(
       <section class="bottom-stack">
         <section class="bottom-block bottom-devices">
           <div class="section-title"><h2>${ctx.translate('devices')}</h2><p class="muted">${ctx.translate('quickControl')}</p></div>
-          <div class="devices" style=${homeDevicesStyle}>${renderShortcutDevices(ctx)}</div>
+          <div class="devices sp-devices-strip">${renderShortcutDevices(ctx)}</div>
         </section>
         <section class="bottom-block">
           <div class="section-title"><h2>${ctx.translate('rooms')}</h2><p class="muted">${ctx.translate('roomSnapshots')}</p></div>
@@ -128,7 +124,7 @@ export function renderHomeView(
 export function renderSidebar(ctx: RenderContext): TemplateResult {
   return html`
     <aside class="sidebar">
-      <div class="profile" @click=${() => ctx.onToggleKiosk()}>
+      <div class="profile" @click=${() => ctx.onToggleFullscreen()}>
         ${renderUserAvatar(ctx.config, ctx.hass, 'profile-img')}
         <div class="meta">
           <h2>${ctx.config.profile_name || ctx.hass?.user?.name || ''}</h2>
@@ -154,7 +150,7 @@ function renderShortcutDevices(ctx: RenderContext): TemplateResult[] {
   let realDevices: RenderedDevice[];
 
   if (selectedEntities.length > 0) {
-    const colors: RenderedDevice['color'][] = ['yellow', 'green', 'blue', 'purple', 'red', 'brown'];
+    const colors = DEVICE_COLORS;
     realDevices = [];
     for (const entityId of selectedEntities) {
       const stateObj = ctx.hass.states[entityId];

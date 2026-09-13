@@ -6,9 +6,9 @@ import type {
   RenderedDevice,
 } from '../types';
 import { iconForDomain } from '../utils';
-import { areaNameForEntity } from './areas';
+import { areaNameForEntity, DOMAIN_GROUP_MAP } from './areas';
 
-const DEVICE_COLORS: RenderedDevice['color'][] = ['yellow', 'green', 'blue', 'purple', 'red', 'brown'];
+export const DEVICE_COLORS: RenderedDevice['color'][] = ['yellow', 'green', 'blue', 'purple', 'red', 'brown'];
 
 const PREFERRED_DOMAINS = /^(light|switch|climate|media_player|lock|cover|fan|valve|input_boolean|humidifier|water_heater|vacuum)\./;
 
@@ -99,7 +99,7 @@ export function getRealDevicesForRender(
 }
 
 export function deviceTypeGroupKey(detail: string): string {
-  return DEVICE_DOMAIN_GROUP[detail] || 'others';
+  return DOMAIN_GROUP_MAP[detail] || 'others';
 }
 
 export function getDeviceRooms(devices: RenderedDevice[]): string[] {
@@ -110,21 +110,3 @@ export function getDeviceTypes(devices: RenderedDevice[]): string[] {
   return [...new Set(devices.map((d) => deviceTypeGroupKey(d.detail)))].sort();
 }
 
-const DEVICE_DOMAIN_GROUP: Record<string, string> = {
-  light: 'lights',
-  switch: 'switches',
-  input_boolean: 'switches',
-  button: 'switches',
-  input_button: 'switches',
-  climate: 'climate',
-  fan: 'climate',
-  humidifier: 'climate',
-  water_heater: 'climate',
-  cover: 'covers',
-  valve: 'covers',
-  media_player: 'media',
-  lock: 'security',
-  alarm_control_panel: 'security',
-  vacuum: 'cleaning',
-  lawn_mower: 'cleaning',
-};

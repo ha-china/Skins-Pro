@@ -16,7 +16,7 @@ export interface HomeAssistant {
   user?: { id?: string; name?: string; is_owner?: boolean; is_admin?: boolean };
   states: Record<string, HassEntity | undefined>;
   callService: (domain: string, service: string, data?: Record<string, unknown>) => Promise<unknown>;
-  localize: (key: string, ...args: string[]) => string;
+  localize?: (key: string, ...args: any[]) => string;
   callApi?: (method: string, path: string, body?: unknown) => Promise<unknown>;
   connection?: {
     sendMessagePromise: <T>(message: Record<string, unknown>) => Promise<T>;
@@ -311,6 +311,7 @@ export type TranslationKey =
   | 'searchRecent'
   | 'searchNoResults'
   | 'searchAll'
+  | 'loading'
 ;
 
 export interface EnergySourceData {
@@ -343,7 +344,6 @@ export interface EnergySourceEntry {
   flow_to?: Array<{ stat_energy_to?: string }>;
   stat_energy_from?: string | null;
   stat_energy_to?: string | null;
-  stat_soc?: string;
 }
 
 export interface EnergyPrefsResponse {

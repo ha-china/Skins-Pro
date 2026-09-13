@@ -92,6 +92,7 @@ const en: Record<TranslationKey, string> = {
   searchNoResults: 'No matching devices found',
   searchAll: 'All',
 
+  loading: 'Loading…',
 };
 
 export default en;

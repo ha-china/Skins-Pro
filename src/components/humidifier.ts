@@ -5,6 +5,7 @@ import type { DashboardConfig, HomeAssistant, RenderedDevice } from '../types';
 import type { Language } from '../i18n';
 import { assetKeyForDomain, deviceStateLabel, formatRelativeTime, selectedSkin } from '../utils';
 import { renderImage } from '../render/context';
+import { DEVICE_SELECT_STYLE, DEVICE_SWITCH_STYLE, deviceStatusClass, hassLocalizeChain, makeDoService, renderDeviceUnavailableCard } from './device-shell';
 
 export function renderHumidifierCard(
   config: DashboardConfig | undefined,
@@ -18,10 +19,7 @@ export function renderHumidifierCard(
   const stateObj = hass.states?.[device.entityId];
 
   if (!stateObj) {
-    return html`<button class="device device-off" @click=${() => onHandleAction(device.entityId, 'more-info')}>
-      <div class="device-top">${renderImage(config, assetKey, device.name, 'item-img')}<div class="tag-stack"><div class="status">${deviceStateLabel(device.state, language, hass, 'humidifier')}</div></div></div>
-      <div class="device-copy"><p class="device-name">${device.name}</p><p class="muted">${device.subtitle}</p></div>
-    </button>`;
+    return renderDeviceUnavailableCard(config, hass, device, language, onHandleAction, 'humidifier');
   }
 
   const a = stateObj.attributes || {};
@@ -36,24 +34,24 @@ export function renderHumidifierCard(
   const modes = (a.available_modes as string[]) || [];
   const action = a.action as string | undefined;
 
-  const statusClass = isOn ? `device-on-${device.color}` : (stateObj.state === 'unavailable' ? 'device-unavailable' : 'device-off');
+  const statusClass = deviceStatusClass(stateObj.state, isOn, device.color);
   const stateLabel = deviceStateLabel(stateObj.state, language, hass, 'humidifier');
   const lastTime = stateObj.last_changed ? formatRelativeTime(new Date(stateObj.last_changed), language) : device.subtitle;
 
   const actionLabel = (() => {
     if (!isOn) return undefined;
-    if (action === 'humidifying') return hass.localize('component.humidifier.entity_component._.state.humidifying') || hass.localize('component.humidifier.state.humidifying') || 'Humidifying';
-    if (action === 'drying') return hass.localize('component.humidifier.entity_component._.state.drying') || hass.localize('component.humidifier.state.drying') || 'Drying';
-    if (action === 'idle' || action === 'off' || !action) return isDehumidifier ? (hass.localize('component.humidifier.entity_component._.state.drying') || hass.localize('component.humidifier.state.drying') || 'Drying') : (hass.localize('component.humidifier.entity_component._.state.humidifying') || hass.localize('component.humidifier.state.humidifying') || 'Humidifying');
+    if (action === 'humidifying') return hassLocalizeChain(hass, [`component.humidifier.entity_component._.state.humidifying`, `component.humidifier.state.humidifying`], 'Humidifying');
+    if (action === 'drying') return hassLocalizeChain(hass, [`component.humidifier.entity_component._.state.drying`, `component.humidifier.state.drying`], 'Drying');
+    if (action === 'idle' || action === 'off' || !action) return isDehumidifier
+      ? hassLocalizeChain(hass, [`component.humidifier.entity_component._.state.drying`, `component.humidifier.state.drying`], 'Drying')
+      : hassLocalizeChain(hass, [`component.humidifier.entity_component._.state.humidifying`, `component.humidifier.state.humidifying`], 'Humidifying');
     return undefined;
   })();
 
   const statusText = isOn && currentHumidity !== undefined ? `${Math.round(currentHumidity)}%` : stateLabel;
   const mutedText = actionLabel || lastTime;
 
-  const doService = (service: string, data: Record<string, unknown>) => {
-    void hass.callService('humidifier', service, { entity_id: device.entityId, ...data });
-  };
+  const doService = makeDoService(hass, 'humidifier', device.entityId);
 
   return html`
     <button class="device ${statusClass}" @click=${() => onHandleAction(device.entityId, 'more-info')}>
@@ -75,10 +73,10 @@ export function renderHumidifierCard(
           <div class="media-volbtn" role="button" style="width:28px;height:32px;padding:0;box-shadow:none" @click=${(e: Event) => { e.stopPropagation(); const next = Math.min(maxH, targetHumidity + step); doService('set_humidity', { humidity: next }); }}><ha-icon icon="mdi:plus" style="--mdc-icon-size:14px"></ha-icon></div>
         </div>` : ''}
         ${isOn && modes.length > 0 ? html`
-        <select class="filter-select" style="font-size:var(--sp-font-3xs);min-height:32px;min-width:48px;padding:0 16px 0 4px;background-size:8px;flex-shrink:0" @change=${(e: Event) => { e.stopPropagation(); doService('set_mode', { mode: (e.target as HTMLSelectElement).value }); }} @click=${(e: Event) => e.stopPropagation()}>
-          ${modes.map(m => html`<option value=${m} ?selected=${m === mode}>${hass.localize(`component.humidifier.entity_component._.state.${m}`) || hass.localize(`component.humidifier.state.${m}`) || m}</option>`)}
+        <select class="filter-select" style=${DEVICE_SELECT_STYLE} @change=${(e: Event) => { e.stopPropagation(); doService('set_mode', { mode: (e.target as HTMLSelectElement).value }); }} @click=${(e: Event) => e.stopPropagation()}>
+          ${modes.map(m => html`<option value=${m} ?selected=${m === mode}>${hassLocalizeChain(hass, [`component.humidifier.entity_component._.state.${m}`, `component.humidifier.state.${m}`], m)}</option>`)}
         </select>` : ''}
-        <ha-control-switch .checked=${isOn} style="--control-switch-thickness:24px;--control-switch-border-radius:var(--sp-radius-pill);--control-switch-padding:3px;width:44px;flex-shrink:0;margin-left:auto" @change=${(e: Event) => { e.stopPropagation(); doService(isOn ? 'turn_off' : 'turn_on', {}); }} @click=${(e: Event) => e.stopPropagation()} .label=${device.name}></ha-control-switch>
+        <ha-control-switch .checked=${isOn} style="${DEVICE_SWITCH_STYLE};margin-left:auto" @change=${(e: Event) => { e.stopPropagation(); doService(isOn ? 'turn_off' : 'turn_on', {}); }} @click=${(e: Event) => e.stopPropagation()} .label=${device.name}></ha-control-switch>
       </div>
     </button>
   `;

@@ -5,6 +5,7 @@ import type { DashboardConfig, HomeAssistant, RenderedDevice } from '../types';
 import type { Language } from '../i18n';
 import { assetKeyForDomain, deviceStateLabel, formatRelativeTime, selectedSkin } from '../utils';
 import { renderImage } from '../render/context';
+import { DEVICE_SELECT_STYLE, DEVICE_SWITCH_STYLE, deviceStatusClass, hassLocalizeChain, makeDoService, renderDeviceUnavailableCard } from './device-shell';
 
 export function renderFanCard(
   config: DashboardConfig | undefined,
@@ -18,10 +19,7 @@ export function renderFanCard(
   const stateObj = hass.states?.[device.entityId];
 
   if (!stateObj) {
-    return html`<button class="device device-off" @click=${() => onHandleAction(device.entityId, 'more-info')}>
-      <div class="device-top">${renderImage(config, assetKey, device.name, 'item-img')}<div class="tag-stack"><div class="status">${deviceStateLabel(device.state, language, hass, 'fan')}</div></div></div>
-      <div class="device-copy"><p class="device-name">${device.name}</p><p class="muted">${device.subtitle}</p></div>
-    </button>`;
+    return renderDeviceUnavailableCard(config, hass, device, language, onHandleAction, 'fan');
   }
 
   const a = stateObj.attributes || {};
@@ -33,13 +31,11 @@ export function renderFanCard(
   const oscillating = a.oscillating as boolean | undefined;
   const currentDirection = a.current_direction as string | undefined;
 
-  const statusClass = isOn ? `device-on-${device.color}` : (stateObj.state === 'unavailable' ? 'device-unavailable' : 'device-off');
+  const statusClass = deviceStatusClass(stateObj.state, isOn, device.color);
   const stateLabel = deviceStateLabel(stateObj.state, language, hass, 'fan');
   const lastTime = stateObj.last_changed ? formatRelativeTime(new Date(stateObj.last_changed), language) : device.subtitle;
 
-  const doService = (service: string, data: Record<string, unknown>) => {
-    void hass.callService('fan', service, { entity_id: device.entityId, ...data });
-  };
+  const doService = makeDoService(hass, 'fan', device.entityId);
 
   return html`
     <button class="device ${statusClass}" @click=${() => onHandleAction(device.entityId, 'more-info')}>
@@ -58,14 +54,14 @@ export function renderFanCard(
         <ha-control-slider .value=${percentage} min="0" max="100" step=${percentageStep} style="--control-slider-thickness:28px;--control-slider-border-radius:var(--sp-radius-pill);flex:1;min-width:0" @value-changed=${(e: CustomEvent) => { e.stopPropagation(); const v = (e.detail.value ?? 0) as number; if (v === 0) { doService('turn_off', {}); } else { doService('set_percentage', { percentage: v }); } }} @click=${(e: Event) => e.stopPropagation()}></ha-control-slider>
         ` : ''}
         ${isOn && presetModes.length > 0 ? html`
-        <select class="filter-select" style="font-size:var(--sp-font-3xs);min-height:32px;min-width:48px;padding:0 16px 0 4px;background-size:8px;flex-shrink:0" @change=${(e: Event) => { e.stopPropagation(); doService('set_preset_mode', { preset_mode: (e.target as HTMLSelectElement).value }); }} @click=${(e: Event) => e.stopPropagation()}>
-          ${presetModes.map(m => html`<option value=${m} ?selected=${m === presetMode}>${hass.localize(`component.fan.entity_component._.state_attributes.preset_mode.state.${m}`) || hass.localize(`component.fan.preset.${m}`) || hass.localize(`component.fan.state.${m}`) || m}</option>`)}
+        <select class="filter-select" style=${DEVICE_SELECT_STYLE} @change=${(e: Event) => { e.stopPropagation(); doService('set_preset_mode', { preset_mode: (e.target as HTMLSelectElement).value }); }} @click=${(e: Event) => e.stopPropagation()}>
+          ${presetModes.map(m => html`<option value=${m} ?selected=${m === presetMode}>${hassLocalizeChain(hass, [`component.fan.entity_component._.state_attributes.preset_mode.state.${m}`, `component.fan.preset.${m}`, `component.fan.state.${m}`], m)}</option>`)}
         </select>` : ''}
         ${isOn && oscillating !== undefined ? html`
-        <div class="media-volbtn" role="button" style="width:32px;height:32px;padding:0;flex-shrink:0" title=${hass.localize('ui.card.fan.oscillate')} @click=${(e: Event) => { e.stopPropagation(); doService('oscillate', { oscillating: !oscillating }); }}><ha-icon icon=${oscillating ? 'mdi:rotate-3d-variant' : 'mdi:rotate-360'} style="--mdc-icon-size:14px"></ha-icon></div>` : ''}
+        <div class="media-volbtn" role="button" style="width:32px;height:32px;padding:0;flex-shrink:0" title=${hass.localize?.('ui.card.fan.oscillate')} @click=${(e: Event) => { e.stopPropagation(); doService('oscillate', { oscillating: !oscillating }); }}><ha-icon icon=${oscillating ? 'mdi:rotate-3d-variant' : 'mdi:rotate-360'} style="--mdc-icon-size:14px"></ha-icon></div>` : ''}
         ${isOn && currentDirection !== undefined ? html`
-        <div class="media-volbtn" role="button" style="width:32px;height:32px;padding:0;flex-shrink:0" title=${hass.localize('ui.card.fan.direction')} @click=${(e: Event) => { e.stopPropagation(); doService('set_direction', { direction: currentDirection === 'forward' ? 'reverse' : 'forward' }); }}><ha-icon icon=${currentDirection === 'reverse' ? 'mdi:reload' : 'mdi:swap-vertical'} style="--mdc-icon-size:14px"></ha-icon></div>` : ''}
-        <ha-control-switch .checked=${isOn} style="--control-switch-thickness:24px;--control-switch-border-radius:var(--sp-radius-pill);--control-switch-padding:3px;width:44px;flex-shrink:0;margin-left:auto" @change=${(e: Event) => { e.stopPropagation(); doService(isOn ? 'turn_off' : 'turn_on', {}); }} @click=${(e: Event) => e.stopPropagation()} .label=${device.name}></ha-control-switch>
+        <div class="media-volbtn" role="button" style="width:32px;height:32px;padding:0;flex-shrink:0" title=${hass.localize?.('ui.card.fan.direction')} @click=${(e: Event) => { e.stopPropagation(); doService('set_direction', { direction: currentDirection === 'forward' ? 'reverse' : 'forward' }); }}><ha-icon icon=${currentDirection === 'reverse' ? 'mdi:reload' : 'mdi:swap-vertical'} style="--mdc-icon-size:14px"></ha-icon></div>` : ''}
+        <ha-control-switch .checked=${isOn} style="${DEVICE_SWITCH_STYLE};margin-left:auto" @change=${(e: Event) => { e.stopPropagation(); doService(isOn ? 'turn_off' : 'turn_on', {}); }} @click=${(e: Event) => e.stopPropagation()} .label=${device.name}></ha-control-switch>
       </div>
     </button>
   `;

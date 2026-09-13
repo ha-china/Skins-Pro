@@ -8,10 +8,10 @@ Skins Pro 是一款社区 Lovelace 卡片，采用多皮肤架构。内置 **mod
 
 - 从 HACS 自定义仓库添加
 - 多皮肤自由切换
-- 全屏 Kiosk 模式，沉浸式体验
+- 浏览器原生全屏模式，沉浸式体验
 - 按房间区域展示设备
 - 图标自动从 Home Assistant 获取
-- 非管理员强制全屏锁定
+- 非管理员演示模式（首次点击自动全屏 + 输入防误触）
 
 > 说明 — 我们常因喜爱而制作自己喜欢的皮肤，但不经意间可能会触及版权问题。建议尽量使用 AI 生成图片以规避风险。当前所有主题图片资源均由 AI 生成，部分图片可能会出现 AI 水印或类似生成痕迹；如果你不喜欢 AI 生成的图片，可以在设置里自由上传背景图和房间图片。如果您认为某些皮肤侵犯了您的版权，请在 Issue 区留言，我们会及时删除对应皮肤。
 
@@ -27,7 +27,7 @@ Skins Pro 的设计围绕简单和易用展开。从 HACS 安装，选择皮肤�
 
 点上面的按钮一键添加，或者手动操作：
 
-1. HACS → Custom Repositories → Add `https://github.com/ha-china/Skins-Pro`, category: Dashboard
+1. HACS → Custom Repositories → Add `https://github.com/ha-china/Skins-Pro`, category: plugin
 2. 安装 Skins Pro
 3. 刷新 Home Assistant 前端
 4. 设置 → 仪表盘 → 添加新仪表盘 → 选 "Skins Pro"
@@ -41,6 +41,8 @@ Skins Pro 的设计围绕简单和易用展开。从 HACS 安装，选择皮肤�
 ![商店](https://github.com/ha-china/Skins-Pro/raw/screenshot-assets/store.gif)
 
 可在卡片编辑器中直接下载额外皮肤。点击**下载**时，卡片通过 CDN 获取皮肤包，并通过 [`skins-pro-hass`](https://github.com/ha-china/skins-pro-hass) 集成安装到 HA 的 `www/` 目录。
+
+打开皮肤商店会从我们的 CDN 拉取公开的皮肤注册表；下载与点赞通过本地随机 ID 匿名计数，不涉及任何账号或个人信息。
 
 > 集成仅在从商店下载皮肤时需要。如果只用内置的 **modern** 皮肤，可以不安装。
 
@@ -82,11 +84,11 @@ Skins Pro 的设计围绕简单和易用展开。从 HACS 安装，选择皮肤�
 - 🌐 中英文双语自动切换
 - 🌙 深色模式 — 日落日出自动切换，点击时钟可手动切换（modern 皮肤）
 - 🔍 全局搜索 — 模糊搜索设备，按类型筛选
-- ↔️ 全屏 Kiosk 模式
-- 🔒 非管理员全屏锁定 — 强制全屏、屏蔽右键及开发者工具
+- ↔️ 浏览器原生全屏模式（点击头像切换，ESC 退出）
+- 🔒 非管理员演示模式 — 首次点击自动全屏，屏蔽右键及开发者工具快捷键
 - 🖼️ 使用 HA 区域图片作为房间背景
 - 🎨 自定义背景图片上传
-- 📱 移动端自适应布局
+- 📱 手机、平板、折叠屏、桌面全分辨率自适应 — 内置 HiDPI / 系统缩放 / 浏览器缩放补偿
 - 🎭 多皮肤架构 — 从内置商店下载社区皮肤
 
 首次添加时会自动扫描你的 Home Assistant，按区域和设备类型组织页面。
@@ -99,7 +101,6 @@ Skins Pro 的设计围绕简单和易用展开。从 HACS 安装，选择皮肤�
 
 - 架构启发自 [dwains-dashboard-next](https://github.com/dwainscheeren/dwains-dashboard-next)
 - 设计启发自 [html-card-pro Discussions](https://github.com/ha-china/html-card-pro/discussions/11)
-- 全屏模式启发自 [kiosk-mode](https://github.com/NemesisRE/kiosk-mode)
 - 核心渲染框架 Lit
 - 图片处理 sharp
-- 零运行时依赖，保持精简
+- 构建时打包 Lit —— 不为你的仪表盘引入额外运行时依赖，保持精简

@@ -5,6 +5,7 @@ import type { DashboardConfig, HomeAssistant, RenderedDevice } from '../types';
 import type { Language } from '../i18n';
 import { assetKeyForDomain, deviceStateLabel, formatRelativeTime, selectedSkin } from '../utils';
 import { renderImage } from '../render/context';
+import { DEVICE_SWITCH_STYLE, deviceStatusClass, makeDoService, renderDeviceUnavailableCard } from './device-shell';
 
 const BRIGHTNESS_MODES = new Set(['brightness', 'color_temp', 'hs', 'rgb', 'rgbw', 'rgbww', 'xy']);
 const COLOR_TEMP_MODES = new Set(['color_temp']);
@@ -53,10 +54,7 @@ export function renderLightCard(
   const stateObj = hass.states?.[device.entityId];
 
   if (!stateObj) {
-    return html`<button class="device device-off" @click=${() => onHandleAction(device.entityId, 'more-info')}>
-      <div class="device-top">${renderImage(config, assetKey, device.name, 'item-img')}<div class="tag-stack"><div class="status">${deviceStateLabel(device.state, language, hass, 'light')}</div></div></div>
-      <div class="device-copy"><p class="device-name">${device.name}</p><p class="muted">${device.subtitle}</p></div>
-    </button>`;
+    return renderDeviceUnavailableCard(config, hass, device, language, onHandleAction, 'light');
   }
 
   const a = stateObj.attributes || {};
@@ -76,15 +74,13 @@ export function renderLightCard(
   const minM = (a.min_mireds as number) ?? DEFAULT_MIN_MIREDS;
   const maxM = (a.max_mireds as number) ?? DEFAULT_MAX_MIREDS;
 
-  const statusClass = isOn ? `device-on-${device.color}` : (stateObj.state === 'unavailable' ? 'device-unavailable' : 'device-off');
+  const statusClass = deviceStatusClass(stateObj.state, isOn, device.color);
   const stateLabel = deviceStateLabel(stateObj.state, language, hass, 'light');
   const lastTime = stateObj.last_changed
     ? formatRelativeTime(new Date(stateObj.last_changed), language)
     : device.subtitle;
 
-  const doService = (service: string, data: Record<string, unknown>) => {
-    void hass.callService('light', service, { entity_id: device.entityId, ...data });
-  };
+  const doService = makeDoService(hass, 'light', device.entityId);
 
   return html`
     <button class="device ${statusClass}" @click=${() => onHandleAction(device.entityId, 'toggle')}>
@@ -110,7 +106,7 @@ export function renderLightCard(
           <input type="color" .value=${currentHex} style="opacity:0;width:100%;height:100%;cursor:pointer;border:0;padding:0" @input=${(e: Event) => { e.stopPropagation(); const v = (e.target as HTMLInputElement).value; doService('turn_on', { rgb_color: hexToRgb(v) }); }} @click=${(e: Event) => e.stopPropagation()}>
         </label>
         ` : ''}
-        <ha-control-switch .checked=${isOn} style="--control-switch-thickness:24px;--control-switch-border-radius:var(--sp-radius-pill);--control-switch-padding:3px;width:44px;flex-shrink:0;margin-left:auto" @change=${(e: Event) => { e.stopPropagation(); doService('toggle', {}); }} @click=${(e: Event) => e.stopPropagation()} .label=${device.name}></ha-control-switch>
+        <ha-control-switch .checked=${isOn} style="${DEVICE_SWITCH_STYLE};margin-left:auto" @change=${(e: Event) => { e.stopPropagation(); doService('toggle', {}); }} @click=${(e: Event) => e.stopPropagation()} .label=${device.name}></ha-control-switch>
       </div>
     </button>
   `;

@@ -8,7 +8,7 @@ import type {
 import type { Language } from '../i18n';
 import { deviceStateLabel, formatNumber, stateValue, t } from '../utils';
 
-const DOMAIN_GROUP_MAP: Record<string, string> = {
+export const DOMAIN_GROUP_MAP: Record<string, string> = {
   light: 'lights',
   switch: 'switches',
   input_boolean: 'switches',
@@ -55,7 +55,7 @@ export function domainGroupKey(domain: string): string {
 export function domainGroupLabel(groupKey: string, hass: HomeAssistant, language: Language): string {
   const haPath = GROUP_HA_PATH[groupKey];
   if (haPath) {
-    const haLabel = hass.localize(haPath);
+    const haLabel = hass.localize?.(haPath);
     if (haLabel) return haLabel;
   }
   const key = GROUP_LABEL_KEY[groupKey];

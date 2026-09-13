@@ -16,34 +16,38 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'contribute-skin') && !contains(github.event.pull_request.labels.*.name, 'architecture')
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 2
 
       - name: Get changed files
         id: files
         run: |
-          FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | tr '\n' ' ')
-          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          # PR checkouts are a merge commit; HEAD^ is the base tip, so this is
+          # the full PR diff even in a shallow clone.
+          git diff --name-only HEAD^ HEAD > /tmp/changed_files.txt
+          cat /tmp/changed_files.txt
 
       - name: Check for architecture changes
         id: check
         run: |
           BLOCKED=false
-          for f in ${{ steps.files.outputs.files }}; do
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
             case "$f" in
               src/*|scripts/*|tsconfig.json|rollup.config.js|.github/workflows/*|.github/PULL_REQUEST_TEMPLATE.md)
                 echo "BLOCKED file: $f"
                 BLOCKED=true
                 ;;
             esac
-          done
+          done < /tmp/changed_files.txt
           echo "blocked=$BLOCKED" >> "$GITHUB_OUTPUT"
 
       - name: Validate strings.json has version field
         id: validate_version
         run: |
-          for f in ${{ steps.files.outputs.files }}; do
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
             if [[ "$f" =~ ^skins-pro/([^/]+)/strings\.json$ ]]; then
               SKIN="${BASH_REMATCH[1]}"
               if [ -f "$f" ]; then
@@ -55,11 +59,11 @@ jobs:
                 echo "OK: $f has version=$VERSION"
               fi
             fi
-          done
+          done < /tmp/changed_files.txt
 
       - name: Fail if architecture files changed
         if: steps.check.outputs.blocked == 'true'
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:
           script: |
             core.setFailed('Skin-contribution PRs must not modify architecture files (src/, scripts/, tsconfig.json, rollup.config.js, .github/workflows/, .github/PULL_REQUEST_TEMPLATE.md). Please revert these changes.');

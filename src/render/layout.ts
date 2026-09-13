@@ -47,21 +47,7 @@ export function applyThemeVariables(host: HTMLElement | null | undefined, config
   host.style.setProperty('--sp-base-texture', `url("${assetUrl(config, 'base')}")`);
 }
 
-export function applyFullscreenHeight(host: HTMLElement | null | undefined): void {
-  if (!host) return;
-  const floor = isShortLandscape() ? FLOOR_SHORT_LANDSCAPE : FLOOR_NORMAL;
-  const h = Math.max(floor, Math.floor(window.innerHeight));
-  host.style.setProperty('--sp-runtime-height', `${h}px`);
-  host.style.setProperty('--sp-runtime-min-height', `${h}px`);
-}
-
-export function applyKioskExitHeight(host: HTMLElement | null | undefined): void {
-  if (!host) return;
-  requestAnimationFrame(() => {
-    const r = host.getBoundingClientRect();
-    const floor = isShortLandscape() ? FLOOR_SHORT_LANDSCAPE : FLOOR_NORMAL;
-    const h = Math.max(floor, Math.floor(window.innerHeight - r.top));
-    host.style.setProperty('--sp-runtime-height', `${h}px`);
-    host.style.setProperty('--sp-runtime-min-height', `${h}px`);
-  });
-}
+// Fullscreen needs no special height handling: when the card element is the
+// fullscreen element its rect.top is 0, so applyLayoutHeight naturally sizes
+// it to the full viewport. The old kiosk-mode height helpers existed only to
+// compensate the shadow-DOM injection approach and are gone with it.

@@ -92,6 +92,7 @@ const zh: Record<TranslationKey, string> = {
   searchNoResults: '未找到相关设备',
   searchAll: '全部',
 
+  loading: '加载中…',
 };
 
 export default zh;

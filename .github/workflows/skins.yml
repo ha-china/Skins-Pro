@@ -8,24 +8,35 @@ on:
       - 'screenshots/**'
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 concurrency:
   group: skins-build
   cancel-in-progress: false
 
 jobs:
   build-skins:
-    name: Build and publish skins
+    name: Build skins
     runs-on: ubuntu-latest
+    # Builds and branch pushes only. No cloud credentials here: this job runs
+    # sharp against externally contributed images, so it must never hold the
+    # store bucket keys (see publish-r2).
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 2
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Reject symlinks in skin sources
+        run: |
+          LINKS=$(find skins-pro -type l 2>/dev/null || true)
+          if [ -n "$LINKS" ]; then
+            echo "::error::Symlinks are not allowed in skins-pro/:"
+            echo "$LINKS"
+            exit 1
+          fi
 
       - name: Detect changed skins
         id: skins
@@ -79,8 +90,9 @@ jobs:
           done
 
       - name: Move source files into full asset worktrees
+        env:
+          TARGET: ${{ steps.skins.outputs.target }}
         run: |
-          TARGET="${{ steps.skins.outputs.target }}"
           if [ -z "$TARGET" ]; then
             exit 0
           fi
@@ -99,7 +111,7 @@ jobs:
           done
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version: '24'
           cache: npm
@@ -108,60 +120,29 @@ jobs:
         run: npm ci
 
       - name: Build skins
+        env:
+          TARGET: ${{ steps.skins.outputs.target }}
         run: |
-          TARGET="${{ steps.skins.outputs.target }}"
           if [ -n "$TARGET" ]; then
             echo "Incremental build for: $TARGET"
+            # shellcheck disable=SC2086
             npm run build -- $TARGET
           else
             echo "Full build"
             npm run build
           fi
 
-      - name: Sync to Cloudflare R2
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: auto
-          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
-        run: |
-          ENDPOINT="https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
-          TARGET="${{ steps.skins.outputs.target }}"
-          DELETED="${{ steps.skins.outputs.deleted }}"
-
-          if [ -z "$TARGET" ] && [ -z "$DELETED" ]; then
-            echo "Full sync"
-            aws s3 sync store/ "s3://skinspro/store/" --endpoint-url "$ENDPOINT"
-            aws s3 sync screenshot-assets/ "s3://skinspro/screenshots/" --endpoint-url "$ENDPOINT" --exclude "thumbnails/*"
-            aws s3 sync screenshot-assets/thumbnails/ "s3://skinspro/screenshots/thumbnails/" --endpoint-url "$ENDPOINT"
-            aws s3 cp screenshot-assets/registry.json "s3://skinspro/screenshots/registry.json" --endpoint-url "$ENDPOINT"
-          else
-            echo "Incremental sync for: target=$TARGET deleted=$DELETED"
-            for skin in $TARGET; do
-              [ -f "store/${skin}.zip" ] && aws s3 cp "store/${skin}.zip" "s3://skinspro/store/${skin}.zip" --endpoint-url "$ENDPOINT"
-              [ -f "screenshot-assets/thumbnails/${skin}.jpg" ] && aws s3 cp "screenshot-assets/thumbnails/${skin}.jpg" "s3://skinspro/screenshots/thumbnails/${skin}.jpg" --endpoint-url "$ENDPOINT"
-              for ext in png jpg jpeg webp bmp gif mp4; do
-                [ -f "screenshot-assets/${skin}.${ext}" ] && aws s3 cp "screenshot-assets/${skin}.${ext}" "s3://skinspro/screenshots/${skin}.${ext}" --endpoint-url "$ENDPOINT"
-              done
-            done
-            [ -f "screenshot-assets/registry.json" ] && aws s3 cp "screenshot-assets/registry.json" "s3://skinspro/screenshots/registry.json" --endpoint-url "$ENDPOINT"
-          fi
-
       - name: Push new skin sources to skin-assets branch
+        env:
+          TARGET: ${{ steps.skins.outputs.target }}
         run: |
-          TARGET="${{ steps.skins.outputs.target }}"
           if [ -z "$TARGET" ]; then
             echo "No new skins to publish"
             exit 0
           fi
           cd skin-assets
-          for skin in $TARGET; do
-            if [ -d "${{ github.workspace }}/skins-pro/$skin" ]; then
-              rm -rf "$skin"
-              cp -r "${{ github.workspace }}/skins-pro/$skin" "$skin"
-              echo "Copied skin source: $skin"
-            fi
-          done
+          # Sources were moved into this worktree by the step above; git add
+          # picks them up from here.
           git add .
           if git diff --cached --quiet; then
             echo "No changes to skin-assets"
@@ -172,8 +153,9 @@ jobs:
           fi
 
       - name: Push new screenshots to screenshot-assets branch
+        env:
+          TARGET: ${{ steps.skins.outputs.target }}
         run: |
-          TARGET="${{ steps.skins.outputs.target }}"
           if [ -z "$TARGET" ]; then
             echo "No new screenshots to publish"
             exit 0
@@ -183,8 +165,8 @@ jobs:
           # thumbnails/registry.json directly here since this is the worktree)
           for skin in $TARGET; do
             for ext in png jpg jpeg webp bmp gif mp4; do
-              if [ -f "${{ github.workspace }}/screenshots/$skin.$ext" ]; then
-                cp "${{ github.workspace }}/screenshots/$skin.$ext" "$skin.$ext"
+              if [ -f "../screenshots/$skin.$ext" ]; then
+                cp "../screenshots/$skin.$ext" "$skin.$ext"
                 echo "Copied screenshot: $skin.$ext"
               fi
             done
@@ -199,13 +181,13 @@ jobs:
           fi
 
       - name: Clean moved assets from master
+        env:
+          TARGET: ${{ steps.skins.outputs.target }}
         run: |
-          TARGET="${{ steps.skins.outputs.target }}"
           if [ -z "$TARGET" ]; then
             echo "No cleanup needed"
             exit 0
           fi
-          cd "${{ github.workspace }}"
           for skin in $TARGET; do
             if git rm -r --ignore-unmatch "skins-pro/$skin" >/dev/null 2>&1; then
               echo "Removed skins-pro/$skin from master"
@@ -228,8 +210,77 @@ jobs:
             git push origin HEAD:master
           fi
 
+      - name: Save sync metadata
+        env:
+          TARGET: ${{ steps.skins.outputs.target }}
+          DELETED: ${{ steps.skins.outputs.deleted }}
+        run: |
+          printf 'target=%s\ndeleted=%s\n' "$TARGET" "$DELETED" > build-meta.txt
+
+      - name: Upload store artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: skins-store
+          path: |
+            store/
+            screenshot-assets/registry.json
+            screenshot-assets/thumbnails/
+            screenshot-assets/*.png
+            screenshot-assets/*.jpg
+            screenshot-assets/*.jpeg
+            screenshot-assets/*.webp
+            screenshot-assets/*.bmp
+            screenshot-assets/*.gif
+            screenshot-assets/*.mp4
+            build-meta.txt
+          retention-days: 3
+          if-no-files-found: warn
+
       - name: Clean up worktrees
         if: always()
         run: |
           git worktree remove --force skin-assets 2>/dev/null || true
           git worktree remove --force screenshot-assets 2>/dev/null || true
+
+  publish-r2:
+    name: Sync to Cloudflare R2
+    needs: build-skins
+    runs-on: ubuntu-latest
+    # Only this job touches the store bucket. It never runs build tooling
+    # against untrusted images.
+    permissions: {}
+
+    steps:
+      - name: Download store artifacts
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: skins-store
+
+      - name: Sync to Cloudflare R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+        run: |
+          ENDPOINT="https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
+          TARGET=$(sed -n 's/^target=//p' build-meta.txt)
+          DELETED=$(sed -n 's/^deleted=//p' build-meta.txt)
+
+          if [ -z "$TARGET" ] && [ -z "$DELETED" ]; then
+            echo "Full sync"
+            aws s3 sync store/ "s3://skinspro/store/" --endpoint-url "$ENDPOINT"
+            aws s3 sync screenshot-assets/ "s3://skinspro/screenshots/" --endpoint-url "$ENDPOINT" --exclude "thumbnails/*"
+            aws s3 sync screenshot-assets/thumbnails/ "s3://skinspro/screenshots/thumbnails/" --endpoint-url "$ENDPOINT"
+            aws s3 cp screenshot-assets/registry.json "s3://skinspro/screenshots/registry.json" --endpoint-url "$ENDPOINT"
+          else
+            echo "Incremental sync for: target=$TARGET deleted=$DELETED"
+            for skin in $TARGET; do
+              [ -f "store/${skin}.zip" ] && aws s3 cp "store/${skin}.zip" "s3://skinspro/store/${skin}.zip" --endpoint-url "$ENDPOINT"
+              [ -f "screenshot-assets/thumbnails/${skin}.jpg" ] && aws s3 cp "screenshot-assets/thumbnails/${skin}.jpg" "s3://skinspro/screenshots/thumbnails/${skin}.jpg" --endpoint-url "$ENDPOINT"
+              for ext in png jpg jpeg webp bmp gif mp4; do
+                [ -f "screenshot-assets/${skin}.${ext}" ] && aws s3 cp "screenshot-assets/${skin}.${ext}" "s3://skinspro/screenshots/${skin}.${ext}" --endpoint-url "$ENDPOINT"
+              done
+            done
+            [ -f "screenshot-assets/registry.json" ] && aws s3 cp "screenshot-assets/registry.json" "s3://skinspro/screenshots/registry.json" --endpoint-url "$ENDPOINT"
+          fi

@@ -8,10 +8,10 @@ Skins Pro is a community Lovelace card with a multi-skin architecture. It ships 
 
 - Add via HACS custom repository
 - Switch between skins freely
-- Fullscreen Kiosk mode for immersive experience
+- True fullscreen mode (browser Fullscreen API) for immersive experience
 - Area-based room display
 - Auto icon resolution from Home Assistant
-- Force fullscreen lock for non-admin users
+- Demo mode for non-admin users (auto-fullscreen on first tap, input guard)
 
 > Note — We often create skins out of passion for the things we like, but this can inadvertently touch on copyright issues. We recommend using AI-generated images whenever possible. All current theme image assets are AI-generated, so some images may contain AI watermarks or similar generation artifacts. If you don't like the AI-generated images, you can freely upload your own background and room images in the settings. If you believe any skin infringes on your copyright, please open an issue and we will remove it promptly.
 
@@ -27,7 +27,7 @@ Skins Pro is built around simplicity and ease of use. Install from HACS, pick a 
 
 Click the button above, or manually:
 
-1. HACS → Custom Repositories → Add `https://github.com/ha-china/Skins-Pro`, category: Dashboard
+1. HACS → Custom Repositories → Add `https://github.com/ha-china/Skins-Pro`, category: plugin
 2. Install Skins Pro
 3. Refresh Home Assistant frontend
 4. Settings → Dashboards → Add Dashboard → Select "Skins Pro"
@@ -41,6 +41,8 @@ Click the button above, or manually:
 ![Store](https://github.com/ha-china/Skins-Pro/raw/screenshot-assets/store.gif)
 
 Download additional skins directly from the card editor. Clicking **Download** fetches the skin package from the CDN and installs it to your HA `www/` directory via the [`skins-pro-hass`](https://github.com/ha-china/skins-pro-hass) integration.
+
+Opening the skin store fetches the public skin registry from our CDN; downloads and likes are counted anonymously via a random local ID (no account or personal data).
 
 > The integration is only needed for downloading skins from the store. If you only use the built-in **modern** skin, you can skip installing it.
 
@@ -82,11 +84,11 @@ Download additional skins directly from the card editor. Clicking **Download** f
 - 🌐 Auto CN/EN bilingual switching
 - 🌙 Dark mode — auto sunset/sunrise switching, or tap the clock to toggle manually (modern skin)
 - 🔍 Global search — fuzzy match devices, filter by type
-- ↔️ Fullscreen Kiosk mode
-- 🔒 Kiosk lock for non-admin users — force fullscreen, block right-click & dev tools
+- ↔️ True fullscreen mode via the browser Fullscreen API (tap the profile to toggle, ESC to exit)
+- 🔒 Demo mode for non-admin users — auto-fullscreen on first tap, context menu & devtools shortcut guard
 - 🖼️ Use HA area pictures as room backgrounds
 - 🎨 Custom background image upload
-- 📱 Mobile responsive layout
+- 📱 Responsive across phones, tablets, folding phones and desktop — with HiDPI / OS-scaling / browser-zoom compensation
 - 🎭 Multi-skin architecture with built-in skin store
 
 On first add, it automatically scans your Home Assistant and organizes content by area and device type.
@@ -99,7 +101,6 @@ Skin development guide, build instructions, and contributing guide have been mov
 
 - Architecture inspired by [dwains-dashboard-next](https://github.com/dwainscheeren/dwains-dashboard-next)
 - Design inspired by [html-card-pro Discussions](https://github.com/ha-china/html-card-pro/discussions/11)
-- Kiosk mode inspired by [kiosk-mode](https://github.com/NemesisRE/kiosk-mode)
 - Core rendering by [Lit](https://lit.dev/)
 - Image processing by [sharp](https://sharp.pixelplumbing.com/)
-- Zero runtime dependencies, lean and fast
+- Bundles Lit at build time — zero extra runtime dependencies for your dashboard, lean and fast

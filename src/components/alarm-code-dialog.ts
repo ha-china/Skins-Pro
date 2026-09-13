@@ -20,10 +20,8 @@ export async function setAlarmMode(
 
   if (needsCode) {
     const helpers = await (window as any).loadCardHelpers();
-    const localize = (hass as any).localize;
-    const title = localize
-      ? localize(`ui.card.alarm_control_panel.${isDisarm ? 'disarm' : 'arm'}`)
-      : (isDisarm ? 'Disarm' : 'Arm');
+    const title = hass.localize?.(`ui.card.alarm_control_panel.${isDisarm ? 'disarm' : 'arm'}`)
+      || (isDisarm ? 'Disarm' : 'Arm');
     const response = await helpers.showEnterCodeDialog(element, {
       codeFormat,
       title,

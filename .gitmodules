@@ -1,9 +1,0 @@
-[submodule "skin-assets"]
-	path = skin-assets
-	url = https://github.com/ha-china/Skins-Pro.git
-	branch = skin-assets
-
-[submodule "screenshot-assets"]
-	path = screenshot-assets
-	url = https://github.com/ha-china/Skins-Pro.git
-	branch = screenshot-assets

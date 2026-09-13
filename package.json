@@ -1,6 +1,6 @@
 {
   "name": "skins-pro",
-  "version": "2.5.4",
+  "version": "2.6.0",
   "description": "Skins Pro for Home Assistant",
   "main": "dist/skins-pro.js",
   "type": "module",
@@ -9,6 +9,7 @@
     "watch": "rollup -c -w",
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
     "type-check": "tsc --noEmit",
+    "test:visual": "node scripts/viewport-check.mjs",
     "release": "npm run clean && npm run build"
   },
   "keywords": [

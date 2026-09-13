@@ -31,13 +31,15 @@ jobs:
 
     steps:
       - name: Checkout full history
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Detect purgeable paths
         id: detect
+        env:
+          EXTRA_PATHS: ${{ github.event.inputs.extra_paths }}
         run: |
           set -euo pipefail
 
@@ -77,12 +79,9 @@ jobs:
           done
 
           # Append user-provided extra paths
-          EXTRA="${{ github.event.inputs.extra_paths }}"
-          if [ -n "$EXTRA" ]; then
-            PATHS="$PATHS $EXTRA"
-          fi
-
-          PATHS=$(echo "$PATHS" | xargs || true)
+          if [ -n "$EXTRA_PATHS" ]; then
+            PATHS="$PATHS $EXTRA_PATHS"
+          fi          PATHS=$(echo "$PATHS" | xargs || true)
 
           echo "purge_paths=$PATHS" >> "$GITHUB_OUTPUT"
           echo "Historical skins (gone from HEAD): ${PURGE_SKINS:-<none>}"
@@ -129,10 +128,11 @@ jobs:
 
       - name: Run filter-repo
         if: steps.detect.outputs.purge_paths != ''
+        env:
+          PATHS: ${{ steps.detect.outputs.purge_paths }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: |
           set -euo pipefail
-          PATHS="${{ steps.detect.outputs.purge_paths }}"
-          DRY_RUN="${{ github.event.inputs.dry_run }}"
 
           # Build --path args
           PATH_ARGS=""

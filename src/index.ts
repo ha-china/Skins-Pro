@@ -121,6 +121,4 @@ if (!window.customStrategies.some((item) => item?.type === DASHBOARD_STRATEGY_TY
   });
 }
 
-console.log('Skins Pro Card loaded');
-
 export { SkinsProCard };

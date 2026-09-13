@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { spawnSync } = require('child_process');
 const sharp = require('sharp');
 const { ZipArchive } = require('archiver');
@@ -46,6 +47,20 @@ const dirs = targetSkins.length > 0
   : [...allDirs, 'modern'];
 
 const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.bmp', '.gif', '.webp'];
+
+// strings.json is contributed by external skin PRs and its fields end up in
+// the store registry.json, which is rendered as HTML by the card. Strip
+// HTML-dangerous and control characters as defense in depth (the card also
+// escapes on render). Keeps international display names intact.
+const UNSAFE_META_CHARS = /[<>&"'`\\]|[\u0000-\u001f\u007f]/g;
+function safeMeta(value, maxLen) {
+  if (typeof value !== 'string') return '';
+  const cleaned = value.replace(UNSAFE_META_CHARS, '').trim().slice(0, maxLen);
+  if (cleaned !== value.trim()) {
+    console.warn(`Warning: sanitized strings.json metadata "${String(value).slice(0, 64)}" -> "${cleaned}"`);
+  }
+  return cleaned;
+}
 
 function getResizeOptions(filename) {
   const name = path.basename(filename).toLowerCase();
@@ -108,6 +123,15 @@ function resolveSkinDir(skin) {
   return path.join(assetsSrc, skin);
 }
 
+function readSkinStrings(file) {
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch (err) {
+    console.warn(`Warning: failed to parse ${file}: ${err.message}`);
+    return {};
+  }
+}
+
 (async () => {
   fs.mkdirSync(dest, { recursive: true });
   fs.mkdirSync(store, { recursive: true });
@@ -141,15 +165,28 @@ function resolveSkinDir(skin) {
     if (!isModern && !skinsOnly) {
       // Zip non-modern directly into store/<dir>.zip, then clean up staging
       const zipPath = path.join(store, `${dir}.zip`);
-      await new Promise((resolve, reject) => {
-        const output = fs.createWriteStream(zipPath);
-        const archive = new ZipArchive({ zlib: { level: 9 } });
-        output.on('close', resolve);
-        archive.on('error', reject);
-        archive.pipe(output);
-        archive.directory(outDir, dir);
-        archive.finalize();
-      });
+      try {
+        await new Promise((resolve, reject) => {
+          let output;
+          try {
+            output = fs.createWriteStream(zipPath);
+          } catch (err) {
+            reject(err);
+            return;
+          }
+          const archive = new ZipArchive({ zlib: { level: 9 } });
+          output.on('close', resolve);
+          output.on('error', reject);
+          archive.on('error', reject);
+          archive.pipe(output);
+          archive.directory(outDir, dir);
+          archive.finalize();
+        });
+      } catch (err) {
+        console.error(`Error: failed to zip ${dir} -> ${zipPath}: ${err.message}`);
+        fs.rmSync(zipPath, { force: true });
+        throw err;
+      }
       fs.rmSync(outDir, { recursive: true, force: true });
       storePackages.push(dir);
     }
@@ -175,7 +212,7 @@ function resolveSkinDir(skin) {
   dirs.forEach(dir => {
     if (dir !== 'modern') return;
     const file = dir === 'modern' ? path.join(modernSrc, 'strings.json') : path.join(resolveSkinDir(dir), 'strings.json');
-    const data = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
+    const data = fs.existsSync(file) ? readSkinStrings(file) : {};
     stringsMap[dir] = data;
     iconMaps[dir] = data.icon_map || {};
   });
@@ -241,22 +278,47 @@ function resolveSkinDir(skin) {
     const found = findScreenshot(dir);
     if (found) {
       const thumbDest = path.join(thumbsDir, `${dir}.jpg`);
-      await sharp(found).resize({ width: 500, withoutEnlargement: true }).jpeg({ quality: 80, mozjpeg: true }).toFile(thumbDest);
+      try {
+        await sharp(found).resize({ width: 500, withoutEnlargement: true }).jpeg({ quality: 80, mozjpeg: true }).toFile(thumbDest);
+      } catch (err) {
+        console.warn(`Warning: failed to generate thumbnail for ${dir} from ${found}: ${err.message}`);
+        continue;
+      }
     }
   }
 
   // Registry always includes ALL skins (just reads metadata, fast)
+  // Carry over sha256 checksums from the previous registry for skins whose zip
+  // was not rebuilt in this (incremental) run, so the published registry always
+  // has checksums for every skin it lists.
+  let prevRegistry = {};
+  try {
+    for (const entry of JSON.parse(fs.readFileSync(path.join(screenshotAssetsSrc, 'registry.json'), 'utf8'))) {
+      if (entry && typeof entry.id === 'string') prevRegistry[entry.id] = entry;
+    }
+  } catch { /* no previous registry */ }
+
+  function zipSha256(dir) {
+    const zipFile = path.join(store, `${dir}.zip`);
+    if (fs.existsSync(zipFile)) {
+      return crypto.createHash('sha256').update(fs.readFileSync(zipFile)).digest('hex');
+    }
+    return typeof prevRegistry[dir]?.sha256 === 'string' ? prevRegistry[dir].sha256 : '';
+  }
+
   for (const dir of allDirs) {
     if (dir === 'modern') continue;
     const stringsFile = path.join(resolveSkinDir(dir), 'strings.json');
-    const stringsData = fs.existsSync(stringsFile) ? JSON.parse(fs.readFileSync(stringsFile, 'utf8')) : {};
+    const stringsData = fs.existsSync(stringsFile) ? readSkinStrings(stringsFile) : {};
+    const sha256 = zipSha256(dir);
     registry.push({
       id: dir,
       name: dir,
-      author: stringsData.author || '',
-      version: stringsData.version || '',
+      author: safeMeta(stringsData.author, 64),
+      version: safeMeta(stringsData.version, 32),
       thumbnail: `screenshots/thumbnails/${dir}.jpg`,
       package: `store/${dir}.zip`,
+      ...(sha256 ? { sha256 } : {}),
     });
   }
 

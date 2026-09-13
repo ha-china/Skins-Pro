@@ -5,7 +5,17 @@ import type { DashboardConfig, HomeAssistant, RenderedDevice } from '../types';
 import type { Language } from '../i18n';
 import { assetKeyForDomain, deviceStateLabel, formatRelativeTime, selectedSkin } from '../utils';
 import { renderImage } from '../render/context';
+import { deviceStatusClass, hassLocalizeChain, renderDeviceUnavailableCard } from './device-shell';
 import { setAlarmMode } from './alarm-code-dialog';
+
+export function alarmStateIcon(state: string): string {
+  const map: Record<string, string> = {
+    disarmed: 'mdi:shield-off', armed_home: 'mdi:shield-home', armed_away: 'mdi:shield-lock',
+    armed_night: 'mdi:shield-moon', armed_vacation: 'mdi:shield-airplane', armed_custom_bypass: 'mdi:shield-home',
+    triggered: 'mdi:bell-ring', pending: 'mdi:shield-sync', arming: 'mdi:shield-sync', disarming: 'mdi:shield-sync',
+  };
+  return map[state] || 'mdi:shield-lock';
+}
 
 export function renderAlarmControlPanelCard(
   config: DashboardConfig | undefined,
@@ -14,15 +24,11 @@ export function renderAlarmControlPanelCard(
   language: Language,
   onHandleAction: (entityId: string, action: string) => void,
 ): TemplateResult {
-  const skin = selectedSkin(config);
-  const assetKey = assetKeyForDomain(skin, alarmAssetDomain(skin));
+  const assetKey = assetKeyForDomain(selectedSkin(config), 'alarm_control_panel');
   const stateObj = hass.states?.[device.entityId];
 
   if (!stateObj) {
-    return html`<button class="device device-off" @click=${() => onHandleAction(device.entityId, 'more-info')}>
-      <div class="device-top">${renderImage(config, assetKey, device.name, 'item-img')}<div class="tag-stack"><div class="status">${deviceStateLabel(device.state, language, hass, 'alarm_control_panel')}</div></div></div>
-      <div class="device-copy"><p class="device-name">${device.name}</p><p class="muted">${device.subtitle}</p></div>
-    </button>`;
+    return renderDeviceUnavailableCard(config, hass, device, language, onHandleAction, 'alarm_control_panel');
   }
 
   const state = stateObj.state;
@@ -31,7 +37,7 @@ export function renderAlarmControlPanelCard(
   const isTriggered = state === 'triggered';
   const isPending = state === 'pending' || state === 'arming' || state === 'disarming';
 
-  const statusClass: string = isTriggered ? `device-on-red` : (isArmed ? `device-on-${device.color}` : (isPending ? `device-on-${device.color}` : (state === 'unavailable' ? 'device-unavailable' : 'device-off')));
+  const statusClass: string = isTriggered ? deviceStatusClass(state, true, 'red') : deviceStatusClass(state, isArmed || isPending, device.color);
   const lastTime = stateObj.last_changed ? formatRelativeTime(new Date(stateObj.last_changed), language) : device.subtitle;
 
   const supportedFeatures = (attrs.supported_features as number) || 0;
@@ -42,7 +48,7 @@ export function renderAlarmControlPanelCard(
   const FEATURE_ARM_VACATION = 16;
 
   type ArmMode = { feature: number; icon: string; service: string; title: string };
-  const aLocal = (st: string) => hass.localize(`component.alarm_control_panel.entity_component._.state.${st}`) || hass.localize(`component.alarm_control_panel.state.${st}`) || st.replace(/_/g, ' ');
+  const aLocal = (st: string) => hassLocalizeChain(hass, [`component.alarm_control_panel.entity_component._.state.${st}`, `component.alarm_control_panel.state.${st}`], st.replace(/_/g, ' '));
   const armModes: ArmMode[] = [
     { feature: FEATURE_ARM_AWAY, icon: 'mdi:shield-lock', service: 'alarm_arm_away', title: aLocal('armed_away') },
     { feature: FEATURE_ARM_HOME, icon: 'mdi:shield-home', service: 'alarm_arm_home', title: aLocal('armed_home') },
@@ -61,7 +67,7 @@ export function renderAlarmControlPanelCard(
     : '';
 
   const disarmButton = (isArmed || isTriggered)
-    ? html`<ha-icon icon="mdi:shield-off" style=${iconStyle} title=${hass.localize('component.alarm_control_panel.entity_component._.state.disarmed') || hass.localize('component.alarm_control_panel.state.disarmed') || 'Disarmed'} @click=${(e: Event) => { e.stopPropagation(); void setAlarmMode(e.currentTarget as HTMLElement, hass, device.entityId, 'alarm_disarm', true); }}></ha-icon>`
+    ? html`<ha-icon icon="mdi:shield-off" style=${iconStyle} title=${aLocal('disarmed')} @click=${(e: Event) => { e.stopPropagation(); void setAlarmMode(e.currentTarget as HTMLElement, hass, device.entityId, 'alarm_disarm', true); }}></ha-icon>`
     : '';
 
   const controlIcons = isPending ? html`<ha-icon icon=${isTriggered ? 'mdi:bell-ring' : (isArmed ? 'mdi:shield-lock' : 'mdi:shield-off')} style="--mdc-icon-size:18px;color:var(--sp-text-primary)"></ha-icon>` : html`${armButtons}${disarmButton}`;
@@ -83,9 +89,4 @@ export function renderAlarmControlPanelCard(
       </div>
     </button>
   `;
-}
-
-function alarmAssetDomain(skin: string): string {
-  void skin;
-  return 'alarm_control_panel';
 }

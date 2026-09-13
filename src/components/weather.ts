@@ -16,6 +16,10 @@ export function renderWeather(
 
   if (!entityId) return html``;
 
+  // The entity can vanish from hass.states (remove/reload) between renders —
+  // never hand `undefined` to <ha-state-icon>.
+  const stateObj = hass.states?.[entityId];
+
   const allForecast = forecast || [];
   const forecastSlice = allForecast.slice(0, 5);
   const today = allForecast[0];
@@ -29,7 +33,9 @@ export function renderWeather(
   return html`
     <div class="weather-block" @click=${() => onMoreInfo(entityId)}>
       <div class="weather-current">
-        <div class="weather-state-icon"><ha-state-icon .stateObj=${hass.states[entityId]}></ha-state-icon></div>
+        <div class="weather-state-icon">${stateObj
+          ? html`<ha-state-icon .stateObj=${stateObj}></ha-state-icon>`
+          : html`<ha-icon icon="mdi:weather-cloudy"></ha-icon>`}</div>
         <div class="weather-current-info">
           <div class="weather-current-temp">${temp || '--'}${todayHigh && todayLow ? html` <span class="weather-current-hl">${todayHigh}/${todayLow}</span>` : ''}</div>
           <div class="weather-current-cond">${condition}${todayPrecip ? html` · ${todayPrecip}` : ''}</div>

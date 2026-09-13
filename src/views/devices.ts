@@ -13,11 +13,17 @@ export function renderDevicesView(ctx: RenderContext): TemplateResult {
   const rooms = getDeviceRooms(allDevices);
   const types = getDeviceTypes(allDevices);
 
-  const filteredDevices = getRealDevicesForRender(ctx.hass, ctx.deviceRegistry, ctx.entityRegistry, ctx.areas, {
-    filterRoom: ctx.filterRoom,
-    filterType: ctx.filterType,
-    hideUnassigned: ctx.hideUnassigned,
-  });
+  // Single scan: getRealDevicesForRender applies filters after building/coloring the
+  // full list, so post-filtering the unfiltered result is exactly equivalent.
+  const { filterRoom, filterType, hideUnassigned } = ctx;
+  const filteredDevices = (filterRoom || filterType || hideUnassigned)
+    ? allDevices.filter((d) => {
+        if (filterRoom && d.subtitle !== filterRoom) return false;
+        if (filterType && deviceTypeGroupKey(d.detail) !== filterType) return false;
+        if (hideUnassigned && !d.subtitle) return false;
+        return true;
+      })
+    : allDevices;
 
   return renderPageShell(
     ctx.filterRoom ? ctx.filterRoom : ctx.translate('devices'),

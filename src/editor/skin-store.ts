@@ -1,6 +1,6 @@
 import type { HomeAssistant } from '../types';
 import type { Language } from '../i18n';
-import { t, clearSkinMetadata } from '../utils';
+import { t, clearSkinMetadata, escapeHtml, AUTO_BASE_PATH } from '../utils';
 import { deepClone, fire, type DashboardConfigRecord } from './config';
 
 export const CDN_STORE = 'https://skins.hachina.dpdns.org';
@@ -138,26 +138,28 @@ export function renderSkinStoreBody(
     const dlCount = theme.downloads ?? '-';
     const likeCount = theme.likes ?? 0;
     const likedClass = theme.userLiked ? ' liked' : '';
+    const id = escapeHtml(theme.id);
+    const author = escapeHtml(theme.author);
     const tagsHtml = theme.tags?.length
-      ? `<div class="store-tags">${theme.tags.slice(0, 4).map(tag => `<span class="store-tag">${tag}</span>`).join('')}</div>`
+      ? `<div class="store-tags">${theme.tags.slice(0, 4).map(tag => `<span class="store-tag">${escapeHtml(tag)}</span>`).join('')}</div>`
       : '';
     return `
-      <div class="store-card ${installed ? 'store-installed' : ''}" data-store-theme="${theme.id}">
-        <img src="${CDN_STORE}/${theme.thumbnail}" alt="${theme.name}" class="store-thumb" loading="lazy">
+      <div class="store-card ${installed ? 'store-installed' : ''}" data-store-theme="${id}">
+        <img src="${escapeHtml(`${CDN_STORE}/${theme.thumbnail}`)}" alt="${escapeHtml(theme.name)}" class="store-thumb" loading="lazy">
         <div class="store-info">
-          <span class="store-name">${theme.name}${theme.author ? `<a href="https://github.com/${theme.author}" target="_blank" rel="noopener noreferrer" class="store-author">${theme.author}</a>` : ''}${theme.hasUpdate ? `<span class="store-update-badge">${t(language, 'editorSkinStoreNewVersion')}</span>` : ''}</span>
+          <span class="store-name">${escapeHtml(theme.name)}${theme.author ? `<a href="https://github.com/${author}" target="_blank" rel="noopener noreferrer" class="store-author">${author}</a>` : ''}${theme.hasUpdate ? `<span class="store-update-badge">${t(language, 'editorSkinStoreNewVersion')}</span>` : ''}</span>
           ${tagsHtml}
           <div class="store-actions">
-            <span class="store-dl-count">⬇ ${dlCount}</span>
-            <button class="store-like${likedClass}" data-store-like="${theme.id}">
-              ${theme.userLiked ? '❤️' : '🤍'} <span class="store-like-count">${likeCount}</span>
+            <span class="store-dl-count">⬇ ${escapeHtml(String(dlCount))}</span>
+            <button class="store-like${likedClass}" data-store-like="${id}">
+              ${theme.userLiked ? '❤️' : '🤍'} <span class="store-like-count">${escapeHtml(String(likeCount))}</span>
             </button>
           </div>
           ${installed
             ? theme.hasUpdate
-              ? `<div style="display:flex;gap:6px"><button class="store-download" data-store-download="${theme.id}">${t(language, 'editorSkinStoreRedownload')}</button><button class="store-remove" data-store-remove="${theme.id}">${t(language, 'editorSkinStoreRemove')}</button></div>`
-              : `<button class="store-remove" data-store-remove="${theme.id}">${t(language, 'editorSkinStoreRemove')}</button>`
-            : `<button class="store-download" data-store-download="${theme.id}">${t(language, 'editorSkinStoreDownload')}</button>`
+              ? `<div style="display:flex;gap:6px"><button class="store-download" data-store-download="${id}">${t(language, 'editorSkinStoreRedownload')}</button><button class="store-remove" data-store-remove="${id}">${t(language, 'editorSkinStoreRemove')}</button></div>`
+              : `<button class="store-remove" data-store-remove="${id}">${t(language, 'editorSkinStoreRemove')}</button>`
+            : `<button class="store-download" data-store-download="${id}">${t(language, 'editorSkinStoreDownload')}</button>`
           }
         </div>
       </div>`;
@@ -175,7 +177,7 @@ export function renderSkinStoreBody(
     : '';
 
   return `
-      <input type="text" class="store-search" data-store-search placeholder="${t(language, 'editorSkinStoreSearch')}" value="${state.searchQuery || ''}" style="width:100%;box-sizing:border-box;padding:10px 14px;border-radius:var(--sp-radius-pill,999px);border:1px solid var(--sp-border-muted,var(--divider-color,rgba(0,0,0,0.12)));background:var(--sp-device-bg,rgba(128,128,128,0.06));color:var(--sp-text-main,inherit);font:inherit;font-size:var(--sp-font-xs,14px);outline:none;margin-bottom:var(--sp-space-md,16px);">
+      <input type="text" class="store-search" data-store-search placeholder="${t(language, 'editorSkinStoreSearch')}" value="${escapeHtml(state.searchQuery || '')}" style="width:100%;box-sizing:border-box;padding:10px 14px;border-radius:var(--sp-radius-pill,999px);border:1px solid var(--sp-border-muted,var(--divider-color,rgba(0,0,0,0.12)));background:var(--sp-device-bg,rgba(128,128,128,0.06));color:var(--sp-text-main,inherit);font:inherit;font-size:var(--sp-font-xs,14px);outline:none;margin-bottom:var(--sp-space-md,16px);">
       ${resultLabel}
       <div class="store-grid">${cards.join('')}</div>
       ${loader}
@@ -184,12 +186,57 @@ export function renderSkinStoreBody(
       </div>`;
 }
 
+// Skin ids become directory names (both for the /local/ fetch path and the
+// download service call), so only allow a conservative charset. Anything else
+// in the registry entry is treated as untrusted remote input: coerce types,
+// strip control characters and cap lengths.
+const SAFE_SKIN_ID_RE = /^[A-Za-z0-9][A-Za-z0-9 ._-]{0,63}$/;
+
+function cleanStr(value: unknown, maxLen: number): string {
+  if (typeof value !== 'string') return '';
+  return value.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, maxLen);
+}
+
+function cleanNum(value: unknown): number | undefined {
+  const n = typeof value === 'number' ? value : Number(value);
+  return Number.isFinite(n) ? n : undefined;
+}
+
+function sanitizeSkinThemes(data: unknown): SkinStoreTheme[] {
+  if (!Array.isArray(data)) return [];
+  const themes: SkinStoreTheme[] = [];
+  for (const raw of data) {
+    if (!raw || typeof raw !== 'object') continue;
+    const r = raw as Record<string, unknown>;
+    const id = cleanStr(r.id, 64);
+    if (!SAFE_SKIN_ID_RE.test(id) || id.includes('..')) continue;
+    const tags = Array.isArray(r.tags)
+      ? r.tags
+          .filter((tag): tag is string => typeof tag === 'string')
+          .map((tag) => cleanStr(tag, 32))
+          .filter(Boolean)
+          .slice(0, 8)
+      : [];
+    themes.push({
+      id,
+      name: cleanStr(r.name, 80) || id,
+      thumbnail: cleanStr(r.thumbnail, 200),
+      author: cleanStr(r.author, 64),
+      version: cleanStr(r.version, 32),
+      downloads: cleanNum(r.downloads),
+      likes: cleanNum(r.likes),
+      tags: tags.length > 0 ? tags : undefined,
+      description: cleanStr(r.description, 200),
+    });
+  }
+  return themes;
+}
+
 export async function fetchSkinThemes(): Promise<SkinStoreTheme[]> {
   const res = await fetch(`${CDN_STORE}/screenshots/registry.json?t=${Date.now()}`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const data = await res.json() as SkinStoreTheme[];
-  const themes = Array.isArray(data) ? data : [];
-  return themes;
+  const data = await res.json() as unknown;
+  return sanitizeSkinThemes(data);
 }
 
 export async function fetchLocalSkinVersions(skins: string[]): Promise<Record<string, string>> {
@@ -220,7 +267,16 @@ export async function fetchSkinStats(): Promise<void> {
   try {
     const res = await fetch(`${STATS_API}/api/stats`);
     if (res.ok) {
-      skinStats = await res.json();
+      const data = await res.json() as Record<string, unknown>;
+      const stats: Record<string, { downloads: number; liked: number }> = {};
+      if (data && typeof data === 'object') {
+        for (const [key, value] of Object.entries(data)) {
+          if (!value || typeof value !== 'object') continue;
+          const v = value as Record<string, unknown>;
+          stats[key] = { downloads: cleanNum(v.downloads) ?? 0, liked: cleanNum(v.liked) ?? 0 };
+        }
+      }
+      skinStats = stats;
       skinStatsFetchTs = now;
     }
   } catch { /* ignore */ }
@@ -228,19 +284,40 @@ export async function fetchSkinStats(): Promise<void> {
 
 export async function toggleLike(skin: string): Promise<{ liked: boolean; total: number } | null> {
   try {
-    const res = await fetch(`${STATS_API}/api/like/${skin}`, {
+    const res = await fetch(`${STATS_API}/api/like/${encodeURIComponent(skin)}`, {
       method: 'POST',
       headers: { 'X-Skin-Voter': getVoterId() },
     });
     if (!res.ok) return null;
-    const data = await res.json();
-    saveLikedSkin(skin, data.userLiked);
-    return { liked: data.userLiked, total: data.liked };
+    const data = await res.json() as { userLiked?: unknown; liked?: unknown };
+    const liked = data.userLiked === true;
+    const total = cleanNum(data.liked) ?? 0;
+    saveLikedSkin(skin, liked);
+    return { liked, total };
   } catch { return null; }
 }
 
 export function isSkinLiked(skin: string): boolean {
   return getLikedSkins().has(skin);
+}
+
+export const STORE_PAGE_SIZE = BATCH_SIZE;
+
+// Shared store pipeline (fetch registry → stats → merge local versions → sort),
+// used by both the fullscreen-mode store on the card and the editor store dialog.
+export async function loadStoreThemes(downloaded: string[]): Promise<SkinStoreTheme[]> {
+  const themes = await fetchSkinThemes();
+  await fetchSkinStats();
+  const localVersions = await fetchLocalSkinVersions(downloaded);
+  const merged = themes.map((th) => ({
+    ...th,
+    hasUpdate: downloaded.includes(th.id) && !!th.version && localVersions[th.id] !== th.version,
+    downloads: skinStats[th.id]?.downloads,
+    likes: skinStats[th.id]?.liked ?? 0,
+    userLiked: isSkinLiked(th.id),
+  }));
+  merged.sort((a, b) => (Number(!!b.hasUpdate) - Number(!!a.hasUpdate)) || ((b.downloads ?? 0) - (a.downloads ?? 0)));
+  return merged;
 }
 
 export function removeSkin(
@@ -257,7 +334,7 @@ export function removeSkin(
   next.downloaded_skins = list;
   if (next.resource_pack?.skin === skinId) {
     next.resource_pack.skin = 'modern';
-    next.resource_pack.base_path = '__AUTO__';
+    next.resource_pack.base_path = AUTO_BASE_PATH;
   }
   fire(el, next);
   return next;
@@ -284,7 +361,7 @@ export async function downloadSkin(
     next.resource_pack.base_path = `/local/skins-pro/${skinId}/`;
     next.downloaded_skins = [...new Set([...(next.downloaded_skins || []), skinId])];
     fire(el, next);
-    fetch(`${STATS_API}/api/download/${skinId}`, { method: 'POST' }).catch(() => {});
+    fetch(`${STATS_API}/api/download/${encodeURIComponent(skinId)}`, { method: 'POST' }).catch(() => {});
     return { success: true };
   } catch (err: any) {
     const raw = err?.message || t(language, 'editorSkinStoreDependency');

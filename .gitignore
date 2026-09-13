@@ -1,9 +1,7 @@
 node_modules/
-package-lock.json
 .DS_Store
 npm-debug.log*
 *.log
-src/skins.generated.ts
 scripts/store-worker.js
 scripts/gen-organic-ai.cjs
 scripts/gen-organic-assets.cjs
@@ -15,3 +13,4 @@ screenshot-assets/
 screenshots/thumbnails/
 screenshots/registry.json
 screenshots/download_skin.gif
+screenshots/viewport-baseline/

@@ -1,19 +1,15 @@
 import type { AreaRegistryEntry } from '../types';
 import type { Language } from '../i18n';
-import { t } from '../utils';
+import { t, escapeHtml } from '../utils';
 
 const ENTITY_PICKER_TAG = 'ha-entity-picker';
 
-export const CONTROLLABLE_DOMAINS = [
-  'light', 'switch', 'fan', 'cover', 'lock', 'climate', 'media_player',
-  'vacuum', 'humidifier', 'water_heater', 'valve', 'siren', 'automation',
-  'group', 'input_boolean',
-];
+export { CONTROLLABLE_DOMAIN_LIST as CONTROLLABLE_DOMAINS } from '../selectors/domains';
 
 export { ENTITY_PICKER_TAG };
 
 function escapeAttr(value: string): string {
-  return value.replace(/"/g, '&quot;');
+  return escapeHtml(value);
 }
 
 export function entityPicker(label: string, path: string, value: string, domains?: string[], deviceClasses?: string[]): string {
@@ -61,7 +57,7 @@ export function areaPicker(
     <div class="selector-row">
       <select data-area-path="home_selection.rooms" data-area-index="${i}">
         <option value="">—</option>
-        ${areas.map(a => `<option value="${a.area_id}"${a.area_id === val ? ' selected' : ''}>${a.name}</option>`).join('')}
+        ${areas.map(a => `<option value="${escapeAttr(a.area_id)}"${a.area_id === val ? ' selected' : ''}>${escapeHtml(a.name)}</option>`).join('')}
       </select>
       <button class="sp-del" data-del-area-path="home_selection.rooms" data-del-area-index="${i}">✕</button>
     </div>

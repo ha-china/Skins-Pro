@@ -88,8 +88,15 @@ jobs:
 
       - name: Tag version
         if: steps.check.outputs.version_changed == 'true'
+        env:
+          VERSION: ${{ steps.check.outputs.version }}
         run: |
-          git tag "v${{ steps.check.outputs.version }}"
+          # Tolerate a tag created by a concurrent run (rapid successive pushes)
+          if git rev-parse -q --verify "refs/tags/v$VERSION" >/dev/null 2>&1; then
+            echo "Tag v$VERSION already exists; skipping"
+          else
+            git tag "v$VERSION"
+          fi
 
       - name: Push master (including tags)
         if: steps.check.outputs.version_changed == 'true'

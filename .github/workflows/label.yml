@@ -12,6 +12,9 @@ permissions:
 jobs:
   validate-pr-template:
     runs-on: ubuntu-latest
+    # Dependency-bot PRs have no skin-PR template; everything in this workflow
+    # (template check, labels, preview comment) only applies to human PRs.
+    if: github.actor != 'dependabot[bot]'
     steps:
       - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:
@@ -67,6 +70,7 @@ jobs:
 
   label:
     runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
     steps:
       - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:

@@ -135,6 +135,7 @@ export class SkinsProCard extends LitElement {
   // Store state objects are replaced (never mutated) on every change, so identity
   // lets us skip innerHTML rebuilds on hass-only updates.
   private _lastRenderedStore: SkinStoreState | null = null;
+  private _lastRenderedConfig?: DashboardConfig;
   private _lastThemeApplied = '';
   private _lastLayoutKey = '';
   private _escapeHandler?: (e: KeyboardEvent) => void;
@@ -199,6 +200,7 @@ export class SkinsProCard extends LitElement {
     window.addEventListener('resize', this._handleWindowResize);
     window.addEventListener('orientationchange', this._handleWindowResize);
     document.addEventListener('fullscreenchange', this._handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', this._handleFullscreenChange);
     this.addEventListener('config-changed', this._handleStoreConfigChanged as EventListener);
     // ResizeObserver watches the card's own box — this fires when HA's sidebar
     // opens/closes, when the card is placed inside a Sections dashboard column,
@@ -234,6 +236,7 @@ export class SkinsProCard extends LitElement {
     window.removeEventListener('resize', this._handleWindowResize);
     window.removeEventListener('orientationchange', this._handleWindowResize);
     document.removeEventListener('fullscreenchange', this._handleFullscreenChange);
+    document.removeEventListener('webkitfullscreenchange', this._handleFullscreenChange);
     this.removeEventListener('config-changed', this._handleStoreConfigChanged as EventListener);
     if (this._autoFullscreenHandler) {
       this.removeEventListener('pointerdown', this._autoFullscreenHandler);
@@ -630,10 +633,11 @@ ${STRUCTURE_CSS}
   // ─── Lifecycle ──────────────────────────────────────────
 
   protected updated(): void {
-    // applyThemeVariables writes several CSS custom properties — skip it unless
-    // the skin, resolved theme or background image actually changed.
+    // applyThemeVariables writes several CSS custom properties derived from
+    // resource_pack (skin, base_path, assets overrides, theme vars) plus the
+    // background image — skip it unless any of those actually changed.
     const resolvedTheme = this._resolveTheme();
-    const themeKey = `${this._config !== undefined ? selectedSkin(this._config) : ''}|${resolvedTheme}|${this._config?.background_image ?? ''}`;
+    const themeKey = `${this._config !== undefined ? selectedSkin(this._config) : ''}|${resolvedTheme}|${JSON.stringify(this._config?.resource_pack ?? {})}|${this._config?.background_image ?? ''}`;
     if (themeKey !== this._lastThemeApplied) {
       this._lastThemeApplied = themeKey;
       applyThemeVariables(this._host(), this._config);
@@ -708,10 +712,13 @@ ${STRUCTURE_CSS}
     const container = this.shadowRoot?.getElementById('store-container');
     if (!container) return;
     const store = this._storeState;
-    // hass-only updates must not rebuild the store DOM; store objects are
-    // replaced wholesale on every state change, so identity is a valid key.
-    if (this._lastRenderedStore === store) return;
+    // hass-only updates must not rebuild the store DOM: store objects are
+    // replaced wholesale on every store state change, so identity is a valid
+    // key — but config changes (remove/download skin, downloaded_skins) must
+    // re-render, so the config reference is part of the key too.
+    if (this._lastRenderedStore === store && this._lastRenderedConfig === this._config) return;
     this._lastRenderedStore = store;
+    this._lastRenderedConfig = this._config;
     if (!store.open) { container.innerHTML = ''; return; }
     const oldGrid = container.querySelector('.store-grid');
     const savedScroll = oldGrid ? oldGrid.scrollTop : 0;

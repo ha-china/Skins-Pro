@@ -10,6 +10,7 @@
 
 import http from 'node:http';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -63,7 +64,10 @@ async function diffPixels(page, baselinePng, currentPng) {
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const HARNESS = path.join(ROOT, 'test', 'harness.html');
 const DIST = path.join(ROOT, 'dist');
-const OUT_DIR = path.join(ROOT, 'screenshots', 'viewport-baseline');
+// Baselines are machine-specific (gitignored) and live OUTSIDE the OneDrive
+// synced repo — OneDrive cleanup kept wiping the directory.
+const OUT_DIR = process.env.SKINS_PRO_BASELINE_DIR
+  || path.join(os.homedir(), '.skins-pro', 'viewport-baselines');
 
 // width x height x label — covers small phones, folding-phone short landscape,
 // tablets, laptop and large desktop.

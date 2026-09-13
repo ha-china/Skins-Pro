@@ -81,7 +81,8 @@ jobs:
           # Append user-provided extra paths
           if [ -n "$EXTRA_PATHS" ]; then
             PATHS="$PATHS $EXTRA_PATHS"
-          fi          PATHS=$(echo "$PATHS" | xargs || true)
+          fi
+          PATHS=$(echo "$PATHS" | xargs || true)
 
           echo "purge_paths=$PATHS" >> "$GITHUB_OUTPUT"
           echo "Historical skins (gone from HEAD): ${PURGE_SKINS:-<none>}"

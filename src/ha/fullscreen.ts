@@ -5,7 +5,8 @@
 // frontend refactor.
 
 export function isFullscreen(): boolean {
-  return Boolean(document.fullscreenElement);
+  const doc = document as Document & { webkitFullscreenElement?: Element | null };
+  return Boolean(doc.fullscreenElement ?? doc.webkitFullscreenElement);
 }
 
 /**
@@ -15,7 +16,7 @@ export function isFullscreen(): boolean {
  */
 export async function toggleFullscreen(el: HTMLElement): Promise<boolean> {
   try {
-    if (document.fullscreenElement) {
+    if (isFullscreen()) {
       await document.exitFullscreen();
       return false;
     }

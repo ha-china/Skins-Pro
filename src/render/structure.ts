@@ -176,9 +176,6 @@ const CARD_CLASSES = `
 @container sp (max-width: 560px) {
   .sp-search-entry { right:var(--sp-space-sm,8px); }
 }
-@media (orientation: portrait) {
-  .sp-search-entry { right:var(--sp-space-sm,8px); left:auto; transform:none; width:auto; max-width:none; }
-}
 
 /* Home: shortcut devices strip — horizontal scroller in landscape, plain
    stacked grid in portrait. */

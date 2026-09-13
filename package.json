@@ -27,12 +27,12 @@
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^12.3.0",
-    "@types/node": "^20.10.5",
+    "@types/node": "^24.0.0",
     "archiver": "^8.0.0",
-    "rollup": "^4.62.2",
+    "rollup": "^4.63.1",
     "sharp": "^0.35.4",
     "tslib": "^2.6.2",
-    "typescript": "^5.3.3"
+    "typescript": "~5.9.3"
   },
   "dependencies": {
     "lit": "^3.3.3"

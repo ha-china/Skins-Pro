@@ -7,6 +7,11 @@ updates:
     groups:
       dev-dependencies:
         dependency-type: "development"
+    # TypeScript 7 (native compiler) breaks @rollup/plugin-typescript; stay on
+    # 5.x until the bundler plugin ecosystem catches up.
+    ignore:
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"

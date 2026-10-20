@@ -30,7 +30,7 @@
     "@types/node": "^24.0.0",
     "archiver": "^8.0.0",
     "rollup": "^4.63.1",
-    "sharp": "^0.35.4",
+    "sharp": "^0.35.5",
     "tslib": "^2.6.2",
     "typescript": "~5.9.3"
   },
